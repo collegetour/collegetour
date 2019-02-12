@@ -51,10 +51,10 @@ instagram.get('/signin/instagram/authorize', async (req, res) => {
       first_name: parts[0],
       last_name: parts[parts.length - 1],
       photo: asset.get('id'),
-      instagram_access_token: req.query.access_token ,
+      instagram_id: user.id,
       created_at: moment(),
       updated_at: moment()
-    })
+    }).save()
 
   }
 
@@ -63,7 +63,7 @@ instagram.get('/signin/instagram/authorize', async (req, res) => {
   const self = await Promise.promisify(ig.user)('self')
 
   const existing_user = await User.where({
-    instagram_access_token: req.query.access_token
+    instagram_id: self.id
   }).fetch()
 
   const user = existing_user || await createUser(self)
