@@ -7,17 +7,8 @@
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/css/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="/css/animate.min.css">
-    <title>Static Starter</title>
-    <% if(process.env.NODE_ENV === 'production' && process.env.GA_PROPERTY_ID !== undefined) { %>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=<%= process.env.GA_PROPERTY_ID %>"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '<%= process.env.GA_PROPERTY_ID %>');
-    </script>
-    <% } %>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>College Tour Planner</title>
   </head>
   <body>
     <main id="app"></main>

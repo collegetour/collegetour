@@ -1,5 +1,6 @@
-import { Router } from 'express'
+import TourSerializer from '../serializers/tour_serializer'
 import Tour from '../models/tour'
+import { Router } from 'express'
 
 const tours = new Router({ mergeParams: true })
 
@@ -14,16 +15,7 @@ tours.get('/api/tours', async (req, res) => {
   }).fetchAll()
 
   res.status(200).json({
-    data: tours.map(tour => ({
-      id: tour.get('id'),
-      name: tour.get('name'),
-      start_date: tour.get('start_date'),
-      end_date: tour.get('end_date'),
-      start_address: tour.get('start_address'),
-      end_address: tour.get('end_address'),
-      created_at: tour.get('created_at'),
-      updated_at: tour.get('updated_at')
-    }))
+    data: tours.map(TourSerializer)
   })
 
 })
@@ -35,16 +27,7 @@ tours.get('/api/tours/:id', async (req, res) => {
   }).fetch()
 
   res.status(200).json({
-    data: {
-      id: tour.get('id'),
-      name: tour.get('name'),
-      start_date: tour.get('start_date'),
-      end_date: tour.get('end_date'),
-      start_address: tour.get('start_address'),
-      end_address: tour.get('end_address'),
-      created_at: tour.get('created_at'),
-      updated_at: tour.get('updated_at')
-    }
+    data: TourSerializer(tour)
   })
 
 })

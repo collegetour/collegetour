@@ -32,10 +32,7 @@ export class Impression extends React.Component {
           <img src={ impression.asset } />
         </div>
         <div className="impression-caption">
-          Lorem ipsum dolor amet squid sartorial godard shaman, twee hashtag
-          green juice retro edison bulb freegan food truck put a bird on it.
-          Palo santo bicycle rights woke next level. 90&apos;s quinoa cloud bread
-          pickled, austin flannel hashtag
+          { impression.caption }
         </div>
       </div>
     )

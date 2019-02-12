@@ -123,6 +123,13 @@ exports.seed = async (knex, Promise) => {
       file_name: 'cornell2.jpg',
       created_at: moment(),
       updated_at: moment()
+    },
+    {
+      id: 18,
+      original_file_name: 'muhlenberg.png',
+      file_name: 'muhlenberg.png',
+      created_at: moment(),
+      updated_at: moment()
     }
   ])
 

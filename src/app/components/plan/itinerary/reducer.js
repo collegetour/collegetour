@@ -1,112 +1,114 @@
 const INITIAL_STATE = {
   steps: [
     {
-      delta: 1,
       date: '2019-02-18',
       text: '3.5 hr drive to Vassar',
       type: 'drive'
     },
     {
-      delta: 2,
       date: '2019-02-18',
       text: '12:00PM: Vassar Tour',
       type: 'tour'
     },
     {
-      delta: 3,
       date: '2019-02-18',
       text: '01:30PM: Vassar Info Session',
       type: 'tour'
     },
     {
-      delta: 3,
       date: '2019-02-18',
       text: '1.5 hr drive to Weslyan',
       type: 'drive'
     },
     {
-      delta: 2,
       date: '2019-02-19',
-      text: '09:30AM: Weslyan Tour',
+      text: '09:00AM: Weslyan Tour',
       type: 'tour'
     },
     {
-      delta: 3,
       date: '2019-02-19',
-      text: '10:30AM: Weslyan Info Session',
+      text: '10:00AM: Weslyan Info Session',
       type: 'tour'
     },
     {
-      delta: 3,
       date: '2019-02-19',
       text: '3.5 hr drive to Swarthmore',
       type: 'drive'
     },
     {
-      delta: 3,
       date: '2019-02-20',
       text: '09:00AM: Swarthmore Info Session',
       type: 'tour'
     },
     {
-      delta: 2,
       date: '2019-02-20',
       text: '10:00AM: Swarthmore Tour',
       type: 'tour'
     },
     {
-      delta: 3,
       date: '2019-02-20',
-      text: '18 min drive to Villanova',
+      text: '46 min drive to University of Pennsylvania',
       type: 'drive'
     },
     {
-      delta: 3,
       date: '2019-02-20',
-      text: '2:15PM: Villanova Info Session',
+      text: '1:00PM: University of Pennsylvania Tour',
       type: 'tour'
     },
     {
-      delta: 2,
       date: '2019-02-20',
-      text: '3:00PM: Villanova Tour',
+      text: '2:00PM: University of Pennsylvania Info Session',
       type: 'tour'
     },
     {
-      delta: 3,
       date: '2019-02-20',
       text: '11 min drive to Haverford',
       type: 'drive'
     },
     {
-      delta: 2,
       date: '2019-02-21',
       text: '09:30AM: Haverford Tour',
       type: 'tour'
     },
     {
-      delta: 3,
       date: '2019-02-21',
       text: '10:00AM: Haverford Info Session',
       type: 'tour'
     },
     {
-      delta: 3,
-      date: '2019-02-22',
-      text: '46 min drive to University of Pennsylvania',
+      date: '2019-02-21',
+      text: '1 hr 11 min drive to Muhlenberg College',
       type: 'drive'
     },
     {
-      delta: 2,
-      date: '2019-02-22',
-      text: '1:00PM: University of Pennsylvania Tour',
+      date: '2019-02-21',
+      text: '01:30AM: Muhlenberg College Tour',
       type: 'tour'
     },
     {
-      delta: 3,
-      date: '2019-02-22',
-      text: '2:00PM: University of Pennsylvania Info Session',
+      date: '2019-02-21',
+      text: '2:30AM: Muhlenberg College Info Session',
       type: 'tour'
+    },
+    {
+      date: '2019-02-21',
+      text: '1 hr 58 min drive to Dickenson',
+      type: 'drive'
+    },
+    {
+      date: '2019-02-22',
+      text: '09:00AM: Dickenson Tour',
+      type: 'tour'
+    },
+    {
+      date: '2019-02-22',
+      text: '10:15AM: Dickenson Info Session',
+      type: 'tour'
+    },
+    {
+      date: '2019-02-22',
+      text: '3 hr 56 min drive to 322 S Geneva St',
+      type: 'drive'
     }
   ]
 }

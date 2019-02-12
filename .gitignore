@@ -5,9 +5,8 @@ npm-debug.log
 !/tmp/.gitkeep
 .DS_Store
 dist
-public
+/public
 knexfile.js
 deploy.js
 config.json
 dist
-server/public

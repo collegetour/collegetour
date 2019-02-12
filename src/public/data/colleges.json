@@ -1,0 +1,92 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Boston University",
+      "city": "Boston",
+      "state": "MA",
+      "logo": "/images/boston.png",
+      "schedule": "https://apply.vassar.edu/portal/campusvisitcalendar"
+    },
+    {
+      "id": 2,
+      "name": "Brown University",
+      "city": "Providence",
+      "state": "RI",
+      "logo": "/images/brown.png",
+      "schedule": "https://apply.vassar.edu/portal/campusvisitcalendar"
+    },
+    {
+      "id": 3,
+      "name": "Cornell University",
+      "city": "Ithaca",
+      "state": "NY",
+      "logo": "/images/cornell.png",
+      "schedule": "https://apply.vassar.edu/portal/campusvisitcalendar"
+    },
+    {
+      "id": 4,
+      "name": "Dickenson University",
+      "city": "Carlisle",
+      "state": "PA",
+      "logo": "/images/dickenson.png",
+      "schedule": "https://apply.vassar.edu/portal/campusvisitcalendar"
+    },
+    {
+      "id": 5,
+      "name": "Drexel University",
+      "city": "Philadelphia",
+      "state": "PA",
+      "logo": "/images/drexel.png",
+      "schedule": "https://apply.vassar.edu/portal/campusvisitcalendar"
+    },
+    {
+      "id": 6,
+      "name": "Haverford College",
+      "city": "Haverford",
+      "state": "PA",
+      "logo": "/images/haverford.jpg",
+      "schedule": "https://apply.vassar.edu/portal/campusvisitcalendar"
+    },
+    {
+      "id": 7,
+      "name": "Swarthmore College",
+      "city": "Swarthmore",
+      "state": "PA",
+      "logo": "/images/swarthmore.png",
+      "schedule": "https://apply.vassar.edu/portal/campusvisitcalendar"
+    },
+    {
+      "id": 8,
+      "name": "University of Pennsylvania",
+      "city": "Philadelphia",
+      "state": "PA",
+      "logo": "/images/upen.png",
+      "schedule": "https://apply.vassar.edu/portal/campusvisitcalendar"
+    },
+    {
+      "id": 9,
+      "name": "Vassar College",
+      "city": "Poughkeepsie",
+      "state": "NY",
+      "logo": "/images/vassar.png",
+      "schedule": "https://apply.vassar.edu/portal/campusvisitcalendar"
+    },
+    {
+      "id": 10,
+      "name": "Villanova University",
+      "city": "Villanova",
+      "state": "PA",
+      "logo": "/images/villanova.png",
+      "schedule": "https://apply.vassar.edu/portal/campusvisitcalendar"
+    },
+    {
+      "id": 11,
+      "name": "Wesleyan University",
+      "city": "Middletown",
+      "state": "CT",
+      "logo": "/images/wesleyan.png",
+      "schedule": "https://apply.vassar.edu/portal/campusvisitcalendar"
+    }
+  ]
+}

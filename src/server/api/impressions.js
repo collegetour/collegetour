@@ -1,5 +1,6 @@
-import { Router } from 'express'
+import ImpressionSerializer from '../serializers/impression_serializer'
 import Impression from '../models/impression'
+import { Router } from 'express'
 
 const impressions = new Router({ mergeParams: true })
 
@@ -16,18 +17,7 @@ impressions.get('/api/tours/:tour_id/visits/:visit_id/impressions', async (req, 
   })
 
   res.status(200).json({
-    data: impressions.map(impression => ({
-      id: impression.get('id'),
-      asset: impression.related('asset').get('url'),
-      type: impression.get('type'),
-      user: {
-        id: impression.related('user').get('id'),
-        full_name: impression.related('user').get('full_name'),
-        photo: impression.related('user').related('photo').get('url')
-      },
-      created_at: impression.get('created_at'),
-      updated_at: impression.get('updated_at')
-    }))
+    data: impressions.map(ImpressionSerializer)
   })
 
 })
@@ -41,18 +31,7 @@ impressions.get('/api/tours/:tour_id/visits/:visit_id/impressions/:id', async (r
   })
 
   res.status(200).json({
-    data: {
-      id: impression.get('id'),
-      asset: impression.related('asset').get('url'),
-      type: impression.get('type'),
-      user: {
-        id: impression.related('user').get('id'),
-        full_name: impression.related('user').get('full_name'),
-        photo: impression.related('user').related('photo').get('url')
-      },
-      created_at: impression.get('created_at'),
-      updated_at: impression.get('updated_at')
-    }
+    data: ImpressionSerializer(impression)
   })
 
 })

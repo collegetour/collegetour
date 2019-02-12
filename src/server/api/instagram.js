@@ -1,4 +1,4 @@
-import { encode } from '../services/jwt'
+import SessionSerializer from '../serializers/session_serializer'
 import Instagram from 'instagram-node'
 import User from '../models/user'
 import express from 'express'
@@ -71,12 +71,7 @@ instagram.get('/signin/instagram/authorize', async (req, res) => {
   await user.load(['photo'])
 
   return res.render('token', {
-    user: {
-      id: user.get('id'),
-      full_name: user.get('full_name'),
-      photo: user.related('photo').get('url'),
-      token: encode(user.get('id'))
-    }
+    user: SessionSerializer(user)
   })
 
 })

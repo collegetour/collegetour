@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
     table.integer('asset_id').unsigned()
     table.foreign('asset_id').references('assets.id')
     table.enum('type', ['image','video','voice','note'])
-    table.text('note')
+    table.text('caption')
     table.timestamps()
   })
 }

@@ -1,5 +1,6 @@
-import { Router } from 'express'
+import CollegeSerializer from '../serializers/college_serializer'
 import College from '../models/college'
+import { Router } from 'express'
 
 const colleges = new Router({ mergeParams: true })
 
@@ -18,15 +19,7 @@ colleges.get('/api/colleges', async (req, res) => {
   })
 
   res.status(200).json({
-    data: colleges.map(college => ({
-      id: college.get('id'),
-      name: college.get('name'),
-      city: college.get('city'),
-      state: college.get('state'),
-      logo: college.related('logo').get('url'),
-      created_at: college.get('created_at'),
-      updated_at: college.get('updated_at')
-    }))
+    data: colleges.map(CollegeSerializer)
   })
 
 })

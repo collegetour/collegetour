@@ -19,6 +19,13 @@ class Signin extends React.Component {
           <a href="/signin/facebook" className="signin-button">
             <span className="fa-stack">
               <i className="fa fa-square fa-stack-2x" />
+              <i className="fa fa-google fa-stack-1x" />
+            </span>
+            Log In with Google
+          </a>
+          <a href="/signin/facebook" className="signin-button">
+            <span className="fa-stack">
+              <i className="fa fa-square fa-stack-2x" />
               <i className="fa fa-facebook fa-stack-1x" />
             </span>
             Log In with Facebook

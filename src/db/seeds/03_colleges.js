@@ -114,6 +114,16 @@ exports.seed = async (knex, Promise) => {
       schedule: 'https://apply.vassar.edu/portal/campusvisitcalendar',
       created_at: moment(),
       updated_at: moment()
+    },
+    {
+      id: 12,
+      name: 'Muhlenberg College',
+      city: 'Allentown',
+      state: 'PA',
+      logo_id: 18,
+      schedule: 'https://apply.vassar.edu/portal/campusvisitcalendar',
+      created_at: moment(),
+      updated_at: moment()
     }
   ])
 }
