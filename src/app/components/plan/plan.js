@@ -41,7 +41,6 @@ class Plan extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     const { tour_id } = this.props
     this.props.onFetch(tour_id)
   }

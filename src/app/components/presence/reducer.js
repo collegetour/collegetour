@@ -26,6 +26,25 @@ export default (state = INITIAL_STATE, action) => {
       status: 'failure'
     }
 
+  case 'LOAD_SESSION_REQUEST':
+    return {
+      ...state,
+      status: 'saving'
+    }
+
+  case 'LOAD_SESSION_SUCCESS':
+    return {
+      ...state,
+      user: action.result.data,
+      status: 'saved'
+    }
+
+  case 'LOAD_SESSION_FAILURE':
+    return {
+      ...state,
+      status: 'failure'
+    }
+
   default:
     return state
   }

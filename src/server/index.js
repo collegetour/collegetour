@@ -3,10 +3,10 @@ import instagram from './api/instagram'
 import facebook from './api/facebook'
 import colleges from './api/colleges'
 import bodyParser from 'body-parser'
+import session from './api/session'
 import visits from './api/visits'
 import tours from './api/tours'
 import token from './api/token'
-import user from './api/user'
 import express from 'express'
 import dotenv from 'dotenv'
 import path from 'path'
@@ -32,12 +32,16 @@ server.use(facebook)
 
 server.use(token)
 
+server.use(session)
+
 server.use(colleges)
 
 server.use(tours)
 
-server.use(user)
-
 server.use(visits)
+
+server.use((err, req, res, next) => {
+  res.status(500).render('error', { error: err })
+})
 
 export default server

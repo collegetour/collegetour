@@ -17,6 +17,7 @@ const tokenMiddleware = store => next => action => {
   if(_.isNil(presence.user)) return next(action)
 
   const token = action.token || presence.user.token
+
   next({
     ...action,
     token,

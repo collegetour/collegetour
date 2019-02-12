@@ -19,7 +19,9 @@ const token = async (req, res, next) => {
 
   const user = await User.where({
     id: user_id
-  }).fetch()
+  }).fetch({
+    withRelated: ['photo']
+  })
 
   if(!user) throw new Error('Invalid user')
 

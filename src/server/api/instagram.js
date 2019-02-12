@@ -70,14 +70,12 @@ instagram.get('/signin/instagram/authorize', async (req, res) => {
 
   await user.load(['photo'])
 
-  const token = encode(user.get('id'))
-
   return res.render('token', {
-    token,
     user: {
       id: user.get('id'),
       full_name: user.get('full_name'),
-      photo: user.related('photo').get('url')
+      photo: user.related('photo').get('url'),
+      token: encode(user.get('id'))
     }
   })
 
