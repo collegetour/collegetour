@@ -23,7 +23,7 @@ class Tour extends React.Component {
         { visits.map((visit, index) => (
           <div className="visits-visit" key={`visit_${visit.id}`} onClick={ this._handleClick.bind(this, visit.id) }>
             <div className="visits-visit-logo">
-              <img src={ visit.college.logo.url } />
+              <img src={ visit.college.logo } />
             </div>
             <div className="visits-visit-details">
               <strong>{ visit.college.name }</strong><br />

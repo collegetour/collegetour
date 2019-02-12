@@ -5,7 +5,13 @@ const tours = new Router({ mergeParams: true })
 
 tours.get('/api/tours', async (req, res) => {
 
-  const tours = await Tour.fetchAll()
+  const tours = await Tour.query(qb => {
+
+    qb.innerJoin('tours_users', 'tours_users.tour_id', 'tours.id')
+
+    qb.where('tours_users.user_id', req.user.get('id'))
+
+  }).fetchAll()
 
   res.status(200).json({
     data: tours.map(tour => ({

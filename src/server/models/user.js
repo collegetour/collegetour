@@ -8,6 +8,14 @@ const User = new Model({
 
   rules: {},
 
+  virtuals: {
+
+    full_name: function() {
+      return `${this.get('first_name')} ${this.get('last_name')}`
+    }
+
+  },
+
   photo() {
     return this.belongsTo(Asset, 'photo_id')
   },

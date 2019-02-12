@@ -1,7 +1,8 @@
-export const fetch = (prop, endpoint) => ({
+export const fetch = (q) => ({
   type: 'API_REQUEST',
   method: 'GET',
-  endpoint: '/data/colleges.json',
+  endpoint: '/api/colleges',
+  query: { q },
   request: 'FETCH_REQUEST',
   success: 'FETCH_SUCCESS',
   failure: 'FETCH_FAILURE'

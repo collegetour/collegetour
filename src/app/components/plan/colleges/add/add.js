@@ -17,7 +17,7 @@ class Colleges extends React.Component {
   _handleQuery = this._handleQuery.bind(this)
 
   render() {
-    const { colleges, q } = this.props
+    const { colleges, q, status } = this.props
     return (
       <div className="colleges-add">
         <div className="colleges-add-header">
@@ -27,7 +27,13 @@ class Colleges extends React.Component {
           { q.length == 0 &&
             <Message { ...this._getMessage() } />
           }
-          { q.length > 0 && colleges.map((college, index) => (
+          { status === 'failure' &&
+            <Message { ...this._getFailure() } />
+          }
+          { status === 'success' && q.length > 0 && colleges.length === 0 &&
+            <Message { ...this._getEmpty() } />
+          }
+          { status === 'success' && q.length > 0 && colleges.map((college, index) => (
             <div className="visit-token" key={`visit_${college.id}`} onClick={ this._handleClick.bind(this, college.id) }>
               <div className="visit-token-logo">
                 <img src={ college.logo } />
@@ -48,7 +54,23 @@ class Colleges extends React.Component {
   componentDidUpdate(prevProps) {
     const { q } = this.props
     if(q !== prevProps.q) {
-      this.props.onFetch()
+      this.props.onFetch(q)
+    }
+  }
+
+  _getEmpty() {
+    return {
+      title: 'No Results',
+      text: 'We couldnt find any colleges that matched your criteria',
+      icon: 'times'
+    }
+  }
+
+  _getFailure() {
+    return {
+      title: 'Request Failed',
+      text: 'We couldnt find any colleges that matched your criteria',
+      icon: 'warning'
     }
   }
 

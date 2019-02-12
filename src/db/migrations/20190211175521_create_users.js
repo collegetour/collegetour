@@ -5,6 +5,8 @@ exports.up = function(knex, Promise) {
     table.string('last_name')
     table.integer('photo_id').unsigned()
     table.foreign('photo_id').references('assets.id')
+    table.string('instagram_access_token')
+    table.string('facebook_access_token')
     table.timestamps()
   })
 }

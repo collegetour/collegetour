@@ -3,18 +3,22 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 
 import { createStore, applyMiddleware } from 'redux'
+import createlocalStorage from 'redux-local-storage'
 import { combineReducers } from 'redux-rubberstamp'
+import tokenMiddleware from './middleware/token'
 import initReactFastclick from 'react-fastclick'
 import createApiRequest from 'redux-api-request'
 import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
 import { hot } from 'react-hot-loader'
+import localforage from 'localforage'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import Browser from './components/host/browser'
 import RouterStack from './components/stack/router'
+import Presence from './components/presence'
 import Tours from './pages/tours/list'
 import Tour from './pages/tours/show'
 import Plan from './pages/tours/plan'
@@ -39,9 +43,11 @@ class App extends React.Component {
     return (
       <Provider store={ this.store }>
         <Browser>
-          <Router>
-            <RouterStack { ...this._getStack() } />
-          </Router>
+          <Presence>
+            <Router>
+              <RouterStack { ...this._getStack() } />
+            </Router>
+          </Presence>
         </Browser>
       </Provider>
     )
@@ -51,9 +57,15 @@ class App extends React.Component {
     const reducers = combineReducers(this.props.reducers)
     const loggerMiddleware = createLogger({ collapsed: true })
     const apiRequestMiddleware = createApiRequest()
+    const localStorageMiddleware = createlocalStorage(localforage.createInstance({
+      name: 'local',
+      storeName: 'collegetour'
+    }))
     const middleware = [
       thunkMiddleware,
+      tokenMiddleware,
       apiRequestMiddleware,
+      localStorageMiddleware,
       ...(process.env.NODE_ENV !== 'production' || window.location.search.match(/log=true/) !== null) ? [loggerMiddleware] : []
     ]
     const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore)

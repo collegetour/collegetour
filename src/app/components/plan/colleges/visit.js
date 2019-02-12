@@ -30,7 +30,7 @@ class Visit extends React.Component {
           <i className="fa fa-circle" />
         </div>
         <div className="visit-token-logo">
-          <img src={ visit.college.logo.url } />
+          <img src={ visit.college.logo } />
         </div>
         <div className="visit-token-details">
           <strong>{ visit.college.name }</strong><br />

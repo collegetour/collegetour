@@ -1,0 +1,47 @@
+.signin-canvas {
+  flex: 1;
+  display: flex;
+  background-color: @red;
+}
+.signin {
+  max-width: 320px;
+  width: ~"calc(100% - 4em)";
+  margin: auto;
+}
+.signin-button {
+  &::selection {
+    background-color: @white !important;
+    color: @red !important;
+  }
+  display: block;
+  background-color: @white !important;
+  color: @red !important;
+  margin-bottom: 2em;
+  font-size: 1.1em;
+  border: 1px solid @white;
+  padding: 0.8em;
+  border-radius: 0.5em;
+  .fa-stack-1x {
+    color: @white;
+  }
+  .fa-stack {
+    font-size: 1em;
+    margin-right: 0.5em;
+  }
+}
+.signin-or {
+  text-align: center;
+  color: @white;
+  margin-bottom: 1em;
+}
+.signin-header {
+  text-align: center;
+  .fa {
+    font-size: 5em;
+    color: @white;
+  }
+  h1 {
+    color: @white;
+  }
+  margin-bottom: 5em;
+}

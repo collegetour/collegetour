@@ -1,37 +1,29 @@
 const INITIAL_STATE = {
-  status: 'pending',
-  visits: [],
-  mode: 'itinerary'
+  status: 'presence',
+  user: null
 }
 
 export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
-
-  case 'FETCH_REQUEST':
+  case 'LOAD_USER_REQUEST':
     return {
       ...state,
       status: 'loading'
     }
 
-  case 'FETCH_SUCCESS':
+  case 'LOAD_USER_SUCCESS':
     return {
       ...state,
-      status: 'success',
-      visits: action.result.data
+      user: action.value,
+      status: 'loaded'
     }
 
-  case 'FETCH_FAILURE':
+  case 'LOAD_USER_FAILURE':
     return {
       ...state,
       status: 'failure'
-    }
-
-  case 'CHANGE_MODE':
-    return {
-      ...state,
-      mode: action.mode
     }
 
   default:

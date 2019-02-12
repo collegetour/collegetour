@@ -1,13 +1,10 @@
+import '../server/services/environment'
+
 import devServer from 'webpack-dev-server'
 import config from '../config/webpack.development.config'
 import server from '../server'
 import Webpack from 'webpack'
-import dotenv from 'dotenv'
 import path from 'path'
-
-dotenv.load({
-  path: path.join('.env')
-})
 
 server.listen(3001, () => {
   console.log(`Example app listening on port 3000!`)
@@ -21,6 +18,7 @@ const devserver = new devServer(Webpack(config()), {
   watchContentBase: true,
   open: true,
   proxy: {
+    '/signin/*': 'http://localhost:3001',
     '/api/*': 'http://localhost:3001'
   },
   historyApiFallback: {

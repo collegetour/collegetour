@@ -20,9 +20,7 @@ visits.get('/api/tours/:tour_id/visits', async (req, res) => {
         city: tour.related('college').get('city'),
         state: tour.related('college').get('state'),
         schedule: tour.related('college').get('schedule'),
-        logo: {
-          url: tour.related('college').related('logo').get('url')
-        }
+        logo: tour.related('college').related('logo').get('url')
       },
       info_session: tour.get('info_session'),
       college_tour: tour.get('college_tour'),
