@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
     table.integer('college_id').unsigned()
     table.foreign('college_id').references('colleges.id')
     table.integer('delta')
+    table.date('date')
     table.time('info_session')
     table.time('college_tour')
     table.timestamps()

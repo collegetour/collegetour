@@ -10,6 +10,7 @@ class Tour extends React.Component {
   }
 
   static propTypes = {
+    tour_id: PropTypes.string,
     visits: PropTypes.array
   }
 
@@ -30,9 +31,6 @@ class Tour extends React.Component {
               <span className="visits-visit-details-location">
                 { visit.college.city }, { visit.college.state }<br />
               </span>
-              <span className="visits-visit-details-timestamp">
-                Visited { moment(visit.visit).format('MM/DD/YYYY') }
-              </span>
             </div>
             <div className="visits-visit-proceed">
               <i className="fa fa-chevron-right" />
@@ -44,18 +42,20 @@ class Tour extends React.Component {
   }
 
   _handleClick(id) {
-    this.context.router.history.push(`/visits/${id}`)
+    const { tour_id } = this.props
+    this.context.router.history.push(`/tours/${tour_id}/visits/${id}`)
   }
 
 }
 
 const mapResourcesToPage = (props, context, page) => ({
+  tour: `/api/tours/${page.params.id}`,
   visits: `/api/tours/${page.params.id}/visits`
 })
 
 const mapPropsToPage = (props, context, resources, page) => ({
-  title: 'Tour',
-  component: Tour
+  title: resources.tour.name,
+  component: () => <Tour visits={ resources.visits} tour_id={ page.params.id } />
 })
 
 export default Page(mapResourcesToPage, mapPropsToPage)

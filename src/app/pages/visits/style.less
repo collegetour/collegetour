@@ -8,19 +8,25 @@
   display: flex;
   flex-direction: column;
 }
-.visit-photos-header {
-  background-color: fadeout(@black, 90);
-}
 .visit-photos-displays {
   display: flex;
 }
 .visit-photos-display {
+  border-bottom: 1px solid fadeout(@black, 95);
   flex: 1;
   text-align: center;
-  padding: 0.8em;
+  padding: 0.6em;
+  color: fadeout(@black, 60);
+  &.active {
+    color: @blue;
+  }
+  .fa {
+    font-size: 1.4em;
+  }
 }
 .visit-photos-body {
   flex: 1;
+  .scrollable();
 }
 .visit-video,
 .visit-image {
@@ -47,6 +53,9 @@
 }
 
 .impression {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 480px;
   flex: 1;
 }
 .impression-header {
@@ -55,8 +64,8 @@
 .impression-header-avatar {
   padding: 0.8em 0 0.8em 0.8em;
   img {
-    width: 3em;
-    height: 3em;
+    width: 2.8em;
+    height: 2.8em;
     border-radius: 50%;
   }
 }
@@ -66,10 +75,23 @@
   strong {
     color: @black;
   }
-  color: fadeout(@black, 60);
+  color: fadeout(@black, 40);
 }
-.impression-body {
+.impression-header-icon {
+  padding: 0.8em;
+  display: flex;
+  .fa {
+    margin: auto;
+    font-size: 1.2em;
+  }
+}
+.impression-asset {
   img {
+    display: block;
     width: 100%;
   }
+}
+.impression-caption {
+  padding: 0.8em;
+  line-height: 1.6em;
 }

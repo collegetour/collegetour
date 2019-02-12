@@ -17,9 +17,11 @@ class Page extends React.Component {
     component: PropTypes.any,
     color: PropTypes.string,
     data: PropTypes.object,
+    leftItems: PropTypes.array,
     message: PropTypes.object,
     panel: PropTypes.object,
     page: PropTypes.object,
+    rightItems: PropTypes.array,
     tabs: PropTypes.object,
     title: PropTypes.string
   }
@@ -79,11 +81,12 @@ class Page extends React.Component {
   }
 
   _getModalPanel() {
-    const { color, title } = this.props
+    const { color, leftItems, rightItems, title } = this.props
     const panel = {
-      leftItems: [
+      leftItems: leftItems || [
         { icon: 'chevron-left', handler: this._handleBack }
       ],
+      rightItems,
       color,
       title
     }

@@ -1,3 +1,4 @@
+import impressions from './api/impressions'
 import multiparty from 'connect-multiparty'
 import instagram from './api/instagram'
 import facebook from './api/facebook'
@@ -39,6 +40,8 @@ server.use(colleges)
 server.use(tours)
 
 server.use(visits)
+
+server.use(impressions)
 
 server.use((err, req, res, next) => {
   res.status(500).render('error', { error: err })

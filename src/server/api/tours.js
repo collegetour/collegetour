@@ -28,4 +28,25 @@ tours.get('/api/tours', async (req, res) => {
 
 })
 
+tours.get('/api/tours/:id', async (req, res) => {
+
+  const tour = await Tour.where({
+    id: req.params.id
+  }).fetch()
+
+  res.status(200).json({
+    data: {
+      id: tour.get('id'),
+      name: tour.get('name'),
+      start_date: tour.get('start_date'),
+      end_date: tour.get('end_date'),
+      start_address: tour.get('start_address'),
+      end_address: tour.get('end_address'),
+      created_at: tour.get('created_at'),
+      updated_at: tour.get('updated_at')
+    }
+  })
+
+})
+
 export default tours

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import moment from 'moment'
 
-class Impression extends React.Component {
+export class Impression extends React.Component {
 
   static propTypes = {
-    impression: PropTypes.array
+    impression: PropTypes.object
   }
 
   static defaultProps = {
@@ -18,15 +18,24 @@ class Impression extends React.Component {
       <div className="impression">
         <div className="impression-header">
           <div className="impression-header-avatar">
-            <img src={ impression.user.url } />
+            <img src={ impression.user.photo } />
           </div>
           <div className="impression-header-details">
-            <strong>{ impression.user.name }</strong><br />
-            { moment(impression.created_at).format('MMM DD, YYYY') }
+            <strong>{ impression.user.full_name }</strong><br />
+            { moment(impression.created_at).format('MMM DD, YYYY @ hh:mm A') }
+          </div>
+          <div className="impression-header-icon">
+            <i className="fa fa-ellipsis-h" />
           </div>
         </div>
-        <div className="impression-body">
-          <img src={ impression.url } />
+        <div className="impression-asset">
+          <img src={ impression.asset } />
+        </div>
+        <div className="impression-caption">
+          Lorem ipsum dolor amet squid sartorial godard shaman, twee hashtag
+          green juice retro edison bulb freegan food truck put a bird on it.
+          Palo santo bicycle rights woke next level. 90&apos;s quinoa cloud bread
+          pickled, austin flannel hashtag
         </div>
       </div>
     )
@@ -36,7 +45,7 @@ class Impression extends React.Component {
 }
 
 const mapResourcesToPage = (props, context, page) => ({
-  impression: '/data/impression.json'
+  impression: `/api/tours/${page.params.tour_id}/visits/${page.params.visit_id}/impressions/${page.params.id}`
 })
 
 const mapPropsToPage = (props, context, resources, page) => ({

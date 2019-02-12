@@ -56,9 +56,7 @@ const PageCreator = (mapResourcesToPage, mapPropsToPage) => {
 
     _getPanel() {
       return {
-        leftItems: [
-          { icon: 'chevron-left', handler: this._handleBack }
-        ],
+        leftItems: [],
         title: ''
       }
     }
