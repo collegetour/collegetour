@@ -1,1 +1,2 @@
-# collegetour
+# static-starter
+Static Site Starter

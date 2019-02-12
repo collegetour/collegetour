@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/animate.min.css">
+    <title>Static Starter</title>
+    <% if(process.env.NODE_ENV === 'production' && process.env.GA_PROPERTY_ID !== undefined) { %>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%= process.env.GA_PROPERTY_ID %>"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '<%= process.env.GA_PROPERTY_ID %>');
+    </script>
+    <% } %>
+  </head>
+  <body>
+    <main id="app"></main>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3BLF5rYDoNlgGo2KQRHFKLhY0hSxGJJo" async defer></script>
+  </body>
+</html>

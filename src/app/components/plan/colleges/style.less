@@ -1,0 +1,125 @@
+.plan-sidebar {
+  flex: 0 0 300px;
+  background-color: fadeout(@black, 97);
+  position: relative;
+}
+.plan-sidebar-panel {
+  background-color: @white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  .slide(.25s);
+
+}
+.plan-sidebar-panel-header {
+  display: flex;
+  background-color: fadeout(@black, 90);
+}
+.plan-sidebar-panel-header-title {
+  flex: 1;
+  padding: 0.8em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.plan-sidebar-panel-body {
+  .scrollable();
+  flex: 1;
+}
+.plan-sidebar-panel-footer {
+  border-top: 1px solid fadeout(@black, 90);
+  padding: 0.8em;
+}
+.plan-map {
+  flex: 1;
+  display: flex;
+  .map {
+    flex: 1;
+  }
+}
+
+
+
+.visits-bound {
+  border-bottom: 1px solid fadeout(@black, 90);
+  position: relative;
+  background-color: fadeout(@black, 95);
+  padding: .8em;
+  text-align: center;
+}
+.visits .visit-token {
+  &:nth-child(1) .fa-circle { color: @red; }
+  &:nth-child(2) .fa-circle { color: @orange; }
+  &:nth-child(3) .fa-circle { color: @yellow; }
+  &:nth-child(4) .fa-circle { color: @olive; }
+  &:nth-child(5) .fa-circle { color: @green; }
+  &:nth-child(6) .fa-circle { color: @teal; }
+  &:nth-child(7) .fa-circle { color: @blue; }
+  &:nth-child(8) .fa-circle { color: @violet; }
+  &:nth-child(9) .fa-circle { color: @purple; }
+  &:nth-child(10) .fa-circle { color: @pink; }
+}
+
+.visit-token {
+  border-bottom: 1px solid fadeout(@black, 90);
+  display: flex;
+  flex: 1;
+  position: relative;
+  background-color: @white;
+  cursor: grab;
+  &:hover {
+    background-color: fadeout(@black, 95);
+  }
+}
+.visit-token-handle {
+  color: fadeout(@black, 80);
+  display: flex;
+  font-size: 1.2em;
+  padding: 0.8em 0 0.8em 0.8em;
+  text-align: center;
+  .fa {
+    margin: auto;
+  }
+}
+.visit-token-logo {
+  display: flex;
+  padding: 0.8em 0 0.8em 0.8em;
+  img {
+    width: 2.5em;
+    height: 2.5em;
+    margin: auto;
+  }
+}
+.visit-token-details {
+  flex: 1;
+  line-height: 1.2em;
+  padding: .8em;
+  strong {
+    color: #000;
+  }
+}
+.visit-token-details-location {
+  color: fadeout(@black, 60);
+  font-size: .8em;
+}
+.visit-token-remove {
+  position: absolute;
+  top: 50%;
+  right: 0.8em;
+  transform: translateY(-50%);
+  color: fadeout(@black, 90);
+  cursor: pointer;
+}
+.visits-add {
+  padding: 0.8em;
+  color: @blue;
+  text-decoration: underline;
+  cursor: pointer;
+  text-align: center;
+  &:hover {
+    background-color: fadeout(@black, 95);
+  }
+}

@@ -1,0 +1,80 @@
+import SearchBox from '../../../searchbox'
+import Message from '../../../message'
+import PropTypes from 'prop-types'
+import React from 'react'
+
+class Colleges extends React.Component {
+
+  static propTypes = {
+    colleges: PropTypes.array,
+    q: PropTypes.string,
+    status: PropTypes.string,
+    onChangeMode: PropTypes.func,
+    onFetch: PropTypes.func,
+    onQuery: PropTypes.func
+  }
+
+  _handleQuery = this._handleQuery.bind(this)
+
+  render() {
+    const { colleges, q } = this.props
+    return (
+      <div className="colleges-add">
+        <div className="colleges-add-header">
+          <SearchBox { ...this._getSearchbox() } />
+        </div>
+        <div className="colleges-add-body">
+          { q.length == 0 &&
+            <Message { ...this._getMessage() } />
+          }
+          { q.length > 0 && colleges.map((college, index) => (
+            <div className="visit-token" key={`visit_${college.id}`} onClick={ this._handleClick.bind(this, college.id) }>
+              <div className="visit-token-logo">
+                <img src={ college.logo } />
+              </div>
+              <div className="visit-token-details">
+                <strong>{ college.name }</strong><br />
+                <span className="visit-token-details-location">
+                  { college.city }, { college.state }<br />
+                </span>
+              </div>
+            </div>
+          )) }
+        </div>
+      </div>
+    )
+  }
+
+  componentDidUpdate(prevProps) {
+    const { q } = this.props
+    if(q !== prevProps.q) {
+      this.props.onFetch()
+    }
+  }
+
+  _getMessage() {
+    return {
+      title: 'Select a college',
+      text: 'Search through our database of colleges-add and universities',
+      icon: 'university'
+    }
+  }
+
+  _getSearchbox() {
+    return {
+      prompt: 'Search by name, city, or state',
+      onChange: this._handleQuery
+    }
+  }
+
+  _handleQuery(q) {
+    this.props.onQuery(q)
+  }
+
+  _handleClick() {
+    this.props.onChangeMode('itinerary')
+  }
+
+}
+
+export default Colleges
