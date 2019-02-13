@@ -5,7 +5,7 @@
     name: 'local',
     storeName: 'collegetour'
   });
-  localforage.setItem('tourst_id', <%= tourist_id %>).then(function () {
+  localforage.setItem('tourist_id', <%= tourist_id %>).then(function () {
     window.location.href = "/";
   });
 </script>

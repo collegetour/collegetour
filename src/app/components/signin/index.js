@@ -4,6 +4,7 @@ import React from 'react'
 class Signin extends React.Component {
 
   static propTypes = {
+    tourist_id: PropTypes.number
   }
 
   static defaultProps = {}
@@ -43,10 +44,14 @@ class Signin extends React.Component {
   }
 
   _getSignin(network) {
-    const tourist_id = 1
-    const redirect = window.location.pathname
+    const { tourist_id } = this.props
+    const { pathname } = window.location
+    const redirect = pathname !== '/' ? pathname : null
     const path = `/signin/${network}`
-    return redirect ? `${path}?redirect=${redirect}&tourist_id=${tourist_id}` : path
+    const query = []
+    if(redirect) query.push(`redirect=${redirect}`)
+    if(tourist_id) query.push(`tourist_id=${tourist_id}`)
+    return query.length > 0 ? `${path}?${query.join('&')}` : path
   }
 
 }

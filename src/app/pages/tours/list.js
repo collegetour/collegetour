@@ -1,3 +1,4 @@
+import Message from '../../components/message'
 import { Page } from '../../components/page'
 import PropTypes from 'prop-types'
 import moment from 'moment'
@@ -18,6 +19,7 @@ class Tours extends React.Component {
 
   render() {
     const { tours } = this.props
+    if(tours.length === 0) return <Message { ...this._getEmpty() } />
     return (
       <div className="tours">
         { tours.map((tour, index) => (
@@ -33,6 +35,15 @@ class Tours extends React.Component {
         )) }
       </div>
     )
+  }
+
+  _getEmpty() {
+    return {
+      icon: 'car',
+      title: 'Create a Tour',
+      text: 'Set up a tour',
+      component: <button className="ui basic fluid red button" onClick={ this._handlePlan }>Create Tour</button>
+    }
   }
 
   _handleClick(id) {

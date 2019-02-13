@@ -1,11 +1,25 @@
 const INITIAL_STATE = {
-  status: 'presence',
+  status: 'pending',
+  tourist_id: null,
   user: null
 }
 
 export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
+
+  case 'LOAD_TOURIST_SUCCESS':
+    return {
+      ...state,
+      tourist_id: action.value
+    }
+
+
+  case 'REMOVE_TOURIST_SUCCESS':
+    return {
+      ...state,
+      tourist_id: null
+    }
 
   case 'LOAD_USER_REQUEST':
     return {

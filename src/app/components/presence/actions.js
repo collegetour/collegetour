@@ -1,3 +1,19 @@
+export const loadTourist = () => ({
+  type: 'LOCAL_GET',
+  key: 'tourist_id',
+  request: 'LOAD_TOURIST_REQUEST',
+  success: 'LOAD_TOURIST_SUCCESS',
+  failure: 'LOAD_TOURIST_FAILURE'
+})
+
+export const removeTourist = () => ({
+  type: 'LOCAL_REMOVE',
+  key: 'tourist_id',
+  request: 'REMOVE_TOURIST_REQUEST',
+  success: 'REMOVE_TOURIST_SUCCESS',
+  failure: 'REMOVE_TOURIST_FAILURE'
+})
+
 export const loadUser = () => ({
   type: 'LOCAL_GET',
   key: 'user',

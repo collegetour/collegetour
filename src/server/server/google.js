@@ -1,48 +1,32 @@
 import { google as googleapis } from 'googleapis'
 import request from 'request-promise'
-import authorize from './authorize'
-import express from 'express'
-import path from 'path'
-import qs from 'qs'
+import signin from './signin'
 
 const redirect_uri = `${process.env.WEB_HOST}/signin/google/token`
 
 const auth = new googleapis.auth.OAuth2(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, redirect_uri)
 
-const router = express()
-
-router.set('views', path.join(__dirname, '..', 'views'))
-
-router.set('view engine', 'ejs')
-
-router.get('/signin/google', async (req, res) => {
-
-  const auth_url = auth.generateAuthUrl({
-    state: qs.stringify(req.query).split('&').join('|'),
-    prompt: 'consent',
-    scope: [
-      'https://www.googleapis.com/auth/userinfo.profile'
-    ]
-  })
-
-  res.redirect(301, auth_url)
-
+const getUrl = async (state) => auth.generateAuthUrl({
+  state,
+  prompt: 'consent',
+  scope: [
+    'https://www.googleapis.com/auth/userinfo.profile'
+  ]
 })
 
-router.get('/signin/google/token', async (req, res) => {
+const getAccessToken = async (code) => {
 
   const data = await new Promise((resolve, reject) => {
-    auth.getToken(req.query.code, (err, data) => {
+    auth.getToken(code, (err, data) => {
       if(err) reject(err)
       resolve(data)
     })
   })
 
-  res.redirect(301, `/signin/google/authorize?access_token=${data.access_token}&state=${req.query.state}`)
+  return data.access_token
+}
 
-})
-
-router.get('/signin/google/authorize', authorize('google', async (access_token) => {
+const getUser = async (access_token) => {
 
   const profile = await request({
     uri: `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${access_token}`,
@@ -56,6 +40,8 @@ router.get('/signin/google/authorize', authorize('google', async (access_token) 
     profile_picture: profile.picture
   }
 
-}))
+}
 
-export default router
+const google = signin('google', getUrl, getAccessToken, getUser)
+
+export default google

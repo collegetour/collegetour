@@ -1,8 +1,5 @@
 import Instagram from 'instagram-node'
-import authorize from './authorize'
-import express from 'express'
-import path from 'path'
-import qs from 'qs'
+import signin from './signin'
 
 const redirect_uri = `${process.env.WEB_HOST}/signin/instagram/token`
 
@@ -13,32 +10,24 @@ ig.use({
   client_secret: process.env.INSTAGRAM_CLIENT_SECRET
 })
 
-const router = express()
+const getUrl = async (state) => {
 
-router.set('views', path.join(__dirname, '..', 'views'))
-
-router.set('view engine', 'ejs')
-
-router.get('/signin/instagram', async (req, res) => {
-
-  const authorization_url = await ig.get_authorization_url(redirect_uri, {
-    state: qs.stringify(req.query).split('&').join('|'),
+  return await ig.get_authorization_url(redirect_uri, {
+    state,
     scope: 'basic'
   })
+  
+}
 
-  res.redirect(301, authorization_url)
+const getAccessToken = async (code) => {
 
-})
+  const data = await Promise.promisify(ig.authorize_user)(code, redirect_uri)
 
-router.get('/signin/instagram/token', async (req, res) => {
+  return data.access_token
 
-  const data = await Promise.promisify(ig.authorize_user)(req.query.code, redirect_uri)
+}
 
-  res.redirect(301, `/signin/instagram/authorize?access_token=${data.access_token}&state=${req.query.state}`)
-
-})
-
-router.get('/signin/instagram/authorize', authorize('instagram', async (access_token) => {
+const getUser = async (access_token) => {
 
   ig.use({ access_token })
 
@@ -53,6 +42,8 @@ router.get('/signin/instagram/authorize', authorize('instagram', async (access_t
     profile_picture: self.profile_picture
   }
 
-}))
+}
 
-export default router
+const instagram = signin('instagram', getUrl, getAccessToken, getUser)
+
+export default instagram

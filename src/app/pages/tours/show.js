@@ -21,7 +21,7 @@ class Tour extends React.Component {
 
   render() {
     const { visits } = this.props
-    if(visits.length === 0) return <Message { ...this._getMessage() } />
+    if(visits.length === 0) return <Message { ...this._getEmpty() } />
     return (
       <div className="visits">
         { visits.map((visit, index) => (
@@ -44,9 +44,9 @@ class Tour extends React.Component {
     )
   }
 
-  _getMessage() {
+  _getEmpty() {
     return {
-      icon: 'car',
+      icon: 'map',
       title: 'Plan Your Tour',
       text: 'Go ahead and add some college visits to your tour',
       component: <button className="ui basic fluid red button" onClick={ this._handlePlan }>Plan Tour</button>

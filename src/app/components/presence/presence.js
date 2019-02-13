@@ -14,9 +14,12 @@ class Presence extends React.Component {
     children: PropTypes.any,
     status: PropTypes.string,
     token: PropTypes.string,
+    tourist_id: PropTypes.number,
     user: PropTypes.object,
     onLoadSession: PropTypes.func,
+    onLoadTourist: PropTypes.func,
     onLoadUser: PropTypes.func,
+    onRemoveTourist: PropTypes.func,
     onSaveUser: PropTypes.func
   }
 
@@ -25,24 +28,30 @@ class Presence extends React.Component {
   _handleReload = this._handleReload.bind(this)
 
   render() {
-    const { status, user } = this.props
-    if(status === 'loaded' && user === null) return <Signin />
+    const { status, tourist_id, user } = this.props
+    if(status === 'loaded' && user === null) return <Signin tourist_id={ tourist_id } />
     if(status !== 'saved') return null
     if(!user.agreed_to_terms) return <Setup />
     return this.props.children
   }
 
   componentDidMount() {
+    this.props.onLoadTourist()
     this.props.onLoadUser()
   }
 
   componentDidUpdate(prevProps) {
-    const { user, onLoadSession, onSaveUser } = this.props
+    const { status, user, onLoadSession, onRemoveTourist, onSaveUser } = this.props
     if(!_.isEqual(user, prevProps.user)) {
       if(prevProps.user === null) {
         onLoadSession(user.token)
       } else if(user.token !== prevProps.user.token) {
         onSaveUser(user)
+      }
+    }
+    if(status !== prevProps.status) {
+      if(status === 'saved') {
+        onRemoveTourist()
       }
     }
   }
