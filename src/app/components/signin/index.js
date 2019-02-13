@@ -14,7 +14,7 @@ class Signin extends React.Component {
         <div className="signin">
           <div className="signin-header">
             <i className="fa fa-university" />
-            <h1>College Tour Planner</h1>
+            <h1>College Tourist</h1>
           </div>
           <a href="/signin/google" className="signin-button">
             <span className="fa-stack">

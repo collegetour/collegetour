@@ -13,7 +13,7 @@ exports.seed = async (knex, Promise) => {
       instagram_id: '1560577',
       facebook_id: '10156132195932338',
       google_id: '108572669723879041659',
-      agreed_to_terms: false,
+      agreed_to_terms: true,
       created_at: moment(),
       updated_at: moment()
     },

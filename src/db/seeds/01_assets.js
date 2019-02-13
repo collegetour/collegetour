@@ -96,8 +96,26 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      original_file_name: 'cornell1.jpg',
-      file_name: 'cornell1.jpg',
+      original_file_name: 'vassar1.jpg',
+      file_name: 'vassar1.jpg',
+      created_at: moment(),
+      updated_at: moment()
+    },
+    {
+      original_file_name: 'vassar2.jpg',
+      file_name: 'vassar2.jpg',
+      created_at: moment(),
+      updated_at: moment()
+    },
+    {
+      original_file_name: 'muhlenberg.png',
+      file_name: 'muhlenberg.png',
+      created_at: moment(),
+      updated_at: moment()
+    },
+    {
+      original_file_name: 'vassar3.jpg',
+      file_name: 'vassar3.jpg',
       created_at: moment(),
       updated_at: moment()
     },
@@ -108,8 +126,20 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      original_file_name: 'muhlenberg.png',
-      file_name: 'muhlenberg.png',
+      original_file_name: 'wesleyan1.jpg',
+      file_name: 'wesleyan1.jpg',
+      created_at: moment(),
+      updated_at: moment()
+    },
+    {
+      original_file_name: 'wesleyan2.jpg',
+      file_name: 'wesleyan2.jpg',
+      created_at: moment(),
+      updated_at: moment()
+    },
+    {
+      original_file_name: 'wesleyan3.jpg',
+      file_name: 'wesleyan3.jpg',
       created_at: moment(),
       updated_at: moment()
     }

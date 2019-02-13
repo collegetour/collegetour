@@ -36,8 +36,8 @@ const User = new Model({
     return this.belongsTo(Asset, 'photo_id')
   },
 
-  travelers() {
-    return this.hasMany(Traveler, 'user_id')
+  tourists() {
+    return this.hasMany(Tourist, 'user_id')
   }
 
 

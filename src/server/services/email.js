@@ -31,7 +31,7 @@ export const sendMail = async (email) => {
 
   const message = {
     ...email,
-    from: 'College Tour Planner <mochini@gmail.com>',
+    from: 'College Tourist <mochini@gmail.com>',
     to: process.env.EMAIL_REDIRECT || email.to,
     html,
     text: htmlToText(html)

@@ -1,6 +1,7 @@
 import impressions from './impressions'
+import invitations from './invitations'
 import instagram from './instagram'
-import travelers from './travelers'
+import tourists from './tourists'
 import facebook from './facebook'
 import colleges from './colleges'
 import { Router } from 'express'
@@ -29,7 +30,9 @@ api.use(colleges)
 
 api.use(tours)
 
-api.use(travelers)
+api.use(invitations)
+
+api.use(tourists)
 
 api.use(visits)
 

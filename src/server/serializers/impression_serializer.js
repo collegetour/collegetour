@@ -5,7 +5,8 @@ const impression_serializer = (impression) => ({
   user: {
     id: impression.related('user').get('id'),
     full_name: impression.related('user').get('full_name'),
-    photo: impression.related('user').related('photo').get('url')
+    initials: impression.related('user').get('initials'),
+    photo: impression.related('user').get('photo_id') ? impression.related('user').related('photo').get('url') : null
   },
   caption: impression.get('caption'),
   created_at: impression.get('created_at'),

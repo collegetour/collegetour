@@ -2,9 +2,9 @@ import Model from './model'
 import Tour from './tour'
 import User from './user'
 
-const Traveler = new Model({
+const Tourist = new Model({
 
-  tableName: 'travelers',
+  tableName: 'tourists',
 
   rules: {},
 
@@ -19,4 +19,4 @@ const Traveler = new Model({
 
 })
 
-export default Traveler
+export default Tourist

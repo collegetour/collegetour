@@ -1,4 +1,5 @@
 import { Page } from '../../components/page'
+import Avatar from '../../components/avatar'
 import PropTypes from 'prop-types'
 import React from 'react'
 import moment from 'moment'
@@ -18,7 +19,7 @@ export class Impression extends React.Component {
       <div className="impression">
         <div className="impression-header">
           <div className="impression-header-avatar">
-            <img src={ impression.user.photo } />
+            <Avatar user={ impression.user } />
           </div>
           <div className="impression-header-details">
             <strong>{ impression.user.full_name }</strong><br />

@@ -1,7 +1,7 @@
+import Message from '../../components/message'
 import { Page } from '../../components/page'
 import PropTypes from 'prop-types'
 import React from 'react'
-import moment from 'moment'
 
 class Tour extends React.Component {
 
@@ -17,8 +17,11 @@ class Tour extends React.Component {
   static defaultProps = {
   }
 
+  _handlePlan = this._handlePlan.bind(this)
+
   render() {
     const { visits } = this.props
+    if(visits.length === 0) return <Message { ...this._getMessage() } />
     return (
       <div className="visits">
         { visits.map((visit, index) => (
@@ -39,6 +42,20 @@ class Tour extends React.Component {
         )) }
       </div>
     )
+  }
+
+  _getMessage() {
+    return {
+      icon: 'car',
+      title: 'Plan Your Tour',
+      text: 'Go ahead and add some college visits to your tour',
+      component: <button className="ui basic fluid red button" onClick={ this._handlePlan }>Plan Tour</button>
+    }
+  }
+
+  _handlePlan() {
+    const { tour_id } = this.props
+    this.context.router.history.push(`/tours/${tour_id}/plan`)
   }
 
   _handleClick(id) {

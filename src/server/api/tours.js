@@ -8,9 +8,9 @@ router.get('/api/tours', async (req, res) => {
 
   const tours = await Tour.query(qb => {
 
-    qb.innerJoin('travelers', 'travelers.tour_id', 'tours.id')
+    qb.innerJoin('tourists', 'tourists.tour_id', 'tours.id')
 
-    qb.where('travelers.user_id', req.user.get('id'))
+    qb.where('tourists.user_id', req.user.get('id'))
 
   }).fetchAll()
 

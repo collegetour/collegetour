@@ -22,9 +22,6 @@ class Tours extends React.Component {
       <div className="tours">
         { tours.map((tour, index) => (
           <div className="tours-tour" key={`tour_${tour.id}`} onClick={ this._handleClick.bind(this, tour.id) }>
-            <div className="tours-tour-icon">
-              <i className="fa fa-car" />
-            </div>
             <div className="tours-tour-details">
               <strong>{ tour.name }</strong><br />
               { moment(tour.start_date).format('MM/DD/YYYY') }
@@ -49,7 +46,7 @@ const mapResourcesToPage = (props, context, page) => ({
 })
 
 const mapPropsToPage = (props, context, resources, page) => ({
-  title: '',
+  title: 'College Tourist',
   component: Tours,
   leftItems: [],
   rightItems: [

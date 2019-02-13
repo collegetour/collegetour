@@ -3,24 +3,24 @@ import Avatar from '../../components/avatar'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-class Travelers extends React.Component {
+class Tourists extends React.Component {
 
   static contextTypes = {
     router: PropTypes.object
   }
 
   static propTypes = {
-    travelers: PropTypes.array
+    tourists: PropTypes.array
   }
 
   static defaultProps = {
   }
 
   render() {
-    const { travelers } = this.props
+    const { tourists } = this.props
     return (
-      <div className="travelers">
-        <div className="travelers-header">
+      <div className="tourists">
+        <div className="tourists-header">
           <div className="ui form">
             <div className="field">
               <label>First Name</label>
@@ -37,18 +37,18 @@ class Travelers extends React.Component {
             <button className="ui fluid red button" type="submit" onClick={ this._handleSubmit }>Send Invitation</button>
           </div>
         </div>
-        <div className="travelers-body">
-          { travelers.map((traveler, index) => (
-            <div className="travelers-traveler" key={`traveler_${index}`}>
-              <div className="travelers-traveler-photo">
-                <Avatar user={ traveler.user } />
+        <div className="tourists-body">
+          { tourists.map((tourist, index) => (
+            <div className="tourists-tourist" key={`tourist_${index}`}>
+              <div className="tourists-tourist-photo">
+                <Avatar user={ tourist.user } />
               </div>
-              <div className="travelers-traveler-details">
-                <strong>{ traveler.user.full_name }</strong><br />
-                { traveler.user.email }
+              <div className="tourists-tourist-details">
+                <strong>{ tourist.user.full_name }</strong><br />
+                { tourist.user.email }
               </div>
-              <div className="travelers-traveler-icon">
-                { traveler.claimed_at ?
+              <div className="tourists-tourist-icon">
+                { tourist.claimed_at ?
                   <i className="fa fa-fw fa-check" /> :
                   <i className="fa fa-fw fa-clock-o" />
                 }
@@ -63,12 +63,12 @@ class Travelers extends React.Component {
 }
 
 const mapResourcesToPage = (props, context, page) => ({
-  travelers: `/api/tours/${page.params.id}/travelers`
+  tourists: `/api/tours/${page.params.id}/tourists`
 })
 
 const mapPropsToPage = (props, context, resources, page) => ({
-  title: 'Travelers',
-  component: () => <Travelers travelers={ resources.travelers } />
+  title: 'Tourists',
+  component: () => <Tourists tourists={ resources.tourists } />
 })
 
 export default Page(mapResourcesToPage, mapPropsToPage)

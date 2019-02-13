@@ -24,7 +24,7 @@ import Tour from './pages/tours/show'
 import Plan from './pages/tours/plan'
 import Visit from './pages/visits/show'
 import Impression from './pages/visits/impression'
-import Travelers from './pages/tours/travelers'
+import Tourists from './pages/tours/tourists'
 import NotFound from './pages/not_found'
 
 initReactFastclick()
@@ -79,7 +79,7 @@ class App extends React.Component {
         { path: '/', component: Tours },
         { path: '/tours', component: Tours },
         { path: '/tours/:id', component: Tour },
-        { path: '/tours/:id/travelers', component: Travelers },
+        { path: '/tours/:id/tourists', component: Tourists },
         { path: '/tours/:tour_id/plan', component: Plan },
         { path: '/tours/:tour_id/visits/:id', component: Visit },
         { path: '/tours/:tour_id/visits/:visit_id/impressions/:id', component: Impression },

@@ -1,4 +1,4 @@
-import Traveler from './traveler'
+import Tourist from './tourist'
 import Model from './model'
 import Visit from './visit'
 
@@ -8,8 +8,8 @@ const Tour = new Model({
 
   rules: {},
 
-  travelers() {
-    return this.hasMany(Traveler, 'user_id')
+  tourists() {
+    return this.hasMany(Tourist, 'user_id')
   },
 
   visits() {

@@ -22,7 +22,7 @@ class Setup extends React.Component {
       <div className="setup">
         <div className="setup-header">
           <h1><i className="fa fa-university" /></h1>
-          <h3>Welcome to College Tour Planner!</h3>
+          <h3>Welcome to College Tourist!</h3>
           <p>Thanks for trying out our app! We&apos;re looking forward to helping you
             get the most out of your upcoming college tour! Before you get
             started, please verify your account information.</p>

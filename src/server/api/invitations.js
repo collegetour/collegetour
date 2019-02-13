@@ -1,7 +1,7 @@
 import UserSerializer from '../serializers/user_serializer'
 import { sendMail } from '../services/email'
 import { encode } from '../services/jwt'
-import Traveler from '../models/traveler'
+import Tourist from '../models/tourist'
 import User from '../models/user'
 import Tour from '../models/tour'
 import { Router } from 'express'
@@ -25,7 +25,7 @@ router.post('/api/tours/:id/invitations', async (req, res) => {
       updated_at: moment()
     }).save()
 
-    const traveler = await Traveler.forge({
+    const tourist = await Tourist.forge({
       tour_id: tour.get('id'),
       user_id: user.get('id'),
       created_at: moment(),
