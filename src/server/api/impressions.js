@@ -1,11 +1,11 @@
 import ImpressionSerializer from '../serializers/impression_serializer'
 import Impression from '../models/impression'
-import { withTransaction } from '../utils'
+import { t } from '../utils'
 import { Router } from 'express'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/api/tours/:tour_id/visits/:visit_id/impressions', withTransaction(async (req, res, trx) => {
+router.get('/api/tours/:tour_id/visits/:visit_id/impressions', t(async (req, res, trx) => {
 
   const impressions = await Impression.query(qb => {
 
@@ -24,7 +24,7 @@ router.get('/api/tours/:tour_id/visits/:visit_id/impressions', withTransaction(a
 
 }))
 
-router.get('/api/tours/:tour_id/visits/:visit_id/impressions/:id', withTransaction(async (req, res, trx) => {
+router.get('/api/tours/:tour_id/visits/:visit_id/impressions/:id', t(async (req, res, trx) => {
 
   const impression = await Impression.where({
     id: req.params.id

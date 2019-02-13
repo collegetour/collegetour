@@ -1,5 +1,5 @@
 import SessionSerializer from '../serializers/session_serializer'
-import { withTransaction } from '../utils'
+import { t } from '../utils'
 import Tourist from '../models/tourist'
 import User from '../models/user'
 import express from 'express'
@@ -14,7 +14,7 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
   router.set('view engine', 'ejs')
 
-  router.get(`/signin/${network}`, withTransaction(async (req, res, trx) => {
+  router.get(`/signin/${network}`, t(async (req, res, trx) => {
 
     const state = Object.keys(req.query).reduce((state, key) => [
       ...state,
@@ -27,7 +27,7 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
   }))
 
-  router.get(`/signin/${network}/token`, withTransaction(async (req, res, trx) => {
+  router.get(`/signin/${network}/token`, t(async (req, res, trx) => {
 
     const access_token = await getAccessToken(req.query.code)
 
@@ -36,7 +36,7 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
   }))
 
 
-  router.get(`/signin/${network}/authorize`, withTransaction(async (req, res, trx) => {
+  router.get(`/signin/${network}/authorize`, t(async (req, res, trx) => {
 
     const findTourist = async (self, tourist_id) => {
 

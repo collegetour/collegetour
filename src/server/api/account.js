@@ -1,10 +1,10 @@
 import SessionSerializer from '../serializers/session_serializer'
-import { withTransaction } from '../utils'
+import { t } from '../utils'
 import { Router } from 'express'
 
 const router = new Router({ mergeParams: true })
 
-router.patch('/api/account', withTransaction(async (req, res, trx) => {
+router.patch('/api/account', t(async (req, res, trx) => {
 
   await req.user.save(req.body, {
     transacting: trx,

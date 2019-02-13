@@ -1,6 +1,6 @@
 import UserSerializer from '../serializers/user_serializer'
 import { sendMail } from '../services/email'
-import { withTransaction } from '../utils'
+import { t } from '../utils'
 import Tourist from '../models/tourist'
 import User from '../models/user'
 import Tour from '../models/tour'
@@ -10,7 +10,7 @@ import moment from 'moment'
 
 const router = new Router({ mergeParams: true })
 
-router.post('/api/tours/:id/invitations', withTransaction(async (req, res, trx) => {
+router.post('/api/tours/:id/invitations', t(async (req, res, trx) => {
 
   const data = await Promise.mapSeries(req.body.invitations, async (invitation) => {
 

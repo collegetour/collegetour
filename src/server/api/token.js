@@ -1,8 +1,8 @@
-import { withTransaction } from '../utils'
+import { t } from '../utils'
 import { decode } from '../services/jwt'
 import User from '../models/user'
 
-const router = withTransaction(async (req, res, trx, next) => {
+const router = t(async (req, res, trx, next) => {
 
   const token = req.headers.authorization
 

@@ -1,6 +1,6 @@
 import knex from '../services/knex'
 
-export const withTransaction = (handler) => async (req, res, next) => {
+export const t = (handler) => async (req, res, next) => {
 
   return knex.transaction(async trx => {
 

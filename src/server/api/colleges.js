@@ -1,11 +1,11 @@
 import CollegeSerializer from '../serializers/college_serializer'
-import { withTransaction } from '../utils'
+import { t } from '../utils'
 import College from '../models/college'
 import { Router } from 'express'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/api/colleges', withTransaction(async (req, res, trx) => {
+router.get('/api/colleges', t(async (req, res, trx) => {
 
   const colleges = await College.query(qb => {
 

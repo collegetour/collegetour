@@ -1,11 +1,11 @@
 import TourSerializer from '../serializers/tour_serializer'
-import { withTransaction } from '../utils'
+import { t } from '../utils'
 import Tour from '../models/tour'
 import { Router } from 'express'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/api/tours', withTransaction(async (req, res, trx) => {
+router.get('/api/tours', t(async (req, res, trx) => {
 
   const tours = await Tour.query(qb => {
 
@@ -23,7 +23,7 @@ router.get('/api/tours', withTransaction(async (req, res, trx) => {
 
 }))
 
-router.get('/api/tours/:id', withTransaction(async (req, res, trx) => {
+router.get('/api/tours/:id', t(async (req, res, trx) => {
 
   const tour = await Tour.where({
     id: req.params.id
