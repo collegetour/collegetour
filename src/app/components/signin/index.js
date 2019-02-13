@@ -16,7 +16,7 @@ class Signin extends React.Component {
             <i className="fa fa-university" />
             <h1>College Tour Planner</h1>
           </div>
-          <a href="/signin/facebook" className="signin-button">
+          <a href="/signin/google" className="signin-button">
             <span className="fa-stack">
               <i className="fa fa-square fa-stack-2x" />
               <i className="fa fa-google fa-stack-1x" />

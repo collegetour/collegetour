@@ -6,7 +6,6 @@ exports.seed = async (knex, Promise) => {
 
   await knex('visits').insert([
     {
-      id: 1,
       tour_id: 1,
       college_id: 9,
       delta: 1,
@@ -17,7 +16,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 2,
       tour_id: 1,
       college_id: 11,
       delta: 2,
@@ -28,7 +26,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 3,
       tour_id: 1,
       college_id: 7,
       delta: 3,
@@ -39,7 +36,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 4,
       tour_id: 1,
       college_id: 6,
       delta: 4,
@@ -50,7 +46,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 5,
       tour_id: 1,
       college_id: 8,
       delta: 5,
@@ -61,7 +56,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 6,
       tour_id: 1,
       college_id: 12,
       delta: 6,
@@ -72,7 +66,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 7,
       tour_id: 1,
       college_id: 4,
       delta: 7,

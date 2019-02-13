@@ -6,7 +6,6 @@ exports.seed = async (knex, Promise) => {
 
   await knex('colleges').insert([
     {
-      id: 1,
       name: 'Boston University',
       city: 'Boston',
       state: 'MA',
@@ -16,7 +15,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 2,
       name: 'Brown University',
       city: 'Providence',
       state: 'RI',
@@ -26,7 +24,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 3,
       name: 'Cornell University',
       city: 'Ithaca',
       state: 'NY',
@@ -36,7 +33,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 4,
       name: 'Dickenson University',
       city: 'Carlisle',
       state: 'PA',
@@ -46,7 +42,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 5,
       name: 'Drexel University',
       city: 'Philadelphia',
       state: 'PA',
@@ -56,7 +51,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 6,
       name: 'Haverford College',
       city: 'Haverford',
       state: 'PA',
@@ -66,7 +60,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 7,
       name: 'Swarthmore College',
       city: 'Swarthmore',
       state: 'PA',
@@ -76,7 +69,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 8,
       name: 'University of Pennsylvania',
       city: 'Philadelphia',
       state: 'PA',
@@ -86,7 +78,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 9,
       name: 'Vassar College',
       city: 'Poughkeepsie',
       state: 'NY',
@@ -96,7 +87,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 10,
       name: 'Villanova University',
       city: 'Villanova',
       state: 'PA',
@@ -106,7 +96,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 11,
       name: 'Wesleyan University',
       city: 'Middletown',
       state: 'CT',
@@ -116,7 +105,6 @@ exports.seed = async (knex, Promise) => {
       updated_at: moment()
     },
     {
-      id: 12,
       name: 'Muhlenberg College',
       city: 'Allentown',
       state: 'PA',

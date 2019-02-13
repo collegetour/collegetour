@@ -6,7 +6,6 @@ exports.seed = async (knex, Promise) => {
 
   await knex('tours').insert([
     {
-      id: 1,
       owner_id: 1,
       name: 'Winter Break Trip',
       start_date: '2019-02-18',
