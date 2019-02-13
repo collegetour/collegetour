@@ -1,10 +1,10 @@
 import UserSerializer from '../serializers/user_serializer'
 import { sendMail } from '../services/email'
-import { encode } from '../services/jwt'
 import Tourist from '../models/tourist'
 import User from '../models/user'
 import Tour from '../models/tour'
 import { Router } from 'express'
+import Hashids from 'hashids'
 import moment from 'moment'
 
 const router = new Router({ mergeParams: true })
@@ -32,6 +32,12 @@ router.post('/api/tours/:id/invitations', async (req, res) => {
       updated_at: moment()
     }).save()
 
+    const hashids = new Hashids()
+
+    const salt = Math.floor(Math.random() * Math.floor(999999999))
+
+    const code = hashids.encode(salt,tourist.get('id'))
+
     await sendMail({
       template: 'invitation',
       data: {
@@ -44,7 +50,7 @@ router.post('/api/tours/:id/invitations', async (req, res) => {
         tour: {
           name: tour.get('name')
         },
-        token: encode('')
+        code
       },
       to: user.get('rfc822'),
       subject: `${req.user.get('full_name')} invited you to a tour`

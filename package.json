@@ -68,6 +68,7 @@
     "express": "^4.16.4",
     "fb": "^2.0.0",
     "googleapis": "^37.2.0",
+    "hashids": "^1.2.2",
     "html-email-to-text": "^1.0.4",
     "inline-css": "^2.4.1",
     "instagram-node": "^0.5.8",
