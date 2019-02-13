@@ -20,8 +20,4 @@ app.use(server)
 
 app.use(api)
 
-app.use((err, req, res, next) => {
-  res.status(500).render('error', { error: err })
-})
-
 export default app

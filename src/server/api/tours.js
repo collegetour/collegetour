@@ -28,7 +28,7 @@ router.get('/api/tours/:id', withTransaction(async (req, res, trx) => {
   const tour = await Tour.where({
     id: req.params.id
   }).fetch({
-    transacting: trx    
+    transacting: trx
   })
 
   res.status(200).json({

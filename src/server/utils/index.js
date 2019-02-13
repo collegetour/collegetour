@@ -14,10 +14,12 @@ export const withTransaction = (handler) => async (req, res, next) => {
 
       await trx.rollback(error)
 
-      if(process.env.NODE_ENV !== 'production') console.log(error)
+      res.status(500).json({
+        message: error.message
+      })
 
     }
 
-  })
+  }).catch(console.error)
 
 }
