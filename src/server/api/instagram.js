@@ -14,13 +14,13 @@ ig.use({
   client_secret: process.env.INSTAGRAM_CLIENT_SECRET
 })
 
-const instagram = express()
+const router = express()
 
-instagram.set('views', path.join(__dirname, '..', 'views'))
+router.set('views', path.join(__dirname, '..', 'views'))
 
-instagram.set('view engine', 'ejs')
+router.set('view engine', 'ejs')
 
-instagram.get('/signin/instagram', async (req, res) => {
+router.get('/signin/instagram', async (req, res) => {
 
   const authorization_url = await ig.get_authorization_url(redirect_uri, {
     scope: 'basic'
@@ -30,7 +30,7 @@ instagram.get('/signin/instagram', async (req, res) => {
 
 })
 
-instagram.get('/signin/instagram/token', async (req, res) => {
+router.get('/signin/instagram/token', async (req, res) => {
 
   const data = await Promise.promisify(ig.authorize_user)(req.query.code, redirect_uri)
 
@@ -38,7 +38,7 @@ instagram.get('/signin/instagram/token', async (req, res) => {
 
 })
 
-instagram.get('/signin/instagram/authorize', async (req, res) => {
+router.get('/signin/instagram/authorize', async (req, res) => {
 
   const createUser = async (user) => {
 
@@ -76,4 +76,4 @@ instagram.get('/signin/instagram/authorize', async (req, res) => {
 
 })
 
-export default instagram
+export default router

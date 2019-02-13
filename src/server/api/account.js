@@ -3,7 +3,9 @@ import { Router } from 'express'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/api/session', async (req, res) => {
+router.patch('/api/account', async (req, res) => {
+
+  await req.user.save(req.body, { patch: true })
 
   res.status(200).json({
     data: SessionSerializer(req.user)

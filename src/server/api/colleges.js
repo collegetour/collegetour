@@ -2,9 +2,9 @@ import CollegeSerializer from '../serializers/college_serializer'
 import College from '../models/college'
 import { Router } from 'express'
 
-const colleges = new Router({ mergeParams: true })
+const router = new Router({ mergeParams: true })
 
-colleges.get('/api/colleges', async (req, res) => {
+router.get('/api/colleges', async (req, res) => {
 
   const colleges = await College.query(qb => {
 
@@ -24,4 +24,4 @@ colleges.get('/api/colleges', async (req, res) => {
 
 })
 
-export default colleges
+export default router

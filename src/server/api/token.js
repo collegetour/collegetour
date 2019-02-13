@@ -1,7 +1,7 @@
 import { decode } from '../services/jwt'
 import User from '../models/user'
 
-const token = async (req, res, next) => {
+const router = async (req, res, next) => {
 
   const token = req.headers.authorization
 
@@ -31,4 +31,4 @@ const token = async (req, res, next) => {
 
 }
 
-export default token
+export default router

@@ -13,13 +13,13 @@ const fb = new Facebook({
   Promise
 })
 
-const facebook = express()
+const router = express()
 
-facebook.set('views', path.join(__dirname, '..', 'views'))
+router.set('views', path.join(__dirname, '..', 'views'))
 
-facebook.set('view engine', 'ejs')
+router.set('view engine', 'ejs')
 
-facebook.get('/signin/facebook', async (req, res) => {
+router.get('/signin/facebook', async (req, res) => {
 
   const login_url = await fb.getLoginUrl({
     redirect_uri
@@ -29,7 +29,7 @@ facebook.get('/signin/facebook', async (req, res) => {
 
 })
 
-facebook.get('/signin/facebook/token', async (req, res) => {
+router.get('/signin/facebook/token', async (req, res) => {
 
   const data = await fb.api('oauth/access_token', {
     client_id: process.env.FACEBOOK_APP_ID,
@@ -42,7 +42,7 @@ facebook.get('/signin/facebook/token', async (req, res) => {
 
 })
 
-facebook.get('/signin/facebook/authorize', async (req, res) => {
+router.get('/signin/facebook/authorize', async (req, res) => {
 
   const createUser = async (user) => {
 
@@ -78,4 +78,4 @@ facebook.get('/signin/facebook/authorize', async (req, res) => {
 
 })
 
-export default facebook
+export default router

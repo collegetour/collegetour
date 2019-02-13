@@ -10,13 +10,13 @@ const redirect_uri = `${process.env.WEB_HOST}/signin/google/token`
 
 const auth = new googleapis.auth.OAuth2(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, redirect_uri)
 
-const google = express()
+const router = express()
 
-google.set('views', path.join(__dirname, '..', 'views'))
+router.set('views', path.join(__dirname, '..', 'views'))
 
-google.set('view engine', 'ejs')
+router.set('view engine', 'ejs')
 
-google.get('/signin/google', async (req, res) => {
+router.get('/signin/google', async (req, res) => {
 
   const auth_url = auth.generateAuthUrl({
     prompt: 'consent',
@@ -29,7 +29,7 @@ google.get('/signin/google', async (req, res) => {
 
 })
 
-google.get('/signin/google/token', async (req, res) => {
+router.get('/signin/google/token', async (req, res) => {
 
   const data = await new Promise((resolve, reject) => {
     auth.getToken(req.query.code, (err, data) => {
@@ -42,7 +42,7 @@ google.get('/signin/google/token', async (req, res) => {
 
 })
 
-google.get('/signin/google/authorize', async (req, res) => {
+router.get('/signin/google/authorize', async (req, res) => {
 
   const createUser = async (user) => {
 
@@ -82,4 +82,4 @@ google.get('/signin/google/authorize', async (req, res) => {
 
 })
 
-export default google
+export default router

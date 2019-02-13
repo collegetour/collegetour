@@ -3,11 +3,13 @@ exports.up = function(knex, Promise) {
     table.increments('id').unsigned().primary()
     table.string('first_name')
     table.string('last_name')
+    table.string('email')
     table.integer('photo_id').unsigned()
     table.foreign('photo_id').references('assets.id')
     table.string('instagram_id')
     table.string('facebook_id')
     table.string('google_id')
+    table.bool('agreed_to_terms')
     table.timestamps()
   })
 }

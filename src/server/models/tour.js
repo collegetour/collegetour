@@ -1,3 +1,4 @@
+import Traveler from './traveler'
 import Model from './model'
 import Visit from './visit'
 
@@ -7,8 +8,12 @@ const Tour = new Model({
 
   rules: {},
 
+  travelers() {
+    return this.hasMany(Traveler, 'user_id')
+  },
+
   visits() {
-    return this.has_many(Visit, 'tour_id')
+    return this.hasMany(Visit, 'tour_id')
   }
 
 

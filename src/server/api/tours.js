@@ -2,15 +2,15 @@ import TourSerializer from '../serializers/tour_serializer'
 import Tour from '../models/tour'
 import { Router } from 'express'
 
-const tours = new Router({ mergeParams: true })
+const router = new Router({ mergeParams: true })
 
-tours.get('/api/tours', async (req, res) => {
+router.get('/api/tours', async (req, res) => {
 
   const tours = await Tour.query(qb => {
 
-    qb.innerJoin('tours_users', 'tours_users.tour_id', 'tours.id')
+    qb.innerJoin('travelers', 'travelers.tour_id', 'tours.id')
 
-    qb.where('tours_users.user_id', req.user.get('id'))
+    qb.where('travelers.user_id', req.user.get('id'))
 
   }).fetchAll()
 
@@ -20,7 +20,7 @@ tours.get('/api/tours', async (req, res) => {
 
 })
 
-tours.get('/api/tours/:id', async (req, res) => {
+router.get('/api/tours/:id', async (req, res) => {
 
   const tour = await Tour.where({
     id: req.params.id
@@ -32,4 +32,4 @@ tours.get('/api/tours/:id', async (req, res) => {
 
 })
 
-export default tours
+export default router

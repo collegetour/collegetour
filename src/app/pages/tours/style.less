@@ -86,3 +86,52 @@
     margin: auto;
   }
 }
+
+.travelers {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.travelers-header {
+  padding: 0.8em;
+  border-bottom: 1px solid fadeout(@black, 90);
+  background-color: fadeout(@black, 95);
+}
+.travelers-body {
+  flex: 1;
+  .scrollable();
+}
+
+.travelers-traveler {
+  display: flex;
+  border-bottom: 1px solid fadeout(@black, 90);
+}
+.travelers-traveler-photo {
+  padding: 0.8em;
+  .avatar {
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+  }
+}
+.travelers-traveler-details {
+  flex: 1;
+  padding: 0.8em 0 0.8em 0;
+  color: fadeout(@black, 60);
+  strong {
+    color: @black;
+  }
+}
+.travelers-traveler-icon {
+  padding: 0.8em;
+  display: flex;
+  .fa {
+    margin: auto;
+  }
+  .fa-check {
+    color: @green;
+  }
+  .fa-clock-o {
+    color: fadeout(@black, 60);
+  }
+}

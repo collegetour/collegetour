@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import Signin from '../signin'
 import React from 'react'
 import _ from 'lodash'
+import Setup from '../setup'
 
 class Presence extends React.Component {
 
@@ -21,10 +22,13 @@ class Presence extends React.Component {
 
   static defaultProps = {}
 
+  _handleReload = this._handleReload.bind(this)
+
   render() {
     const { status, user } = this.props
     if(status === 'loaded' && user === null) return <Signin />
     if(status !== 'saved') return null
+    if(!user.agreed_to_terms) return <Setup />
     return this.props.children
   }
 
@@ -48,9 +52,15 @@ class Presence extends React.Component {
     return {
       presence: {
         token,
-        user
+        user,
+        reload: this._handleReload
       }
     }
+  }
+
+  _handleReload() {
+    const { user, onLoadSession } = this.props
+    onLoadSession(user.token)
   }
 
 }

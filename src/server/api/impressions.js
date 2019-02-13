@@ -2,9 +2,9 @@ import ImpressionSerializer from '../serializers/impression_serializer'
 import Impression from '../models/impression'
 import { Router } from 'express'
 
-const impressions = new Router({ mergeParams: true })
+const router = new Router({ mergeParams: true })
 
-impressions.get('/api/tours/:tour_id/visits/:visit_id/impressions', async (req, res) => {
+router.get('/api/tours/:tour_id/visits/:visit_id/impressions', async (req, res) => {
 
   const impressions = await Impression.query(qb => {
 
@@ -22,7 +22,7 @@ impressions.get('/api/tours/:tour_id/visits/:visit_id/impressions', async (req, 
 
 })
 
-impressions.get('/api/tours/:tour_id/visits/:visit_id/impressions/:id', async (req, res) => {
+router.get('/api/tours/:tour_id/visits/:visit_id/impressions/:id', async (req, res) => {
 
   const impression = await Impression.where({
     id: req.params.id
@@ -36,4 +36,4 @@ impressions.get('/api/tours/:tour_id/visits/:visit_id/impressions/:id', async (r
 
 })
 
-export default impressions
+export default router
