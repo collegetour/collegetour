@@ -19,6 +19,7 @@ const devserver = new devServer(Webpack(config()), {
   open: true,
   proxy: {
     '/signin/*': 'http://localhost:3001',
+    '/invitations/*': 'http://localhost:3001',
     '/api/*': 'http://localhost:3001'
   },
   historyApiFallback: {

@@ -8,7 +8,7 @@ import React from 'react'
 class Plan extends React.Component {
 
   static propTypes = {
-    tour_id: PropTypes.number,
+    tour_id: PropTypes.string,
     visits: PropTypes.array,
     status: PropTypes.string,
     step: PropTypes.number,

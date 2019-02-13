@@ -1,30 +1,17 @@
+import invitations from './invitations'
+import instagram from './instagram'
+import facebook from './facebook'
 import { Router } from 'express'
-import { sendMail } from '../services/email'
+import google from './google'
 
 const server = new Router({ mergeParams: true })
 
-server.get('/foo', async (req, res) => {
+server.use(instagram)
 
-  const result = await sendMail({
-    template: 'invitation',
-    data: {
-      invitee: {
-        first_name: 'Elinor'
-      },
-      inviter: {
-        full_name: 'Greg Kops'
-      },
-      tour: {
-        name: 'Winter Break Tour'
-      },
-      token: 'abc'
-    },
-    to: 'mochini@gmail.com',
-    subject: 'Greg Kops invited you to a tour'
-  })
+server.use(facebook)
 
-  res.json(result)
+server.use(google)
 
-})
+server.use(invitations)
 
 export default server

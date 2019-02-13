@@ -1,9 +1,8 @@
-import SessionSerializer from '../serializers/session_serializer'
-import User from '../models/user'
+import authorize from './authorize'
 import { Facebook } from 'fb'
 import express from 'express'
-import moment from 'moment'
 import path from 'path'
+import qs from 'qs'
 
 const redirect_uri = `${process.env.WEB_HOST}/signin/facebook/token`
 
@@ -22,6 +21,7 @@ router.set('view engine', 'ejs')
 router.get('/signin/facebook', async (req, res) => {
 
   const login_url = await fb.getLoginUrl({
+    state: qs.stringify(req.query).split('&').join('|'),
     redirect_uri
   })
 
@@ -38,44 +38,24 @@ router.get('/signin/facebook/token', async (req, res) => {
     code: req.query.code
   })
 
-  res.redirect(301, `/signin/facebook/authorize?access_token=${data.access_token}`)
+  res.redirect(301, `/signin/facebook/authorize?access_token=${data.access_token}&state=${req.query.state}`)
 
 })
 
-router.get('/signin/facebook/authorize', async (req, res) => {
 
-  const createUser = async (user) => {
+router.get('/signin/facebook/authorize', authorize('facebook', async (access_token) => {
 
-    // create asset #user.profile_picture
-    const asset = { get: () => 1 }
-
-    return await User.forge({
-      first_name: user.first_name,
-      last_name: user.last_name,
-      photo_id: asset.get('id'),
-      facebook_id: user.id,
-      created_at: moment(),
-      updated_at: moment()
-    }).save()
-
-  }
-
-  fb.setAccessToken(req.query.access_token)
+  fb.setAccessToken(access_token)
 
   const self = await fb.api('/me', { fields: ['id','first_name','last_name','picture'] })
 
-  const existing_user = await User.where({
-    facebook_id: self.id
-  }).fetch()
+  return {
+    id: self.id,
+    first_name: self.first_name,
+    last_name: self.last_name,
+    profile_picture: self.picture.data.url
+  }
 
-  const user = existing_user || await createUser(self)
-
-  await user.load(['photo'])
-
-  return res.render('token', {
-    user: SessionSerializer(user)
-  })
-
-})
+}))
 
 export default router

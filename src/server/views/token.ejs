@@ -13,7 +13,7 @@
       token: '<%= user.token %>'
     }
     localforage.setItem('user', user).then(function () {
-      window.location.href = "/";
+      window.location.href = "<%= redirect %>";
     });
   });
 </script>

@@ -1,10 +1,9 @@
-import SessionSerializer from '../serializers/session_serializer'
 import { google as googleapis } from 'googleapis'
 import request from 'request-promise'
-import User from '../models/user'
+import authorize from './authorize'
 import express from 'express'
-import moment from 'moment'
 import path from 'path'
+import qs from 'qs'
 
 const redirect_uri = `${process.env.WEB_HOST}/signin/google/token`
 
@@ -19,6 +18,7 @@ router.set('view engine', 'ejs')
 router.get('/signin/google', async (req, res) => {
 
   const auth_url = auth.generateAuthUrl({
+    state: qs.stringify(req.query).split('&').join('|'),
     prompt: 'consent',
     scope: [
       'https://www.googleapis.com/auth/userinfo.profile'
@@ -38,48 +38,24 @@ router.get('/signin/google/token', async (req, res) => {
     })
   })
 
-  res.redirect(301, `/signin/google/authorize?access_token=${data.access_token}`)
+  res.redirect(301, `/signin/google/authorize?access_token=${data.access_token}&state=${req.query.state}`)
 
 })
 
-router.get('/signin/google/authorize', async (req, res) => {
-
-  const createUser = async (user) => {
-
-    // create asset #user.profile_picture
-    const asset = { get: () => 1 }
-
-    return await User.forge({
-      first_name: user.first_name,
-      last_name: user.last_name,
-      photo_id: asset.get('id'),
-      google_id: user.id,
-      created_at: moment(),
-      updated_at: moment()
-    }).save()
-
-  }
+router.get('/signin/google/authorize', authorize('google', async (access_token) => {
 
   const profile = await request({
-    uri: `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${req.query.access_token}`,
+    uri: `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${access_token}`,
     json: true
   })
 
-  const self = {
+  return {
     id: profile.sub,
     first_name: profile.given_name,
     last_name: profile.family_name,
     profile_picture: profile.picture
   }
 
-  const existing_user = await User.where({ google_id: self.id }).fetch()
-
-  const user = existing_user || await createUser(self)
-
-  await user.load(['photo'])
-
-  return res.render('token', { user: SessionSerializer(user) })
-
-})
+}))
 
 export default router

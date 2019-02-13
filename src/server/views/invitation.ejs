@@ -1,0 +1,11 @@
+<script src="/js/localforage.min.js"></script>
+
+<script>
+  localforage.config({
+    name: 'local',
+    storeName: 'collegetour'
+  });
+  localforage.setItem('tourst_id', <%= tourist_id %>).then(function () {
+    window.location.href = "/";
+  });
+</script>
