@@ -17,7 +17,9 @@ router.get('/invitations/:code', async (req, res) => {
 
   const tourist = await Tourist.where({
     id: values[1]
-  }).fetch()
+  }).fetch({
+    transacting: trx    
+  })
 
   return res.render('invitation', {
     tourist_id: tourist.get('id')

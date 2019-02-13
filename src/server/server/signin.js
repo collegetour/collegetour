@@ -1,4 +1,5 @@
 import SessionSerializer from '../serializers/session_serializer'
+import { withTransaction } from '../utils'
 import Tourist from '../models/tourist'
 import User from '../models/user'
 import express from 'express'
@@ -13,7 +14,7 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
   router.set('view engine', 'ejs')
 
-  router.get(`/signin/${network}`, async (req, res) => {
+  router.get(`/signin/${network}`, withTransaction(async (req, res, trx) => {
 
     const state = Object.keys(req.query).reduce((state, key) => [
       ...state,
@@ -24,18 +25,18 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
     res.redirect(301, login_url)
 
-  })
+  }))
 
-  router.get(`/signin/${network}/token`, async (req, res) => {
+  router.get(`/signin/${network}/token`, withTransaction(async (req, res, trx) => {
 
     const access_token = await getAccessToken(req.query.code)
 
     res.redirect(301, `/signin/${network}/authorize?access_token=${access_token}&state=${req.query.state}`)
 
-  })
+  }))
 
 
-  router.get(`/signin/${network}/authorize`, async (req, res) => {
+  router.get(`/signin/${network}/authorize`, withTransaction(async (req, res, trx) => {
 
     const findTourist = async (self, tourist_id) => {
 
@@ -44,6 +45,7 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
       const tourist = await Tourist.where({
         id: tourist_id
       }).fetch({
+        transacting: trx,
         withRelated: ['user']
       })
 
@@ -51,7 +53,10 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
       await tourist.related('user').save({
         [`${network}_id`]: self.id
-      }, { patch: true})
+      }, {
+        transacting: trx,
+        patch: true
+      })
 
       return tourist.related('user')
 
@@ -59,7 +64,9 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
     const findUser = async (self) => await User.where({
       [`${network}_id`]: self.id
-    }).fetch()
+    }).fetch({
+      transacting: trx
+    })
 
     const createUser = async (user) => {
 
@@ -73,7 +80,9 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
         [`${network}_id`]: user.id,
         created_at: moment(),
         updated_at: moment()
-      }).save()
+      }).save(null, {
+        transacting: trx        
+      })
 
     }
 
@@ -96,7 +105,7 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
       user: SessionSerializer(user)
     })
 
-  })
+  }))
 
   return router
 

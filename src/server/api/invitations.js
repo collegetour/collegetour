@@ -1,5 +1,6 @@
 import UserSerializer from '../serializers/user_serializer'
 import { sendMail } from '../services/email'
+import { withTransaction } from '../utils'
 import Tourist from '../models/tourist'
 import User from '../models/user'
 import Tour from '../models/tour'
@@ -9,13 +10,15 @@ import moment from 'moment'
 
 const router = new Router({ mergeParams: true })
 
-router.post('/api/tours/:id/invitations', async (req, res) => {
+router.post('/api/tours/:id/invitations', withTransaction(async (req, res, trx) => {
 
   const data = await Promise.mapSeries(req.body.invitations, async (invitation) => {
 
     const tour = await Tour.where({
       id: req.params.id
-    }).fetch()
+    }).fetch({
+      transacting: trx
+    })
 
     const user = await User.forge({
       first_name: invitation.first_name,
@@ -23,14 +26,18 @@ router.post('/api/tours/:id/invitations', async (req, res) => {
       email: invitation.email,
       created_at: moment(),
       updated_at: moment()
-    }).save()
+    }).save(null, {
+      transacting: trx
+    })
 
     const tourist = await Tourist.forge({
       tour_id: tour.get('id'),
       user_id: user.get('id'),
       created_at: moment(),
       updated_at: moment()
-    }).save()
+    }).save(null, {
+      transacting: trx
+    })
 
     const hashids = new Hashids()
 
@@ -62,6 +69,6 @@ router.post('/api/tours/:id/invitations', async (req, res) => {
 
   res.status(200).json({ data })
 
-})
+}))
 
 export default router

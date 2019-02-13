@@ -1,10 +1,11 @@
 import CollegeSerializer from '../serializers/college_serializer'
+import { withTransaction } from '../utils'
 import College from '../models/college'
 import { Router } from 'express'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/api/colleges', async (req, res) => {
+router.get('/api/colleges', withTransaction(async (req, res, trx) => {
 
   const colleges = await College.query(qb => {
 
@@ -15,6 +16,7 @@ router.get('/api/colleges', async (req, res) => {
     qb.whereRaw('lower(name) like ? or lower(city) like ? or lower(state) like ?', [term, term, term])
 
   }).fetchAll({
+    transacting: trx,
     withRelated: ['logo']
   })
 
@@ -22,6 +24,6 @@ router.get('/api/colleges', async (req, res) => {
     data: colleges.map(CollegeSerializer)
   })
 
-})
+}))
 
 export default router

@@ -1,14 +1,16 @@
 import VisitSerializer from '../serializers/visit_serializer'
+import { withTransaction } from '../utils'
 import Visit from '../models/visit'
 import { Router } from 'express'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/api/tours/:tour_id/visits', async (req, res) => {
+router.get('/api/tours/:tour_id/visits', withTransaction(async (req, res, trx) => {
 
   const visits = await Visit.where({
     tour_id: req.params.tour_id
   }).fetchAll({
+    transacting: trx,
     withRelated: ['college.logo']
   })
 
@@ -16,13 +18,14 @@ router.get('/api/tours/:tour_id/visits', async (req, res) => {
     data: visits.map(VisitSerializer)
   })
 
-})
+}))
 
-router.get('/api/tours/:tour_id/visits/:id', async (req, res) => {
+router.get('/api/tours/:tour_id/visits/:id', withTransaction(async (req, res, trx) => {
 
   const visit = await Visit.where({
     id: req.params.id
   }).fetch({
+    transacting: trx,
     withRelated: ['college.logo']
   })
 
@@ -30,5 +33,6 @@ router.get('/api/tours/:tour_id/visits/:id', async (req, res) => {
     data: VisitSerializer(visit)
   })
 
-})
+}))
+
 export default router
