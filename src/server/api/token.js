@@ -1,5 +1,5 @@
 import { t } from '../utils'
-import { decode } from '../services/jwt'
+import { decode } from '../lib/jwt'
 import User from '../models/user'
 
 const router = t(async (req, res, trx, next) => {

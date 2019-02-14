@@ -11,8 +11,12 @@ const Asset = new Model({
 
   virtuals: {
 
+    identifier: function() {
+      return this.get('file_size')+'-'+this.get('original_file_name').replace(/[^0-9a-zA-Z_-]/img, '')
+    },
+
     url: function() {
-      return `/images/${this.get('file_name')}`
+      return `/assets/${this.get('id')}/${this.get('file_name')}`
     }
 
   },

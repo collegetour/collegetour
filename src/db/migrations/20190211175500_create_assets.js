@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
     table.string('content_type')
     table.integer('file_size')
     table.integer('chunks_total')
+    table.string('status')
     table.timestamps()
   })
 }

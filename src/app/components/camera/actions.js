@@ -16,6 +16,16 @@ export const addUpload = (file) => ({
   file
 })
 
+export const updateUpload = (asset) => ({
+  type: 'UPDATE_UPLOAD',
+  asset
+})
+
 export const removeUpload = () => ({
   type: 'REMOVE_UPLOAD'
+})
+
+export const type = (caption) => ({
+  type: 'TYPE',
+  caption
 })

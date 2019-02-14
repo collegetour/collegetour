@@ -1,4 +1,4 @@
-import knex from '../services/knex'
+import knex from '../lib/knex'
 
 export const t = (handler) => async (req, res, next) => {
 

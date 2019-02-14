@@ -1,4 +1,4 @@
-import bookshelf from '../services/bookshelf'
+import bookshelf from '../lib/bookshelf'
 import Checkit from  'checkit'
 import _ from 'lodash'
 

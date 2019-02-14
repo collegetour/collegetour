@@ -8,28 +8,32 @@ import React from 'react'
 class Camera extends React.Component {
 
   static propTypes = {
+    caption: PropTypes.string,
     preview: PropTypes.bool,
     upload: PropTypes.object,
     onAddUpload: PropTypes.func,
     onRemoveUpload: PropTypes.func,
-    onSave: PropTypes.func
+    onSave: PropTypes.func,
+    onType: PropTypes.func,
+    onUpdateUpload: PropTypes.func
   }
 
   static defaultProps = {
   }
 
-  _handleRemoveUpload = this._handleRemoveUpload.bind(this)
-
   button = null
+  caption = null
   files = {}
   input = null
   resumable = null
 
   _handleAdd = this._handleAdd.bind(this)
+  _handleCancel = this._handleCancel.bind(this)
   _handleClick = this._handleClick.bind(this)
   _handleFinish = this._handleFinish.bind(this)
   _handleSave = this._handleSave.bind(this)
   _handleSuccess = this._handleSuccess.bind(this)
+  _handleType = this._handleType.bind(this)
 
   render() {
     const { preview, upload } = this.props
@@ -44,28 +48,13 @@ class Camera extends React.Component {
                 <Preview image={ upload } />
               </div>
               <div className="media-caption">
-                <textarea placeholder="Type a caption" />
+                <textarea { ...this._getCaption() } ref={ node => this.caption = node } />
               </div>
             </div>
           </ModalPanel>
         </CSSTransition>
       </div>
     )
-  }
-
-  _getModalPanel() {
-    return {
-      leftItems: [
-        { label: 'Cancel', handler: this._handleRemoveUpload }
-      ],
-      rightItems: [
-        { label: 'Share', handler: this._handleSave }
-      ]
-    }
-  }
-
-  _handleRemoveUpload() {
-    this.props.onRemoveUpload()
   }
 
   componentDidMount() {
@@ -84,6 +73,26 @@ class Camera extends React.Component {
     this.input.setAttribute('accept', 'image/*')
   }
 
+  _getCaption(e) {
+    const { caption } = this.props
+    return {
+      placeholder: 'Type a caption',
+      onChange: this._handleType,
+      value: caption
+    }
+  }
+
+  _getModalPanel() {
+    return {
+      leftItems: [
+        { label: 'Cancel', handler: this._handleCancel }
+      ],
+      rightItems: [
+        { label: 'Share', handler: this._handleSave }
+      ]
+    }
+  }
+
   _handleAdd(file) {
     this.props.onAddUpload({
       content_type: file.file.type,
@@ -94,12 +103,24 @@ class Camera extends React.Component {
     this.resumable.upload()
   }
 
-  _handleSave() {
-    this.props.onSave(1,1,1,'foo')
+  _handleCancel() {
+    this.props.onRemoveUpload()
   }
 
-  _handleSuccess() {
-    console.log('success')
+  _handleSave() {
+    const { caption, upload } = this.props
+    this.props.onSave(1, 1, upload.asset.id, caption)
+  }
+
+  _handleSuccess(file, message) {
+    const response = JSON.parse(message)
+    const asset = response.data
+    this.resumable.removeFile(file)
+    this.props.onUpdateUpload(asset)
+  }
+
+  _handleType(e) {
+    this.props.onType(e.target.value)
   }
 
   _handleFinish() {

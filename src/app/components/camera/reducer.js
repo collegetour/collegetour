@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   preview: false,
-  upload: null
+  upload: null,
+  caption: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -23,6 +24,21 @@ export default (state = INITIAL_STATE, action) => {
     return {
       ...state,
       preview: false
+    }
+
+  case 'UPDATE_UPLOAD':
+    return {
+      ...state,
+      upload: {
+        ...state.upload,
+        asset: action.asset
+      }
+    }
+
+  case 'TYPE':
+    return {
+      ...state,
+      caption: action.caption
     }
 
   default:

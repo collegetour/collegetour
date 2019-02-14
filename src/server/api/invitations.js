@@ -1,5 +1,5 @@
 import UserSerializer from '../serializers/user_serializer'
-import { sendMail } from '../services/email'
+import { sendMail } from '../lib/email'
 import { t } from '../utils'
 import Tourist from '../models/tourist'
 import User from '../models/user'

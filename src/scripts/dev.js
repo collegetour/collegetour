@@ -1,4 +1,4 @@
-import '../server/services/environment'
+import '../server/lib/environment'
 
 import devServer from 'webpack-dev-server'
 import config from '../config/webpack.development.config'

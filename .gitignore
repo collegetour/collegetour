@@ -10,3 +10,5 @@ knexfile.js
 deploy.js
 config.json
 dist
+/src/public/tmp
+/src/public/assets

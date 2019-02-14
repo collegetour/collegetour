@@ -1,4 +1,4 @@
-import { encode } from '../services/jwt'
+import { encode } from '../lib/jwt'
 
 const session_serializer = (user) => ({
   id: user.get('id'),
