@@ -41,6 +41,18 @@ export default (state = INITIAL_STATE, action) => {
       caption: action.caption
     }
 
+  case 'SAVE_REQUEST':
+    return {
+      ...state,
+      preview: false
+    }
+
+  case 'SAVE_SUCCESS':
+    return {
+      ...state,
+      upload: null
+    }
+
   default:
     return state
   }

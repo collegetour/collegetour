@@ -10,7 +10,7 @@ class Tour extends React.Component {
   }
 
   static propTypes = {
-    tour_id: PropTypes.string,
+    page: PropTypes.object,
     visits: PropTypes.array
   }
 
@@ -54,13 +54,13 @@ class Tour extends React.Component {
   }
 
   _handlePlan() {
-    const { tour_id } = this.props
-    this.context.router.history.push(`/tours/${tour_id}/plan`)
+    const { page } = this.props
+    this.context.router.history.push(`/tours/${page.params.tour_id}/plan`)
   }
 
   _handleClick(id) {
-    const { tour_id } = this.props
-    this.context.router.history.push(`/tours/${tour_id}/visits/${id}`)
+    const { page } = this.props
+    this.context.router.history.push(`/tours/${page.params.tour_id}/visits/${id}`)
   }
 
 }
@@ -72,7 +72,7 @@ const mapResourcesToPage = (props, context, page) => ({
 
 const mapPropsToPage = (props, context, resources, page) => ({
   title: resources.tour.name,
-  component: () => <Tour visits={ resources.visits} tour_id={ page.params.id } />
+  component: Tour
 })
 
 export default Page(mapResourcesToPage, mapPropsToPage)

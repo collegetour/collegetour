@@ -12,6 +12,7 @@ class Visit extends React.Component {
 
   static propTypes = {
     impressions: PropTypes.array,
+    page: PropTypes.object,
     visit: PropTypes.object
   }
 
@@ -51,10 +52,18 @@ class Visit extends React.Component {
           <Feed { ...this._getFeed() } />
         </div>
         <div className="visit-camera">
-          <Camera />
+          <Camera { ...this._getCamera() } />
         </div>
       </div>
     )
+  }
+
+  _getCamera() {
+    const { page } = this.props
+    return {
+      tour_id: page.params.tour_id,
+      visit_id: page.params.id
+    }
   }
 
   _getFeed() {

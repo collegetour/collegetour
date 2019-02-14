@@ -68,7 +68,7 @@ const mapResourcesToPage = (props, context, page) => ({
 
 const mapPropsToPage = (props, context, resources, page) => ({
   title: 'Tourists',
-  component: () => <Tourists tourists={ resources.tourists } />
+  component: Tourists
 })
 
 export default Page(mapResourcesToPage, mapPropsToPage)

@@ -12,15 +12,13 @@ class Plan extends React.Component {
   }
 
   static propTypes = {
-    tour_id: PropTypes.string,
+    page: PropTypes.object,
     step: PropTypes.number,
     onChangeStep: PropTypes.func,
     onFetch: PropTypes.func
   }
 
-  static defaultProps = {
-    tour_id: '1'
-  }
+  static defaultProps = {}
 
   render() {
     const { step } = this.props
@@ -44,26 +42,26 @@ class Plan extends React.Component {
   }
 
   _getColleges() {
-    const { tour_id, onChangeStep } = this.props
+    const { page, onChangeStep } = this.props
     return {
-      tour_id,
+      tour_id: page.params.tour_id,
       onNext: onChangeStep.bind(this, 2)
     }
   }
 
   _getSchedule() {
-    const { tour_id, onChangeStep } = this.props
+    const { page, onChangeStep } = this.props
     return {
-      tour_id,
+      tour_id: page.params.tour_id,
       onPrev: onChangeStep.bind(this, 1),
       onNext: onChangeStep.bind(this, 3)
     }
   }
 
   _getItinerary() {
-    const { tour_id, onChangeStep } = this.props
+    const { page, onChangeStep } = this.props
     return {
-      tour_id,
+      tour_id: page.params.tour_id,
       onPrev: onChangeStep.bind(this, 2),
       onNext: onChangeStep.bind(this, 4)
     }

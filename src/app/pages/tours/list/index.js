@@ -1,5 +1,6 @@
 import Message from '../../../components/message'
 import { Page } from '../../../components/page'
+import Avatar from '../../../components/avatar'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import React from 'react'
@@ -61,7 +62,7 @@ const mapPropsToPage = (props, context, resources, page) => ({
   component: Tours,
   leftItems: [],
   rightItems: [
-    { component: <img src="/images/greg.jpg" /> }
+    { component: <Avatar user={ context.presence.user } /> }
   ]
 })
 

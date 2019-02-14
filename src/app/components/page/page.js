@@ -6,6 +6,7 @@ import React from 'react'
 class Page extends React.Component {
 
   static contextTypes = {
+    presence: PropTypes.object,
     router: PropTypes.object
   }
 

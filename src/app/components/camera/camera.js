@@ -10,7 +10,9 @@ class Camera extends React.Component {
   static propTypes = {
     caption: PropTypes.string,
     preview: PropTypes.bool,
+    tour_id: PropTypes.string,
     upload: PropTypes.object,
+    visit_id: PropTypes.string,
     onAddUpload: PropTypes.func,
     onRemoveUpload: PropTypes.func,
     onSave: PropTypes.func,
@@ -108,8 +110,8 @@ class Camera extends React.Component {
   }
 
   _handleSave() {
-    const { caption, upload } = this.props
-    this.props.onSave(1, 1, upload.asset.id, caption)
+    const { caption, tour_id, upload, visit_id } = this.props
+    this.props.onSave(tour_id, visit_id, upload.asset.id, caption)
   }
 
   _handleSuccess(file, message) {
