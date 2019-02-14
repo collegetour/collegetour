@@ -9,7 +9,7 @@ exports.up = function(knex, Promise) {
     table.string('instagram_id')
     table.string('facebook_id')
     table.string('google_id')
-    table.bool('agreed_to_terms')
+    table.boolean('agreed_to_terms')
     table.timestamps()
   })
 }

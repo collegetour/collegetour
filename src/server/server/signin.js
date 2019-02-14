@@ -1,9 +1,9 @@
 import SessionSerializer from '../serializers/session_serializer'
-import { t } from '../utils'
 import Tourist from '../models/tourist'
 import User from '../models/user'
 import express from 'express'
 import moment from 'moment'
+import { t } from '../utils'
 import path from 'path'
 
 const signin = (network, getUrl, getAccessToken, getUser) => {
@@ -81,7 +81,7 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
         created_at: moment(),
         updated_at: moment()
       }).save(null, {
-        transacting: trx        
+        transacting: trx
       })
 
     }

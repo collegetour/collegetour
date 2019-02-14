@@ -1,7 +1,7 @@
 import TouristSerializer from '../serializers/tourist_serializer'
-import { t } from '../utils'
 import Tourist from '../models/tourist'
 import { Router } from 'express'
+import { t } from '../utils'
 
 const router = new Router({ mergeParams: true })
 

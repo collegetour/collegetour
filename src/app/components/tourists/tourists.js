@@ -1,18 +1,19 @@
+import Avatar from '../avatar'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-class Setup extends React.Component {
+class Tourists extends React.Component {
 
   static contextTypes = {
-    presence: PropTypes.object
+    router: PropTypes.object
   }
 
   static propTypes = {
     first_name: PropTypes.string,
     last_name: PropTypes.string,
     email: PropTypes.string,
-    status: PropTypes.string,
-    onFetch: PropTypes.func,
+    page: PropTypes.object,
+    tourists: PropTypes.array,
     onSave: PropTypes.func,
     onType: PropTypes.func
   }
@@ -23,16 +24,10 @@ class Setup extends React.Component {
   _handleSubmit = this._handleSubmit.bind(this)
 
   render() {
+    const { tourists } = this.props
     return (
-      <div className="setup">
-        <div className="setup-header">
-          <h1><i className="fa fa-university" /></h1>
-          <h3>Welcome to College Tourist!</h3>
-          <p>Thanks for trying out our app! We&apos;re looking forward to helping you
-            get the most out of your upcoming college tour! Before you get
-            started, please verify your account information.</p>
-        </div>
-        <div className="setup-body">
+      <div className="tourists">
+        <div className="tourists-header">
           <div className="ui form">
             <div className="field">
               <label>First Name</label>
@@ -46,35 +41,30 @@ class Setup extends React.Component {
               <label>Email</label>
               <input type="text" { ...this._getEmail() }  />
             </div>
-            <div className="field">
-              <label>Photo</label>
-              <div className="photo">
-                <img src="/images/greg.jpg" />
-              </div>
-            </div>
-            <div className="field">
-              <div className="ui checkbox">
-                <input type="checkbox" className="hidden" />
-                <label>I agree to the <a href="">Terms and Conditions</a></label>
-              </div>
-            </div>
-            <button className="ui fluid red button" type="submit" onClick={ this._handleSubmit }>Get Started!</button>
+            <button className="ui fluid red button" type="submit" onClick={ this._handleSubmit }>Send Invitation</button>
           </div>
+        </div>
+        <div className="tourists-body">
+          { tourists.map((tourist, index) => (
+            <div className="tourists-tourist" key={`tourist_${index}`}>
+              <div className="tourists-tourist-photo">
+                <Avatar user={ tourist.user } />
+              </div>
+              <div className="tourists-tourist-details">
+                <strong>{ tourist.user.full_name }</strong><br />
+                { tourist.user.email }
+              </div>
+              <div className="tourists-tourist-icon">
+                { tourist.claimed_at ?
+                  <i className="fa fa-fw fa-check" /> :
+                  <i className="fa fa-fw fa-clock-o" />
+                }
+              </div>
+            </div>
+          )) }
         </div>
       </div>
     )
-  }
-
-  componentDidMount() {
-    this.props.onFetch()
-  }
-
-  componentDidUpdate(prevProps) {
-    const { status } = this.props
-    if(status !== prevProps.status && status === 'saved') {
-      this.context.presence.reload()
-    }
-
   }
 
   _getFirstName() {
@@ -104,17 +94,15 @@ class Setup extends React.Component {
     }
   }
 
-  _handleSubmit() {
-    const { email, first_name, last_name } = this.props
-    const photo_id = 1
-    const agreed_to_terms = true
-    this.props.onSave(first_name, last_name, email, photo_id, agreed_to_terms)
-  }
-
   _handleType(key, e) {
     this.props.onType(key, e.target.value)
   }
 
+  _handleSubmit() {
+    const { email, first_name, last_name, page } = this.props
+    this.props.onSave(page.params.id, first_name, last_name, email)
+  }
+
 }
 
-export default Setup
+export default Tourists
