@@ -6,8 +6,8 @@ exports.up = function(knex, Promise) {
     table.string('name')
     table.date('start_date')
     table.date('end_date')
-    table.string('start_address')
-    table.string('end_address')
+    table.string('origin')
+    table.string('destination')
     table.timestamps()
   })
 }

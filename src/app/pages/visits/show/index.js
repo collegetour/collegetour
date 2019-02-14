@@ -36,12 +36,16 @@ class Visit extends React.Component {
               </div>
             </div>
           </div>
-          <div className="visit-photos-displays">
-            <div className="visit-photos-display active">
-              <i className="fa fa-camera-retro" />
-            </div>
-            <div className="visit-photos-display">
-              <i className="fa fa-check-circle" />
+          <div className="visit-photos-tools">
+            <div className="visit-photos-container">
+              <div className="visit-photos-displays">
+                <div className="visit-photos-display active">
+                  <i className="fa fa-camera-retro" />
+                </div>
+                <div className="visit-photos-display">
+                  <i className="fa fa-check-circle" />
+                </div>
+              </div>
             </div>
           </div>
           { impressions.length === 0 &&
@@ -49,9 +53,11 @@ class Visit extends React.Component {
           }
           { impressions.length > 0 &&
             <div className="visit-photos-body">
-              { impressions.map((impression, index) => (
-                <Impression impression={ impression } key={`impression_${impression.id}`} />
-              )) }
+              <div className="visit-photos-container">
+                { impressions.map((impression, index) => (
+                  <Impression impression={ impression } key={`impression_${impression.id}`} />
+                )) }
+              </div>
             </div>
           }
         </div>

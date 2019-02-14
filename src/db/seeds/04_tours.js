@@ -10,8 +10,8 @@ exports.seed = async (knex, Promise) => {
       name: 'Winter Break Trip',
       start_date: '2019-02-18',
       end_date: '2019-02-18',
-      start_address: '322 S Geneva St, Ithaca, NY 14850',
-      end_address: '322 S Geneva St, Ithaca, NY 14850',
+      origin: '322 S Geneva St, Ithaca, NY 14850',
+      destination: '322 S Geneva St, Ithaca, NY 14850',
       created_at: moment(),
       updated_at: moment()
     },
@@ -20,8 +20,8 @@ exports.seed = async (knex, Promise) => {
       name: 'Spring Break Trip',
       start_date: '2019-04-10',
       end_date: '2019-04-15',
-      start_address: '322 S Geneva St, Ithaca, NY 14850',
-      end_address: '322 S Geneva St, Ithaca, NY 14850',
+      origin: '322 S Geneva St, Ithaca, NY 14850',
+      destination: '322 S Geneva St, Ithaca, NY 14850',
       created_at: moment(),
       updated_at: moment()
     }

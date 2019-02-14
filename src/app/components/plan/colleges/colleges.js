@@ -82,6 +82,8 @@ class Colleges extends React.Component {
   _getMap() {
     const { visits } = this.props
     return {
+      origin: '322 S Geneva St, Ithaca, NY',
+      destination: '322 S Geneva St, Ithaca, NY',
       visits
     }
   }
