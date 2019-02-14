@@ -1,0 +1,45 @@
+.camera {
+  padding: 0.8em;
+  text-align: center;
+  background-color: @white;
+  .fa {
+    background-color: fadeout(@black, 90);
+    color: fadeout(@black, 60);
+    padding: 0.5em;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+  input {
+    display: none;
+    opacity: 0;
+  }
+  .modal-panel {
+    .slideY(100%, .5s); 
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+.media {
+  flex: 1;
+  background-color: @white;
+  display: flex;
+  flex-direction: column;
+}
+.media-image {
+}
+.media-caption {
+  flex: 1;
+  display: flex;
+  textarea {
+    background-color: fadeout(@black, 95);
+    flex: 1;
+    border: none;
+    padding: 0.8em;
+    line-height: 1.8em;
+    color: fadeout(@black, 40);
+  }
+}

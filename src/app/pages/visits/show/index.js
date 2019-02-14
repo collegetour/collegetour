@@ -1,6 +1,6 @@
-import Message from '../../../components/message'
+import Camera from '../../../components/camera'
 import { Page } from '../../../components/page'
-import { Impression } from '../impression'
+import Feed from '../../../components/feed'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -19,7 +19,7 @@ class Visit extends React.Component {
   }
 
   render() {
-    const { impressions, visit } = this.props
+    const { visit } = this.props
     return (
       <div className="visit">
         <div className="visit-photos">
@@ -40,7 +40,7 @@ class Visit extends React.Component {
             <div className="visit-photos-container">
               <div className="visit-photos-displays">
                 <div className="visit-photos-display active">
-                  <i className="fa fa-camera-retro" />
+                  <i className="fa fa-picture-o" />
                 </div>
                 <div className="visit-photos-display">
                   <i className="fa fa-check-circle" />
@@ -48,28 +48,19 @@ class Visit extends React.Component {
               </div>
             </div>
           </div>
-          { impressions.length === 0 &&
-            <Message { ...this._getMessage() } />
-          }
-          { impressions.length > 0 &&
-            <div className="visit-photos-body">
-              <div className="visit-photos-container">
-                { impressions.map((impression, index) => (
-                  <Impression impression={ impression } key={`impression_${impression.id}`} />
-                )) }
-              </div>
-            </div>
-          }
+          <Feed { ...this._getFeed() } />
+        </div>
+        <div className="visit-camera">
+          <Camera />
         </div>
       </div>
     )
   }
 
-  _getMessage() {
+  _getFeed() {
+    const { impressions } = this.props
     return {
-      icon: 'camera-retro',
-      title: 'No impressions',
-      text: 'No one on this tour has shared any impressions of this college yet'
+      impressions
     }
   }
 

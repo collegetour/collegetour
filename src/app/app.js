@@ -23,7 +23,6 @@ import Tours from './pages/tours/list'
 import Tour from './pages/tours/show'
 import Plan from './pages/tours/plan'
 import Visit from './pages/visits/show'
-import Impression from './pages/visits/impression'
 import Tourists from './pages/tours/tourists'
 import NotFound from './pages/not_found'
 
@@ -82,7 +81,6 @@ class App extends React.Component {
         { path: '/tours/:id/tourists', component: Tourists },
         { path: '/tours/:tour_id/plan', component: Plan },
         { path: '/tours/:tour_id/visits/:id', component: Visit },
-        { path: '/tours/:tour_id/visits/:visit_id/impressions/:id', component: Impression },
         { path: '/*', component: NotFound }
       ]
     }

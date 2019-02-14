@@ -1,10 +1,9 @@
-import { Page } from '../../../components/page'
-import Avatar from '../../../components/avatar'
 import PropTypes from 'prop-types'
-import React from 'react'
+import Avatar from '../avatar'
 import moment from 'moment'
+import React from 'react'
 
-export class Impression extends React.Component {
+class Impression extends React.Component {
 
   static propTypes = {
     impression: PropTypes.object
@@ -39,16 +38,6 @@ export class Impression extends React.Component {
     )
   }
 
-
 }
 
-const mapResourcesToPage = (props, context, page) => ({
-  impression: `/api/tours/${page.params.tour_id}/visits/${page.params.visit_id}/impressions/${page.params.id}`
-})
-
-const mapPropsToPage = (props, context, resources, page) => ({
-  title: 'Impression',
-  component: Impression
-})
-
-export default Page(mapResourcesToPage, mapPropsToPage)
+export default Impression

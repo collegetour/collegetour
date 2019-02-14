@@ -61,8 +61,8 @@
 	  background: fadeout(@black, 80) !important;
 	}
 	&::-webkit-scrollbar {
-	  width: 6px !important;
-	  height: 6px !important;
+	  width: 0 !important;
+	  height: 0 !important;
 	}
 }
 .slide(@duration) {
@@ -81,7 +81,22 @@
 		transform: translateX(0);
 	}
 }
-
+.slideY(@start, @duration) {
+	&.slide-enter,
+	&.slide-exit {
+	  transition: transform @duration ease-in-out 0s;
+	}
+	&.slide-enter {
+		transform: translateY(@start);
+	}
+	&.slide-exit.slide-exit-active {
+		transform: translateY(@start);
+	}
+	&.slide-exit,
+	&.slide-enter.slide-enter-active {
+		transform: translateY(0);
+	}
+}
 .link {
 	color: @blue;
 	text-decoration: underline;

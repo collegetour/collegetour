@@ -42,7 +42,7 @@ class Page extends React.Component {
     const Component = this.props.component
     return (
       <ModalPanel { ...this._getModalPanel() }>
-        <div className="maha-page-body">
+        <div className="page-body">
           { Component && <Component { ...this._getComponent() } /> }
           { message && <Message { ...message } /> }
           { this.props.children }

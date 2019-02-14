@@ -3,10 +3,6 @@ import PropTypes from 'prop-types'
 
 class Avatar extends React.Component {
 
-  static childContextTypes = {
-    host: PropTypes.object
-  }
-
   static propTypes = {
     user: PropTypes.object
   }

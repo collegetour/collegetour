@@ -5,11 +5,14 @@ import colleges from './colleges'
 import { Router } from 'express'
 import session from './session'
 import account from './account'
+import assets from './assets'
 import visits from './visits'
 import tours from './tours'
 import token from './token'
 
 const api = new Router({ mergeParams: true })
+
+api.use(assets)
 
 api.use(token)
 
