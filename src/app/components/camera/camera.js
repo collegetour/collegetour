@@ -89,7 +89,7 @@ class Camera extends React.Component {
   _getCaption(e) {
     const { caption } = this.props
     return {
-      placeholder: 'Write a caption',
+      placeholder: 'Describe your impressions',
       onChange: this._handleType,
       value: caption
     }
@@ -97,12 +97,11 @@ class Camera extends React.Component {
 
   _getModalPanel() {
     return {
-      title: 'Caption',
       leftItems: [
         { label: 'Cancel', handler: this._handleCancel }
       ],
       rightItems: [
-        { label: 'Share', handler: this._handleSave }
+        { label: 'Post', handler: this._handleSave }
       ]
     }
   }

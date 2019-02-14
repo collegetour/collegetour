@@ -20,10 +20,6 @@
   }
 }
 .signin-button {
-  &::selection {
-    background-color: @white !important;
-    color: @red !important;
-  }
   display: block;
   background-color: @white !important;
   color: @red !important;
@@ -32,11 +28,13 @@
   border: 1px solid @white;
   padding: 0.6em;
   border-radius: 0.5em;
-  .fa-stack-1x {
-    color: @white;
+  text-align: center;
+  &::selection {
+    background-color: @white !important;
+    color: @red !important;
   }
-  .fa-stack {
-    font-size: 1em;
+  .fa {
+    font-size: 1.1em;
     margin-right: 0.5em;
   }
 }

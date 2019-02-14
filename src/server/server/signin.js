@@ -1,4 +1,5 @@
 import SessionSerializer from '../serializers/session_serializer'
+import { createAssetFromUrl } from '../services/assets'
 import Tourist from '../models/tourist'
 import User from '../models/user'
 import express from 'express'
@@ -70,8 +71,7 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
     const createUser = async (user) => {
 
-      // create asset #user.profile_picture
-      const asset = { get: () => 1 }
+      const asset = await createAssetFromUrl(user.profile_picture, trx)
 
       return await User.forge({
         first_name: user.first_name,

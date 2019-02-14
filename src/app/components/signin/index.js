@@ -18,24 +18,15 @@ class Signin extends React.Component {
             <h1>College Tourist</h1>
           </div>
           <a href={ this._getSignin('google') } className="signin-button">
-            <span className="fa-stack">
-              <i className="fa fa-square fa-stack-2x" />
-              <i className="fa fa-google fa-stack-1x" />
-            </span>
+            <i className="fa fa-google" />
             Log In with Google
           </a>
           <a href={ this._getSignin('facebook') } className="signin-button">
-            <span className="fa-stack">
-              <i className="fa fa-square fa-stack-2x" />
-              <i className="fa fa-facebook fa-stack-1x" />
-            </span>
+            <i className="fa fa-facebook" />
             Log In with Facebook
           </a>
           <a href={ this._getSignin('instagram') } className="signin-button">
-            <span className="fa-stack">
-              <i className="fa fa-square fa-stack-2x" />
-              <i className="fa fa-instagram fa-stack-1x" />
-            </span>
+            <i className="fa fa-instagram" />
             Log In with Instagram
           </a>
         </div>
