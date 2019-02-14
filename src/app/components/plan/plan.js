@@ -7,20 +7,23 @@ import React from 'react'
 
 class Plan extends React.Component {
 
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
   static propTypes = {
     tour_id: PropTypes.string,
-    visits: PropTypes.array,
-    status: PropTypes.string,
     step: PropTypes.number,
     onChangeStep: PropTypes.func,
     onFetch: PropTypes.func
   }
 
-  static defaultProps = {}
+  static defaultProps = {
+    tour_id: '1'
+  }
 
   render() {
-    const { status, step } = this.props
-    if(status !== 'success') return null
+    const { step } = this.props
     return (
       <div className="plan">
         <div className="plan-panel">
@@ -40,32 +43,27 @@ class Plan extends React.Component {
     )
   }
 
-  componentDidMount() {
-    const { tour_id } = this.props
-    this.props.onFetch(tour_id)
-  }
-
   _getColleges() {
-    const { visits, onChangeStep } = this.props
+    const { tour_id, onChangeStep } = this.props
     return {
-      visits,
+      tour_id,
       onNext: onChangeStep.bind(this, 2)
     }
   }
 
   _getSchedule() {
-    const { visits, onChangeStep } = this.props
+    const { tour_id, onChangeStep } = this.props
     return {
-      visits,
+      tour_id,
       onPrev: onChangeStep.bind(this, 1),
       onNext: onChangeStep.bind(this, 3)
     }
   }
 
   _getItinerary() {
-    const { visits, onChangeStep } = this.props
+    const { tour_id, onChangeStep } = this.props
     return {
-      visits,
+      tour_id,
       onPrev: onChangeStep.bind(this, 2),
       onNext: onChangeStep.bind(this, 4)
     }

@@ -21,21 +21,31 @@ class Visits extends React.Component {
     return (
       <div className="plan-sidebar-panel">
         <div className="plan-sidebar-panel-body">
-          <div className="visits-bound">
-            <strong>START:</strong> 322 S Geneva St,
-            Ithaca, NY 14850
+          <div className="visit-bound">
+            <div className="visit-bound-icon">
+              <i className="fa fa-circle" />
+            </div>
+            <div className="visit-bound-details">
+              322 S Geneva St,
+              Ithaca, NY 14850
+            </div>
           </div>
           <div className="visits">
             { visits.map((visit, index) => (
-              <Visit { ...this._getVisit(visit, index) } key={`visit_${visit.id}`} />
+              <Visit { ...this._getVisit(visit, index) } key={`visit_${visit.college.id}`} />
             )) }
             <div className="visits-add" onClick={ this._handleChangeMode.bind(this, 'add') }>
               Add a college
             </div>
           </div>
-          <div className="visits-bound">
-            <strong>END:</strong> 322 S Geneva St,
-            Ithaca, NY 14850
+          <div className="visit-bound">
+            <div className="visit-bound-icon">
+              <i className="fa fa-circle" />
+            </div>
+            <div className="visit-bound-details">
+              322 S Geneva St,
+              Ithaca, NY 14850
+            </div>
           </div>
         </div>
       </div>
@@ -43,11 +53,10 @@ class Visits extends React.Component {
   }
 
   _getVisit(visit, index) {
-    const { onMove, onReorder } = this.props
+    const { onReorder } = this.props
     return {
       visit,
       index,
-      onMove,
       onRemove: this._handleRemove.bind(this, index),
       onReorder
     }

@@ -65,10 +65,10 @@ const source = {
     onReorder: props.onReorder
   }),
   endDrag: (props, monitor, component) => {
-    const source = monitor.getItem()
-    const target = monitor.getDropResult()
-    if(!target) return
-    source.onReorder(source.delta, target.index)
+    // const source = monitor.getItem()
+    // const target = monitor.getDropResult()
+    // if(!target) return
+    // source.onReorder(source.delta, target.index)
   }
 }
 

@@ -1,5 +1,5 @@
-import { Page } from '../../components/page'
-import Avatar from '../../components/avatar'
+import { Page } from '../../../components/page'
+import Avatar from '../../../components/avatar'
 import PropTypes from 'prop-types'
 import React from 'react'
 

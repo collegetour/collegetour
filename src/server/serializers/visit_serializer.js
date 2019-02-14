@@ -2,6 +2,7 @@ const visit_serializer = (visit) => ({
   id: visit.get('id'),
   delta: visit.get('delta'),
   college: {
+    id: visit.related('college').get('id'),
     name: visit.related('college').get('name'),
     city: visit.related('college').get('city'),
     state: visit.related('college').get('state'),

@@ -9,16 +9,21 @@ class Colleges extends React.Component {
 
   static propTypes = {
     mode: PropTypes.string,
+    tour_id: PropTypes.string,
     visits: PropTypes.array,
+    onAddVisit: PropTypes.func,
     onChangeMode: PropTypes.func,
+    onFetch: PropTypes.func,
     onMove: PropTypes.func,
     onNext: PropTypes.func,
+    onRemove: PropTypes.func,
     onReorder: PropTypes.func
   }
 
   static defaultProps = {
   }
 
+  _handleAddVisit = this._handleAddVisit.bind(this)
   _handleNext = this._handleNext.bind(this)
 
   render() {
@@ -36,7 +41,7 @@ class Colleges extends React.Component {
             <Visits { ...this._getVisits() } />
             <CSSTransition in={ mode === 'add'} classNames="slide" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true } appear={ true }>
               <div className="plan-sidebar-panel">
-                <Add { ...this._getColleges() } />
+                <Add { ...this._getAdd() } />
               </div>
             </CSSTransition>
           </div>
@@ -56,9 +61,20 @@ class Colleges extends React.Component {
     )
   }
 
-  _getColleges() {
+  componentDidMount() {
+    const { tour_id } = this.props
+    this.props.onFetch(tour_id)
+  }
+
+  _handleAddVisit(visit) {
+    this.props.onAddVisit(visit)
+  }
+
+
+  _getAdd() {
     const { onChangeMode } = this.props
     return {
+      onAddVisit: this._handleAddVisit,
       onChangeMode
     }
   }

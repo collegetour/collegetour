@@ -1,5 +1,5 @@
-import Message from '../../components/message'
-import { Page } from '../../components/page'
+import Message from '../../../components/message'
+import { Page } from '../../../components/page'
 import PropTypes from 'prop-types'
 import React from 'react'
 

@@ -1,5 +1,5 @@
-import { Page } from '../../components/page'
-import Plan from '../../components/plan'
+import { Page } from '../../../components/page'
+import Plan from '../../../components/plan'
 import React from 'react'
 
 const mapPropsToPage = (props, context, resources, page) => ({

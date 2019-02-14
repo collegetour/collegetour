@@ -9,6 +9,7 @@ class Colleges extends React.Component {
     colleges: PropTypes.array,
     q: PropTypes.string,
     status: PropTypes.string,
+    onAddVisit: PropTypes.func,
     onChangeMode: PropTypes.func,
     onFetch: PropTypes.func,
     onQuery: PropTypes.func
@@ -23,30 +24,32 @@ class Colleges extends React.Component {
         <div className="colleges-add-header">
           <SearchBox { ...this._getSearchbox() } />
         </div>
-        <div className="colleges-add-body">
-          { q.length == 0 &&
-            <Message { ...this._getMessage() } />
-          }
-          { status === 'failure' &&
-            <Message { ...this._getFailure() } />
-          }
-          { status === 'success' && q.length > 0 && colleges.length === 0 &&
-            <Message { ...this._getEmpty() } />
-          }
-          { status === 'success' && q.length > 0 && colleges.map((college, index) => (
-            <div className="visit-token" key={`visit_${college.id}`} onClick={ this._handleClick.bind(this, college.id) }>
-              <div className="visit-token-logo">
-                <img src={ college.logo } />
+        { q.length == 0 &&
+          <Message { ...this._getMessage() } />
+        }
+        { status === 'failure' &&
+          <Message { ...this._getFailure() } />
+        }
+        { status === 'success' && q.length > 0 && colleges.length === 0 &&
+          <Message { ...this._getEmpty() } />
+        }
+        { status === 'success' && q.length > 0 &&
+          <div className="colleges-add-body">
+            { colleges.map((college, index) => (
+              <div className="visit-token" key={`visit_${college.id}`} onClick={ this._handleClick.bind(this, college) }>
+                <div className="visit-token-logo">
+                  <img src={ college.logo } />
+                </div>
+                <div className="visit-token-details">
+                  <strong>{ college.name }</strong><br />
+                  <span className="visit-token-details-location">
+                    { college.city }, { college.state }<br />
+                  </span>
+                </div>
               </div>
-              <div className="visit-token-details">
-                <strong>{ college.name }</strong><br />
-                <span className="visit-token-details-location">
-                  { college.city }, { college.state }<br />
-                </span>
-              </div>
-            </div>
-          )) }
-        </div>
+            ))}
+          </div>
+        }
       </div>
     )
   }
@@ -93,7 +96,8 @@ class Colleges extends React.Component {
     this.props.onQuery(q)
   }
 
-  _handleClick() {
+  _handleClick(college) {
+    this.props.onAddVisit({ college })
     this.props.onChangeMode('itinerary')
   }
 

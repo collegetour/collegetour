@@ -40,6 +40,13 @@ class Map extends React.Component {
     this._handleLoadMap()
   }
 
+  componentDidUpdate(prevProps){
+    const { visits } = this.props
+    if(!_.isEqual(visits, prevProps.visits)) {
+      this._handleLoadMap()
+    }
+  }
+
   _handleLoadMap() {
     const { visits } = this.props
     this.markers.map((marker,index) => {

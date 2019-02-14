@@ -1,9 +1,8 @@
-import Message from '../../components/message'
-import { Page } from '../../components/page'
+import Message from '../../../components/message'
+import { Page } from '../../../components/page'
+import { Impression } from '../impression'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Impression } from './impression'
-import moment from 'moment'
 
 class Visit extends React.Component {
 

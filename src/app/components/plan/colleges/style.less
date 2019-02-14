@@ -2,6 +2,7 @@
   flex: 0 0 300px;
   background-color: fadeout(@black, 97);
   position: relative;
+  overflow: hidden;
 }
 .plan-sidebar-panel {
   background-color: @white;
@@ -43,24 +44,34 @@
 
 
 
-.visits-bound {
+.visit-bound {
   border-bottom: 1px solid fadeout(@black, 95);
-  position: relative;
-  background-color: fadeout(@black, 95);
-  padding: .8em;
+  display: flex;
+}
+.visit-bound-icon {
+  display: flex;
+  font-size: 1.2em;
+  padding: 0.8em 0 0.8em 0.8em;
   text-align: center;
+  .fa {
+    margin: auto;
+  }
+  color: @red;
+}
+.visit-bound-details {
+  padding: 0.8em;
+  flex: 1;
 }
 .visits .visit-token {
-  &:nth-child(1) .fa-circle { color: @red; }
-  &:nth-child(2) .fa-circle { color: @orange; }
-  &:nth-child(3) .fa-circle { color: @yellow; }
-  &:nth-child(4) .fa-circle { color: @olive; }
-  &:nth-child(5) .fa-circle { color: @green; }
-  &:nth-child(6) .fa-circle { color: @teal; }
-  &:nth-child(7) .fa-circle { color: @blue; }
-  &:nth-child(8) .fa-circle { color: @violet; }
-  &:nth-child(9) .fa-circle { color: @purple; }
-  &:nth-child(10) .fa-circle { color: @pink; }
+  &:nth-child(1) .fa-circle { color: @orange; }
+  &:nth-child(2) .fa-circle { color: @yellow; }
+  &:nth-child(3) .fa-circle { color: @olive; }
+  &:nth-child(4) .fa-circle { color: @green; }
+  &:nth-child(5) .fa-circle { color: @teal; }
+  &:nth-child(6) .fa-circle { color: @blue; }
+  &:nth-child(7) .fa-circle { color: @violet; }
+  &:nth-child(8) .fa-circle { color: @purple; }
+  &:nth-child(9) .fa-circle { color: @pink; }
 }
 
 .visit-token {
@@ -70,6 +81,9 @@
   position: relative;
   background-color: @white;
   cursor: grab;
+  &.dragging {
+    cursor: grabbing;
+  }
   &:hover {
     background-color: fadeout(@black, 95);
   }
@@ -114,6 +128,7 @@
   cursor: pointer;
 }
 .visits-add {
+  border-bottom: 1px solid fadeout(@black, 95);
   padding: 0.8em;
   color: @blue;
   text-decoration: underline;
