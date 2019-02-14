@@ -48,7 +48,7 @@ class Tours extends React.Component {
   }
 
   _handleClick(id) {
-    this.context.router.history.push(`/tours/${id}`)
+    this.context.router.history.push(`/tours/${id}/visits`)
   }
 
 }

@@ -1,4 +1,3 @@
-import { CSSTransition } from 'react-transition-group'
 import ModalPanel from '../modal_panel'
 import Resumable from 'resumablejs'
 import PropTypes from 'prop-types'
@@ -43,18 +42,23 @@ class Camera extends React.Component {
       <div className="camera">
         <input type="file" ref={ node => this.input = node } capture />
         <i className="fa fa-camera-retro" ref={ node => this.button = node } />
-        <CSSTransition in={ preview } classNames="slide" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true } appear={ true }>
+        { preview &&
           <ModalPanel { ...this._getModalPanel() }>
             <div className="media">
-              <div className="media-image">
-                <Preview image={ upload } />
+              <div className="media-post">
+                <div className="media-image">
+                  <div className="media-frame">
+                    <Preview image={ upload } />
+                  </div>
+                </div>
+                <div className="media-caption">
+                  <textarea { ...this._getCaption() } ref={ node => this.caption = node } />
+                </div>
               </div>
-              <div className="media-caption">
-                <textarea { ...this._getCaption() } ref={ node => this.caption = node } />
-              </div>
+              <div className="media-canvas" />
             </div>
           </ModalPanel>
-        </CSSTransition>
+        }
       </div>
     )
   }
@@ -75,10 +79,17 @@ class Camera extends React.Component {
     this.input.setAttribute('accept', 'image/*')
   }
 
+  componentDidUpdate(prevProps) {
+    const { preview } = this.props
+    if(preview !== prevProps.preview && preview) {
+      setTimeout(() => this.caption.focus())
+    }
+  }
+
   _getCaption(e) {
     const { caption } = this.props
     return {
-      placeholder: 'Type a caption',
+      placeholder: 'Write a caption',
       onChange: this._handleType,
       value: caption
     }
@@ -86,6 +97,7 @@ class Camera extends React.Component {
 
   _getModalPanel() {
     return {
+      title: 'Caption',
       leftItems: [
         { label: 'Cancel', handler: this._handleCancel }
       ],

@@ -31,9 +31,7 @@ class Impression extends React.Component {
         <div className="impression-asset">
           <img src={ impression.asset } />
         </div>
-        <div className="impression-caption">
-          { impression.caption }
-        </div>
+        <div className="impression-caption" dangerouslySetInnerHTML={{__html: impression.caption.replace(/\n/g, '<br />') }} />
       </div>
     )
   }

@@ -100,7 +100,7 @@ class Tourists extends React.Component {
 
   _handleSubmit() {
     const { email, first_name, last_name, page } = this.props
-    this.props.onSave(page.params.id, first_name, last_name, email)
+    this.props.onSave(page.params.tour_id, first_name, last_name, email)
   }
 
 }

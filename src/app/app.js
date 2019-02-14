@@ -77,8 +77,8 @@ class App extends React.Component {
       routes: [
         { path: '/', component: Tours },
         { path: '/tours', component: Tours },
-        { path: '/tours/:id', component: Tour },
-        { path: '/tours/:id/tourists', component: Tourists },
+        { path: '/tours/:tour_id/visits', component: Tour },
+        { path: '/tours/:tour_id/tourists', component: Tourists },
         { path: '/tours/:tour_id/plan', component: Plan },
         { path: '/tours/:tour_id/visits/:id', component: Visit },
         { path: '/*', component: NotFound }
