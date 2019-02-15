@@ -15,8 +15,7 @@ class Cordova extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     permission: PropTypes.string,
-    user: PropTypes.object,
-    onSetVersion: PropTypes.func
+    user: PropTypes.object
   }
 
   state = {
@@ -29,7 +28,7 @@ class Cordova extends React.Component {
   _handleOpenWindow = this._handleOpenWindow.bind(this)
   _handlePushRoute = this._handlePushRoute.bind(this)
   _handleReceiveMessage = this._handleReceiveMessage.bind(this)
-  _handleSetVersion = this._handleSetVersion.bind(this)
+  _handleSignin = this._handleSignin.bind(this)
   _handleUpdateUnseen = this._handleUpdateUnseen.bind(this)
 
   render() {
@@ -48,7 +47,9 @@ class Cordova extends React.Component {
   getChildContext() {
     return {
       host: {
+        type: 'cordova',
         mobile: true,
+        signin: this._handleSignin,
         hasFocus: this._handleHasFocus,
         openWindow: this._handleOpenWindow,
         updateUnseen: this._handleUpdateUnseen
@@ -79,9 +80,6 @@ class Cordova extends React.Component {
   _handleReceiveMessage(e) {
     if(e.origin !== 'file://') return
     const message = e.data
-    if(message.action === 'setVersion') {
-      this._handleSetVersion(message.data.version)
-    }
     if(message.action === 'pushPath') {
       window.location.href = message.data.path
     }
@@ -96,8 +94,8 @@ class Cordova extends React.Component {
     }
   }
 
-  _handleSetVersion(version) {
-    this.props.onSetVersion(version)
+  _handleSignin(auth_url) {
+    this._handleSendMessage('signin', auth_url)
   }
 
   _handleSendMessage(action, data = null) {

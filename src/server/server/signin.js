@@ -15,18 +15,13 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
   router.set('view engine', 'ejs')
 
-  router.get(`/signin/${network}`, t(async (req, res, trx) => {
+  router.get(`/api/signin/${network}`, t(async (req, res, trx) => {
 
-    const state = Object.keys(req.query).reduce((state, key) => [
-      ...state,
-      `${key}:${req.query[key]}`
-    ], []).join('|')
+    const state = encodeState(req.query)
 
-    const login_url = await getUrl(state)
+    const data = await getUrl(state)
 
-    res.send(login_url)
-
-    // res.redirect(301, login_url)
+    res.status(200).json({ data })
 
   }))
 
@@ -34,7 +29,11 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
     const access_token = await getAccessToken(req.query.code)
 
-    res.redirect(301, `collegetourist://signin/${network}/authorize?access_token=${access_token}&state=${req.query.state}`)
+    const state = decodeState(req.query.state)
+
+    const protocol =  state.host === 'cordova' ? 'collegetourist://' : '/'
+
+    res.redirect(301, `${protocol}signin/${network}/authorize?access_token=${access_token}&state=${req.query.state}`)
 
   }))
 
@@ -88,13 +87,7 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
     }
 
-    const state = req.query.state.split('|').reduce((state, pair) => {
-      const parts = pair.split(':')
-      return {
-        ...state,
-        [parts[0]]: parts[1]
-      }
-    }, {})
+    const state = decodeState(req.query.state)
 
     const self = await getUser(req.query.access_token)
 
@@ -112,5 +105,18 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
   return router
 
 }
+
+const encodeState = (state) => Object.keys(state).reduce((encoded, key) => [
+  ...encoded,
+  `${key}:${state[key]}`
+], []).join('|')
+
+const decodeState = (state) => state.split('|').reduce((decoded, pair) => {
+  const parts = pair.split(':')
+  return {
+    ...decoded,
+    [parts[0]]: parts[1]
+  }
+}, {})
 
 export default signin

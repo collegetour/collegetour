@@ -14,6 +14,7 @@ class Browser extends React.Component {
   static defaultProps = {}
 
   _handleOpenWindow = this._handleOpenWindow.bind(this)
+  _handleSignin = this._handleSignin.bind(this)
 
   render() {
     return (
@@ -27,6 +28,8 @@ class Browser extends React.Component {
   getChildContext() {
     return {
       host: {
+        type: 'browser',
+        signin: this._handleSignin,
         openWindow: this._handleOpenWindow
       }
     }
@@ -35,6 +38,10 @@ class Browser extends React.Component {
   _handleOpenWindow(url) {
     this.link.href = url
     this.link.click()
+  }
+
+  _handleSignin(auth_url) {
+    window.location.href = auth_url
   }
 
 

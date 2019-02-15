@@ -15,14 +15,6 @@ var app = {
 
     window.open = window.cordova.InAppBrowser
 
-    if (parseInt(window.device.version) >= 12 && window.device.platform == 'iOS') {
-      window.ASWebAuthSession.start('collegetourist://', 'https://accounts.google.com/o/oauth2/v2/auth?state=&prompt=consent&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&response_type=code&client_id=549274983663-rsk4fp7mbl3epuq6juu6hej3ij3qjod2.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fsignin%2Fgoogle%2Ftoken', function(url) {
-        sendMessage('pushPath', { path: url.replace('collegetourist:/', '') })
-      },function(error){
-        console.log(error)
-      })
-    }
-
     document.addEventListener('pause', pause, false)
     document.addEventListener('resume', resume, false)
 
@@ -66,9 +58,20 @@ var app = {
       })
     }
 
+    function signin(auth_url) {
+      if (parseInt(window.device.version) >= 12 && window.device.platform == 'iOS') {
+        window.ASWebAuthSession.start('collegetourist://', auth_url, function(url) {
+          sendMessage('pushPath', { path: url.replace('collegetourist:/', '') })
+        },function(error){
+          console.log(error)
+        })
+      }
+    }
+
     window.addEventListener('message', function (e) {
       var message = e.data
       if(message.action === 'openWindow') return openWindow(message.data)
+      if(message.action === 'signin') return signin(message.data)
     }, false)
 
     window.handleOpenURL = function(target) {
