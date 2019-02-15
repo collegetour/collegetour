@@ -16,7 +16,8 @@ import localforage from 'localforage'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Browser from './components/host/browser'
+import Portal from './components/portal'
+import Host from './components/host'
 import RouterStack from './components/stack/router'
 import Presence from './components/presence'
 import Tours from './pages/tours/list'
@@ -42,13 +43,15 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={ this.store }>
-        <Browser>
+        <Host>
           <Presence>
-            <Router>
-              <RouterStack { ...this._getStack() } />
-            </Router>
+            <Portal>
+              <Router>
+                <RouterStack { ...this._getStack() } />
+              </Router>
+            </Portal>
           </Presence>
-        </Browser>
+        </Host>
       </Provider>
     )
   }

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.collegetourist" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>College Tourist</name>
+  <description>
+    College Tourist is an app that helps you organize, document, and remember your college tour experiences.
+  </description>
+  <author email="mochini@gmail.com" href="collegetouristapp.com">Greg Kops</author>
+  <content src="index.html" />
+  <access origin="*" />
+  <allow-navigation href="http://*/*" />
+  <allow-navigation href="https://*/*" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <allow-intent href="tel:*" />
+  <allow-intent href="sms:*" />
+  <allow-intent href="mailto:*" />
+  <allow-intent href="geo:*" />
+  <platform name="android">
+    <allow-intent href="market:*" />
+  </platform>
+  <platform name="ios">
+    <preference name="KeyboardShrinksView" value="true" />
+    <allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
+    <icon height="57" platform="ios" src="../public/images/icons/ios/icon.png" width="57" />
+    <icon height="114" platform="ios" src="../public/images/icons/ios/icon@2x.png" width="114" />
+    <icon height="40" platform="ios" src="../public/images/icons/ios/icon-40.png" width="40" />
+    <icon height="80" platform="ios" src="../public/images/icons/ios/icon-40@2x.png" width="80" />
+    <icon height="50" platform="ios" src="../public/images/icons/ios/icon-50.png" width="50" />
+    <icon height="100" platform="ios" src="../public/images/icons/ios/icon-50@2x.png" width="100" />
+    <icon height="60" platform="ios" src="../public/images/icons/ios/icon-60.png" width="60" />
+    <icon height="120" platform="ios" src="../public/images/icons/ios/icon-60@2x.png" width="120" />
+    <icon height="180" platform="ios" src="../public/images/icons/ios/icon-60@3x.png" width="180" />
+    <icon height="72" platform="ios" src="../public/images/icons/ios/icon-72.png" width="72" />
+    <icon height="144" platform="ios" src="../public/images/icons/ios/icon-72@2x.png" width="144" />
+    <icon height="76" platform="ios" src="../public/images/icons/ios/icon-76.png" width="76" />
+    <icon height="152" platform="ios" src="../public/images/icons/ios/icon-76@2x.png" width="152" />
+    <icon height="29" platform="ios" src="../public/images/icons/ios/icon-small.png" width="29" />
+    <icon height="58" platform="ios" src="../public/images/icons/ios/icon-small@2x.png" width="58" />
+    <icon height="87" platform="ios" src="../public/images/icons/ios/icon-small@3x.png" width="87" />
+  </platform>
+  <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+    <string>need camera access to take pictures</string>
+  </edit-config>
+  <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
+    <string>need photo library access to get pictures from there</string>
+  </edit-config>
+  <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+    <string>need location access to find things nearby</string>
+  </edit-config>
+  <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
+    <string>need photo library access to save pictures there</string>
+  </edit-config>
+  <preference name="StatusBarOverlaysWebView" value="false" />
+  <preference name="StatusBarBackgroundColor" value="#000000" />
+  <preference name="StatusBarStyle" value="lightcontent" />
+  <preference name="AppendUserAgent" value=";Cordova" />
+  <plugin name="cordova-plugin-whitelist" spec="1" />
+  <plugin name="cordova-plugin-camera" spec="^4.0.3" />
+  <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
+  <plugin name="cordova-plugin-safariviewcontroller" spec="^1.5.4" />
+  <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
+  <engine name="ios" spec="^4.5.5" />
+</widget>

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-class Loader extends React.Component {
+class Browser extends React.Component {
 
   static childContextTypes = {
     host: PropTypes.object
@@ -40,4 +40,4 @@ class Loader extends React.Component {
 
 }
 
-export default Loader
+export default Browser

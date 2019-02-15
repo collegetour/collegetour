@@ -3,6 +3,10 @@ import React from 'react'
 
 class Signin extends React.Component {
 
+  static contextTypes = {
+    host: PropTypes.object
+  }
+
   static propTypes = {
     tourist_id: PropTypes.number
   }
@@ -17,21 +21,29 @@ class Signin extends React.Component {
             <i className="fa fa-university" />
             <h1>College Tourist</h1>
           </div>
-          <a href={ this._getSignin('google') } className="signin-button">
+          <a href={ this._getSignin('google') } onClick={ this._handleClick.bind(this) } className="signin-button">
             <i className="fa fa-google" />
             Log In with Google
           </a>
-          <a href={ this._getSignin('facebook') } className="signin-button">
+          <a href={ this._getSignin('facebook') } onClick={ this._handleClick.bind(this) } className="signin-button">
             <i className="fa fa-facebook" />
             Log In with Facebook
           </a>
-          <a href={ this._getSignin('instagram') } className="signin-button">
+          <a href={ this._getSignin('instagram') } onClick={ this._handleClick.bind(this) } className="signin-button">
             <i className="fa fa-instagram" />
             Log In with Instagram
           </a>
         </div>
       </div>
     )
+  }
+
+  _handleClick(e) {
+    e.preventDefault()
+    e.stopPropagation()
+    e.preventDefault()
+    this.context.host.openWindow(e.target.href)
+    return false
   }
 
   _getSignin(network) {
