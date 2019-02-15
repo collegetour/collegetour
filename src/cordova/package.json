@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "ios": "cordova run ios --buildFlag='-UseModernBuildSystem=0'",
+        "ios": "cordova run ios --buildFlag='-UseModernBuildSystem=0' --target=iPhone-8",
         "android": "cordova run android --release --device",
         "package": "cordova build ios --release --device --buildFlag='-UseModernBuildSystem=0' --packageType='app-store'"
     },

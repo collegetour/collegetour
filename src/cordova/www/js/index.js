@@ -49,24 +49,20 @@ var app = {
 
     function openWindow(url) {
       window.SafariViewController.isAvailable(function (available) {
-        if (available) {
-          window.SafariViewController.show({
-            url: url,
-            hidden: false,
-            animated: false,
-            transition: 'curl',
-            enterReaderModeIfAvailable: false,
-            tintColor: '#00ffff',
-            barColor: '#0000ff',
-            controlTintColor: '#ffffff'
-          },
-          function(result) { },
-          function(msg) { })
-        } else {
-          window.open(url, '_blank', 'location=no')
-        }
+        if(!available) return window.open(url, '_blank', 'location=no')
+        window.SafariViewController.show({
+          url: url,
+          hidden: false,
+          animated: false,
+          transition: 'curl',
+          enterReaderModeIfAvailable: false,
+          tintColor: '#DB2828',
+          barColor: '#DB2828',
+          controlTintColor: '#ffffff'
+        },
+        function(result) { },
+        function(msg) { })
       })
-      window.cordova.InAppBrowser.open(url, '_blank', 'location=no')
     }
 
     window.addEventListener('message', function (e) {
