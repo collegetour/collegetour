@@ -12,7 +12,10 @@
     "license": "Apache-2.0",
     "dependencies": {
         "cordova-ios": "^4.5.5",
+        "cordova-plugin-aswebauthenticationsession": "^1.0.12",
         "cordova-plugin-camera": "^4.0.3",
+        "cordova-plugin-customurlscheme": "^4.3.0",
+        "cordova-plugin-device": "^2.0.2",
         "cordova-plugin-inappbrowser": "^3.0.0",
         "cordova-plugin-safariviewcontroller": "^1.5.4",
         "cordova-plugin-statusbar": "^2.4.2",
@@ -24,7 +27,12 @@
             "cordova-plugin-camera": {},
             "cordova-plugin-inappbrowser": {},
             "cordova-plugin-safariviewcontroller": {},
-            "cordova-plugin-statusbar": {}
+            "cordova-plugin-statusbar": {},
+            "cordova-plugin-device": {},
+            "cordova-plugin-customurlscheme": {
+                "URL_SCHEME": "collegetourist"
+            },
+            "cordova-plugin-aswebauthenticationsession": {}
         },
         "platforms": [
             "ios"

@@ -15,6 +15,14 @@ var app = {
 
     window.open = window.cordova.InAppBrowser
 
+    if (parseInt(window.device.version) >= 12 && window.device.platform == 'iOS') {
+      window.ASWebAuthSession.start('collegetourist://', 'https://accounts.google.com/o/oauth2/v2/auth?state=&prompt=consent&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&response_type=code&client_id=549274983663-rsk4fp7mbl3epuq6juu6hej3ij3qjod2.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fsignin%2Fgoogle%2Ftoken', function(url) {
+        sendMessage('pushPath', { path: url.replace('collegetourist:/', '') })
+      },function(error){
+        console.log(error)
+      })
+    }
+
     document.addEventListener('pause', pause, false)
     document.addEventListener('resume', resume, false)
 
@@ -40,13 +48,6 @@ var app = {
       sendMessage('resume')
     }
 
-
-    function getVersion() {
-      window.cordova.getAppVersion.getVersionNumber(function(version){
-        sendMessage('setVersion', { version })
-      })
-    }
-
     function openWindow(url) {
       window.SafariViewController.isAvailable(function (available) {
         if(!available) return window.open(url, '_blank', 'location=no')
@@ -67,7 +68,6 @@ var app = {
 
     window.addEventListener('message', function (e) {
       var message = e.data
-      if(message.action === 'getVersion') return getVersion()
       if(message.action === 'openWindow') return openWindow(message.data)
     }, false)
 

@@ -82,6 +82,9 @@ class Cordova extends React.Component {
     if(message.action === 'setVersion') {
       this._handleSetVersion(message.data.version)
     }
+    if(message.action === 'pushPath') {
+      window.location.href = message.data.path
+    }
     if(message.action === 'pushRoute') {
       this._handlePushRoute(message.data.route)
     }

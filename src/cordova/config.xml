@@ -51,6 +51,16 @@
     <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
         <string>need photo library access to save pictures there</string>
     </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="CFBundleURLTypes">
+        <array>
+            <dict>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>collegetourist</string>
+                </array>
+            </dict>
+        </array>
+    </edit-config>
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />
@@ -60,5 +70,10 @@
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="cordova-plugin-safariviewcontroller" spec="^1.5.4" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
+    <plugin name="cordova-plugin-device" spec="^2.0.2" />
+    <plugin name="cordova-plugin-customurlscheme" spec="^4.3.0">
+        <variable name="URL_SCHEME" value="collegetourist" />
+    </plugin>
+    <plugin name="cordova-plugin-aswebauthenticationsession" spec="^1.0.12" />
     <engine name="ios" spec="^4.5.5" />
 </widget>

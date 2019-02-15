@@ -24,7 +24,9 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
     const login_url = await getUrl(state)
 
-    res.redirect(301, login_url)
+    res.send(login_url)
+
+    // res.redirect(301, login_url)
 
   }))
 
@@ -32,7 +34,7 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
     const access_token = await getAccessToken(req.query.code)
 
-    res.redirect(301, `/signin/${network}/authorize?access_token=${access_token}&state=${req.query.state}`)
+    res.redirect(301, `collegetourist://signin/${network}/authorize?access_token=${access_token}&state=${req.query.state}`)
 
   }))
 
