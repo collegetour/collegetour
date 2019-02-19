@@ -6,12 +6,18 @@ import React from 'react'
 
 class Impression extends React.Component {
 
+  static contextTypes = {
+    tasks: PropTypes.object
+  }
+
   static propTypes = {
     impression: PropTypes.object
   }
 
   static defaultProps = {
   }
+
+  _handleTasks = this._handleTasks.bind(this)
 
   render() {
     const { impression } = this.props
@@ -25,7 +31,7 @@ class Impression extends React.Component {
             <strong>{ impression.user.full_name }</strong><br />
             { moment(impression.created_at).format('MMM DD, YYYY @ hh:mm A') }
           </div>
-          <div className="impression-header-icon">
+          <div className="impression-header-icon" onClick={ this._handleTasks }>
             <i className="fa fa-ellipsis-h" />
           </div>
         </div>
@@ -35,6 +41,13 @@ class Impression extends React.Component {
         <div className="impression-caption" dangerouslySetInnerHTML={{__html: impression.caption.replace(/\n/g, '<br />') }} />
       </div>
     )
+  }
+
+  _handleTasks() {
+    this.context.tasks.open([
+      { label: 'Edit Impression' },
+      { label: 'Delete Impression' }
+    ])
   }
 
 }

@@ -8,7 +8,6 @@ class Cordova extends React.Component {
   }
 
   static contextTypes = {
-    device: PropTypes.object,
     router: PropTypes.object
   }
 

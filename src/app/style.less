@@ -82,6 +82,30 @@ input, textarea {
 	  height: 0 !important;
 	}
 }
+
+.opacity-transition(@start, @end, @duration) {
+	transition: opacity @duration ease-in-out 0s;
+	&.opacity-enter,
+	&.opacity-exit.opacity-exit-active {
+		opacity: @start;
+	}
+	&.opacity-exit,
+	&.opacity-enter.opacity-enter-active {
+		opacity: @end;
+	}
+}
+.translatey-transition(@start, @end, @duration) {
+  transition: transform @duration ease-in-out 0s;
+	&.translatey-enter,
+	&.translatey-exit.translatey-exit-active {
+		transform: translateY(@start);
+	}
+	&.translatey-exit,
+	&.translatey-enter.translatey-enter-active {
+		transform: translateY(@end);
+	}
+}
+
 .slide(@duration) {
 	&.slide-enter,
 	&.slide-exit {

@@ -78,10 +78,6 @@ class Visit extends React.Component {
     }
   }
 
-  _handleClick(id) {
-    this.context.router.history.push(`/tours/${id}/visits/${id}/impressions/${id}`)
-  }
-
   _handleCall() {
     const { phone } = this.props.visit.college
     window.location.href = `tel://${phone}`
