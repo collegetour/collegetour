@@ -1,5 +1,6 @@
 import SearchBox from '../../../searchbox'
 import Message from '../../../message'
+import Image from '../../../image'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -38,7 +39,7 @@ class Colleges extends React.Component {
             { colleges.map((college, index) => (
               <div className="visit-token" key={`visit_${college.id}`} onClick={ this._handleClick.bind(this, college) }>
                 <div className="visit-token-logo">
-                  <img src={ college.logo } />
+                  <Image src={ college.logo } />
                 </div>
                 <div className="visit-token-details">
                   <strong>{ college.name }</strong><br />

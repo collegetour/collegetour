@@ -13,20 +13,16 @@ class Feed extends React.Component {
 
   render() {
     const { impressions } = this.props
+    if(impressions.length === 0) return <Message { ...this._getMessage() } />
     return (
       <div className="feed">
-        { impressions.length === 0 &&
-          <Message { ...this._getMessage() } />
-        }
-        { impressions.length > 0 &&
-          <div className="visit-photos-body">
-            <div className="visit-photos-container">
-              { impressions.map((impression, index) => (
-                <Impression impression={ impression } key={`impression_${impression.id}`} />
-              )) }
-            </div>
+        <div className="visit-photos-body">
+          <div className="visit-photos-container">
+            { impressions.map((impression, index) => (
+              <Impression impression={ impression } key={`impression_${impression.id}`} />
+            )) }
           </div>
-        }
+        </div>
       </div>
     )
   }

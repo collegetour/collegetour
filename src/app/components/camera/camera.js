@@ -40,10 +40,8 @@ class Camera extends React.Component {
     const { preview, upload } = this.props
     return (
       <div className="camera">
-        <input type="file" ref={ node => this.input = node } capture />
-        <i className="fa fa-pencil" ref={ node => this.button = node } />
+        <input type="file" ref={ node => this.input = node } />
         <i className="fa fa-camera-retro" ref={ node => this.button = node } />
-        <i className="fa fa-check" ref={ node => this.button = node } />
         { preview &&
           <ModalPanel { ...this._getModalPanel() }>
             <div className="media">
@@ -67,7 +65,7 @@ class Camera extends React.Component {
 
   componentDidMount() {
     this.resumable = new Resumable({
-      target: '/api/assets/upload',
+      target: `${process.env.API_HOST}/api/assets/upload`,
       chunkSize: 1024 * 128,
       permanentErrors: [204, 400, 404, 409, 415, 500, 501],
       headers: {},

@@ -6,6 +6,8 @@ const visit_serializer = (visit) => ({
     name: visit.related('college').get('name'),
     city: visit.related('college').get('city'),
     state: visit.related('college').get('state'),
+    phone: visit.related('college').get('phone'),
+    website: visit.related('college').get('website'),
     schedule: visit.related('college').get('schedule'),
     logo: visit.related('college').related('logo').get('url')
   },

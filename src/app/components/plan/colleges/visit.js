@@ -1,5 +1,6 @@
 import { DragSource, DropTarget } from 'react-dnd'
 import PropTypes from 'prop-types'
+import Image from '../../image'
 import React from 'react'
 
 class Visit extends React.Component {
@@ -30,7 +31,7 @@ class Visit extends React.Component {
           <i className="fa fa-circle" />
         </div>
         <div className="visit-token-logo">
-          <img src={ visit.college.logo } />
+          <Image src={ visit.college.logo } />
         </div>
         <div className="visit-token-details">
           <strong>{ visit.college.name }</strong><br />

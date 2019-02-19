@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Image from '../image'
 
 class Avatar extends React.Component {
 
@@ -13,7 +14,7 @@ class Avatar extends React.Component {
     const { user } = this.props
     return (
       <div className="avatar">
-        { user.photo && <img src={ user.photo } />}
+        { user.photo && <Image src={ user.photo } />}
         { !user.photo &&
           <div className="avatar-initials">
             { user.initials }

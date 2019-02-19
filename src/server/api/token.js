@@ -18,8 +18,6 @@ const router = t(async (req, res, trx, next) => {
 
   if(iat > exp) throw new Error('Expired token')
 
-  console.log('user_id', user_id)
-
   const user = await User.where({
     id: user_id
   }).fetch({

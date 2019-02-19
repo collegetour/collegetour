@@ -38,7 +38,7 @@ export const uploadChunk = async (req, trx) => {
     status: 'chunked'
   }).save(null, { transacting: trx })
   if(!asset) throw new Error('Unable to create asset')
-  await _assembleAsset(asset.id, trx)
+  await _assembleAsset(asset, trx)
   return AssetSerializer(asset)
 }
 
@@ -69,15 +69,12 @@ export const createAsset = async (meta, trx) => {
   return asset
 }
 
-const _assembleAsset = async (id, trx) => {
-  const asset = await Asset.where({ id }).fetch({ transacting: trx })
-  if(!asset) throw new Error('Unable to find asset' )
+const _assembleAsset = async (asset, trx) => {
   const fileData = await _getAssembledData(asset)
   const normalizedData = await _getNormalizedData(asset, fileData)
   await _saveFile(normalizedData, `assets/${asset.get('id')}/${asset.get('file_name')}`, asset.get('content_type'))
   await _deleteChunks(asset)
-  const status = 'assembled'
-  await asset.save({ status }, { transacting: trx })
+  await asset.save({ status: 'assembled' }, { transacting: trx })
 }
 
 const _getNormalizedData = async (asset, fileData) => {
@@ -108,7 +105,7 @@ const _listChunks = async () => {
 }
 
 const _saveFile = async (filedata, filepath, content_type) => {
-  backend.saveFile(filedata, filepath, content_type)
+  return await backend.saveFile(filedata, filepath, content_type)
 }
 
 const _unlinkChunk = async (filepath) => {

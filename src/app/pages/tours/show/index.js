@@ -1,5 +1,6 @@
 import Message from '../../../components/message'
 import { Page } from '../../../components/page'
+import Image from '../../../components/image'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -27,7 +28,7 @@ class Tour extends React.Component {
         { visits.map((visit, index) => (
           <div className="visits-visit" key={`visit_${visit.id}`} onClick={ this._handleClick.bind(this, visit.id) }>
             <div className="visits-visit-logo">
-              <img src={ visit.college.logo } />
+              <Image src={ visit.college.logo } />
             </div>
             <div className="visits-visit-details">
               <strong>{ visit.college.name }</strong><br />

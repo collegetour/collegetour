@@ -2,6 +2,7 @@
 const awsServerlessExpress = require('aws-serverless-express')
 const app = require('./index').default
 const binaryMimeTypes = [
+	'multipart/form-data',
 	'application/octet-stream',
 	'font/eot',
 	'font/opentype',
