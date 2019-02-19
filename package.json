@@ -6,7 +6,8 @@
   "scripts": {
     "reset": "knex migrate:rollback && knex migrate:latest && knex seed:run",
     "build": "NODE_ENV=production babel-node ./src/scripts/build.js",
-    "publish": "babel-node ./src/scripts/publish.js",
+    "publish:server": "NODE_ENV=production babel-node ./src/scripts/publish/index.js && cd dist && claudia update",
+    "publish:client": "NODE_ENV=production babel-node ./src/scripts/build.js && NODE_ENV=production babel-node ./src/scripts/publish.js",
     "dev": "babel-node ./src/scripts/dev.js",
     "test": "babel-node ./src/scripts/test.js"
   },
@@ -21,6 +22,7 @@
   },
   "homepage": "https://github.com/ccetc/static-starter#readme",
   "devDependencies": {
+    "archiver": "^3.0.0",
     "autoprefixer": "^8.6.5",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
@@ -36,8 +38,6 @@
     "chai-enzyme": "^1.0.0-beta.1",
     "css-loader": "^1.0.0",
     "cssnano": "^4.0.2",
-    "dotenv": "^6.2.0",
-    "ejs": "^2.6.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^5.1.0",
@@ -60,11 +60,14 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
-    "aws-sdk": "^2.275.1",
+    "aws-sdk": "^2.404.0",
     "body-parser": "^1.18.3",
     "bookshelf": "^0.14.2",
     "checkit": "^0.7.0",
     "connect-multiparty": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
     "fb": "^2.0.0",
     "googleapis": "^37.2.0",

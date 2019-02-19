@@ -17,6 +17,24 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <icon qualifier="ldpi" src="../public/images/icons/android/drawable-ldpi-icon.png" />
+        <icon qualifier="mdpi" src="../public/images/icons/android/drawable-mdpi-icon.png" />
+        <icon qualifier="hdpi" src="../public/images/icons/android/drawable-hdpi-icon.png" />
+        <icon qualifier="xhdpi" src="../public/images/icons/android/drawable-xhdpi-icon.png" />
+        <icon qualifier="xxhdpi" src="../public/images/icons/android/drawable-xxhdpi-icon.png" />
+        <icon qualifier="xxxhdpi" src="../public/images/icons/android/drawable-xxxhdpi-icon.png" />
+        <splash qualifier="land-ldpi" src="../public/images/screens/android/drawable-land-ldpi-screen.png" />
+        <splash qualifier="land-mdpi" src="../public/images/screens/android/drawable-land-mdpi-screen.png" />
+        <splash qualifier="land-hdpi" src="../public/images/screens/android/drawable-land-hdpi-screen.png" />
+        <splash qualifier="land-xhdpi" src="../public/images/screens/android/drawable-land-xhdpi-screen.png" />
+        <splash qualifier="land-xxhdpi" src="../public/images/screens/android/drawable-land-xxhdpi-screen.png" />
+        <splash qualifier="land-xxxhdpi" src="../public/images/screens/android/drawable-land-xxxhdpi-screen.png" />
+        <splash qualifier="port-ldpi" src="../public/images/screens/android/drawable-port-ldpi-screen.png" />
+        <splash qualifier="port-mdpi" src="../public/images/screens/android/drawable-port-mdpi-screen.png" />
+        <splash qualifier="port-hdpi" src="../public/images/screens/android/drawable-port-hdpi-screen.png" />
+        <splash qualifier="port-xhdpi" src="../public/images/screens/android/drawable-port-xhdpi-screen.png" />
+        <splash qualifier="port-xxhdpi" src="../public/images/screens/android/drawable-port-xxhdpi-screen.png" />
+        <splash qualifier="port-xxxhdpi" src="../public/images/screens/android/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="ios">
         <preference name="KeyboardShrinksView" value="true" />
@@ -38,6 +56,16 @@
         <icon height="29" platform="ios" src="../public/images/icons/ios/icon-small.png" width="29" />
         <icon height="58" platform="ios" src="../public/images/icons/ios/icon-small@2x.png" width="58" />
         <icon height="87" platform="ios" src="../public/images/icons/ios/icon-small@3x.png" width="87" />
+        <splash height="1136" platform="ios" src="../public/images/screens/ios/Default-568h@2x~iphone.png" width="640" />
+        <splash height="1334" platform="ios" src="../public/images/screens/ios/Default-667h.png" width="750" />
+        <splash height="2208" platform="ios" src="../public/images/screens/ios/Default-736h.png" width="1242" />
+        <splash height="1242" platform="ios" src="../public/images/screens/ios/Default-Landscape-736h.png" width="2208" />
+        <splash height="1536" platform="ios" src="../public/images/screens/ios/Default-Landscape@2x~ipad.png" width="2048" />
+        <splash height="768" platform="ios" src="../public/images/screens/ios/Default-Landscape~ipad.png" width="1024" />
+        <splash height="2048" platform="ios" src="../public/images/screens/ios/Default-Portrait@2x~ipad.png" width="1536" />
+        <splash height="1024" platform="ios" src="../public/images/screens/ios/Default-Portrait~ipad.png" width="768" />
+        <splash height="960" platform="ios" src="../public/images/screens/ios/Default@2x~iphone.png" width="640" />
+        <splash height="480" platform="ios" src="../public/images/screens/ios/Default~iphone.png" width="320" />
     </platform>
     <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
         <string>need camera access to take pictures</string>

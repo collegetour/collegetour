@@ -41,7 +41,9 @@ class Camera extends React.Component {
     return (
       <div className="camera">
         <input type="file" ref={ node => this.input = node } capture />
+        <i className="fa fa-pencil" ref={ node => this.button = node } />
         <i className="fa fa-camera-retro" ref={ node => this.button = node } />
+        <i className="fa fa-check" ref={ node => this.button = node } />
         { preview &&
           <ModalPanel { ...this._getModalPanel() }>
             <div className="media">
@@ -136,9 +138,7 @@ class Camera extends React.Component {
     this.props.onType(e.target.value)
   }
 
-  _handleFinish() {
-    console.log('finish')
-  }
+  _handleFinish() {}
 
   _handleClick() {
     this.input.style.display = 'block'

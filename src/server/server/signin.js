@@ -5,15 +5,10 @@ import User from '../models/user'
 import express from 'express'
 import moment from 'moment'
 import { t } from '../utils'
-import path from 'path'
 
 const signin = (network, getUrl, getAccessToken, getUser) => {
 
   const router = express()
-
-  router.set('views', path.join(__dirname, '..', 'views'))
-
-  router.set('view engine', 'ejs')
 
   router.get(`/api/signin/${network}`, t(async (req, res, trx) => {
 
@@ -33,14 +28,16 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
     const protocol =  state.host === 'cordova' ? 'collegetourist://' : '/'
 
-    res.redirect(301, `${protocol}signin/${network}/authorize?access_token=${access_token}&state=${req.query.state}`)
+    const url = `${protocol}signin/${network}/authorize?access_token=${access_token}&state=${req.query.state}`
+
+    res.redirect(301, url)
 
   }))
 
 
   router.get(`/signin/${network}/authorize`, t(async (req, res, trx) => {
 
-    const findTourist = async (self, tourist_id) => {
+    const findTourist = async (self, tourist_id, trx) => {
 
       if(!tourist_id) return null
 
@@ -64,13 +61,13 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
     }
 
-    const findUser = async (self) => await User.where({
+    const findUser = async (self, trx) => await User.where({
       [`${network}_id`]: self.id
     }).fetch({
       transacting: trx
     })
 
-    const createUser = async (user) => {
+    const createUser = async (user, trx) => {
 
       const asset = await createAssetFromUrl(user.profile_picture, trx)
 
@@ -91,14 +88,23 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
     const self = await getUser(req.query.access_token)
 
-    const user = await findTourist(self, state.tourist_id) || await findUser(self) || await createUser(self)
+    const user = await findTourist(self, state.tourist_id, trx) || await findUser(self, trx) || await createUser(self, trx)
 
-    await user.load(['photo'])
+    await user.load(['photo'], { transacting: trx })
 
-    res.render('token', {
-      redirect: state.redirect || '/',
-      user: SessionSerializer(user)
-    })
+    const session = SessionSerializer(user)
+
+    const redirect = state.redirect || '/'
+
+    const query = [
+      `id=${session.id}`,
+      `full_name=${session.full_name}`,
+      `photo=${session.photo}`,
+      `token=${session.token}`,
+      `redirect=${redirect}`
+    ]
+
+    res.redirect(301, `${process.env.WEB_HOST}/signin.html?${query.join('&')}`)
 
   }))
 

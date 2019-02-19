@@ -1,10 +1,11 @@
 import './lib/environment'
 import multiparty from 'connect-multiparty'
 import bodyParser from 'body-parser'
-import express from 'express'
-import qs from 'qs'
-import api from './api'
 import server from './server'
+import express from 'express'
+import api from './api'
+import cors from 'cors'
+import qs from 'qs'
 
 const app = express()
 
@@ -15,6 +16,8 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }))
 app.use(bodyParser.json({ limit: '5mb' }))
 
 app.use(multiparty({ uploadDir: './tmp' }))
+
+app.use(cors())
 
 app.use(server)
 

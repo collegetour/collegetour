@@ -20,12 +20,15 @@ class Presence extends React.Component {
     onLoadTourist: PropTypes.func,
     onLoadUser: PropTypes.func,
     onRemoveTourist: PropTypes.func,
-    onSaveUser: PropTypes.func
+    onRemoveUser: PropTypes.func,
+    onSaveUser: PropTypes.func,
+    onSignout: PropTypes.func
   }
 
   static defaultProps = {}
 
   _handleReload = this._handleReload.bind(this)
+  _handleSignout = this._handleSignout.bind(this)
 
   render() {
     const { status, tourist_id, user } = this.props
@@ -41,9 +44,11 @@ class Presence extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { status, user, onLoadSession, onRemoveTourist, onSaveUser } = this.props
+    const { status, user, onLoadSession, onRemoveTourist, onRemoveUser, onSaveUser } = this.props
     if(!_.isEqual(user, prevProps.user)) {
-      if(prevProps.user === null) {
+      if(user === null) {
+        onRemoveUser()
+      } else if(prevProps.user === null) {
         onLoadSession(user.token)
       } else if(user.token !== prevProps.user.token) {
         onSaveUser(user)
@@ -62,7 +67,8 @@ class Presence extends React.Component {
       presence: {
         token,
         user,
-        reload: this._handleReload
+        reload: this._handleReload,
+        signout: this._handleSignout
       }
     }
   }
@@ -70,6 +76,10 @@ class Presence extends React.Component {
   _handleReload() {
     const { user, onLoadSession } = this.props
     onLoadSession(user.token)
+  }
+
+  _handleSignout() {
+    this.props.onSignout()
   }
 
 }

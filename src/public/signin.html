@@ -1,0 +1,25 @@
+<script src="/js/localforage.min.js"></script>
+
+<script>
+  const getUrlParameter = function(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  }
+  localforage.config({
+    name: 'local',
+    storeName: 'collegetour'
+  });
+  localforage.getItem('user').then(function (saved) {
+    const user = saved || {
+      id: getUrlParameter('id'),
+      full_name: getUrlParameter('full_name'),
+      photo: getUrlParameter('photo'),
+      token: getUrlParameter('token')
+    }
+    localforage.setItem('user', user).then(function () {
+      window.location.href = getUrlParameter('redirect');
+    });
+  });
+</script>

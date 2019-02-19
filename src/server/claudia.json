@@ -1,0 +1,10 @@
+{
+  "lambda": {
+    "role": "collegetour-executor",
+    "name": "collegetour",
+    "region": "us-east-1"
+  },
+  "api": {
+    "id": "8oayrxgdc8"
+  }
+}

@@ -37,16 +37,12 @@ class Visit extends React.Component {
               </div>
             </div>
           </div>
-          <div className="visit-photos-tools">
-            <div className="visit-photos-container">
-              <div className="visit-photos-displays">
-                <div className="visit-photos-display active">
-                  <i className="fa fa-picture-o" />
-                </div>
-                <div className="visit-photos-display">
-                  <i className="fa fa-check-circle" />
-                </div>
-              </div>
+          <div className="visit-photos-buttons">
+            <div className="visit-photos-button">
+              <div className="ui basic red fluid button">Get Directions</div>
+            </div>
+            <div className="visit-photos-button">
+              <div className="ui basic red fluid button">Call Admissions</div>
             </div>
           </div>
           <Feed { ...this._getFeed() } />
@@ -80,8 +76,8 @@ class Visit extends React.Component {
 }
 
 const mapResourcesToPage = (props, context, page) => ({
-  visit: `/api/tours/${page.params.tour_id}/visits/${page.params.id}`,
-  impressions: `/api/tours/${page.params.tour_id}/visits/${page.params.id}/impressions`
+  visit: `${process.env.API_HOST}/api/tours/${page.params.tour_id}/visits/${page.params.id}`,
+  impressions: `${process.env.API_HOST}/api/tours/${page.params.tour_id}/visits/${page.params.id}/impressions`
 })
 
 const mapPropsToPage = (props, context, resources, page) => ({

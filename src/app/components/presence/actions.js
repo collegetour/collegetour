@@ -31,12 +31,24 @@ export const saveUser = (user) => ({
   failure: 'SAVE_USER_FAILURE'
 })
 
+export const removeUser = () => ({
+  type: 'LOCAL_REMOVE',
+  key: 'user',
+  request: 'REMOVE_USER_REQUEST',
+  success: 'REMOVE_USER_SUCCESS',
+  failure: 'REMOVE_USER_FAILURE'
+})
+
 export const loadSession = (token) => ({
   type: 'API_REQUEST',
   method: 'GET',
   token,
-  endpoint: '/api/session',
+  endpoint: `${process.env.API_HOST}/api/session`,
   request: 'LOAD_SESSION_REQUEST',
   success: 'LOAD_SESSION_SUCCESS',
   failure: 'LOAD_SESSION_FAILURE'
+})
+
+export const signout = (token) => ({
+  type: 'SIGNOUT'
 })

@@ -16,42 +16,6 @@ exports.seed = async (knex, Promise) => {
       agreed_to_terms: true,
       created_at: moment(),
       updated_at: moment()
-    },
-    {
-      first_name: 'Alice',
-      last_name: 'Kops',
-      email: 'portia@amklegal.com',
-      photo_id: null,
-      instagram_id: null,
-      facebook_id: null,
-      google_id: null,
-      agreed_to_terms: true,
-      created_at: moment(),
-      updated_at: moment()
-    },
-    {
-      first_name: 'Margaret',
-      last_name: 'Kops',
-      email: 'margaretthewarrior@gmail.com',
-      photo_id: 14,
-      instagram_id: null,
-      facebook_id: null,
-      google_id: null,
-      agreed_to_terms: true,
-      created_at: moment(),
-      updated_at: moment()
-    },
-    {
-      first_name: 'Elinor',
-      last_name: 'Kops',
-      email: 'elinorkkb@gmail.com',
-      photo_id: null,
-      instagram_id: null,
-      facebook_id: null,
-      google_id: null,
-      agreed_to_terms: true,
-      created_at: moment(),
-      updated_at: moment()
     }
   ])
 

@@ -19,7 +19,7 @@ var app = {
     document.addEventListener('resume', resume, false)
 
     iframe = document.createElement('iframe')
-    iframe.setAttribute('src', 'http://192.168.0.4:3000')
+    iframe.setAttribute('src', 'https://collegetouristapp.com')
     iframe.setAttribute('border', 0)
 
     body = document.getElementById('cordova')

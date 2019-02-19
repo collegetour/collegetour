@@ -54,7 +54,7 @@ class Tours extends React.Component {
 }
 
 const mapResourcesToPage = (props, context, page) => ({
-  tours: '/api/tours'
+  tours: `${process.env.API_HOST}/api/tours`
 })
 
 const mapPropsToPage = (props, context, resources, page) => ({

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import Avatar from '../avatar'
+import Image from '../image'
 import moment from 'moment'
 import React from 'react'
 
@@ -29,7 +30,7 @@ class Impression extends React.Component {
           </div>
         </div>
         <div className="impression-asset">
-          <img src={ impression.asset } />
+          <Image src={ impression.asset } />
         </div>
         <div className="impression-caption" dangerouslySetInnerHTML={{__html: impression.caption.replace(/\n/g, '<br />') }} />
       </div>

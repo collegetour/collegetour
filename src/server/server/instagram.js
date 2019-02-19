@@ -1,7 +1,7 @@
 import Instagram from 'instagram-node'
 import signin from './signin'
 
-const redirect_uri = `${process.env.WEB_HOST}/signin/instagram/token`
+const redirect_uri = `${process.env.API_HOST}/signin/instagram/token`
 
 const ig = new Instagram.instagram()
 
@@ -16,7 +16,7 @@ const getUrl = async (state) => {
     state,
     scope: 'basic'
   })
-  
+
 }
 
 const getAccessToken = async (code) => {

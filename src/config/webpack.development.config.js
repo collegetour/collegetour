@@ -70,8 +70,11 @@ const config = () => ({
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV':JSON.stringify(process.env.NODE_ENV),
-        'GA_PROPERTY_ID':JSON.stringify(process.env.GA_PROPERTY_ID)
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        'WEB_HOST': JSON.stringify(process.env.WEB_HOST),
+        'API_HOST': JSON.stringify(process.env.API_HOST),
+        'ASSET_HOST': JSON.stringify(process.env.ASSET_HOST),
+        'CDN_HOST': JSON.stringify(process.env.CDN_HOST)
       }
     })
   ]

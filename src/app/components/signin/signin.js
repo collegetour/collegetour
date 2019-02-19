@@ -55,7 +55,7 @@ class Signin extends React.Component {
     const query = { host: host.type }
     if(redirect) query.redirect = redirect
     if(tourist_id) query.tourist_id = tourist_id
-    this.props.onFetch(`/api/signin/${network}`, query)
+    this.props.onFetch(network, query)
   }
 
 }

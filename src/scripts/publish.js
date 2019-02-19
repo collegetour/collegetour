@@ -6,8 +6,10 @@ import path from 'path'
 import _ from 'lodash'
 import fs from 'fs'
 
+const env = process.env.NODE_ENV === 'production' ? '.env.production' : '.env'
+
 dotenv.load({
-  path: path.join('.env')
+  path: path.join(env)
 })
 
 aws.config.constructor({

@@ -7,7 +7,7 @@ const fb = new Facebook({
   Promise
 })
 
-const redirect_uri = `${process.env.WEB_HOST}/signin/facebook/token`
+const redirect_uri = `${process.env.API_HOST}/signin/facebook/token`
 
 const getUrl = async (state) => await fb.getLoginUrl({
   state,

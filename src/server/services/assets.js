@@ -76,7 +76,7 @@ const _assembleAsset = async (id, trx) => {
   const normalizedData = await _getNormalizedData(asset, fileData)
   await _saveFile(normalizedData, `assets/${asset.get('id')}/${asset.get('file_name')}`, asset.get('content_type'))
   await _deleteChunks(asset)
-  const status = asset.get('has_preview') ? 'assembled' : 'processed'
+  const status = 'assembled'
   await asset.save({ status }, { transacting: trx })
 }
 

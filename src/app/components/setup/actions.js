@@ -1,7 +1,7 @@
 export const fetch = (id) => ({
   type: 'API_REQUEST',
   method: 'GET',
-  endpoint: '/api/account',
+  endpoint: `${process.env.API_HOST}/api/account`,
   request: 'FETCH_REQUEST',
   success: 'FETCH_SUCCESS',
   failure: 'FETCH_FAILURE'
@@ -10,7 +10,7 @@ export const fetch = (id) => ({
 export const save = (first_name, last_name, email, photo_id, agreed_to_terms) => ({
   type: 'API_REQUEST',
   method: 'PATCH',
-  endpoint: '/api/account',
+  endpoint: `${process.env.API_HOST}/api/account`,
   body: {
     first_name,
     last_name,

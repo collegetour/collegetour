@@ -1,13 +1,16 @@
-import config from '../config/webpack.production.config'
 import webpack from 'webpack'
 import dotenv from 'dotenv'
 import rimraf from 'rimraf'
 import path from 'path'
 import ncp from 'ncp'
 
+const env = process.env.NODE_ENV === 'production' ? '.env.production' : '.env'
+
 dotenv.load({
-  path: path.join('.env')
+  path: path.join(env)
 })
+
+const config = require(`../config/webpack.${process.env.NODE_ENV}.config`).default
 
 const removeAssets = (dest) => rimraf.sync(dest)
 
@@ -30,6 +33,10 @@ const build = async () => {
   await removeAssets(path.join('public'))
 
   await copyAssets(path.join('src','public'), path.join('public'))
+
+  await removeAssets(path.join('public','assets'))
+
+  await removeAssets(path.join('public','tmp'))
 
   await compile()
 

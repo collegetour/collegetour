@@ -8,15 +8,18 @@ const _getConnection = () => {
 
   if(fs.existsSync(knexpath)) return require(knexpath)[process.env.NODE_ENV].connection
 
-  const { db_user, db_pass, db_host, db_name } = process.env
-
-  return `postgres://${db_user}:${db_pass}@${db_host}:5432/${db_name}`
+  return process.env.DATABASE_URL
 
 }
 
 const knex = Knex({
   client: 'pg',
-  connection: _getConnection()
+  connection: _getConnection(),
+  useNullAsDefault: true,
+  pool: {
+    min: 3,
+    max: 5
+  }
 })
 
 export default knex

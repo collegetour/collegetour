@@ -59,6 +59,13 @@ export default (state = INITIAL_STATE, action) => {
       status: 'failure'
     }
 
+  case 'SIGNOUT':
+    return {
+      ...state,
+      status: 'loaded',
+      user: null
+    }
+
   default:
     return state
   }

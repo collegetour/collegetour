@@ -23,6 +23,7 @@ router.get('/invitations/:code', t(async (req, res, trx) => {
   })
 
   return res.render('invitation', {
+    web_host: process.env.WEB_HOST,
     tourist_id: tourist.get('id')
   })
 
