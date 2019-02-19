@@ -8,12 +8,11 @@ class Camera extends React.Component {
 
   static propTypes = {
     caption: PropTypes.string,
-    preview: PropTypes.bool,
     tour_id: PropTypes.string,
-    upload: PropTypes.object,
+    uploads: PropTypes.array,
     visit_id: PropTypes.string,
     onAddUpload: PropTypes.func,
-    onRemoveUpload: PropTypes.func,
+    onRemoveUploads: PropTypes.func,
     onSave: PropTypes.func,
     onType: PropTypes.func,
     onUpdateUpload: PropTypes.func
@@ -34,27 +33,30 @@ class Camera extends React.Component {
   _handleFinish = this._handleFinish.bind(this)
   _handleSave = this._handleSave.bind(this)
   _handleSuccess = this._handleSuccess.bind(this)
-  _handleType = this._handleType.bind(this)
 
   render() {
-    const { preview, upload } = this.props
+    const { uploads } = this.props
     return (
       <div className="camera">
         <input type="file" ref={ node => this.input = node } />
         <i className="fa fa-camera-retro" ref={ node => this.button = node } />
-        { preview &&
+        { uploads.length > 0 &&
           <ModalPanel { ...this._getModalPanel() }>
-            <div className="media">
-              <div className="media-post">
-                <div className="media-image">
-                  <div className="media-frame">
-                    <Preview image={ upload } />
+            <div className="media list">
+              { uploads.map((upload, index) => (
+                <div className="list-item" key={`media_${index}`}>
+                  <div className="media-post">
+                    <div className="media-image">
+                      <div className="media-frame">
+                        <Preview image={ upload } />
+                      </div>
+                    </div>
+                    <div className="media-caption">
+                      <textarea { ...this._getCaption(index) } />
+                    </div>
                   </div>
                 </div>
-                <div className="media-caption">
-                  <textarea { ...this._getCaption() } ref={ node => this.caption = node } />
-                </div>
-              </div>
+              )) }
               <div className="media-canvas" />
             </div>
           </ModalPanel>
@@ -68,8 +70,6 @@ class Camera extends React.Component {
       target: `${process.env.API_HOST}/api/assets/upload`,
       chunkSize: 1024 * 128,
       permanentErrors: [204, 400, 404, 409, 415, 500, 501],
-      headers: {},
-      maxFiles: 1,
       fileType: ['jpg','png','gif','jpeg']
     })
     this.resumable.on('fileAdded', this._handleAdd)
@@ -79,18 +79,11 @@ class Camera extends React.Component {
     this.input.setAttribute('accept', 'image/*')
   }
 
-  componentDidUpdate(prevProps) {
-    const { preview } = this.props
-    if(preview !== prevProps.preview && preview) {
-      setTimeout(() => this.caption.focus())
-    }
-  }
-
-  _getCaption(e) {
+  _getCaption(index) {
     const { caption } = this.props
     return {
       placeholder: 'Describe your impressions',
-      onChange: this._handleType,
+      onChange: this._handleType.bind(this, index),
       value: caption
     }
   }
@@ -117,12 +110,16 @@ class Camera extends React.Component {
   }
 
   _handleCancel() {
-    this.props.onRemoveUpload()
+    this.props.onRemoveUploads()
   }
 
   _handleSave() {
-    const { caption, tour_id, upload, visit_id } = this.props
-    this.props.onSave(tour_id, visit_id, upload.asset.id, caption)
+    const { caption, tour_id, uploads, visit_id } = this.props
+    const impressions = uploads.map(upload => ({
+      asset_id: upload.asset.id,
+      caption: upload.caption
+    }))
+    this.props.onSave(tour_id, visit_id, impressions)
   }
 
   _handleSuccess(file, message) {
@@ -132,8 +129,8 @@ class Camera extends React.Component {
     this.props.onUpdateUpload(asset)
   }
 
-  _handleType(e) {
-    this.props.onType(e.target.value)
+  _handleType(index, e) {
+    this.props.onType(index, e.target.value)
   }
 
   _handleFinish() {}

@@ -1,5 +1,6 @@
 const asset_serializer = (asset) => ({
   id: asset.get('id'),
+  identifier: asset.get('identifier'),
   original_file_name: asset.get('original_file_name'),
   file_name: asset.get('file_name'),
   content_type: asset.get('content_type'),

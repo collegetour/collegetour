@@ -1,10 +1,9 @@
-export const save = (tour_id, visit_id, asset_id, caption) => ({
+export const save = (tour_id, visit_id, impressions) => ({
   type: 'API_REQUEST',
   method: 'POST',
   endpoint: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${visit_id}/impressions`,
   body: {
-    asset_id,
-    caption
+    impressions
   },
   request: 'SAVE_REQUEST',
   success: 'SAVE_SUCCESS',
@@ -21,11 +20,12 @@ export const updateUpload = (asset) => ({
   asset
 })
 
-export const removeUpload = () => ({
-  type: 'REMOVE_UPLOAD'
+export const removeUploads = () => ({
+  type: 'REMOVE_UPLOADS'
 })
 
-export const type = (caption) => ({
+export const type = (index, caption) => ({
   type: 'TYPE',
+  index,
   caption
 })

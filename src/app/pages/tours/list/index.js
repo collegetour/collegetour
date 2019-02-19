@@ -22,15 +22,17 @@ class Tours extends React.Component {
     const { tours } = this.props
     if(tours.length === 0) return <Message { ...this._getEmpty() } />
     return (
-      <div className="tours">
+      <div className="list">
         { tours.map((tour, index) => (
-          <div className="tours-tour" key={`tour_${tour.id}`} onClick={ this._handleClick.bind(this, tour.id) }>
-            <div className="tours-tour-details">
-              <strong>{ tour.name }</strong><br />
-              { moment(tour.start_date).format('MM/DD/YYYY') }
-            </div>
-            <div className="tours-tour-proceed">
-              <i className="fa fa-chevron-right" />
+          <div className="list-item" key={`tour_${tour.id}`}>
+            <div className="tour-token" onClick={ this._handleClick.bind(this, tour.id) }>
+              <div className="tour-token-details">
+                <strong>{ tour.name }</strong><br />
+                { moment(tour.start_date).format('MM/DD/YYYY') }
+              </div>
+              <div className="tour-token-proceed">
+                <i className="fa fa-chevron-right" />
+              </div>
             </div>
           </div>
         )) }

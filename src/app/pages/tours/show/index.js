@@ -24,20 +24,22 @@ class Tour extends React.Component {
     const { visits } = this.props
     if(visits.length === 0) return <Message { ...this._getEmpty() } />
     return (
-      <div className="visits">
+      <div className="list">
         { visits.map((visit, index) => (
-          <div className="visits-visit" key={`visit_${visit.id}`} onClick={ this._handleClick.bind(this, visit.id) }>
-            <div className="visits-visit-logo">
-              <Image src={ visit.college.logo } />
-            </div>
-            <div className="visits-visit-details">
-              <strong>{ visit.college.name }</strong><br />
-              <span className="visits-visit-details-location">
-                { visit.college.city }, { visit.college.state }<br />
-              </span>
-            </div>
-            <div className="visits-visit-proceed">
-              <i className="fa fa-chevron-right" />
+          <div className="list-item" key={`visit_${visit.id}`}>
+            <div className="visit-token" onClick={ this._handleClick.bind(this, visit.id) }>
+              <div className="visit-token-logo">
+                <Image src={ visit.college.logo } />
+              </div>
+              <div className="visit-token-details">
+                <strong>{ visit.college.name }</strong><br />
+                <span className="visit-token-details-location">
+                  { visit.college.city }, { visit.college.state }<br />
+                </span>
+              </div>
+              <div className="visit-token-proceed">
+                <i className="fa fa-chevron-right" />
+              </div>
             </div>
           </div>
         )) }

@@ -1,7 +1,5 @@
 const INITIAL_STATE = {
-  preview: false,
-  upload: null,
-  caption: ''
+  uploads: []
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -11,46 +9,56 @@ export default (state = INITIAL_STATE, action) => {
   case 'ADD_UPLOAD':
     return {
       ...state,
-      preview: true,
-      upload: {
-        ...action.file,
-        status: 'added',
-        progress: 0,
-        asset: null
-      }
+      uploads: [
+        ...state.uploads,
+        {
+          ...action.file,
+          status: 'added',
+          progress: 0,
+          asset: null,
+          caption: ''
+        }
+      ]
     }
 
-  case 'REMOVE_UPLOAD':
+  case 'REMOVE_UPLOADS':
     return {
       ...state,
-      preview: false
+      uploads: []
     }
 
   case 'UPDATE_UPLOAD':
     return {
       ...state,
-      upload: {
-        ...state.upload,
-        asset: action.asset
-      }
+      uploads: [
+        ...state.uploads.map((upload, index) => {
+          if(upload.identifier !== action.asset.identifier) return upload
+          return {
+            ...upload,
+            asset: action.asset
+          }
+        })
+      ]
     }
 
   case 'TYPE':
     return {
       ...state,
-      caption: action.caption
-    }
-
-  case 'SAVE_REQUEST':
-    return {
-      ...state,
-      preview: false
+      uploads: [
+        ...state.uploads.map((upload, index) => {
+          if(index !== action.index) return upload
+          return {
+            ...upload,
+            caption: action.caption
+          }
+        })
+      ]
     }
 
   case 'SAVE_SUCCESS':
     return {
       ...state,
-      upload: null
+      uploads: null
     }
 
   default:

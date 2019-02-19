@@ -31,13 +31,13 @@ class Visit extends React.Component {
       <div className="visit">
         <div className="visit-photos">
           <div className="visit-photos-header">
-            <div className="visits-visit">
-              <div className="visits-visit-logo">
+            <div className="visit-token">
+              <div className="visit-token-logo">
                 <Image src={ visit.college.logo } />
               </div>
-              <div className="visits-visit-details">
+              <div className="visit-token-details">
                 <strong>{ visit.college.name }</strong><br />
-                <span className="visits-visit-details-location">
+                <span className="visit-token-details-location">
                   { visit.college.city }, { visit.college.state }<br />
                 </span>
               </div>
