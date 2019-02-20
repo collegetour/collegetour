@@ -1,6 +1,6 @@
 import Review from '../../../components/review'
-import Camera from '../../../components/camera'
 import { Page } from '../../../components/page'
+import Photo from '../../../components/photo'
 import Image from '../../../components/image'
 import Feed from '../../../components/feed'
 import Note from '../../../components/note'
@@ -66,7 +66,7 @@ class Visit extends React.Component {
               <Note { ...this._getNote() } />
             </div>
             <div className="visit-tool">
-              <Camera { ...this._getCamera() } />
+              <Photo { ...this._getPhoto() } />
             </div>
             <div className="visit-tool">
               <Review { ...this._getReview() } />
@@ -77,7 +77,7 @@ class Visit extends React.Component {
     )
   }
 
-  _getCamera() {
+  _getPhoto() {
     const { page } = this.props
     return {
       tour_id: page.params.tour_id,

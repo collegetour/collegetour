@@ -24,32 +24,6 @@ router.get('/api/tours/:tour_id/visits/:visit_id/impressions', t(async (req, res
 
 }))
 
-router.post('/api/tours/:tour_id/visits/:visit_id/impressions', t(async (req, res, trx) => {
-
-  const impressions = await Promise.map(req.body.impressions, async (data) => {
-
-    const impression = await Impression.forge({
-      type: 'image',
-      visit_id: req.params.visit_id,
-      user_id: req.user.get('id'),
-      asset_id: data.asset_id,
-      caption: data.caption
-    }).save(null, {
-      transacting: trx
-    })
-
-    await impression.load(['asset', 'user.photo'])
-
-    return ImpressionSerializer(impression)
-
-  })
-
-  res.status(200).json({
-    data: impressions
-  })
-
-}))
-
 router.get('/api/tours/:tour_id/visits/:visit_id/impressions/:id', t(async (req, res, trx) => {
 
   const impression = await Impression.where({
@@ -61,6 +35,23 @@ router.get('/api/tours/:tour_id/visits/:visit_id/impressions/:id', t(async (req,
 
   res.status(200).json({
     data: ImpressionSerializer(impression)
+  })
+
+}))
+
+router.delete('/api/tours/:tour_id/visits/:visit_id/impressions/:id', t(async (req, res, trx) => {
+
+  const impression = await Impression.where({
+    id: req.params.id
+  }).fetch({
+    transacting: trx,
+    withRelated: ['asset', 'user.photo']
+  })
+
+  await impression.destroy({ transacting: trx })
+
+  res.status(200).json({
+    data: null
   })
 
 }))

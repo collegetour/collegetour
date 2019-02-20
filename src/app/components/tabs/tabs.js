@@ -32,12 +32,14 @@ class Tabs extends React.Component {
     return (
       <div className="tabs">
         <div className="tabs-header">
-          <div className="ui three item menu">
-            { items.map((item, index) => (
-              <div key={`tab_${index}`} className={ this._getItemClass(index) } onClick={ this._handleChoose.bind(this, index) }>
-                { item.label }
-              </div>
-            )) }
+          <div className="tabs-header-menu">
+            <div className="ui three item menu">
+              { items.map((item, index) => (
+                <div key={`tab_${index}`} className={ this._getItemClass(index) } onClick={ this._handleChoose.bind(this, index) }>
+                  { item.label }
+                </div>
+              )) }
+            </div>
           </div>
         </div>
         <div className="tabs-body">

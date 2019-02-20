@@ -11,6 +11,9 @@ import visits from './visits'
 import tours from './tours'
 import token from './token'
 
+import photos from './photos'
+import notes from './notes'
+
 const api = new Router({ mergeParams: true })
 
 api.use(assets)
@@ -34,5 +37,9 @@ api.use(itinerary)
 api.use(visits)
 
 api.use(impressions)
+
+api.use(notes)
+
+api.use(photos)
 
 export default api

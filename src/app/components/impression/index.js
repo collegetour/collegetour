@@ -3,7 +3,9 @@ import Avatar from '../avatar'
 import Image from '../image'
 import moment from 'moment'
 import React from 'react'
-import Edit from './edit'
+import EditNote from '../note/edit'
+import EditPhoto from '../photo/edit'
+
 class Impression extends React.Component {
 
   static contextTypes = {
@@ -34,26 +36,66 @@ class Impression extends React.Component {
             <i className="fa fa-ellipsis-h" />
           </div>
         </div>
-        { impression.type === 'image' &&
-          <div className="impression-image">
+        { impression.type === 'photo' &&
+          <div className="impression-photo">
             <div className="impression-asset">
               <Image src={ impression.asset } />
             </div>
-            <div className="impression-caption" dangerouslySetInnerHTML={{__html: impression.caption.replace(/\n/g, '<br />') }} />
+            <div className="impression-caption" dangerouslySetInnerHTML={{__html: impression.text.replace(/\n/g, '<br />') }} />
           </div>
         }
         { impression.type === 'note' &&
-          <div className="impression-note" dangerouslySetInnerHTML={{__html: impression.caption.replace(/\n/g, '<br />') }} />
+          <div className="impression-note" dangerouslySetInnerHTML={{__html: impression.text.replace(/\n/g, '<br />') }} />
         }
       </div>
     )
   }
 
+  _getNoteItems() {
+    return [
+      { label: 'Edit Note', modal: EditNote },
+      { label: 'Delete Note', request: {
+        method: 'delete',
+        endpoint: `${process.env.API_HOST}/api/tours/1/visits/1/impressions/1`,
+        onSuccess: () => {},
+        onError: () => {}
+      }}
+    ]
+  }
+
+  _getPhotoItems() {
+    return [
+      { label: 'Edit Photo', modal: EditPhoto },
+      { label: 'Delete Photo', request: {
+        method: 'delete',
+        endpoint: `${process.env.API_HOST}/api/tours/1/visits/1/impressions/1`,
+        onSuccess: () => {},
+        onError: () => {}
+      } }
+    ]
+  }
+
+  _getReviewItems() {
+    return [
+      { label: 'Edit Review', modal: EditPhoto },
+      { label: 'Delete Review', request: {
+        method: 'delete',
+        endpoint: `${process.env.API_HOST}/api/tours/1/visits/1/impressions/1`,
+        onSuccess: () => {},
+        onError: () => {}
+      } }
+    ]
+  }
+
+  _getItems() {
+    const { impression } = this.props
+    if(impression.type === 'note') return this._getNoteItems()
+    if(impression.type === 'photo') return this._getPhotoItems()
+    if(impression.type === 'review') return this._getReviewItems()
+  }
+
   _handleTasks() {
-    this.context.tasks.open([
-      { label: 'Edit Impression', modal: Edit },
-      { label: 'Delete Impression' }
-    ])
+    this.context.tasks.open(this._getItems())
   }
 
 }
