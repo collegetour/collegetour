@@ -4,6 +4,7 @@ import Itinerary from './itinerary'
 import PropTypes from 'prop-types'
 import Tourists from './tourists'
 import Visits from './visits'
+import Edit from '../edit'
 import React from 'react'
 
 class Tour extends React.Component {
@@ -51,6 +52,7 @@ const mapPropsToPage = (props, context, resources, page) => ({
   component: Tour,
   tasks: {
     items: [
+      { label: 'Edit Tour', modal: Edit },
       { label: 'Manage Plan' },
       { label: 'Invite Family' }
     ]

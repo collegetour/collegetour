@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   data: {},
   errors: {},
+  panel: null,
   status: 'pending'
 }
 
@@ -27,6 +28,18 @@ export default (state = INITIAL_STATE, action) => {
         ...state.data,
         [action.key]: action.value
       }
+    }
+
+  case 'PUSH':
+    return {
+      ...state,
+      panel: action.component
+    }
+
+  case 'POP':
+    return {
+      ...state,
+      panel: null
     }
 
   default:

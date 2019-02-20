@@ -1,6 +1,7 @@
 import Textfield from './textfield'
 import PropTypes from 'prop-types'
 import Textarea from './textarea'
+import Datefield from '../datefield'
 import React from 'react'
 
 class Field extends React.Component {
@@ -20,9 +21,11 @@ class Field extends React.Component {
     const { error, field } = this.props
     return (
       <div className="field">
-        { field.label && <label>{ field.label }</label> }
-        { field.type === 'textarea' && <Textfield { ...this._getTextarea(field) } /> }
-        { field.type === 'textfield' && <Textarea { ...this._getTextfield(field) } /> }
+        { field.label && <div className="field-label">{ field.label }</div> }
+        { field.instructions && <div className="field-instructions">{ field.instructions }</div> }
+        { field.type === 'textarea' && <Textarea { ...this._getTextarea(field) } /> }
+        { field.type === 'textfield' && <Textfield { ...this._getTextfield(field) } /> }
+        { field.type === 'datefield' && <Datefield { ...this._getDatefield(field) } /> }
         { error && <div className="error-message">{ error }</div> }
       </div>
     )
@@ -43,6 +46,15 @@ class Field extends React.Component {
       error,
       placeholder,
       rows,
+      onChange: this._handleChange.bind(this, name)
+    }
+  }
+
+  _getDatefield({ name, defaultValue, error, placeholder }) {
+    return {
+      defaultValue,
+      error,
+      placeholder,
       onChange: this._handleChange.bind(this, name)
     }
   }

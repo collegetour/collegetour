@@ -1,8 +1,8 @@
+import Form from '../../components/form'
 import PropTypes from 'prop-types'
 import React from 'react'
-import Form from '../form'
 
-class New extends React.Component {
+class Edit extends React.Component {
 
   static contextTypes = {
     modal: PropTypes.object
@@ -21,11 +21,15 @@ class New extends React.Component {
 
   _getForm() {
     return {
-      title: 'New Note',
-      method: 'POST',
-      action: `${process.env.API_HOST}/api/tours/1/visits/1/notes`,
+      title: 'Edit Tour',
+      method: 'PATCH',
+      action: `${process.env.API_HOST}/api/tours`,
       fields: [
-        { name: 'text', type: 'textarea', placeholder: 'Enter your notes or record your impressions', rows: 22 }
+        { label: 'Name', name: 'name', type: 'textfield' },
+        { label: 'Origin', name: 'origin', type: 'textfield' },
+        { label: 'Destination', name: 'destination', type: 'textfield' },
+        { label: 'Start Date', name: 'start_date', type: 'textfield' },
+        { label: 'End Date', name: 'end_date', type: 'textfield' }
       ],
       onCancel: this._handleCancel,
       onSuccess: this._handleSuccess
@@ -42,4 +46,4 @@ class New extends React.Component {
 
 }
 
-export default New
+export default Edit

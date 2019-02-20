@@ -1,9 +1,10 @@
-import Message from '../../../components/message'
-import { Page } from '../../../components/page'
-import Avatar from '../../../components/avatar'
+import TourToken from '../../tokens/tour_token'
+import Message from '../../components/message'
+import { Page } from '../../components/page'
+import Avatar from '../../components/avatar'
 import PropTypes from 'prop-types'
-import moment from 'moment'
 import React from 'react'
+import New from './new'
 
 class Tours extends React.Component {
 
@@ -24,16 +25,8 @@ class Tours extends React.Component {
     return (
       <div className="list">
         { tours.map((tour, index) => (
-          <div className="list-item" key={`tour_${tour.id}`}>
-            <div className="tour-token" onClick={ this._handleClick.bind(this, tour.id) }>
-              <div className="tour-token-details">
-                <strong>{ tour.name }</strong><br />
-                { moment(tour.start_date).format('MM/DD/YYYY') }
-              </div>
-              <div className="tour-token-proceed">
-                <i className="fa fa-chevron-right" />
-              </div>
-            </div>
+          <div className="list-item" key={`tour_${tour.id}`} onClick={ this._handleClick.bind(this, tour.id) }>
+            <TourToken tour={ tour } />
           </div>
         )) }
       </div>
@@ -60,12 +53,14 @@ const mapResourcesToPage = (props, context, page) => ({
 })
 
 const mapPropsToPage = (props, context, resources, page) => ({
-  title: 'College Tourist',
+  title: 'Tours',
   component: Tours,
-  leftItems: [],
-  rightItems: [
+  leftItems: [
     { component: <Avatar user={ context.presence.user } /> }
-  ]
+  ],
+  task: {
+    modal: New
+  }
 })
 
 export default Page(mapResourcesToPage, mapPropsToPage)

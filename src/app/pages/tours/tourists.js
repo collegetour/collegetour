@@ -1,5 +1,5 @@
-import Tourists from '../../../components/tourists'
-import { Page } from '../../../components/page'
+import Tourists from '../../components/tourists'
+import { Page } from '../../components/page'
 
 const mapResourcesToPage = (props, context, page) => ({
   tourists: `${process.env.API_HOST}/api/tours/${page.params.tour_id}/tourists`

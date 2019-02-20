@@ -101,6 +101,7 @@
     "redux-thunk": "^2.3.0",
     "request-promise": "^4.2.2",
     "reselect": "^3.0.1",
-    "resumablejs": "^1.1.0"
+    "resumablejs": "^1.1.0",
+    "shipit": "^1.2.0"
   }
 }

@@ -7,6 +7,7 @@ class Page extends React.Component {
 
   static contextTypes = {
     presence: PropTypes.object,
+    modal: PropTypes.object,
     router: PropTypes.object,
     tasks: PropTypes.object
   }
@@ -26,6 +27,7 @@ class Page extends React.Component {
     rightItems: PropTypes.array,
     tabs: PropTypes.object,
     tasks: PropTypes.object,
+    task: PropTypes.object,
     title: PropTypes.string
   }
 
@@ -39,6 +41,7 @@ class Page extends React.Component {
 
   _handleBack = this._handleBack.bind(this)
   _handleTasks = this._handleTasks.bind(this)
+  _handleTask = this._handleTask.bind(this)
   _handleUpdateTitle = this._handleUpdateTitle.bind(this)
 
   render() {
@@ -85,17 +88,22 @@ class Page extends React.Component {
   }
 
   _getModalPanel() {
-    const { color, leftItems, rightItems, tasks, title } = this.props
+    const { color, leftItems, rightItems, tasks, task, title } = this.props
     const panel = {
-      leftItems: leftItems || [
-        { icon: 'chevron-left', handler: this._handleBack }
-      ],
       color,
       title
     }
-    if(rightItems) panel.rightItems = rightItems
-    if(tasks && tasks.items && tasks.items.filter(task => task.show !== false).length > 0) {
+    if(leftItems) {
+      panel.leftItems = leftItems
+    } else {
+      panel.leftItems = [{ icon: 'chevron-left', handler: this._handleBack }]
+    }
+    if(rightItems) {
+      panel.rightItems = rightItems
+    } else if(tasks && tasks.items && tasks.items.filter(task => task.show !== false).length > 0) {
       panel.rightItems = [{ icon: tasks.icon || 'ellipsis-v', handler: this._handleTasks }]
+    } else if(task) {
+      panel.rightItems = [{ icon: task.icon || 'plus', handler: this._handleTask }]
     }
     return panel
   }
@@ -108,6 +116,20 @@ class Page extends React.Component {
     const { tasks } = this.props
     this.context.tasks.open(tasks.items)
   }
+
+  _handleTask() {
+    const { task } = this.props
+    const { router, modal, tasks } = this.context
+    if(task.route) {
+      router.push(task.route)
+    } else if(task.modal) {
+      modal.open(task.modal)
+    } else if(task.handler){
+      task.handler()
+    }
+    tasks.close()
+  }
+
 }
 
 export default Page

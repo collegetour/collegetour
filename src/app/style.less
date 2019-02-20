@@ -21,7 +21,7 @@
 	&.orange { @{property}: @orange; }
 	&.yellow { @{property}: @yellow; }
 	&.olive { @{property}: @olive; }
-	&.green { @{property}: @green; }
+	&.green { @{property}: @blue; }
 	&.teal { @{property}: @teal; }
 	&.blue { @{property}: @blue; }
 	&.purple { @{property}: @purple; }
@@ -37,7 +37,7 @@
 	&.orange .@{item} { @{property}: @orange; }
 	&.yellow .@{item} { @{property}: @yellow; }
 	&.olive .@{item} { @{property}: @olive; }
-	&.green .@{item} { @{property}: @green; }
+	&.green .@{item} { @{property}: @blue; }
 	&.teal .@{item} { @{property}: @teal; }
 	&.blue .@{item} { @{property}: @blue; }
 	&.purple .@{item} { @{property}: @purple; }
@@ -92,6 +92,17 @@ input, textarea {
 	&.opacity-exit,
 	&.opacity-enter.opacity-enter-active {
 		opacity: @end;
+	}
+}
+.translatex-transition(@start, @end, @duration) {
+  transition: transform @duration ease-in-out 0s;
+	&.translatex-enter,
+	&.translatex-exit.translatex-exit-active {
+		transform: translateX(@start);
+	}
+	&.translatex-exit,
+	&.translatex-enter.translatex-enter-active {
+		transform: translateX(@end);
 	}
 }
 .translatey-transition(@start, @end, @duration) {

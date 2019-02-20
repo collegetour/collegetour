@@ -1,3 +1,16 @@
+.form-container {
+  flex: 1;
+  position: relative;
+  .form-panel {
+    .translatex-transition(100%, 0, .25s);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: @white;
+  }
+}
 .ui.form {
   flex: 1;
   padding: 0.8em;
@@ -14,4 +27,11 @@
   textarea {
     line-height: 1.8em !important;
   }
+}
+.field-label {
+  font-weght: bold;
+  color: @black;
+}
+.field-instructions {
+  color: fadeout(@black, 60);
 }

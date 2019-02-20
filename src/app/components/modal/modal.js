@@ -16,16 +16,21 @@ class Modal extends React.Component {
     onOpen: PropTypes.func
   }
 
+  state = {
+    panel: null
+  }
+
   _handleClose = this._handleClose.bind(this)
 
   render() {
-    const { children, panel } = this.props
+    const { panel } = this.state
+    const { children } = this.props
     return ([
       children,
-      <CSSTransition key="modal-overlay" in={ panel !== null } classNames="opacity" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+      <CSSTransition key="modal-overlay" in={ this.props.panel !== null } classNames="opacity" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
         <div className="modal-overlay" onClick={ this._handleClose } />
       </CSSTransition>,
-      <CSSTransition key="modal-window" in={ panel !== null } classNames="translatey" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+      <CSSTransition key="modal-window" in={ this.props.panel !== null } classNames="translatey" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
         <div className="modal-window">
           <div className="modal-window-container">
             <div className="modal-window-panel">
@@ -35,6 +40,14 @@ class Modal extends React.Component {
         </div>
       </CSSTransition>
     ])
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { panel } = this.props
+    if(panel !== prevProps.panel) {
+      const timeout = prevProps.panel ? 500 : 0
+      setTimeout(() => this.setState({ panel }), timeout)
+    }
   }
 
   getChildContext() {

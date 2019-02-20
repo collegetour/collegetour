@@ -7,6 +7,15 @@ export const fetch = (endpoint) => ({
   failure: 'FETCH_FAILURE'
 })
 
+export const pop = () => ({
+  type: 'POP'
+})
+
+export const push = (component) => ({
+  type: 'PUSH',
+  component
+})
+
 export const save = (method, endpoint, body) => ({
   type: 'API_REQUEST',
   method,

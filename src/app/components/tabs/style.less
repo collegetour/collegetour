@@ -56,23 +56,25 @@
   left: 0;
   bottom: 0;
   right: 0;
-  display: none;
+  display: flex;
   .scrollable();
   p {
     color: fadeout(@black, 50);
   }
   &.transitioning {
     transition: transform .5s ease-in-out 0s;
-    display: block;
   }
   &.right {
     transform: translateX(100%);
   }
   &.active {
     transform: translateX(0);
-    display: block;
   }
   &.left {
     transform: translateX(-100%);
   }
+}
+.tab-content {
+  flex: 1;
+  display: flex;
 }
