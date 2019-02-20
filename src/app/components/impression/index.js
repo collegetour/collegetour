@@ -13,7 +13,9 @@ class Impression extends React.Component {
   }
 
   static propTypes = {
-    impression: PropTypes.object
+    impression: PropTypes.object,
+    tour_id: PropTypes.number,
+    visit_id: PropTypes.number
   }
 
   static defaultProps = {}
@@ -52,11 +54,12 @@ class Impression extends React.Component {
   }
 
   _getNoteItems() {
+    const { impression, tour_id, visit_id } = this.props
     return [
-      { label: 'Edit Note', modal: EditNote },
+      { label: 'Edit Note', modal: <EditNote id={ impression.id } /> },
       { label: 'Delete Note', request: {
         method: 'delete',
-        endpoint: `${process.env.API_HOST}/api/tours/1/visits/1/impressions/1`,
+        endpoint: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${ visit_id }/impressions/${impression.id}`,
         onSuccess: () => {},
         onError: () => {}
       }}
@@ -64,11 +67,12 @@ class Impression extends React.Component {
   }
 
   _getPhotoItems() {
+    const { impression, tour_id, visit_id } = this.props
     return [
       { label: 'Edit Photo', modal: EditPhoto },
       { label: 'Delete Photo', request: {
         method: 'delete',
-        endpoint: `${process.env.API_HOST}/api/tours/1/visits/1/impressions/1`,
+        endpoint: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${ visit_id }/impressions/${impression.id}`,
         onSuccess: () => {},
         onError: () => {}
       } }

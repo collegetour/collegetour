@@ -8,7 +8,7 @@ const router = new Router({ mergeParams: true })
 router.post('/api/tours/:tour_id/visits/:visit_id/notes', t(async (req, res, trx) => {
 
   const impression = await Impression.forge({
-    type: 'photo',
+    type: 'note',
     visit_id: req.params.visit_id,
     user_id: req.user.get('id'),
     text: req.body.text

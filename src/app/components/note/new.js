@@ -21,6 +21,12 @@ class New extends React.Component {
 
   _getForm() {
     return {
+      title: 'New Note',
+      method: 'POST',
+      action: `${process.env.API_HOST}/api/tours/1/visits/1/notes`,
+      fields: [
+        { name: 'text', type: 'textfield', placeholder: 'Enter your notes or record your impressions', rows: 22 }
+      ],
       onCancel: this._handleCancel,
       onSuccess: this._handleSuccess
     }

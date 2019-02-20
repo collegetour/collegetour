@@ -86,9 +86,11 @@ class Visit extends React.Component {
   }
 
   _getFeed() {
-    const { impressions } = this.props
+    const { impressions, visit } = this.props
     return {
-      impressions
+      impressions,
+      tour_id: visit.tour_id,
+      visit_id: visit.id
     }
   }
 

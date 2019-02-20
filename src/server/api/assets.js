@@ -6,8 +6,6 @@ const router = new Router({ mergeParams: true })
 
 router.get('/api/assets/upload', t(async (req, res, trx) => {
 
-  console.log('get asset', req.query)
-
   const exists = await checkUploadedFile(req, trx)
 
   if(!exists) return res.status(204).send('not found')
@@ -17,8 +15,6 @@ router.get('/api/assets/upload', t(async (req, res, trx) => {
 }))
 
 router.post('/api/assets/upload', t(async (req, res, trx) => {
-
-  console.log('upload asset', req.query)
 
   const data = await uploadChunk(req, trx)
 

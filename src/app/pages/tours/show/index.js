@@ -48,7 +48,13 @@ const mapResourcesToPage = (props, context, page) => ({
 
 const mapPropsToPage = (props, context, resources, page) => ({
   title: resources.tour.name,
-  component: Tour
+  component: Tour,
+  tasks: {
+    items: [
+      { label: 'Manage Plan' },
+      { label: 'Invite Family' }
+    ]
+  }
 })
 
 export default Page(mapResourcesToPage, mapPropsToPage)

@@ -8,7 +8,9 @@ class Edit extends React.Component {
     modal: PropTypes.object
   }
 
-  static propTypes = {}
+  static propTypes = {
+    id: PropTypes.number
+  }
 
   static defaultProps = {}
 
@@ -20,7 +22,15 @@ class Edit extends React.Component {
   }
 
   _getForm() {
+    const { id } = this.props
     return {
+      title: 'Edit Note',
+      method: 'POST',
+      endpoint: `${process.env.API_HOST}/api/tours/1/visits/1/impressions/${id}`,
+      action: `${process.env.API_HOST}/api/tours/1/visits/1/impressions/${id}`,
+      fields: [
+        { name: 'text', type: 'textfield', placeholder: 'Enter your notes or record your impressions', rows: 22 }
+      ],
       onCancel: this._handleCancel,
       onSuccess: this._handleSuccess
     }

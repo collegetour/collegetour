@@ -7,7 +7,8 @@ class Page extends React.Component {
 
   static contextTypes = {
     presence: PropTypes.object,
-    router: PropTypes.object
+    router: PropTypes.object,
+    tasks: PropTypes.object
   }
 
   static propTypes = {
@@ -24,6 +25,7 @@ class Page extends React.Component {
     page: PropTypes.object,
     rightItems: PropTypes.array,
     tabs: PropTypes.object,
+    tasks: PropTypes.object,
     title: PropTypes.string
   }
 
@@ -36,6 +38,7 @@ class Page extends React.Component {
   }
 
   _handleBack = this._handleBack.bind(this)
+  _handleTasks = this._handleTasks.bind(this)
   _handleUpdateTitle = this._handleUpdateTitle.bind(this)
 
   render() {
@@ -82,14 +85,17 @@ class Page extends React.Component {
   }
 
   _getModalPanel() {
-    const { color, leftItems, rightItems, title } = this.props
+    const { color, leftItems, rightItems, tasks, title } = this.props
     const panel = {
       leftItems: leftItems || [
         { icon: 'chevron-left', handler: this._handleBack }
       ],
-      rightItems,
       color,
       title
+    }
+    if(rightItems) panel.rightItems = rightItems
+    if(tasks && tasks.items && tasks.items.filter(task => task.show !== false).length > 0) {
+      panel.rightItems = [{ icon: tasks.icon || 'ellipsis-v', handler: this._handleTasks }]
     }
     return panel
   }
@@ -98,6 +104,10 @@ class Page extends React.Component {
     this.context.router.history.goBack()
   }
 
+  _handleTasks() {
+    const { tasks } = this.props
+    this.context.tasks.open(tasks.items)
+  }
 }
 
 export default Page

@@ -6,7 +6,9 @@ import React from 'react'
 class Feed extends React.Component {
 
   static propTypes = {
-    impressions: PropTypes.array
+    impressions: PropTypes.array,
+    tour_id: PropTypes.number,
+    visit_id: PropTypes.number
   }
 
   static defaultProps = {}
@@ -19,12 +21,21 @@ class Feed extends React.Component {
         <div className="visit-photos-body">
           <div className="visit-photos-container">
             { impressions.map((impression, index) => (
-              <Impression impression={ impression } key={`impression_${impression.id}`} />
+              <Impression { ...this._getImpression(impression) } key={`impression_${impression.id}`} />
             )) }
           </div>
         </div>
       </div>
     )
+  }
+
+  _getImpression(impression) {
+    const { tour_id, visit_id } = this.props
+    return {
+      impression,
+      tour_id,
+      visit_id
+    }
   }
 
   _getMessage() {
@@ -34,7 +45,6 @@ class Feed extends React.Component {
       text: 'No one on this tour has shared any impressions of this college yet'
     }
   }
-
 
 }
 
