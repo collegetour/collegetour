@@ -114,7 +114,7 @@ class Camera extends React.Component {
   }
 
   _handleSave() {
-    const { caption, tour_id, uploads, visit_id } = this.props
+    const { tour_id, uploads, visit_id } = this.props
     const impressions = uploads.map(upload => ({
       asset_id: upload.asset.id,
       caption: upload.caption

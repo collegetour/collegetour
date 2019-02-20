@@ -45,23 +45,27 @@ class Tourists extends React.Component {
           </div>
         </div>
         <div className="tourists-body">
-          { tourists.map((tourist, index) => (
-            <div className="tourists-tourist" key={`tourist_${index}`}>
-              <div className="tourists-tourist-photo">
-                <Avatar user={ tourist.user } />
+          <div className="list">
+            { tourists.map((tourist, index) => (
+              <div className="list-item" key={`tourist_${index}`}>
+                <div className="tourist-token">
+                  <div className="tourist-token-photo">
+                    <Avatar user={ tourist.user } />
+                  </div>
+                  <div className="tourist-token-details">
+                    <strong>{ tourist.user.full_name }</strong><br />
+                    { tourist.user.email }
+                  </div>
+                  <div className="tourist-token-icon">
+                    { tourist.claimed_at ?
+                      <i className="fa fa-fw fa-check" /> :
+                      <i className="fa fa-fw fa-clock-o" />
+                    }
+                  </div>
+                </div>
               </div>
-              <div className="tourists-tourist-details">
-                <strong>{ tourist.user.full_name }</strong><br />
-                { tourist.user.email }
-              </div>
-              <div className="tourists-tourist-icon">
-                { tourist.claimed_at ?
-                  <i className="fa fa-fw fa-check" /> :
-                  <i className="fa fa-fw fa-clock-o" />
-                }
-              </div>
-            </div>
-          )) }
+            )) }
+          </div>
         </div>
       </div>
     )

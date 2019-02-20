@@ -7,6 +7,9 @@
   flex: 1;
   .scrollable()
 }
+.visit-photos-header {
+  border-bottom: 1px solid fadeout(@black, 95);
+}
 .visit-photos-container {
   margin: 0 auto;
   width: 100%;
@@ -15,7 +18,6 @@
 .visit-photos-buttons {
   display: flex;
   padding: 0 0.4em 0.4em;
-  border-bottom: 1px solid fadeout(@black, 95);
 }
 .visit-photos-button {
   flex: 1;
@@ -47,6 +49,17 @@
     transform: translate(-50%, -50%);
   }
 }
-.visit-camera {
+.visit-footer {
   border-top: 1px solid fadeout(@black, 90);
+  display: flex;
+}
+.visit-tools {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+}
+.visit-tool {
+  flex: 1;
+  text-align: center;
 }

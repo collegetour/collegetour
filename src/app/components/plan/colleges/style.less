@@ -71,22 +71,15 @@
   &:nth-child(6) .fa-circle { color: @violet; }
   &:nth-child(7) .fa-circle { color: @purple; }
   &:nth-child(8) .fa-circle { color: @pink; }
-}
-
-.visit-token {
-  border-bottom: 1px solid fadeout(@black, 95);
-  display: flex;
-  flex: 1;
-  position: relative;
-  background-color: @white;
+  &:hover {
+    background-color: fadeout(@black, 95);
+  }
   cursor: grab;
   &.dragging {
     cursor: grabbing;
   }
-  &:hover {
-    background-color: fadeout(@black, 95);
-  }
 }
+
 .visit-token-handle {
   color: fadeout(@black, 80);
   display: flex;
@@ -96,27 +89,6 @@
   .fa {
     margin: auto;
   }
-}
-.visit-token-logo {
-  display: flex;
-  padding: 0.8em 0 0.8em 0.8em;
-  img {
-    width: 2.5em;
-    height: 2.5em;
-    margin: auto;
-  }
-}
-.visit-token-details {
-  flex: 1;
-  line-height: 1.2em;
-  padding: .8em;
-  strong {
-    color: #000;
-  }
-}
-.visit-token-details-location {
-  color: fadeout(@black, 60);
-  font-size: .8em;
 }
 .visit-token-remove {
   position: absolute;

@@ -1,7 +1,9 @@
+import Review from '../../../components/review'
 import Camera from '../../../components/camera'
 import { Page } from '../../../components/page'
 import Image from '../../../components/image'
 import Feed from '../../../components/feed'
+import Note from '../../../components/note'
 import PropTypes from 'prop-types'
 import React from 'react'
 import _ from 'lodash'
@@ -31,33 +33,45 @@ class Visit extends React.Component {
       <div className="visit">
         <div className="visit-photos">
           <div className="visit-photos-header">
-            <div className="visit-token">
-              <div className="visit-token-logo">
-                <Image src={ visit.college.logo } />
+            <div className="visit-photos-container">
+              <div className="visit-token">
+                <div className="visit-token-logo">
+                  <Image src={ visit.college.logo } />
+                </div>
+                <div className="visit-token-details">
+                  <strong>{ visit.college.name }</strong><br />
+                  <span className="visit-token-details-location">
+                    { visit.college.city }, { visit.college.state }<br />
+                  </span>
+                </div>
               </div>
-              <div className="visit-token-details">
-                <strong>{ visit.college.name }</strong><br />
-                <span className="visit-token-details-location">
-                  { visit.college.city }, { visit.college.state }<br />
-                </span>
+              <div className="visit-photos-buttons">
+                <div className="visit-photos-button" onClick={ this._handleDirections }>
+                  <div className="ui basic red fluid button">Directions</div>
+                </div>
+                <div className="visit-photos-button" onClick={ this._handleWebsite }>
+                  <div className="ui basic red fluid button">Website</div>
+                </div>
+                <div className="visit-photos-button" onClick={ this._handleCall }>
+                  <div className="ui basic red fluid button">Call</div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="visit-photos-buttons">
-            <div className="visit-photos-button" onClick={ this._handleDirections }>
-              <div className="ui basic red fluid button">Directions</div>
-            </div>
-            <div className="visit-photos-button" onClick={ this._handleWebsite }>
-              <div className="ui basic red fluid button">Website</div>
-            </div>
-            <div className="visit-photos-button" onClick={ this._handleCall }>
-              <div className="ui basic red fluid button">Call</div>
             </div>
           </div>
           <Feed { ...this._getFeed() } />
         </div>
-        <div className="visit-camera">
-          <Camera { ...this._getCamera() } />
+        <div className="visit-footer">
+          <div className="visit-tools">
+            <div className="visit-tool">
+              <Note { ...this._getNote() } />
+            </div>
+            <div className="visit-tool">
+              <Camera { ...this._getCamera() } />
+            </div>
+            <div className="visit-tool">
+              <Review { ...this._getReview() } />
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -75,6 +89,18 @@ class Visit extends React.Component {
     const { impressions } = this.props
     return {
       impressions
+    }
+  }
+
+  _getNote() {
+    return {
+
+    }
+  }
+
+  _getReview() {
+    return {
+
     }
   }
 
@@ -103,7 +129,7 @@ const mapResourcesToPage = (props, context, page) => ({
 })
 
 const mapPropsToPage = (props, context, resources, page) => ({
-  title: resources.visit.college.name,
+  title: 'Visit',
   component: Visit
 })
 

@@ -1,0 +1,46 @@
+.itinerary {
+  flex: 1;
+  .scrollable()
+}
+.itinerary-day {
+  border-bottom: 1px solid fadeout(@black, 95);
+}
+.itinerary-day-date {
+  flex: 0 0 5em;
+  text-align: center;
+  padding: 0.4em;
+  background-color: fadeout(@blue, 80);
+  color: fadeout(@black, 20);
+  text-transform: uppercase;
+  font-size: 0.8em;
+}
+.itinerary-day-item {
+  line-height: 1.8em;
+  display: flex;
+  &.past, &.past .fa {
+    color: fadeout(@black, 70);
+
+  }
+}
+.itinerary-day-item-icon {
+  flex: 0 0 2em;
+  padding: 0.2em 0.5em;
+  display: flex;
+  text-align: center;
+  .fa {
+    margin: auto 0;
+  }
+  .fa-car {
+    color: lighten(@red, 20);
+  }
+  .fa-clock-o {
+    color: @green;
+  }
+}
+.itinerary-day-item-details {
+  padding: 0.2em;
+  flex: 1;
+  span {
+    margin-left: 5px;
+  }
+}

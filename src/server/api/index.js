@@ -1,5 +1,6 @@
 import impressions from './impressions'
 import invitations from './invitations'
+import itinerary from './itinerary'
 import tourists from './tourists'
 import colleges from './colleges'
 import { Router } from 'express'
@@ -27,6 +28,8 @@ api.use(tours)
 api.use(invitations)
 
 api.use(tourists)
+
+api.use(itinerary)
 
 api.use(visits)
 

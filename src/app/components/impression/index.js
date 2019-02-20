@@ -3,7 +3,7 @@ import Avatar from '../avatar'
 import Image from '../image'
 import moment from 'moment'
 import React from 'react'
-
+import Edit from './edit'
 class Impression extends React.Component {
 
   static contextTypes = {
@@ -14,8 +14,7 @@ class Impression extends React.Component {
     impression: PropTypes.object
   }
 
-  static defaultProps = {
-  }
+  static defaultProps = {}
 
   _handleTasks = this._handleTasks.bind(this)
 
@@ -35,17 +34,24 @@ class Impression extends React.Component {
             <i className="fa fa-ellipsis-h" />
           </div>
         </div>
-        <div className="impression-asset">
-          <Image src={ impression.asset } />
-        </div>
-        <div className="impression-caption" dangerouslySetInnerHTML={{__html: impression.caption.replace(/\n/g, '<br />') }} />
+        { impression.type === 'image' &&
+          <div className="impression-image">
+            <div className="impression-asset">
+              <Image src={ impression.asset } />
+            </div>
+            <div className="impression-caption" dangerouslySetInnerHTML={{__html: impression.caption.replace(/\n/g, '<br />') }} />
+          </div>
+        }
+        { impression.type === 'note' &&
+          <div className="impression-note" dangerouslySetInnerHTML={{__html: impression.caption.replace(/\n/g, '<br />') }} />
+        }
       </div>
     )
   }
 
   _handleTasks() {
     this.context.tasks.open([
-      { label: 'Edit Impression' },
+      { label: 'Edit Impression', modal: Edit },
       { label: 'Delete Impression' }
     ])
   }

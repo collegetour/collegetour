@@ -16,6 +16,7 @@ import localforage from 'localforage'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import Modal from './components/modal'
 import Tasks from './components/tasks'
 import Portal from './components/portal'
 import Host from './components/host'
@@ -46,13 +47,15 @@ class App extends React.Component {
       <Provider store={ this.store }>
         <Host>
           <Presence>
-            <Tasks>
-              <Portal>
-                <Router>
-                  <RouterStack { ...this._getStack() } />
-                </Router>
-              </Portal>
-            </Tasks>
+            <Modal>
+              <Tasks>
+                <Portal>
+                  <Router>
+                    <RouterStack { ...this._getStack() } />
+                  </Router>
+                </Portal>
+              </Tasks>
+            </Modal>
           </Presence>
         </Host>
       </Provider>
