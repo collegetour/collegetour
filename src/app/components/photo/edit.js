@@ -13,7 +13,7 @@ class Edit extends React.Component {
   static defaultProps = {}
 
   _handleCancel = this._handleCancel.bind(this)
-  _handleSave = this._handleSave.bind(this)
+  _handleSuccess = this._handleSuccess.bind(this)
 
   render() {
     return (
@@ -31,7 +31,7 @@ class Edit extends React.Component {
         { label: 'Cancel', handler: this._handleCancel }
       ],
       rightItems: [
-        { label: 'Post', handler: this._handleSave }
+        { label: 'Post', handler: this._handleSuccess }
       ]
     }
   }
@@ -40,7 +40,7 @@ class Edit extends React.Component {
     this.context.modal.close()
   }
 
-  _handleSave() {
+  _handleSuccess() {
     this.context.modal.close()
   }
 

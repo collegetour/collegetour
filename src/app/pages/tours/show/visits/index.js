@@ -1,5 +1,5 @@
+import VisitToken from '../../../../tokens/visit_token'
 import Message from '../../../../components/message'
-import Image from '../../../../components/image'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -22,21 +22,8 @@ class Visits extends React.Component {
     return (
       <div className="list">
         { visits.map((visit, index) => (
-          <div className="list-item" key={`visit_${visit.id}`}>
-            <div className="visit-token" onClick={ this._handleClick.bind(this, visit.id) }>
-              <div className="visit-token-logo">
-                <Image src={ visit.college.logo } />
-              </div>
-              <div className="visit-token-details">
-                <strong>{ visit.college.name }</strong><br />
-                <span className="visit-token-details-location">
-                  { visit.college.city }, { visit.college.state }<br />
-                </span>
-              </div>
-              <div className="visit-token-proceed">
-                <i className="fa fa-chevron-right" />
-              </div>
-            </div>
+          <div className="list-item" key={`visit_${visit.id}`} onClick={ this._handleClick.bind(this, visit.id) }>
+            <VisitToken visit={ visit } />
           </div>
         )) }
       </div>

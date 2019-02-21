@@ -15,7 +15,7 @@ class Edit extends React.Component {
   static defaultProps = {}
 
   _handleCancel = this._handleCancel.bind(this)
-  _handleSave = this._handleSave.bind(this)
+  _handleSuccess = this._handleSuccess.bind(this)
 
   render() {
     return <Form { ...this._getForm() } />
@@ -28,6 +28,7 @@ class Edit extends React.Component {
       method: 'POST',
       endpoint: `${process.env.API_HOST}/api/tours/1/visits/1/impressions/${id}`,
       action: `${process.env.API_HOST}/api/tours/1/visits/1/impressions/${id}`,
+      submitText: 'Save',
       fields: [
         { name: 'text', type: 'textarea', placeholder: 'Enter your notes or record your impressions', rows: 22 }
       ],
@@ -40,7 +41,7 @@ class Edit extends React.Component {
     this.context.modal.close()
   }
 
-  _handleSave() {
+  _handleSuccess() {
     this.context.modal.close()
   }
 

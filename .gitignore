@@ -11,9 +11,12 @@ knexfile.js
 deploy.js
 config.json
 dist
+docs/files/deploy
 src/cordova/platforms/*
 !src/cordova/platforms/.gitkeep
 src/cordova/plugins/*
 !src/cordova/plugins/.gitkeep
 src/public/tmp
 src/public/assets
+repo
+REVISION

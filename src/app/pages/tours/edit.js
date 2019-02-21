@@ -8,12 +8,14 @@ class Edit extends React.Component {
     modal: PropTypes.object
   }
 
-  static propTypes = {}
+  static propTypes = {
+    id: PropTypes.string
+  }
 
   static defaultProps = {}
 
   _handleCancel = this._handleCancel.bind(this)
-  _handleSave = this._handleSave.bind(this)
+  _handleSuccess = this._handleSuccess.bind(this)
 
   render() {
     return <Form { ...this._getForm() } />
@@ -43,7 +45,7 @@ class Edit extends React.Component {
     this.context.modal.close()
   }
 
-  _handleSave() {
+  _handleSuccess() {
     this.context.modal.close()
   }
 

@@ -58,7 +58,7 @@ export default (state = INITIAL_STATE, action) => {
   case 'SAVE_SUCCESS':
     return {
       ...state,
-      uploads: null
+      uploads: []
     }
 
   default:

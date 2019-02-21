@@ -13,7 +13,7 @@ class New extends React.Component {
   static defaultProps = {}
 
   _handleCancel = this._handleCancel.bind(this)
-  _handleSave = this._handleSave.bind(this)
+  _handleSuccess = this._handleSuccess.bind(this)
 
   render() {
     return <Form { ...this._getForm() } />
@@ -24,6 +24,7 @@ class New extends React.Component {
       title: 'New Note',
       method: 'POST',
       action: `${process.env.API_HOST}/api/tours/1/visits/1/notes`,
+      submitText: 'Create',
       fields: [
         { name: 'text', type: 'textarea', placeholder: 'Enter your notes or record your impressions', rows: 22 }
       ],
@@ -36,7 +37,7 @@ class New extends React.Component {
     this.context.modal.close()
   }
 
-  _handleSave() {
+  _handleSuccess() {
     this.context.modal.close()
   }
 

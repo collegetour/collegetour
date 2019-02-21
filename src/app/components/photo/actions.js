@@ -1,7 +1,7 @@
 export const save = (tour_id, visit_id, impressions) => ({
   type: 'API_REQUEST',
   method: 'POST',
-  endpoint: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${visit_id}/impressions`,
+  endpoint: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${visit_id}/photos`,
   body: {
     impressions
   },
