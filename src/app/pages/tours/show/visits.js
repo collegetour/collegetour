@@ -1,5 +1,5 @@
-import VisitToken from '../../../../tokens/visit_token'
-import Message from '../../../../components/message'
+import VisitToken from '../../../tokens/visit_token'
+import Message from '../../../components/message'
 import PropTypes from 'prop-types'
 import React from 'react'
 

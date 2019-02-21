@@ -4,9 +4,9 @@ import Itinerary from './itinerary'
 import PropTypes from 'prop-types'
 import Tourists from './tourists'
 import Visits from './visits'
+import Invite from './invite'
 import Edit from '../edit'
 import React from 'react'
-import ManageTourists from '../../../components/tourists'
 
 class Tour extends React.Component {
 
@@ -55,7 +55,7 @@ const mapPropsToPage = (props, context, resources, page) => ({
     items: [
       { label: 'Edit Tour', modal: () => <Edit id={ page.params.tour_id } /> },
       { label: 'Manage Plan' },
-      { label: 'Invite Family', modal: () => <ManageTourists id={ page.params.tour_id } /> }
+      { label: 'Invite Family', modal: () => <Invite id={ page.params.tour_id } /> }
     ]
   }
 })

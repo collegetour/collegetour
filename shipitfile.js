@@ -27,7 +27,8 @@ module.exports = shipit => {
 
   utils.registerTask(shipit, 'deploy:prepare', [
     'deploy:config',
-    'deploy:install_modules'
+    'deploy:install_modules',
+    'deploy:compile'
   ])
 
   utils.registerTask(shipit, 'deploy:release', [
@@ -44,6 +45,10 @@ module.exports = shipit => {
 
   utils.registerTask(shipit, 'deploy:install_modules', () => {
     return shipit.remote('cd ' + shipit.releasePath + ' && npm install')
+  })
+
+  utils.registerTask(shipit, 'deploy:compile', () => {
+    return shipit.remote('cd ' + shipit.releasePath + ' && NODE_ENV=production npm run compile')
   })
 
   utils.registerTask(shipit, 'deploy:reload_appserver', () => {
