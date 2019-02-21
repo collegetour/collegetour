@@ -26,6 +26,7 @@ module.exports = shipit => {
   const currentDir = deployDir + '/current'
 
   utils.registerTask(shipit, 'deploy:prepare', [
+    'deploy:config',
     'deploy:install_modules'
   ])
 
@@ -33,6 +34,13 @@ module.exports = shipit => {
     'deploy:reload_appserver',
     'deploy:cache_app'
   ])
+
+  utils.registerTask(shipit, 'deploy:config', () => {
+    const mkdir = () => shipit.remote('mkdir -p ' + sharedDir)
+    const copyConfig = () => shipit.remoteCopy(path.resolve('.env.'+shipit.options.environment), sharedDir + '/.env')
+    const linkConfig = () => shipit.remote('rm -rf ' + shipit.releasePath + '/.env && ln -s ' + sharedDir + '/.env ' + shipit.releasePath + '/.env')
+    return mkdir().then(copyConfig).then(linkConfig)
+  })
 
   utils.registerTask(shipit, 'deploy:install_modules', () => {
     return shipit.remote('cd ' + shipit.releasePath + ' && npm install')

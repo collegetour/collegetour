@@ -6,8 +6,8 @@
   "scripts": {
     "reset": "knex migrate:rollback && knex migrate:latest && knex seed:run",
     "build": "NODE_ENV=production babel-node ./src/scripts/build.js",
-    "publish:server": "NODE_ENV=production babel-node ./src/scripts/publish/index.js && cd dist && claudia update",
-    "publish:client": "NODE_ENV=production babel-node ./src/scripts/build.js && NODE_ENV=production babel-node ./src/scripts/publish.js",
+    "compile": "NODE_ENV=production babel-node ./src/scripts/compile.js",
+    "publish": "NODE_ENV=production babel-node ./src/scripts/build.js && NODE_ENV=production babel-node ./src/scripts/publish.js",
     "dev": "babel-node ./src/scripts/dev.js",
     "test": "babel-node ./src/scripts/test.js"
   },
