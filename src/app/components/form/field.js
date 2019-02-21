@@ -1,7 +1,8 @@
+import Addressfield from '../addressfield'
+import Datefield from '../datefield'
 import Textfield from './textfield'
 import PropTypes from 'prop-types'
 import Textarea from './textarea'
-import Datefield from '../datefield'
 import React from 'react'
 
 class Field extends React.Component {
@@ -26,21 +27,13 @@ class Field extends React.Component {
         { field.type === 'textarea' && <Textarea { ...this._getTextarea(field) } /> }
         { field.type === 'textfield' && <Textfield { ...this._getTextfield(field) } /> }
         { field.type === 'datefield' && <Datefield { ...this._getDatefield(field) } /> }
+        { field.type === 'addressfield' && <Addressfield { ...this._getAddressfield(field) } /> }
         { error && <div className="error-message">{ error }</div> }
       </div>
     )
   }
 
-  _getTextarea({ name, defaultValue, error, placeholder }) {
-    return {
-      defaultValue,
-      error,
-      placeholder,
-      onChange: this._handleChange.bind(this, name)
-    }
-  }
-
-  _getTextfield({ name, defaultValue, error, placeholder, rows }) {
+  _getTextarea({ name, defaultValue, error, placeholder, rows  }) {
     return {
       defaultValue,
       error,
@@ -50,7 +43,25 @@ class Field extends React.Component {
     }
   }
 
+  _getTextfield({ name, defaultValue, error, placeholder}) {
+    return {
+      defaultValue,
+      error,
+      placeholder,
+      onChange: this._handleChange.bind(this, name)
+    }
+  }
+
   _getDatefield({ name, defaultValue, error, placeholder }) {
+    return {
+      defaultValue,
+      error,
+      placeholder,
+      onChange: this._handleChange.bind(this, name)
+    }
+  }
+
+  _getAddressfield({ name, defaultValue, error, placeholder }) {
     return {
       defaultValue,
       error,

@@ -15,6 +15,7 @@ class Form extends React.Component {
 
   static propTypes = {
     action: PropTypes.string,
+    cancelText: PropTypes.string,
     data: PropTypes.object,
     endpoint: PropTypes.string,
     errors: PropTypes.object,
@@ -22,6 +23,7 @@ class Form extends React.Component {
     method: PropTypes.string,
     panel: PropTypes.any,
     status: PropTypes.string,
+    submitText: PropTypes.string,
     title: PropTypes.string,
     onCancel: PropTypes.func,
     onFetch: PropTypes.func,
@@ -34,8 +36,14 @@ class Form extends React.Component {
   }
 
   static defaultProps = {
+    cancelText: 'Cancel',
+    submitText: 'Submit',
     fields: [],
     title: ''
+  }
+
+  state = {
+    panel: null
   }
 
   _handleCancel = this._handleCancel.bind(this)
@@ -46,7 +54,8 @@ class Form extends React.Component {
   _handleSuccess = this._handleSuccess.bind(this)
 
   render() {
-    const { fields, panel } = this.props
+    const { panel } = this.state
+    const { fields } = this.props
     return (
       <div className="form-container">
         <ModalPanel { ...this._getModalPanel() }>
@@ -56,7 +65,7 @@ class Form extends React.Component {
             )) }
           </div>
         </ModalPanel>
-        <CSSTransition key="form-panel" in={ panel !== null } classNames="translatex" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+        <CSSTransition key="form-panel" in={ this.props.panel !== null } classNames="translatex" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
           <div className="form-panel">
             { _.isFunction(panel) ? React.createElement(panel) : panel }
           </div>
@@ -70,8 +79,12 @@ class Form extends React.Component {
     if(endpoint) onFetch(endpoint)
   }
 
-  componentDidUpdate(prevProps) {
-    const { status } = this.props
+  componentDidUpdate(prevProps, prevState) {
+    const { panel, status } = this.props
+    if(panel !== prevProps.panel) {
+      const timeout = prevProps.panel ? 500 : 0
+      setTimeout(() => this.setState({ panel }), timeout)
+    }
     if(status !== prevProps.status) {
       if(status === 'saved') {
         this._handleSuccess()
@@ -104,14 +117,14 @@ class Form extends React.Component {
   }
 
   _getModalPanel() {
-    const { title } = this.props
+    const { title, cancelText, submitText } = this.props
     return {
       title,
       leftItems: [
-        { label: 'Cancel', handler: this._handleCancel }
+        { label: cancelText, handler: this._handleCancel }
       ],
       rightItems: [
-        { label: 'Post', handler: this._handleSubmit }
+        { label: submitText, handler: this._handleSubmit }
       ]
     }
   }

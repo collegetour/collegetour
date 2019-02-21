@@ -20,16 +20,19 @@ class Edit extends React.Component {
   }
 
   _getForm() {
+    const { id } = this.props
     return {
       title: 'Edit Tour',
       method: 'PATCH',
-      action: `${process.env.API_HOST}/api/tours`,
+      endpoint: `${process.env.API_HOST}/api/tours/${id}`,
+      action: `${process.env.API_HOST}/api/tours/${id}`,
+      submitText: 'Save',
       fields: [
-        { label: 'Name', name: 'name', type: 'textfield' },
-        { label: 'Origin', name: 'origin', type: 'textfield' },
-        { label: 'Destination', name: 'destination', type: 'textfield' },
-        { label: 'Start Date', name: 'start_date', type: 'textfield' },
-        { label: 'End Date', name: 'end_date', type: 'textfield' }
+        { label: 'Name', name: 'name', type: 'textfield', required: true, placeholder: 'Name to uniquely identify this tour' },
+        { label: 'Origin', name: 'origin', type: 'addressfield', required: true, placeholder: 'Street address you will leave from' },
+        { label: 'Destination', name: 'destination', type: 'addressfield', required: true, placeholder: 'Street address you will return to' },
+        { label: 'Start Date', name: 'start_date', type: 'datefield', required: true, placeholder: 'First day of your tour' },
+        { label: 'End Date', name: 'end_date', type: 'datefield', required: true, placeholder: 'Last day of your tour' }
       ],
       onCancel: this._handleCancel,
       onSuccess: this._handleSuccess

@@ -14,7 +14,7 @@ class Avatar extends React.Component {
     const { user } = this.props
     return (
       <div className="avatar">
-        { user.photo && <Image src={ user.photo } />}
+        { user.photo && <Image src={ user.photo } alt={ user.full_name } title={ user.full_name } />}
         { !user.photo &&
           <div className="avatar-initials">
             { user.initials }

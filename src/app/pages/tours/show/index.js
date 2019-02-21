@@ -6,6 +6,7 @@ import Tourists from './tourists'
 import Visits from './visits'
 import Edit from '../edit'
 import React from 'react'
+import ManageTourists from '../../../components/tourists'
 
 class Tour extends React.Component {
 
@@ -52,9 +53,9 @@ const mapPropsToPage = (props, context, resources, page) => ({
   component: Tour,
   tasks: {
     items: [
-      { label: 'Edit Tour', modal: Edit },
+      { label: 'Edit Tour', modal: () => <Edit id={ page.params.tour_id } /> },
       { label: 'Manage Plan' },
-      { label: 'Invite Family' }
+      { label: 'Invite Family', modal: () => <ManageTourists id={ page.params.tour_id } /> }
     ]
   }
 })

@@ -4,7 +4,7 @@ import button from './button'
 import * as actions from './actions'
 
 export default Factory({
-  namespace: 'reframe.button',
+  namespace: 'button',
   component: button,
   reducer,
   actions

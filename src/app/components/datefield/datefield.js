@@ -14,6 +14,7 @@ class Datefield extends React.Component {
     defaultValue: PropTypes.string,
     disabled: PropTypes.bool,
     month: PropTypes.number,
+    placeholder: PropTypes.string,
     prompt: PropTypes.string,
     tabIndex: PropTypes.number,
     year: PropTypes.number,
@@ -33,6 +34,7 @@ class Datefield extends React.Component {
   static defaultProps = {
     defaultValue: null,
     disabled: false,
+    placeholder: 'Choose a date',
     prompt: 'Choose a date',
     tabIndex: 0,
     onBusy: () => {},
@@ -42,12 +44,12 @@ class Datefield extends React.Component {
   }
 
   render() {
-    const { prompt, value, tabIndex } = this.props
+    const { placeholder, value, tabIndex } = this.props
     return (
       <div className="datefield">
         <div className="datefield-input" tabIndex={ tabIndex }>
           <div className="datefield-field" onClick={ this._handleBegin.bind(this) }>
-            { value ? value.format('dddd, MMMM DD, YYYY') : <span>{ prompt }</span> }
+            { value ? value.format('dddd, MMMM DD, YYYY') : <span>{ placeholder }</span> }
           </div>
           { value  &&
             <div className="datefield-remove" onClick={ this._handleClear.bind(this) }>
