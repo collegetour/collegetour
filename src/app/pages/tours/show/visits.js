@@ -24,6 +24,9 @@ class Visits extends React.Component {
         { visits.map((visit, index) => (
           <div className="list-item" key={`visit_${visit.id}`} onClick={ this._handleClick.bind(this, visit.id) }>
             <VisitToken visit={ visit } />
+            <div className="list-item-proceed">
+              <i className="fa fa-chevron-right" />
+            </div>
           </div>
         )) }
       </div>

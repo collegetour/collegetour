@@ -10,6 +10,7 @@ class Addressfield extends React.Component {
 
   static propTypes = {
     active: PropTypes.bool,
+    defaultValue: PropTypes.string,
     options: PropTypes.array,
     placeholder: PropTypes.string,
     prompt: PropTypes.string,
@@ -17,6 +18,8 @@ class Addressfield extends React.Component {
     tabIndex: PropTypes.number,
     value: PropTypes.string,
     onBegin: PropTypes.func,
+    onChange: PropTypes.func,
+    onChoose: PropTypes.func,
     onClear: PropTypes.func,
     onSetOptions: PropTypes.func
   }
@@ -48,14 +51,17 @@ class Addressfield extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { active } = this.props
+    const { active, defaultValue, value, onChange, onChoose } = this.props
     const { form } = this.context
+    if(defaultValue !== prevProps.defaultValue) {
+      onChoose(defaultValue)
+    }
+    if(prevProps.value !== value) {
+      onChange(value)
+    }
     if(active !== prevProps.active) {
-      if(active) {
-        form.push(<Chooser { ...this._getChooser() } />)
-      } else  {
-        form.pop()
-      }
+      if(active) form.push(<Chooser { ...this._getChooser() } />)
+      if(!active)form.pop()
     }
   }
 

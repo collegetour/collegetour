@@ -60,7 +60,7 @@ class Impression extends React.Component {
   _getNoteItems() {
     const { impression, tour_id, visit_id } = this.props
     return [
-      { label: 'Edit Note', modal: <EditNote id={ impression.id } /> },
+      { label: 'Edit Note', modal: <EditNote tour_id={ tour_id } visit_id={ visit_id } id={ impression.id } /> },
       { label: 'Delete Note', request: {
         method: 'delete',
         endpoint: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${ visit_id }/impressions/${impression.id}`,

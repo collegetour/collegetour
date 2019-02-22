@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
     table.integer('delta')
     table.date('date')
     table.time('info_session')
-    table.time('college_tour')
+    table.time('campus_tour')
     table.timestamps()
   })
 }

@@ -25,6 +25,7 @@ class Invite extends React.Component {
     const { id } = this.props
     return {
       title: 'Invite Tourist',
+      instructions: 'Enter the contact information and we\'ll send them an invitation by email',
       method: 'POST',
       action: `${process.env.API_HOST}/api/tours/${id}/invitations`,
       submitText: 'Invite',

@@ -5,23 +5,41 @@
 }
 .visit-photos {
   flex: 1;
-  .scrollable()
+  .scrollable();
+}
+.visit-photos-empty {
+  height: calc(100vh - 18.7em);
+  display: flex;
 }
 .visit-photos-header {
-  border-bottom: 1px solid fadeout(@black, 95);
+  border-bottom: 1px solid fadeout(@black, 90);
 }
 .visit-photos-container {
   margin: 0 auto;
   width: 100%;
   max-width: 480px;
 }
+.visit-photos-schedule {
+  display: flex;
+  padding: 0 0.4em;
+}
+.visit-photos-event {
+  flex: 1;
+  margin: 0 0.4em;
+  padding: 0.4em;
+  background-color: fadeout(@black, 90);
+  border-radius: 0.4em;
+  text-align: center;
+  color: fadeout(@black, 60);
+  font-size: 0.8em;
+}
 .visit-photos-buttons {
   display: flex;
-  padding: 0 0.4em 0.4em;
+  padding: 0.4em;
 }
 .visit-photos-button {
   flex: 1;
-  padding: 0 0.4em 0.4em;
+  padding: 0.4em;
 }
 .visit-photos-body {
   flex: 1;

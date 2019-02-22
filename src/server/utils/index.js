@@ -10,16 +10,25 @@ export const t = (handler) => async (req, res, next) => {
 
       await trx.commit()
 
-    } catch(error) {
+    } catch(err) {
 
-      await trx.rollback(error)
+      await trx.rollback(err)
+
+      if(err.errors) {
+
+        return res.status(422).json({
+          message: 'Unable to save record',
+          errors: err.toJSON()
+        })
+
+      }
 
       res.status(500).json({
-        message: error.message
+        message: err.message
       })
 
     }
 
-  }).catch(console.error)
+  }).catch(() => {})//console.error)
 
 }

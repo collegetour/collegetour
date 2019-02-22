@@ -15,15 +15,19 @@ class Feed extends React.Component {
 
   render() {
     const { impressions } = this.props
-    if(impressions.length === 0) return <Message { ...this._getMessage() } />
+    if(impressions.length === 0) {
+      return (
+        <div className="visit-photos-empty">
+          <Message { ...this._getMessage() } />
+        </div>
+      )
+    }
     return (
-      <div className="feed">
-        <div className="visit-photos-body">
-          <div className="visit-photos-container">
-            { impressions.map((impression, index) => (
-              <Impression { ...this._getImpression(impression) } key={`impression_${impression.id}`} />
-            )) }
-          </div>
+      <div className="visit-photos-body">
+        <div className="visit-photos-container">
+          { impressions.map((impression, index) => (
+            <Impression { ...this._getImpression(impression) } key={`impression_${impression.id}`} />
+          )) }
         </div>
       </div>
     )
@@ -40,9 +44,9 @@ class Feed extends React.Component {
 
   _getMessage() {
     return {
-      icon: 'camera-retro',
+      icon: 'institution',
       title: 'No impressions',
-      text: 'No one on this tour has shared any impressions of this college yet'
+      text: 'No one has shared any impressions of this college yet'
     }
   }
 

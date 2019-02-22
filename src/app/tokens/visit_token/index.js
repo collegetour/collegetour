@@ -28,9 +28,6 @@ class VisitToken extends React.Component {
               { visit.college.city }, { visit.college.state }<br />
             </span>
           </div>
-          <div className="visit-token-proceed">
-            <i className="fa fa-chevron-right" />
-          </div>
         </div>
       </div>
     )

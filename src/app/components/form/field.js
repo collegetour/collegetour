@@ -10,8 +10,8 @@ class Field extends React.Component {
   static contextTypes = {}
 
   static propTypes = {
-    defaultValue: PropTypes.string,
-    error: PropTypes.string,
+    data: PropTypes.object,
+    errors: PropTypes.object,
     field: PropTypes.object,
     onChange: PropTypes.func
   }
@@ -19,7 +19,7 @@ class Field extends React.Component {
   static defaultProps = {}
 
   render() {
-    const { error, field } = this.props
+    const { errors, field } = this.props
     return (
       <div className="field">
         { field.label && <div className="field-label">{ field.label }</div> }
@@ -28,43 +28,47 @@ class Field extends React.Component {
         { field.type === 'textfield' && <Textfield { ...this._getTextfield(field) } /> }
         { field.type === 'datefield' && <Datefield { ...this._getDatefield(field) } /> }
         { field.type === 'addressfield' && <Addressfield { ...this._getAddressfield(field) } /> }
-        { error && <div className="error-message">{ error }</div> }
+        { errors[field.name] && <div className="error-message">{ errors[field.name] }</div> }
       </div>
     )
   }
 
-  _getTextarea({ name, defaultValue, error, placeholder, rows  }) {
+  _getTextarea({ name, placeholder, rows  }) {
+    const { data, errors } = this.props
     return {
-      defaultValue,
-      error,
+      defaultValue: data[name],
+      error: errors[name],
       placeholder,
       rows,
       onChange: this._handleChange.bind(this, name)
     }
   }
 
-  _getTextfield({ name, defaultValue, error, placeholder}) {
+  _getTextfield({ name, placeholder}) {
+    const { data, errors } = this.props
     return {
-      defaultValue,
-      error,
+      defaultValue: data[name],
+      error: errors[name],
       placeholder,
       onChange: this._handleChange.bind(this, name)
     }
   }
 
-  _getDatefield({ name, defaultValue, error, placeholder }) {
+  _getDatefield({ name, placeholder }) {
+    const { data, errors } = this.props
     return {
-      defaultValue,
-      error,
+      defaultValue: data[name],
+      error: errors[name],
       placeholder,
       onChange: this._handleChange.bind(this, name)
     }
   }
 
-  _getAddressfield({ name, defaultValue, error, placeholder }) {
+  _getAddressfield({ name, placeholder }) {
+    const { data, errors } = this.props
     return {
-      defaultValue,
-      error,
+      defaultValue: data[name],
+      error: errors[name],
       placeholder,
       onChange: this._handleChange.bind(this, name)
     }

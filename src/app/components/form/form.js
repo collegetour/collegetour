@@ -20,6 +20,7 @@ class Form extends React.Component {
     endpoint: PropTypes.string,
     errors: PropTypes.object,
     fields: PropTypes.array,
+    instructions: PropTypes.string,
     method: PropTypes.string,
     panel: PropTypes.any,
     status: PropTypes.string,
@@ -55,10 +56,15 @@ class Form extends React.Component {
 
   render() {
     const { panel } = this.state
-    const { fields } = this.props
+    const { fields, instructions } = this.props
     return (
       <div className="form-container">
         <ModalPanel { ...this._getModalPanel() }>
+          { instructions &&
+            <div className="form-instructions">
+              { instructions }
+            </div>
+          }
           <div className={ this._getFormClasses() } ref={ node => this.form = node }>
             { fields.map((field, index) => (
               <Field key={`field_${index}`} { ...this._getField(field, index) } />
@@ -104,8 +110,8 @@ class Form extends React.Component {
   _getField(field, index) {
     const { data, errors } = this.props
     return {
-      defaultValue: data[field.name],
-      error: errors[field.name],
+      data,
+      errors,
       field,
       onChange: this._handleChange
     }

@@ -13,7 +13,7 @@ const visit_serializer = (visit) => ({
   },
   date: visit.get('date'),
   info_session: visit.get('info_session'),
-  college_tour: visit.get('college_tour'),
+  campus_tour: visit.get('campus_tour'),
   created_at: visit.get('created_at'),
   updated_at: visit.get('updated_at')
 })

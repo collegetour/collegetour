@@ -25,13 +25,11 @@ class Image extends React.Component {
   _handleLoad = this._handleLoad.bind(this)
 
   render() {
-    const { loaded } = this.state
     const { src } = this.props
     if(!src) return <div className="image" />
     return (
       <div className="image">
         <img { ...this._getImage() } />
-        { !loaded  && <i className="fa fa-fw fa-circle-o-notch fa-spin" /> }
       </div>
     )
   }

@@ -6,7 +6,13 @@ const Tour = new Model({
 
   tableName: 'tours',
 
-  rules: {},
+  rules: {
+    name: 'required',
+    origin: 'required',
+    destination: 'required',
+    start_date: 'required',
+    end_date: 'required'
+  },
 
   tourists() {
     return this.hasMany(Tourist, 'user_id')

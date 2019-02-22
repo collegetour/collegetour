@@ -1,12 +1,14 @@
+import VisitToken from '../../../tokens/visit_token'
 import Review from '../../../components/review'
 import { Page } from '../../../components/page'
 import Photo from '../../../components/photo'
-import Image from '../../../components/image'
 import Feed from '../../../components/feed'
 import Note from '../../../components/note'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 import React from 'react'
 import _ from 'lodash'
+
 class Visit extends React.Component {
 
   static contextTypes = {
@@ -34,15 +36,15 @@ class Visit extends React.Component {
         <div className="visit-photos">
           <div className="visit-photos-header">
             <div className="visit-photos-container">
-              <div className="visit-token">
-                <div className="visit-token-logo">
-                  <Image src={ visit.college.logo } />
+              <VisitToken visit={ visit } />
+              <div className="visit-photos-schedule">
+                <div className="visit-photos-event">
+                  <strong>Campus Tour: </strong>
+                  { moment(visit.campus_tour, 'hh:mm:ss').format('hh:mm A') }
                 </div>
-                <div className="visit-token-details">
-                  <strong>{ visit.college.name }</strong><br />
-                  <span className="visit-token-details-location">
-                    { visit.college.city }, { visit.college.state }<br />
-                  </span>
+                <div className="visit-photos-event">
+                  <strong>Info Session: </strong>
+                  { moment(visit.info_session, 'hh:mm:ss').format('hh:mm A') }
                 </div>
               </div>
               <div className="visit-photos-buttons">
@@ -67,9 +69,6 @@ class Visit extends React.Component {
             </div>
             <div className="visit-tool">
               <Photo { ...this._getPhoto() } />
-            </div>
-            <div className="visit-tool">
-              <Review { ...this._getReview() } />
             </div>
           </div>
         </div>

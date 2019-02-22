@@ -70,21 +70,18 @@ class Datefield extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { active, value, onChange } = this.props
+    const { active, defaultValue, value, onChange, onChoose } = this.props
     const { form } = this.context
+    if(defaultValue !== prevProps.defaultValue) {
+      onChoose(moment(defaultValue))
+    }
     if(prevProps.value !== value) {
-      if(value) {
-        onChange(value.format('YYYY-MM-DD'))
-      } else  {
-        onChange(value)
-      }
+      if(value) onChange(value.format('YYYY-MM-DD'))
+      if(!value) onChange(value)
     }
     if(active !== prevProps.active) {
-      if(active) {
-        form.push(<Chooser { ...this._getChooser() } />)
-      } else  {
-        form.pop()
-      }
+      if(active) form.push(<Chooser { ...this._getChooser() } />)
+      if(!active)form.pop()
     }
   }
 

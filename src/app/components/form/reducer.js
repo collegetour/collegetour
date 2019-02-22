@@ -21,6 +21,13 @@ export default (state = INITIAL_STATE, action) => {
       status: 'saved'
     }
 
+  case 'SAVE_FAILURE':
+    return {
+      ...state,
+      errors: action.result.errors,
+      status: 'failure'
+    }
+
   case 'UPDATE_DATA':
     return {
       ...state,

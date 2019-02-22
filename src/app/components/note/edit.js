@@ -25,7 +25,7 @@ class Edit extends React.Component {
     const { id } = this.props
     return {
       title: 'Edit Note',
-      method: 'POST',
+      method: 'PATCH',
       endpoint: `${process.env.API_HOST}/api/tours/1/visits/1/impressions/${id}`,
       action: `${process.env.API_HOST}/api/tours/1/visits/1/impressions/${id}`,
       submitText: 'Save',
