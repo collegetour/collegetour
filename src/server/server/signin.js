@@ -99,15 +99,9 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
       `redirect=${redirect}`
     ]
 
-    const url = `${process.env.WEB_HOST}/signin.html?${query.join('&')}`
+    const protocol = state.host === 'cordova' ? 'collegetourist://' : `${process.env.WEB_HOST}/`
 
-    const adjusted = state.host === 'cordova' ? url.replace(/^(.*):\/\//, 'collegetourist://') : url
-
-    console.log('url', url)
-
-    console.log('adjusted', adjusted)
-
-    res.redirect(301, adjusted)
+    res.redirect(301, `${protocol}signin.html?${query.join('&')}`)
 
   }))
 
