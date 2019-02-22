@@ -45,17 +45,17 @@ class App extends React.Component {
     return (
       <Provider store={ this.store }>
         <Host>
-          <Presence>
-            <Modal>
-              <Tasks>
-                <Portal>
-                  <Router>
+          <Router>
+            <Presence>
+              <Modal>
+                <Tasks>
+                  <Portal>
                     <RouterStack { ...this._getStack() } />
-                  </Router>
-                </Portal>
-              </Tasks>
-            </Modal>
-          </Presence>
+                  </Portal>
+                </Tasks>
+              </Modal>
+            </Presence>
+          </Router>
         </Host>
       </Provider>
     )

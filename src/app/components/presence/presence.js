@@ -7,21 +7,27 @@ import Setup from '../setup'
 class Presence extends React.Component {
 
   static childContextTypes = {
-    presence: PropTypes.any
+    presence: PropTypes.object
+  }
+
+  static contextTypes = {
+    router: PropTypes.object
   }
 
   static propTypes = {
     children: PropTypes.any,
     status: PropTypes.string,
     token: PropTypes.string,
-    tourist_id: PropTypes.number,
+    tourist_id: PropTypes.string,
     user: PropTypes.object,
     onLoadSession: PropTypes.func,
     onLoadTourist: PropTypes.func,
-    onLoadUser: PropTypes.func,
+    onLoadToken: PropTypes.func,
     onRemoveTourist: PropTypes.func,
-    onRemoveUser: PropTypes.func,
-    onSaveUser: PropTypes.func,
+    onRemoveToken: PropTypes.func,
+    onSaveToken: PropTypes.func,
+    onSetToken: PropTypes.func,
+    onSetTourist: PropTypes.func,
     onSignout: PropTypes.func
   }
 
@@ -31,27 +37,38 @@ class Presence extends React.Component {
   _handleSignout = this._handleSignout.bind(this)
 
   render() {
-    const { status, tourist_id, user } = this.props
-    if(status === 'loaded' && user === null) return <Signin tourist_id={ tourist_id } />
+    const { status, token, tourist_id, user } = this.props
+    if(status === 'loaded' && token === null) return <Signin tourist_id={ tourist_id } />
     if(status !== 'saved') return null
     if(!user.agreed_to_terms) return <Setup />
     return this.props.children
   }
 
   componentDidMount() {
+    const query = this._getQuery()
+    this._handleTourist(query.tourist_id)
+    this._handleToken(query.token)
+  }
+
+  _handleToken(token) {
+    if(token) return this.props.onSetToken(token)
+    this.props.onLoadToken()
+  }
+
+  _handleTourist(tourist_id) {
+    if(tourist_id) return this.props.onSetTourist(tourist_id)
     this.props.onLoadTourist()
-    this.props.onLoadUser()
   }
 
   componentDidUpdate(prevProps) {
-    const { status, user, onLoadSession, onRemoveTourist, onRemoveUser, onSaveUser } = this.props
-    if(!_.isEqual(user, prevProps.user)) {
-      if(user === null) {
-        onRemoveUser()
-      } else if(prevProps.user === null) {
-        onLoadSession(user.token)
-      } else if(user.token !== prevProps.user.token) {
-        onSaveUser(user)
+    const { status, token, onLoadSession, onRemoveTourist, onRemoveToken, onSaveToken } = this.props
+    if(!_.isEqual(token, prevProps.token)) {
+      if(token === null) {
+        onRemoveToken()
+      } else if(prevProps.token === null) {
+        onLoadSession(token)
+      } else if(token !== prevProps.token) {
+        onSaveToken(token)
       }
     }
     if(status !== prevProps.status) {
@@ -71,6 +88,14 @@ class Presence extends React.Component {
         signout: this._handleSignout
       }
     }
+  }
+
+  _getQuery() {
+    const search = this.context.router.history.location.search.substr(1)
+    return search.split('&').reduce((query, arg) => ({
+      ...query,
+      [arg.split('=')[0]]: arg.split('=')[1]
+    }), {})
   }
 
   _handleReload() {

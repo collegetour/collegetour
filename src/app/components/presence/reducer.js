@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
   status: 'pending',
+  token: null,
   tourist_id: null,
   user: null
 }
@@ -14,27 +15,26 @@ export default (state = INITIAL_STATE, action) => {
       tourist_id: action.value
     }
 
-
   case 'REMOVE_TOURIST_SUCCESS':
     return {
       ...state,
       tourist_id: null
     }
 
-  case 'LOAD_USER_REQUEST':
+  case 'LOAD_TOKEN_REQUEST':
     return {
       ...state,
       status: 'loading'
     }
 
-  case 'LOAD_USER_SUCCESS':
+  case 'LOAD_TOKEN_SUCCESS':
     return {
       ...state,
-      user: action.value,
+      token: action.value,
       status: 'loaded'
     }
 
-  case 'LOAD_USER_FAILURE':
+  case 'LOAD_TOKEN_FAILURE':
     return {
       ...state,
       status: 'failure'
@@ -49,7 +49,7 @@ export default (state = INITIAL_STATE, action) => {
   case 'LOAD_SESSION_SUCCESS':
     return {
       ...state,
-      user: action.result.data,
+      ...action.result.data,
       status: 'saved'
     }
 
@@ -59,10 +59,25 @@ export default (state = INITIAL_STATE, action) => {
       status: 'failure'
     }
 
+  case 'SET_TOKEN':
+    return {
+      ...state,
+      token: action.token,
+      status: 'loaded'
+    }
+
+  case 'SET_TOURIST':
+    return {
+      ...state,
+      tourist_id: action.tourist_id
+    }
+
   case 'SIGNOUT':
     return {
       ...state,
       status: 'loaded',
+      token: null,
+      tourist_id: null,
       user: null
     }
 

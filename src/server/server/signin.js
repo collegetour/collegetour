@@ -71,6 +71,7 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
         last_name: user.last_name,
         photo_id: asset.get('id'),
         [`${network}_id`]: user.id,
+        agreed_to_terms: false,
         created_at: moment(),
         updated_at: moment()
       }).save(null, {
@@ -91,17 +92,9 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
     const redirect = state.redirect || '/'
 
-    const query = [
-      `id=${session.id}`,
-      `full_name=${session.full_name}`,
-      `photo=${session.photo}`,
-      `token=${session.token}`,
-      `redirect=${redirect}`
-    ]
-
     const protocol = state.host === 'cordova' ? 'collegetourist://' : `${process.env.WEB_HOST}/`
 
-    res.redirect(301, `${protocol}signin.html?${query.join('&')}`)
+    res.redirect(301, `${protocol}?token=${session.token}&redirect=${redirect}`)
 
   }))
 

@@ -9,7 +9,7 @@ class Signin extends React.Component {
 
   static propTypes = {
     url: PropTypes.string,
-    tourist_id: PropTypes.number,
+    tourist_id: PropTypes.string,
     onFetch: PropTypes.func
   }
 
