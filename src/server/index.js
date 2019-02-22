@@ -23,4 +23,6 @@ app.use(server)
 
 app.use(api)
 
+app.listen(3001)
+
 export default app

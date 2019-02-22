@@ -15,7 +15,7 @@ module.exports = shipit => {
       keepReleases: 2
     },
     production: {
-      servers: 'root@54.91.124.183'
+      servers: 'root@18.211.173.32'
     }
   })
 
@@ -28,7 +28,8 @@ module.exports = shipit => {
   utils.registerTask(shipit, 'deploy:prepare', [
     'deploy:config',
     'deploy:install_modules',
-    'deploy:compile'
+    'deploy:compile',
+    'deploy:tmp'
   ])
 
   utils.registerTask(shipit, 'deploy:release', [
@@ -48,7 +49,11 @@ module.exports = shipit => {
   })
 
   utils.registerTask(shipit, 'deploy:compile', () => {
-    return shipit.remote('cd ' + shipit.releasePath + ' && NODE_ENV=production npm run compile')
+    return shipit.remote('cd ' + shipit.releasePath + ' && NODE_ENV=production npm run compile && chown -R 501.games dist')
+  })
+
+  utils.registerTask(shipit, 'deploy:tmp', () => {
+    return shipit.remote('cd ' + shipit.releasePath + ' && rm -rf tmp && ln -s ' + sharedDir + '/tmp ' + shipit.releasePath + '/tmp')
   })
 
   utils.registerTask(shipit, 'deploy:reload_appserver', () => {

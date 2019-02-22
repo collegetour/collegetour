@@ -1,14 +1,10 @@
 import '../server/lib/environment'
+import '../server'
 
 import devServer from 'webpack-dev-server'
 import config from '../config/webpack.development.config'
-import server from '../server'
 import Webpack from 'webpack'
 import path from 'path'
-
-server.listen(3001, () => {
-  console.log(`Example app listening on port 3001!`)
-})
 
 const devserver = new devServer(Webpack(config()), {
   contentBase: path.join('src', 'public'),
