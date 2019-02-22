@@ -16,7 +16,8 @@ router.get('/api/tours', t(async (req, res, trx) => {
     qb.where('tourists.user_id', req.user.get('id'))
 
   }).fetchAll({
-    transacting: trx
+    transacting: trx,
+    withRelated: ['owner.photo']
   })
 
   res.status(200).json({
@@ -56,7 +57,8 @@ router.get('/api/tours/:id', t(async (req, res, trx) => {
   const tour = await Tour.where({
     id: req.params.id
   }).fetch({
-    transacting: trx
+    transacting: trx,
+    withRelated: ['owner.photo']
   })
 
   res.status(200).json({

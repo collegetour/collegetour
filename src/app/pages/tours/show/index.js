@@ -51,13 +51,13 @@ const mapResourcesToPage = (props, context, page) => ({
 const mapPropsToPage = (props, context, resources, page) => ({
   title: resources.tour.name,
   component: Tour,
-  tasks: {
+  tasks: context.presence.user.id === resources.tour.owner.id ? {
     items: [
       { label: 'Edit Tour', modal: () => <Edit id={ page.params.tour_id } /> },
       { label: 'Manage Plan' },
       { label: 'Invite Family', modal: () => <Invite id={ page.params.tour_id } /> }
     ]
-  }
+  } : null
 })
 
 export default Page(mapResourcesToPage, mapPropsToPage)

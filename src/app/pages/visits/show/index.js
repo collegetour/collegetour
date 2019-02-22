@@ -37,13 +37,21 @@ class Visit extends React.Component {
           <div className="visit-photos-header">
             <div className="visit-photos-container">
               <VisitToken visit={ visit } />
-              <div className="visit-photos-schedule">
-                <div className="visit-photos-event">
-                  { moment(visit.date, 'YYYY-MM-DD').format('dddd, MMMM DD, YYYY') }<br />
-                  <strong>Campus Tour: </strong>
-                  { moment(visit.campus_tour, 'hh:mm:ss').format('hh:mm A') }<br />
-                  <strong>Info Session: </strong>
-                  { moment(visit.info_session, 'hh:mm:ss').format('hh:mm A') }
+              <div className="visit-photos-details">
+                <div className="visit-photos-details-schedule">
+                  <div className="visit-photos-event">
+                    { moment(visit.date, 'YYYY-MM-DD').format('ddd, MMM DD, YYYY') }<br />
+                    <strong>Campus Tour: </strong>
+                    { moment(visit.campus_tour, 'hh:mm:ss').format('hh:mm A') }<br />
+                    <strong>Info Session: </strong>
+                    { moment(visit.info_session, 'hh:mm:ss').format('hh:mm A') }
+                  </div>
+                </div>
+                <div className="visit-photos-details-weather">
+                  <h1>
+                    <i className={ `wi wi-${visit.weather}` } />
+                    { visit.temp }&deg; F
+                  </h1>
                 </div>
               </div>
               <div className="visit-photos-buttons">

@@ -19,17 +19,33 @@
   width: 100%;
   max-width: 480px;
 }
-.visit-photos-schedule {
+.visit-photos-details {
+  margin: 0 0.8em;
+  background-color: fadeout(@black, 90);
+  border-radius: 0.4em;
   display: flex;
-  padding: 0 0.8em;
+}
+.visit-photos-details-schedule {
+  flex: 1;
+  padding: 0.8em;
 }
 .visit-photos-event {
   flex: 1;
-  padding: 0.8em;
-  background-color: fadeout(@black, 90);
-  border-radius: 0.4em;
   color: fadeout(@black, 60);
-  font-size: 0.8em;
+  font-size: 0.9em;
+}
+.visit-photos-details-weather {
+  color: fadeout(@black, 60);
+  display: flex;
+  padding: 0 0.8em;
+  h1 {
+    margin: auto;
+    font-size: 2em;
+    font-weight: normal;
+  }
+  .wi {
+    margin-right: 0.3em;
+  }
 }
 .visit-photos-buttons {
   display: flex;

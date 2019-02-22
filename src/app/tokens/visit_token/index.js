@@ -28,12 +28,6 @@ class VisitToken extends React.Component {
               { visit.college.city }, { visit.college.state }<br />
             </span>
           </div>
-          <div className="visit-token-weather">
-            <div>
-              <i className={ `wi wi-${visit.weather}` } />
-              { visit.temp }&deg; F
-            </div>
-          </div>
         </div>
       </div>
     )

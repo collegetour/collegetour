@@ -1,5 +1,6 @@
 import Tourist from './tourist'
 import Model from './model'
+import User from './user'
 import Visit from './visit'
 
 const Tour = new Model({
@@ -12,6 +13,10 @@ const Tour = new Model({
     destination: 'required',
     start_date: 'required',
     end_date: 'required'
+  },
+
+  owner() {
+    return this.belongsTo(User, 'owner_id')
   },
 
   tourists() {

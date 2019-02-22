@@ -5,7 +5,7 @@ import React from 'react'
 class TouristToken extends React.Component {
 
   static contextTypes = {
-    router: PropTypes.object
+    presence: PropTypes.object
   }
 
   static propTypes = {
@@ -16,6 +16,7 @@ class TouristToken extends React.Component {
   }
 
   render() {
+    const { presence } = this.context
     const { tourist } = this.props
     return (
       <div className="tourist-token">
@@ -23,8 +24,11 @@ class TouristToken extends React.Component {
           <Avatar user={ tourist.user } />
         </div>
         <div className="tourist-token-details">
-          <strong>{ tourist.user.full_name }</strong><br />
-          { tourist.user.email }
+          <strong>{ tourist.user.full_name }</strong>
+          { tourist.user.id === presence.user.id &&
+            <span> ( You )</span>
+          }
+          <br />{ tourist.user.email }
         </div>
         <div className="tourist-token-icon">
           { tourist.claimed_at ?
