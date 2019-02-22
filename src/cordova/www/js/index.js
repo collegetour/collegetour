@@ -75,6 +75,8 @@ var app = {
     }, false)
 
     window.handleOpenURL = function(target) {
+
+      console.log(`handle ${target}`)
       const url = new URL(target)
       setTimeout(() => sendMessage('pushRoute', {
         route: {

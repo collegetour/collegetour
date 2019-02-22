@@ -24,16 +24,11 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
     const access_token = await getAccessToken(req.query.code)
 
-    const state = decodeState(req.query.state)
-
-    const protocol =  state.host === 'cordova' ? 'collegetourist://' : '/'
-
-    const url = `${protocol}signin/${network}/authorize?access_token=${access_token}&state=${req.query.state}`
+    const url = `${process.env.API_HOST}/signin/${network}/authorize?access_token=${access_token}&state=${req.query.state}`
 
     res.redirect(301, url)
 
   }))
-
 
   router.get(`/signin/${network}/authorize`, t(async (req, res, trx) => {
 
@@ -104,7 +99,15 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
       `redirect=${redirect}`
     ]
 
-    res.redirect(301, `${process.env.WEB_HOST}/signin.html?${query.join('&')}`)
+    const url = `${process.env.WEB_HOST}/signin.html?${query.join('&')}`
+
+    const adjusted = state.host === 'cordova' ? url.replace(/^(.*):\/\//, 'collegetourist://') : url
+
+    console.log('url', url)
+
+    console.log('adjusted', adjusted)
+
+    res.redirect(301, adjusted)
 
   }))
 
