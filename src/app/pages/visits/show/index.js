@@ -39,10 +39,9 @@ class Visit extends React.Component {
               <VisitToken visit={ visit } />
               <div className="visit-photos-schedule">
                 <div className="visit-photos-event">
+                  { moment(visit.date, 'YYYY-MM-DD').format('dddd, MMMM DD, YYYY') }<br />
                   <strong>Campus Tour: </strong>
-                  { moment(visit.campus_tour, 'hh:mm:ss').format('hh:mm A') }
-                </div>
-                <div className="visit-photos-event">
+                  { moment(visit.campus_tour, 'hh:mm:ss').format('hh:mm A') }<br />
                   <strong>Info Session: </strong>
                   { moment(visit.info_session, 'hh:mm:ss').format('hh:mm A') }
                 </div>
@@ -85,17 +84,19 @@ class Visit extends React.Component {
   }
 
   _getFeed() {
-    const { impressions, visit } = this.props
+    const { impressions, page } = this.props
     return {
       impressions,
-      tour_id: visit.tour_id,
-      visit_id: visit.id
+      tour_id: page.params.tour_id,
+      visit_id: page.params.id
     }
   }
 
   _getNote() {
+    const { page } = this.props
     return {
-
+      tour_id: page.params.tour_id,
+      visit_id: page.params.id
     }
   }
 

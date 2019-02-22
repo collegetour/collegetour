@@ -51,6 +51,7 @@ router.patch('/api/tours/:tour_id/visits/:visit_id/impressions/:id', t(async (re
   await impression.save({
     text: req.body.text
   }, {
+    patch: true,
     transacting: trx
   })
 
@@ -69,7 +70,9 @@ router.delete('/api/tours/:tour_id/visits/:visit_id/impressions/:id', t(async (r
     withRelated: ['asset', 'user.photo']
   })
 
-  await impression.destroy({ transacting: trx })
+  await impression.destroy({
+    transacting: trx
+  })
 
   res.status(200).json({
     data: null

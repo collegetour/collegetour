@@ -1,6 +1,5 @@
 import bookshelf from '../lib/bookshelf'
 import Checkit from  'checkit'
-import _ from 'lodash'
 
 class Model {
 
@@ -8,13 +7,7 @@ class Model {
 
     return bookshelf.Model.extend({
 
-      hasTimestamps: options.hasTimestamps !== false,
-
-      tableName: '',
-
-      rules: {},
-
-      virtuals: {},
+      hasTimestamps: true,
 
       initialize: function(attrs, opts) {
 
@@ -26,7 +19,9 @@ class Model {
 
         if(saveOptions.skipValidation) return true
 
-        return new Checkit(this.rules).run(this.attributes, { tableName: this.tableName })
+        return new Checkit(this.rules).run(this.attributes, {
+          tableName: this.tableName
+        })
 
       },
 

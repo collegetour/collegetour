@@ -8,7 +8,10 @@ class New extends React.Component {
     modal: PropTypes.object
   }
 
-  static propTypes = {}
+  static propTypes = {
+    tour_id: PropTypes.number,
+    visit_id: PropTypes.number    
+  }
 
   static defaultProps = {}
 
@@ -20,11 +23,12 @@ class New extends React.Component {
   }
 
   _getForm() {
+    const { tour_id, visit_id } = this.props
     return {
       title: 'New Note',
       method: 'POST',
-      action: `${process.env.API_HOST}/api/tours/1/visits/1/notes`,
-      submitText: 'Create',
+      action: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${visit_id}/notes`,
+      submitText: 'Post',
       fields: [
         { name: 'text', type: 'textarea', placeholder: 'Enter your notes or record your impressions', rows: 22 }
       ],

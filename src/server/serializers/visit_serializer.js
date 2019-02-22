@@ -14,6 +14,8 @@ const visit_serializer = (visit) => ({
   date: visit.get('date'),
   info_session: visit.get('info_session'),
   campus_tour: visit.get('campus_tour'),
+  weather: visit.get('weather'),
+  temp: visit.get('temp'),
   created_at: visit.get('created_at'),
   updated_at: visit.get('updated_at')
 })

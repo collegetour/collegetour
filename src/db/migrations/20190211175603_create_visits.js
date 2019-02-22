@@ -9,6 +9,10 @@ exports.up = function(knex, Promise) {
     table.date('date')
     table.time('info_session')
     table.time('campus_tour')
+    table.string('weather')
+    table.integer('temp')
+    table.integer('drive_duration')
+    table.integer('drive_distance')
     table.timestamps()
   })
 }

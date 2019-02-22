@@ -9,6 +9,8 @@ class Edit extends React.Component {
   }
 
   static propTypes = {
+    tour_id: PropTypes.number,
+    visit_id: PropTypes.number,
     id: PropTypes.number
   }
 
@@ -22,12 +24,12 @@ class Edit extends React.Component {
   }
 
   _getForm() {
-    const { id } = this.props
+    const { tour_id, visit_id, id } = this.props
     return {
       title: 'Edit Note',
       method: 'PATCH',
-      endpoint: `${process.env.API_HOST}/api/tours/1/visits/1/impressions/${id}`,
-      action: `${process.env.API_HOST}/api/tours/1/visits/1/impressions/${id}`,
+      endpoint: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${visit_id}/impressions/${id}`,
+      action: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${visit_id}/impressions/${id}`,
       submitText: 'Save',
       fields: [
         { name: 'text', type: 'textarea', placeholder: 'Enter your notes or record your impressions', rows: 22 }

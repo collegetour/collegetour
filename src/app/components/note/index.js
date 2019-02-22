@@ -9,7 +9,9 @@ class Note extends React.Component {
   }
 
   static propTypes = {
-    show: PropTypes.bool
+    show: PropTypes.bool,
+    tour_id: PropTypes.number,
+    visit_id: PropTypes.number    
   }
 
   static defaultProps = {}
@@ -25,7 +27,8 @@ class Note extends React.Component {
   }
 
   _handleNew() {
-    this.context.modal.open(New)
+    const { tour_id, visit_id } = this.props
+    this.context.modal.open(<New tour_id={ tour_id } visit_id={ visit_id } />)
   }
 
 }

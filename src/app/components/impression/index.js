@@ -9,6 +9,7 @@ import EditPhoto from '../photo/edit'
 class Impression extends React.Component {
 
   static contextTypes = {
+    presence: PropTypes.object,
     tasks: PropTypes.object
   }
 
@@ -23,6 +24,7 @@ class Impression extends React.Component {
   _handleTasks = this._handleTasks.bind(this)
 
   render() {
+    const { presence } = this.context
     const { impression } = this.props
     return (
       <div className="impression">
@@ -34,9 +36,11 @@ class Impression extends React.Component {
             <strong>{ impression.user.full_name }</strong><br />
             { moment(impression.created_at).format('MMM DD, YYYY @ hh:mm A') }
           </div>
-          <div className="impression-header-icon" onClick={ this._handleTasks }>
-            <i className="fa fa-ellipsis-h" />
-          </div>
+          { impression.user.id === presence.user.id &&
+            <div className="impression-header-icon" onClick={ this._handleTasks }>
+              <i className="fa fa-ellipsis-h" />
+            </div>
+          }
         </div>
         { impression.type === 'photo' &&
           <div className="impression-photo">
