@@ -5,6 +5,7 @@ import _ from 'lodash'
 class TextArea extends React.Component {
 
   static propTypes = {
+    autoGrow: PropTypes.bool,
     defaultValue: PropTypes.string,
     placeholder: PropTypes.string,
     rows: PropTypes.number,
@@ -14,12 +15,15 @@ class TextArea extends React.Component {
   }
 
   static defaultProps = {
+    autoGrow: false,
     placeholder: '',
     rows: 5,
     tabIndex: 0,
     onChange: () => {},
     onReady: () => {}
   }
+
+  input = null
 
   state = {
     value: ''
@@ -28,14 +32,15 @@ class TextArea extends React.Component {
   _handleChange = this._handleChange.bind(this)
 
   render() {
-    return <textarea { ...this._getTextarea() } />
+    return <textarea ref={ node => this.input = node } { ...this._getTextarea() } />
   }
 
   componentDidMount() {
-    const { defaultValue, onReady } = this.props
+    const { autoGrow, defaultValue, onReady } = this.props
     if(defaultValue) this.setState({
       value: _.toString(defaultValue)
     })
+    if(autoGrow) this.input.style.height = `${this.input.scrollHeight}px`
     onReady()
   }
 
@@ -67,6 +72,7 @@ class TextArea extends React.Component {
   }
 
   _handleChange(event) {
+    if(this.props.autoGrow) this.input.style.height = `${this.input.scrollHeight}px`
     this.setValue(event.target.value)
   }
 

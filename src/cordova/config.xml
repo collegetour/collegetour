@@ -39,9 +39,11 @@
         <splash qualifier="port-xxxhdpi" src="../public/images/screens/android/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="ios">
-        <preference name="KeyboardShrinksView" value="true" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <preference name="FadeSplashScreen" value="true" />
+        <preference name="SuppressesIncrementalRendering" value="true" />
+        <preference name="KeyboardShrinksView" value="true" />
         <icon height="57" platform="ios" src="../public/images/icons/ios/icon.png" width="57" />
         <icon height="114" platform="ios" src="../public/images/icons/ios/icon@2x.png" width="114" />
         <icon height="40" platform="ios" src="../public/images/icons/ios/icon-40.png" width="40" />

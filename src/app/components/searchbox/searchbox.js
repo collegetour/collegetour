@@ -5,6 +5,7 @@ import _ from 'lodash'
 class Searchbox extends React.Component {
 
   static propTypes = {
+    autoFocus: PropTypes.bool,
     active: PropTypes.bool,
     icon: PropTypes.string,
     prompt: PropTypes.string,
@@ -18,13 +19,20 @@ class Searchbox extends React.Component {
   }
 
   static defaultProps = {
+    autoFocus: false,
     prompt: 'Search...',
     q: '',
     onChange: (value) => {}
   }
 
-  _handleChange = _.throttle(this._handleChange, 500)
+  input = null
 
+  _handleAbort = this._handleAbort.bind(this)
+  _handleBegin = this._handleBegin.bind(this)
+  _handleChange = _.throttle(this._handleChange, 500)
+  _handleEnd = this._handleEnd.bind(this)
+  _handleIcon = this._handleIcon.bind(this)
+  _handleType = this._handleType.bind(this)
 
   render() {
     const { icon, q } = this.props
@@ -32,7 +40,7 @@ class Searchbox extends React.Component {
       <div className={ this._getClass() }>
         <div className="searchbox-container">
           { icon &&
-            <div className="searchbox-extra" onClick={ this._handleIcon.bind(this) }>
+            <div className="searchbox-extra" onClick={ this._handleIcon }>
               <i className={ `fa fa-fw fa-${icon}` } />
             </div>
           }
@@ -41,10 +49,10 @@ class Searchbox extends React.Component {
               <i className="fa fa-search" />
             </div>
             <div className="searchbox-field">
-              <input { ...this._getInput() } />
+              <input ref={ node => this.input  = node} { ...this._getInput() } />
             </div>
             { q.length > 0 &&
-              <div className="searchbox-remove-icon" onClick={ this._handleAbort.bind(this) }>
+              <div className="searchbox-remove-icon" onClick={ this._handleAbort}>
                 <i className="fa fa-times-circle" />
               </div>
             }
@@ -52,6 +60,10 @@ class Searchbox extends React.Component {
         </div>
       </div>
     )
+  }
+
+  componentDidMount() {
+    if(this.props.autoFocus) this.input.focus()
   }
 
   _getClass() {
@@ -66,9 +78,9 @@ class Searchbox extends React.Component {
       type: 'text',
       placeholder: prompt,
       value: q,
-      onFocus: this._handleBegin.bind(this),
-      onBlur: this._handleEnd.bind(this),
-      onChange: this._handleType.bind(this)
+      onFocus: this._handleBegin,
+      onBlur: this._handleEnd,
+      onChange: this._handleType
     }
   }
 
@@ -82,14 +94,17 @@ class Searchbox extends React.Component {
   }
 
   _handleBegin() {
+    console.log('begin')
     this.props.onBegin()
   }
 
   _handleChange(q) {
+    console.log(q)
     this.props.onChange(q)
   }
 
   _handleEnd() {
+    console.log('end')
     this.props.onEnd()
   }
 

@@ -64,6 +64,7 @@ class Chooser extends React.Component {
   componentDidUpdate(prevProps) {
     const { q } = this.props
     if(q !== prevProps.q) {
+      if(q.length === 0) this.props.onSetOptions([])
       this.autocomplete.getPlacePredictions({
         input: q
       }, (options) => this.props.onSetOptions(options || []))
@@ -73,7 +74,7 @@ class Chooser extends React.Component {
     return {
       title: 'Choose Location',
       leftItems: [
-        { label: 'Cancel', handler: this._handleCancel }
+        { icon: 'chevron-left', handler: this._handleCancel }
       ]
     }
   }
@@ -81,7 +82,7 @@ class Chooser extends React.Component {
   _getMessage() {
     return {
       title: 'Find a location',
-      text: 'choose a location',
+      text: 'Search locations by place or address',
       icon: 'map'
     }
   }
@@ -97,6 +98,7 @@ class Chooser extends React.Component {
   _getSearchbox() {
     const { prompt } = this.props
     return {
+      autoFocus: true,
       prompt,
       onChange: this._handleType
     }

@@ -28,7 +28,7 @@ import Plan from './pages/tours/plan'
 import Visit from './pages/visits/show'
 import NotFound from './pages/not_found'
 
-initReactFastclick()
+// initReactFastclick()
 
 class App extends React.Component {
 

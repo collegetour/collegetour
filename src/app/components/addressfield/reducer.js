@@ -18,19 +18,22 @@ const reducer = (state = INITIAL_STATE, action) => {
   case 'CANCEL':
     return {
       ...state,
+      options: [],
       active: false
     }
 
   case 'CHOOSE':
     return {
       ...state,
-      value: action.value,
-      active: false
+      active: false,
+      options: [],
+      value: action.value
     }
 
   case 'CLEAR':
     return {
       ...state,
+      options: [],
       value: null
     }
 

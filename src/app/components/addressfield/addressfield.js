@@ -29,6 +29,8 @@ class Addressfield extends React.Component {
     prompt: 'Search for a place or address'
   }
 
+  field = null
+
   _handleBegin = this._handleBegin.bind(this)
   _handleClear = this._handleClear.bind(this)
 

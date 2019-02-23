@@ -16,6 +16,7 @@ class Form extends React.Component {
   static propTypes = {
     action: PropTypes.string,
     cancelText: PropTypes.string,
+    className: PropTypes.string,
     data: PropTypes.object,
     endpoint: PropTypes.string,
     errors: PropTypes.object,
@@ -58,14 +59,14 @@ class Form extends React.Component {
     const { panel } = this.state
     const { fields, instructions } = this.props
     return (
-      <div className="form-container">
+      <div className={ this._getContainerClass() }>
         <ModalPanel { ...this._getModalPanel() }>
           { instructions &&
             <div className="form-instructions">
               { instructions }
             </div>
           }
-          <div className={ this._getFormClasses() } ref={ node => this.form = node }>
+          <div className={ this._getFormClass() } ref={ node => this.form = node }>
             { fields.map((field, index) => (
               <Field key={`field_${index}`} { ...this._getField(field, index) } />
             )) }
@@ -112,13 +113,23 @@ class Form extends React.Component {
     return {
       data,
       errors,
-      field,
+      field: {
+        ...field,
+        tabIndex: index + 11
+      },
       onChange: this._handleChange
     }
   }
 
-  _getFormClasses() {
+  _getFormClass() {
     const classes = ['ui','form']
+    return classes.join(' ')
+  }
+
+  _getContainerClass() {
+    const { className } = this.props
+    const classes = ['form-container']
+    if(className) classes.push(className)
     return classes.join(' ')
   }
 

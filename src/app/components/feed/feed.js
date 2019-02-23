@@ -7,8 +7,8 @@ class Feed extends React.Component {
 
   static propTypes = {
     impressions: PropTypes.array,
-    tour_id: PropTypes.number,
-    visit_id: PropTypes.number
+    tour_id: PropTypes.string,
+    visit_id: PropTypes.string
   }
 
   static defaultProps = {}

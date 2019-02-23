@@ -15,8 +15,8 @@ class Impression extends React.Component {
 
   static propTypes = {
     impression: PropTypes.object,
-    tour_id: PropTypes.number,
-    visit_id: PropTypes.number
+    tour_id: PropTypes.string,
+    visit_id: PropTypes.string
   }
 
   static defaultProps = {}

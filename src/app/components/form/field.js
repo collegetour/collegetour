@@ -33,43 +33,48 @@ class Field extends React.Component {
     )
   }
 
-  _getTextarea({ name, placeholder, rows  }) {
+  _getTextarea({ autoGrow, name, placeholder, rows, tabIndex }) {
     const { data, errors } = this.props
     return {
+      autoGrow,
       defaultValue: data[name],
       error: errors[name],
       placeholder,
       rows,
+      tabIndex,
       onChange: this._handleChange.bind(this, name)
     }
   }
 
-  _getTextfield({ name, placeholder}) {
+  _getTextfield({ name, placeholder, tabIndex }) {
     const { data, errors } = this.props
     return {
       defaultValue: data[name],
       error: errors[name],
       placeholder,
+      tabIndex,
       onChange: this._handleChange.bind(this, name)
     }
   }
 
-  _getDatefield({ name, placeholder }) {
+  _getDatefield({ name, placeholder, tabIndex }) {
     const { data, errors } = this.props
     return {
       defaultValue: data[name],
       error: errors[name],
       placeholder,
+      tabIndex,
       onChange: this._handleChange.bind(this, name)
     }
   }
 
-  _getAddressfield({ name, placeholder }) {
+  _getAddressfield({ name, placeholder, tabIndex }) {
     const { data, errors } = this.props
     return {
       defaultValue: data[name],
       error: errors[name],
       placeholder,
+      tabIndex,
       onChange: this._handleChange.bind(this, name)
     }
   }

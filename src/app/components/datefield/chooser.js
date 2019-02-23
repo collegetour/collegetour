@@ -17,6 +17,10 @@ class Chooser extends React.Component {
     onSetCurrent: PropTypes.func
   }
 
+  _handleCancel = this._handleCancel.bind(this)
+  _handleNext = this._handleNext.bind(this)
+  _handlePrevious = this._handlePrevious.bind(this)
+
   render() {
     const { month, value, year } = this.props
     const current = { month, year, day: '01'}
@@ -29,13 +33,13 @@ class Chooser extends React.Component {
         <div className="datefield-chooser">
           <div className="datefield-month">
             <div className="datefield-header">
-              <div className="datefield-previous" onClick={ this._handlePrevious.bind(this)}>
+              <div className="datefield-previous" onClick={ this._handlePrevious }>
                 <i className="fa fa-fw fa-chevron-left" />
               </div>
               <div className="datefield-title">
                 { moment(current).format('MMMM YYYY').toUpperCase() }
               </div>
-              <div className="datefield-next" onClick={ this._handleNext.bind(this)}>
+              <div className="datefield-next" onClick={ this._handleNext }>
                 <i className="fa fa-fw fa-chevron-right" />
               </div>
             </div>
@@ -74,7 +78,7 @@ class Chooser extends React.Component {
     return {
       title: 'Choose Date',
       leftItems: [
-        { label: 'Cancel', handler: this._handleCancel.bind(this) }
+        { icon: 'chevron-left', handler: this._handleCancel }
       ]
     }
   }
