@@ -56,8 +56,7 @@ class Image extends React.Component {
   }
 
   _getHost() {
-    return ''
-    // return '' || process.env.CDN_HOST || process.env.ASSET_HOST
+    return process.env.CDN_HOST || process.env.ASSET_HOST
   }
 
   _getNormal() {
