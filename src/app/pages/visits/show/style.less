@@ -8,11 +8,12 @@
   .scrollable();
 }
 .visit-photos-empty {
-  height: calc(100vh - 22em);
+  height: calc(100vh - 24em);
   display: flex;
 }
 .visit-photos-header {
   border-bottom: 1px solid fadeout(@black, 90);
+  background-color: fadeout(@black, 95);
 }
 .visit-photos-container {
   margin: 0 auto;
@@ -20,31 +21,29 @@
   max-width: 480px;
 }
 .visit-photos-details {
-  margin: 0 0.8em;
-  background-color: fadeout(@black, 90);
-  border-radius: 0.4em;
   display: flex;
 }
 .visit-photos-details-schedule {
   flex: 1;
-  padding: 0.8em;
-}
-.visit-photos-event {
-  flex: 1;
+  padding: 0.8em 0.8em 0;
   color: fadeout(@black, 60);
-  font-size: 0.9em;
-}
-.visit-photos-details-weather {
-  color: fadeout(@black, 60);
-  display: flex;
-  padding: 0 0.8em;
-  h1 {
-    margin: auto;
-    font-size: 2em;
-    font-weight: normal;
+  line-height: 1.6em;
+  strong {
+    color: @black;
   }
-  .wi {
-    margin-right: 0.3em;
+  label {
+    font-weight: bold;
+  }
+  .weather {
+    color: @blue;
+  }
+}
+.visit-photos-details-logo {
+  flex: 1;
+  display: flex;
+  padding: 0.8em 0.8em 0;
+  .image {
+    margin: auto;
   }
 }
 .visit-photos-buttons {
@@ -54,6 +53,27 @@
 .visit-photos-button {
   flex: 1;
   padding: 0.4em;
+  .ui.basic.button {
+    background-color: @white !important;
+  }
+}
+.visit-photos-tools {
+  border-bottom: 1px solid fadeout(@black, 95);
+}
+.visit-photos-displays {
+  display: flex;
+}
+.visit-photos-display {
+  flex: 1;
+  text-align: center;
+  padding: 0.6em;
+  color: fadeout(@black, 60);
+  &.active {
+    color: @blue;
+  }
+  .fa {
+    font-size: 1.4em;
+  }
 }
 .visit-photos-body {
   flex: 1;

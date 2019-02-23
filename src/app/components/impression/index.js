@@ -30,11 +30,10 @@ class Impression extends React.Component {
       <div className="impression">
         <div className="impression-header">
           <div className="impression-header-avatar">
-            <Avatar user={ impression.user } size="42" />
+            <Avatar user={ impression.user } size="22" />
           </div>
           <div className="impression-header-details">
-            <strong>{ impression.user.full_name }</strong><br />
-            { moment(impression.created_at).format('MMM DD, YYYY @ hh:mm A') }
+            <strong>{ impression.user.full_name }</strong>
           </div>
           { impression.user.id === presence.user.id &&
             <div className="impression-header-icon" onClick={ this._handleTasks }>
@@ -47,7 +46,6 @@ class Impression extends React.Component {
             <div className="impression-asset">
               <Image src={ impression.asset } transforms={{ w: 480 }} />
             </div>
-            <div className="impression-caption" dangerouslySetInnerHTML={{__html: this._getCaption(impression.text) }} />
           </div>
         }
         { impression.type === 'note' &&
@@ -77,7 +75,6 @@ class Impression extends React.Component {
   _getPhotoItems() {
     const { impression, tour_id, visit_id } = this.props
     return [
-      { label: 'Edit Photo', modal: EditPhoto },
       { label: 'Delete Photo', request: {
         method: 'delete',
         endpoint: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${ visit_id }/impressions/${impression.id}`,

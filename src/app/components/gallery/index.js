@@ -1,8 +1,8 @@
-import Impression from '../impression'
+import Image from '../../components/image'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-class Feed extends React.Component {
+class Gallery extends React.Component {
 
   static contextTypes = {
     router: PropTypes.object
@@ -19,10 +19,10 @@ class Feed extends React.Component {
   render() {
     const { impressions } = this.props
     return (
-      <div className="feed">
-        { impressions.map((impression, index) => (
-          <div className="feed-impression" key={`impression_${impression.id}`} onClick={ this._handleClick.bind(this, impression.id) }>
-            <Impression { ...this._getImpression(impression) } />
+      <div className="gallery">
+        { impressions.filter(impression => impression.asset).map((impression, index) => (
+          <div className="gallery-impression" key={`impression_${impression.id}`} onClick={ this._handleClick.bind(this, impression.id) }>
+            <Image src={ impression.asset } transforms={{ w: 200, h: 200, fit: 'cover' }} />
           </div>
         )) }
       </div>
@@ -54,4 +54,4 @@ class Feed extends React.Component {
 
 }
 
-export default Feed
+export default Gallery

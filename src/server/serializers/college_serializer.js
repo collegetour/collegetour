@@ -5,7 +5,7 @@ const college_serializer = (college) => ({
   state: college.get('state'),
   phone: college.get('phone'),
   website: college.get('website'),
-  logo: college.related('logo').get('url'),
+  logo: college.get('logo_id') ? college.related('logo').get('url') : null,
   created_at: college.get('created_at'),
   updated_at: college.get('updated_at')
 })

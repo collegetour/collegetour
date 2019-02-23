@@ -1,6 +1,6 @@
 const impression_serializer = (impression) => ({
   id: impression.get('id'),
-  asset: impression.related('asset').get('url'),
+  asset: impression.get('asset_id') ? impression.related('asset').get('url') : null,
   type: impression.get('type'),
   user: {
     id: impression.related('user').get('id'),

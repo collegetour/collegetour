@@ -1,6 +1,7 @@
-import VisitToken from '../../../tokens/visit_token'
-import Review from '../../../components/review'
+import Message from '../../../components/message'
+import Gallery from '../../../components/gallery'
 import { Page } from '../../../components/page'
+import Image from '../../../components/image'
 import Photo from '../../../components/photo'
 import Feed from '../../../components/feed'
 import Note from '../../../components/note'
@@ -22,7 +23,10 @@ class Visit extends React.Component {
     visit: PropTypes.object
   }
 
-  static defaultProps = {
+  static defaultProps = {}
+
+  state = {
+    layout: 'gallery'
   }
 
   _handleCall = this._handleCall.bind(this)
@@ -30,28 +34,25 @@ class Visit extends React.Component {
   _handleWebsite = this._handleWebsite.bind(this)
 
   render() {
-    const { visit } = this.props
+    const { layout } = this.state
+    const { impressions, visit } = this.props
     return (
       <div className="visit">
         <div className="visit-photos">
           <div className="visit-photos-header">
             <div className="visit-photos-container">
-              <VisitToken visit={ visit } />
               <div className="visit-photos-details">
                 <div className="visit-photos-details-schedule">
-                  <div className="visit-photos-event">
-                    { moment(visit.date, 'YYYY-MM-DD').format('ddd, MMM DD, YYYY') }<br />
-                    <strong>Campus Tour: </strong>
-                    { moment(visit.campus_tour, 'hh:mm:ss').format('h:mm A') }<br />
-                    <strong>Info Session: </strong>
-                    { moment(visit.info_session, 'hh:mm:ss').format('h:mm A') }
-                  </div>
+                  { visit.college.city}, { visit.college.state }<br />
+                  { moment(visit.date, 'YYYY-MM-DD').format('ddd, MMM DD, YYYY') }<br />
+                  <label>Campus Tour: </label>{ moment(visit.campus_tour, 'hh:mm:ss').format('h:mm A') }<br />
+                  <label>Info Session: </label>{ moment(visit.info_session, 'hh:mm:ss').format('h:mm A') }<br />
+                  <span className="weather">
+                    <i className={ `wi wi-${visit.weather}` } /> { visit.temp }&deg; F
+                  </span>
                 </div>
-                <div className="visit-photos-details-weather">
-                  <h1>
-                    <i className={ `wi wi-${visit.weather}` } />
-                    { visit.temp }&deg; F
-                  </h1>
+                <div className="visit-photos-details-logo">
+                  <Image src={ visit.college.logo } transforms={{ w: 100, h: 100 }} />
                 </div>
               </div>
               <div className="visit-photos-buttons">
@@ -67,7 +68,31 @@ class Visit extends React.Component {
               </div>
             </div>
           </div>
-          <Feed { ...this._getFeed() } />
+          <div className="visit-photos-tools">
+            <div className="visit-photos-container">
+              <div className="visit-photos-displays">
+                <div className={ this._getDisplayClass('gallery') } onClick={ this._handleLayout.bind(this, 'gallery') }>
+                  <i className="fa fa-th" />
+                </div>
+                <div className={ this._getDisplayClass('feed') } onClick={ this._handleLayout.bind(this, 'feed') }>
+                  <i className="fa fa-th-list" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="visit-photos-body">
+            { impressions.length === 0 &&
+              <div className="visit-photos-empty">
+                <Message { ...this._getEmpty() } />
+              </div>
+            }
+            { impressions.length > 0 &&
+              <div className="visit-photos-container">
+                { layout === 'feed' && <Feed { ...this._getImpressions() } /> }
+                { layout === 'gallery' && <Gallery { ...this._getImpressions() } /> }
+              </div>
+            }
+          </div>
         </div>
         <div className="visit-footer">
           <div className="visit-tools">
@@ -83,6 +108,20 @@ class Visit extends React.Component {
     )
   }
 
+  _getDisplayClass(layout) {
+    const classes = ['visit-photos-display']
+    if(layout === this.state.layout) classes.push('active')
+    return classes.join(' ')
+  }
+
+  _getEmpty() {
+    return {
+      icon: 'institution',
+      title: 'No impressions',
+      text: 'No one has shared any impressions of this college yet'
+    }
+  }
+
   _getPhoto() {
     const { page } = this.props
     return {
@@ -91,7 +130,7 @@ class Visit extends React.Component {
     }
   }
 
-  _getFeed() {
+  _getImpressions() {
     const { impressions, page } = this.props
     return {
       impressions,
@@ -114,6 +153,10 @@ class Visit extends React.Component {
     }
   }
 
+  _handleLayout(layout) {
+    this.setState({ layout })
+  }
+
   _handleCall() {
     const { phone } = this.props.visit.college
     window.location.href = `tel://+1${phone.replace(/[^\d]/g, '')}`
@@ -124,10 +167,8 @@ class Visit extends React.Component {
     const daddr = `${name} ${city}, ${state}`.replace(' ', '+')
     const path = `://maps.google.com/maps?daddr=${daddr}`
     if(_.includes(['iPhone','iPad','iPod'], navigator.platform)) {
-      console.log(`maps${path}`)
       window.location.href = `maps${path}`
     } else {
-      console.log(`https${path}`)
       this.context.host.openWindow(`https${path}`)
     }
   }
@@ -145,7 +186,7 @@ const mapResourcesToPage = (props, context, page) => ({
 })
 
 const mapPropsToPage = (props, context, resources, page) => ({
-  title: 'Visit',
+  title: resources.visit.college.name,
   component: Visit
 })
 
