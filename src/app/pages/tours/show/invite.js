@@ -5,6 +5,7 @@ import React from 'react'
 class Invite extends React.Component {
 
   static contextTypes = {
+    flash: PropTypes.object,
     modal: PropTypes.object
   }
 
@@ -25,7 +26,14 @@ class Invite extends React.Component {
     const { id } = this.props
     return {
       title: 'Invite Tourist',
-      instructions: 'Enter the contact information and we\'ll send them an invitation by email',
+      instructions: (
+        <div className="invitation">
+          <i className="fa fa-fw fa-user-circle" />
+          You can invite others to view or contribute to your tour. Just enter
+          their contact information and we&apos;ll send them an invitation
+          by email.
+        </div>
+      ),
       method: 'POST',
       action: `${process.env.API_HOST}/api/tours/${id}/invitations`,
       submitText: 'Invite',
@@ -43,7 +51,8 @@ class Invite extends React.Component {
     this.context.modal.close()
   }
 
-  _handleSuccess() {
+  _handleSuccess(tourist) {
+    this.context.flash.set('success', `We sent an invitation to ${tourist.first_name}`)
     this.context.modal.close()
   }
 

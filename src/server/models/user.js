@@ -1,12 +1,16 @@
 import Model from './model'
 import Asset from './asset'
-import Tour from './tour'
+import Tourist from './tourist'
 
 const User = new Model({
 
   tableName: 'users',
 
-  rules: {},
+  rules: {
+    first_name: 'required',
+    last_name: 'required',
+    email: ['required','email']
+  },
 
   virtuals: {
 

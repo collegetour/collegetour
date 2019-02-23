@@ -22,15 +22,21 @@ class New extends React.Component {
   _getForm() {
     return {
       title: 'New Tour',
+      instructions: (
+        <div className="invitation">
+          <i className="fa fa-fw fa-map" />
+          Let plan a college tour! To begin, give your tour a memorable name
+          like &quot;Spring Break Tour&quot; and indicate the locations where
+          you will begin and end.
+        </div>
+      ),
       method: 'POST',
       action: `${process.env.API_HOST}/api/tours`,
       submitText: 'Create',
       fields: [
         { label: 'Name', name: 'name', type: 'textfield', required: true, placeholder: 'Name to uniquely identify this tour' },
         { label: 'Origin', name: 'origin', type: 'addressfield', required: true, placeholder: 'Street address you will leave from' },
-        { label: 'Destination', name: 'destination', type: 'addressfield', required: true, placeholder: 'Street address you will return to' },
-        { label: 'Start Date', name: 'start_date', type: 'datefield', required: true, placeholder: 'First day of your tour' },
-        { label: 'End Date', name: 'end_date', type: 'datefield', required: true, placeholder: 'Last day of your tour' }
+        { label: 'Destination', name: 'destination', type: 'addressfield', required: true, placeholder: 'Street address you will return to' }
       ],
       onCancel: this._handleCancel,
       onSuccess: this._handleSuccess

@@ -56,7 +56,11 @@ const mapPropsToPage = (props, context, resources, page) => ({
   title: 'Tours',
   component: Tours,
   leftItems: [
-    { component: <Avatar user={ context.presence.user } /> }
+    { component: (
+      <div onClick={ context.portal.toggleAccount }>
+        <Avatar user={ context.presence.user } />
+      </div>
+    ) }
   ],
   task: {
     modal: New

@@ -11,6 +11,7 @@ const PageCreator = (mapResourcesToPage, mapPropsToPage) => {
   class PageContainer extends React.Component {
 
     static contextTypes = {
+      portal: PropTypes.object,
       presence: PropTypes.object,
       router: PropTypes.object
     }

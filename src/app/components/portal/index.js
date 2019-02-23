@@ -17,15 +17,24 @@ class Portal extends React.Component {
 
   static defaultProps = {}
 
+  state = {
+    account: false
+  }
+
+  _handleToggleAccount = this._handleToggleAccount.bind(this)
+
   render() {
+    const { account } = this.state
     return (
       <div className="portal">
         { this.props.children }
-        <CSSTransition in={ false } classNames="slide" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true } appear={ true }>
-          <div className="portal-overlay" />
+        <CSSTransition in={ account } classNames="opacity" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true } appear={ true }>
+          <div className="portal-overlay" onClick={ this._handleToggleAccount } />
         </CSSTransition>
-        <CSSTransition in={ false } classNames="slide" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true } appear={ true }>
-          <Account />
+        <CSSTransition in={ account } classNames="translatex" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true } appear={ true }>
+          <div className="portal-drawer">
+            <Account />
+          </div>
         </CSSTransition>
       </div>
     )
@@ -34,8 +43,16 @@ class Portal extends React.Component {
   getChildContext() {
     return {
       portal: {
+        toggleAccount: this._handleToggleAccount
       }
     }
+  }
+
+  _handleToggleAccount() {
+    const { account } = this.state
+    this.setState({
+      account: !account
+    })
   }
 
 }

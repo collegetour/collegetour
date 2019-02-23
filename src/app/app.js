@@ -6,7 +6,6 @@ import { createStore, applyMiddleware } from 'redux'
 import createlocalStorage from 'redux-local-storage'
 import { combineReducers } from 'redux-rubberstamp'
 import tokenMiddleware from './middleware/token'
-import initReactFastclick from 'react-fastclick'
 import createApiRequest from 'redux-api-request'
 import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
@@ -16,6 +15,7 @@ import localforage from 'localforage'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import Flash from './components/flash'
 import Modal from './components/modal'
 import Tasks from './components/tasks'
 import Portal from './components/portal'
@@ -28,8 +28,6 @@ import Plan from './pages/tours/plan'
 import Visit from './pages/visits/show'
 import Impression from './pages/impressions/show'
 import NotFound from './pages/not_found'
-
-// initReactFastclick()
 
 class App extends React.Component {
 
@@ -47,15 +45,17 @@ class App extends React.Component {
       <Provider store={ this.store }>
         <Host>
           <Router>
-            <Presence>
-              <Modal>
-                <Tasks>
-                  <Portal>
-                    <RouterStack { ...this._getStack() } />
-                  </Portal>
-                </Tasks>
-              </Modal>
-            </Presence>
+            <Flash>
+              <Presence>
+                <Modal>
+                  <Tasks>
+                    <Portal>
+                      <RouterStack { ...this._getStack() } />
+                    </Portal>
+                  </Tasks>
+                </Modal>
+              </Presence>
+            </Flash>
           </Router>
         </Host>
       </Provider>

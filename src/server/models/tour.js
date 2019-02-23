@@ -10,9 +10,7 @@ const Tour = new Model({
   rules: {
     name: 'required',
     origin: 'required',
-    destination: 'required',
-    start_date: 'required',
-    end_date: 'required'
+    destination: 'required'
   },
 
   owner() {

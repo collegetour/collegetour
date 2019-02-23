@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
   data: {},
+  entity: null,
   errors: {},
   panel: null,
   status: 'pending'
@@ -18,7 +19,8 @@ export default (state = INITIAL_STATE, action) => {
   case 'SAVE_SUCCESS':
     return {
       ...state,
-      status: 'saved'
+      status: 'saved',
+      entity: action.result.data
     }
 
   case 'SAVE_FAILURE':

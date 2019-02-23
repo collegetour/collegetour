@@ -32,9 +32,7 @@ class Edit extends React.Component {
       fields: [
         { label: 'Name', name: 'name', type: 'textfield', required: true, placeholder: 'Name to uniquely identify this tour' },
         { label: 'Origin', name: 'origin', type: 'addressfield', required: true, placeholder: 'Street address you will leave from' },
-        { label: 'Destination', name: 'destination', type: 'addressfield', required: true, placeholder: 'Street address you will return to' },
-        { label: 'Start Date', name: 'start_date', type: 'datefield', required: true, placeholder: 'First day of your tour' },
-        { label: 'End Date', name: 'end_date', type: 'datefield', required: true, placeholder: 'Last day of your tour' }
+        { label: 'Destination', name: 'destination', type: 'addressfield', required: true, placeholder: 'Street address you will return to' }
       ],
       onCancel: this._handleCancel,
       onSuccess: this._handleSuccess

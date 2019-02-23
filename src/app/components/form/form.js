@@ -21,7 +21,7 @@ class Form extends React.Component {
     endpoint: PropTypes.string,
     errors: PropTypes.object,
     fields: PropTypes.array,
-    instructions: PropTypes.string,
+    instructions: PropTypes.any,
     method: PropTypes.string,
     panel: PropTypes.any,
     status: PropTypes.string,
@@ -87,14 +87,14 @@ class Form extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { panel, status } = this.props
+    const { entity, panel, status } = this.props
     if(panel !== prevProps.panel) {
       const timeout = prevProps.panel ? 500 : 0
       setTimeout(() => this.setState({ panel }), timeout)
     }
     if(status !== prevProps.status) {
       if(status === 'saved') {
-        this._handleSuccess()
+        this._handleSuccess(entity)
       }
     }
   }
@@ -167,8 +167,8 @@ class Form extends React.Component {
     this.props.onSave(method, action, data)
   }
 
-  _handleSuccess() {
-    this.props.onSuccess()
+  _handleSuccess(entity) {
+    this.props.onSuccess(entity)
   }
 
 }

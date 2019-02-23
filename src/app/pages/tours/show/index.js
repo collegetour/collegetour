@@ -32,7 +32,7 @@ class Tour extends React.Component {
     const { itinerary, page, tourists, visits } = this.props
     return {
       items: [
-        { label: 'Visits', component: () => <Visits visits={ visits } tour_id={ page.params.tour_id } /> },
+        { label: 'Colleges', component: () => <Visits visits={ visits } tour_id={ page.params.tour_id } /> },
         { label: 'Tourists', component: () => <Tourists tourists={ tourists } tour_id={ page.params.tour_id } /> },
         { label: 'Itinerary', component: () => <Itinerary itinerary={ itinerary } tour_id={ page.params.tour_id } /> }
       ]
@@ -54,8 +54,8 @@ const mapPropsToPage = (props, context, resources, page) => ({
   tasks: context.presence.user.id === resources.tour.owner.id ? {
     items: [
       { label: 'Edit Tour', modal: () => <Edit id={ page.params.tour_id } /> },
-      { label: 'Manage Plan' },
-      { label: 'Invite Family', modal: () => <Invite id={ page.params.tour_id } /> }
+      { label: 'Manage Tour' },
+      { label: 'Invite Tourists', modal: () => <Invite id={ page.params.tour_id } /> }
     ]
   } : null
 })

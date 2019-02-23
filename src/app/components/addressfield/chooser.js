@@ -83,7 +83,7 @@ class Chooser extends React.Component {
     return {
       title: 'Find a location',
       text: 'Search locations by place or address',
-      icon: 'map'
+      icon: 'map-marker'
     }
   }
 
@@ -98,7 +98,6 @@ class Chooser extends React.Component {
   _getSearchbox() {
     const { prompt } = this.props
     return {
-      autoFocus: true,
       prompt,
       onChange: this._handleType
     }
