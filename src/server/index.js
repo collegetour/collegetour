@@ -19,6 +19,8 @@ app.use(multiparty({ uploadDir: './tmp' }))
 
 app.use(cors())
 
+app.use('/assets', express.static('public'))
+
 app.use(server)
 
 app.use(api)
