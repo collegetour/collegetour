@@ -11,9 +11,7 @@ router.get('/imagecache/*', t(async (req, res, trx) => {
 
   const transformed = await transform(req.originalUrl)
 
-  res.set('Content-Type', 'image/jpeg')
-
-  res.status(200).send(transformed)
+  res.type('jpeg').status(200).send(transformed)
 
 }))
 
@@ -27,7 +25,7 @@ const transform = async(originalUrl) => {
 
   const matches = parts[0].match(/\w*=\w*/)
 
-  const transform = matches ? qs.parse(parts[0]) : null
+  const transform = matches ? qs.parse(parts[0]) : {}
 
   const path = matches ? parts.slice(1).join('/') : parts.join('/')
 
@@ -38,7 +36,7 @@ const transform = async(originalUrl) => {
 
   const source = sharp(original)
 
-  const dpi = parseInt(transform.dpi) || 1
+  const dpi = transform.dpi ? parseInt(transform.dpi) : 1
 
   const w = transform.w ? parseInt(transform.w) * dpi : null
 
@@ -47,6 +45,8 @@ const transform = async(originalUrl) => {
   if(w & h) return await source.resize(w, h, { fit: sharp.fit.cover }).jpeg({ quality: 70 }).toBuffer()
 
   if(w) return await sharp(original).resize(w).jpeg({ quality: 70 }).toBuffer()
+
+  return original
 
 }
 
