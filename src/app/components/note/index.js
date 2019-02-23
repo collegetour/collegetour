@@ -10,8 +10,8 @@ class Note extends React.Component {
 
   static propTypes = {
     show: PropTypes.bool,
-    tour_id: PropTypes.number,
-    visit_id: PropTypes.number    
+    tour_id: PropTypes.string,
+    visit_id: PropTypes.string    
   }
 
   static defaultProps = {}

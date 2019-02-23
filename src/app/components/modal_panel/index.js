@@ -7,82 +7,53 @@ class ModalPanel extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     className: PropTypes.string,
-    color: PropTypes.string,
     leftEnabled: PropTypes.bool,
     leftItems: PropTypes.array,
     rightEnabled: PropTypes.bool,
     rightItems: PropTypes.array,
-    position: PropTypes.string,
     title: PropTypes.string
   }
 
-  static defaultProps = {
-    position: 'top'
-  }
+  static defaultProps = {}
 
   render() {
-    const { leftItems, position, rightItems, title } = this.props
+    const { leftItems, rightItems, title } = this.props
     return (
       <div className={ this._getClass() }>
-        { position === 'top' &&
-          <div className="modal-panel-header">
-            { leftItems &&
-              <div className="modal-panel-header-navigation">
-                { leftItems.map((item,index) => (
-                  <div key={`left_${index}`} className="modal-panel-header-navigation-item" onClick={ item.handler }>
-                    { this._getElement(item) }
-                  </div>
-                )) }
-              </div>
-            }
-            <div className="modal-panel-header-title">
-              { title }
+        <div className="modal-panel-header">
+          { leftItems &&
+            <div className="modal-panel-header-navigation">
+              { leftItems.map((item,index) => (
+                <div key={`left_${index}`} className="modal-panel-header-navigation-item" onClick={ item.handler }>
+                  { this._getElement(item) }
+                </div>
+              )) }
             </div>
-            { rightItems &&
-              <div className="modal-panel-header-navigation">
-                { rightItems.map((item,index) => (
-                  <div key={`right_${index}`} className="modal-panel-header-navigation-item" onClick={ item.handler }>
-                    { this._getElement(item) }
-                  </div>
-                )) }
-              </div>
-            }
+          }
+          <div className="modal-panel-header-title">
+            { title }
           </div>
-        }
+          { rightItems &&
+            <div className="modal-panel-header-navigation">
+              { rightItems.map((item,index) => (
+                <div key={`right_${index}`} className="modal-panel-header-navigation-item" onClick={ item.handler }>
+                  { this._getElement(item) }
+                </div>
+              )) }
+            </div>
+          }
+        </div>
         <div className="modal-panel-body">
           { this.props.children }
         </div>
-        { position === 'bottom' &&
-          <div className="modal-panel-footer">
-            { leftItems &&
-              <div className="modal-panel-footer-navigation">
-                { leftItems.map((item,index) => (
-                  <div key={`left_${index}`} className="ui button" onClick={ item.handler }>
-                    { this._getElement(item) }
-                  </div>
-                )) }
-              </div>
-            }
-            { rightItems &&
-              <div className="modal-panel-footer-navigation">
-                { rightItems.map((item,index) => (
-                  <div key={`right_${index}`} className="ui red button" onClick={ item.handler }>
-                    { this._getElement(item) }
-                  </div>
-                )) }
-              </div>
-            }
-          </div>
-        }
       </div>
     )
   }
 
   _getClass() {
-    const { className, color } = this.props
+    const { className } = this.props
     const classes = ['modal-panel']
     if(className) classes.push(className)
-    if(color) classes.push(color)
     return classes.join(' ')
   }
 

@@ -22,7 +22,7 @@ class Chooser extends React.Component {
   _handleType = this._handleType.bind(this)
 
   render() {
-    const { options } = this.props
+    const { options, q } = this.props
     return (
       <ModalPanel { ...this._getPanel() }>
         <div className="addressfield-chooser">
@@ -30,7 +30,13 @@ class Chooser extends React.Component {
             <Searchbox { ...this._getSearchbox() } />
           </div>
           <div className="addressfield-chooser-body">
-            { options.length > 0 ?
+            { options.length === 0 && q.length === 0 &&
+              <Message { ...this._getMessage() } />
+            }
+            { options.length === 0 && q.length > 0 &&
+              <Message { ...this._getEmpty() } />
+            }
+            { options.length > 0 &&
               <div className="addressfield-chooser-results">
                 { options.map((option, index) => (
                   <div className="addressfield-chooser-result" key={`options_${index}`} onClick={ this._handleChoose.bind(this, option.description) }>
@@ -43,8 +49,7 @@ class Chooser extends React.Component {
                     </div>
                   </div>
                 )) }
-              </div> :
-              <Message { ...this._getMessage() } />
+              </div>
             }
           </div>
         </div>
@@ -61,7 +66,7 @@ class Chooser extends React.Component {
     if(q !== prevProps.q) {
       this.autocomplete.getPlacePredictions({
         input: q
-      }, this.props.onSetOptions)
+      }, (options) => this.props.onSetOptions(options || []))
     }
   }
   _getPanel() {
@@ -78,6 +83,14 @@ class Chooser extends React.Component {
       title: 'Find a location',
       text: 'choose a location',
       icon: 'map'
+    }
+  }
+
+  _getEmpty() {
+    return {
+      title: 'No locations',
+      text: 'No locations matched your search',
+      icon: 'times'
     }
   }
 

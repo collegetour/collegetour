@@ -57,7 +57,6 @@ const PageCreator = (mapResourcesToPage, mapPropsToPage) => {
 
     _getPanel() {
       return {
-        leftItems: [],
         title: ''
       }
     }

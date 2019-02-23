@@ -31,7 +31,11 @@ class Cordova extends React.Component {
   _handleUpdateUnseen = this._handleUpdateUnseen.bind(this)
 
   render() {
-    return this.props.children
+    return (
+      <div className="cordova">
+        { this.props.children }
+      </div>
+    )
   }
 
   componentDidMount() {

@@ -1,10 +1,5 @@
 var iframe, body = null
 
-var store = window.localforage.createInstance({
-  name: 'local',
-  storeName: 'electron'
-})
-
 var app = {
 
   initialize: function() {
@@ -13,14 +8,14 @@ var app = {
 
   onDeviceReady: function() {
 
-    window.open = window.cordova.InAppBrowser
+    screen.orientation.lock('portrait')
 
     document.addEventListener('pause', pause, false)
     document.addEventListener('resume', resume, false)
 
     iframe = document.createElement('iframe')
-    // iframe.setAttribute('src', 'https://collegetouristapp.com')
-    iframe.setAttribute('src', 'http://localhost:3000')
+    iframe.setAttribute('src', 'https://collegetouristapp.com')
+    // iframe.setAttribute('src', 'http://localhost:3000')
     iframe.setAttribute('border', 0)
 
     body = document.getElementById('cordova')
@@ -76,8 +71,6 @@ var app = {
     }, false)
 
     window.handleOpenURL = function(target) {
-
-      console.log(`handle ${target}`)
       const url = new URL(target)
       setTimeout(() => sendMessage('pushRoute', {
         route: {

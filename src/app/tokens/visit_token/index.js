@@ -17,17 +17,15 @@ class VisitToken extends React.Component {
   render() {
     const { visit } = this.props
     return (
-      <div className="list">
-        <div className="visit-token">
-          <div className="visit-token-logo">
-            <Image src={ visit.college.logo } />
-          </div>
-          <div className="visit-token-details">
-            <strong>{ visit.college.name }</strong><br />
-            <span className="visit-token-details-location">
-              { visit.college.city }, { visit.college.state }<br />
-            </span>
-          </div>
+      <div className="visit-token">
+        <div className="visit-token-logo">
+          <Image src={ visit.college.logo } />
+        </div>
+        <div className="visit-token-details">
+          <strong>{ visit.college.name }</strong><br />
+          <span className="visit-token-details-location">
+            { visit.college.city }, { visit.college.state }<br />
+          </span>
         </div>
       </div>
     )

@@ -42,9 +42,9 @@ class Visit extends React.Component {
                   <div className="visit-photos-event">
                     { moment(visit.date, 'YYYY-MM-DD').format('ddd, MMM DD, YYYY') }<br />
                     <strong>Campus Tour: </strong>
-                    { moment(visit.campus_tour, 'hh:mm:ss').format('hh:mm A') }<br />
+                    { moment(visit.campus_tour, 'hh:mm:ss').format('h:mm A') }<br />
                     <strong>Info Session: </strong>
-                    { moment(visit.info_session, 'hh:mm:ss').format('hh:mm A') }
+                    { moment(visit.info_session, 'hh:mm:ss').format('h:mm A') }
                   </div>
                 </div>
                 <div className="visit-photos-details-weather">
@@ -116,14 +116,20 @@ class Visit extends React.Component {
 
   _handleCall() {
     const { phone } = this.props.visit.college
-    window.location.href = `tel://${phone}`
+    window.location.href = `tel://+1${phone.replace(/[^\d]/g, '')}`
   }
 
   _handleDirections() {
     const { name, city, state } =  this.props.visit.college
     const daddr = `${name} ${city}, ${state}`.replace(' ', '+')
-    const protocol = _.includes(['iPhone','iPad','iPod'], navigator.platform) ? 'maps' : 'https'
-    this.context.host.openWindow(`${protocol}://maps.google.com/maps?daddr=${daddr}`)
+    const path = `://maps.google.com/maps?daddr=${daddr}`
+    if(_.includes(['iPhone','iPad','iPod'], navigator.platform)) {
+      console.log(`maps${path}`)
+      window.location.href = `maps${path}`
+    } else {
+      console.log(`https${path}`)
+      this.context.host.openWindow(`https${path}`)
+    }
   }
 
   _handleWebsite() {
