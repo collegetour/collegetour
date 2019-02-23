@@ -30,7 +30,7 @@ router.get('/api/tours/:tour_id/visits/:visit_id/impressions/:id', t(async (req,
     id: req.params.id
   }).fetch({
     transacting: trx,
-    withRelated: ['asset', 'user.photo']
+    withRelated: ['asset', 'user.photo', 'visit.college']
   })
 
   res.status(200).json({
@@ -66,8 +66,7 @@ router.delete('/api/tours/:tour_id/visits/:visit_id/impressions/:id', t(async (r
   const impression = await Impression.where({
     id: req.params.id
   }).fetch({
-    transacting: trx,
-    withRelated: ['asset', 'user.photo']
+    transacting: trx
   })
 
   await impression.destroy({

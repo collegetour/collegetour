@@ -30,10 +30,12 @@ class Impression extends React.Component {
       <div className="impression">
         <div className="impression-header">
           <div className="impression-header-avatar">
-            <Avatar user={ impression.user } size="22" />
+            <Avatar user={ impression.user } size="50" />
           </div>
           <div className="impression-header-details">
-            <strong>{ impression.user.full_name }</strong>
+            <strong>{ impression.user.full_name }</strong><br />
+            { impression.college.name }, { impression.college.city }, { impression.college.state }<br />
+            { moment(impression.created_at).format('MMM DD, YYYY @ hh:mm A') }
           </div>
           { impression.user.id === presence.user.id &&
             <div className="impression-header-icon" onClick={ this._handleTasks }>
