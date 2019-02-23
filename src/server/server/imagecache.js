@@ -34,6 +34,8 @@ const getType = (originalUrl) => {
 
   if(ext === 'jpg') return 'jpeg'
 
+  if(ext === 'jpeg') return 'jpeg'
+
   if(ext === 'png') return 'png'
 
   if(ext === 'gif') return 'gif'
