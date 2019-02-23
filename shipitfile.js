@@ -33,8 +33,7 @@ module.exports = shipit => {
   ])
 
   utils.registerTask(shipit, 'deploy:release', [
-    'deploy:reload_appserver',
-    'deploy:cache_app'
+    'deploy:reload_appserver'
   ])
 
   utils.registerTask(shipit, 'deploy:config', () => {

@@ -6,6 +6,7 @@ import express from 'express'
 import api from './api'
 import cors from 'cors'
 import qs from 'qs'
+import path from 'path'
 
 const app = express()
 
@@ -19,7 +20,7 @@ app.use(multiparty({ uploadDir: './tmp' }))
 
 app.use(cors())
 
-app.use('/assets', express.static('public'))
+app.use('/assets', express.static(path.join(__dirname, 'public')))
 
 app.use(server)
 
