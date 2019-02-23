@@ -14,6 +14,7 @@ const devserver = new devServer(Webpack(config()), {
   watchContentBase: true,
   open: true,
   proxy: {
+    '/imagecache/*': 'http://localhost:3001',
     '/signin/*': 'http://localhost:3001',
     '/invitations/*': 'http://localhost:3001',
     '/api/*': 'http://localhost:3001'

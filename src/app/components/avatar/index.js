@@ -5,7 +5,8 @@ import Image from '../image'
 class Avatar extends React.Component {
 
   static propTypes = {
-    user: PropTypes.object
+    user: PropTypes.object,
+    width: PropTypes.string
   }
 
   static defaultProps = {}
@@ -14,7 +15,7 @@ class Avatar extends React.Component {
     const { user } = this.props
     return (
       <div className="avatar">
-        { user.photo && <Image src={ user.photo } alt={ user.full_name } title={ user.full_name } />}
+        { user.photo && <Image { ...this._getImage() } />}
         { !user.photo &&
           <div className="avatar-initials">
             { user.initials }
@@ -22,6 +23,16 @@ class Avatar extends React.Component {
         }
       </div>
     )
+  }
+
+  _getImage() {
+    const { user, width } = this.props
+    return {
+      transforms: width ? { w: width, h: width } : null,
+      src: user.photo,
+      alt: user.full_name,
+      title: user.full_name
+    }
   }
 
 }

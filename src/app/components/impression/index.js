@@ -30,7 +30,7 @@ class Impression extends React.Component {
       <div className="impression">
         <div className="impression-header">
           <div className="impression-header-avatar">
-            <Avatar user={ impression.user } />
+            <Avatar user={ impression.user } width="42" />
           </div>
           <div className="impression-header-details">
             <strong>{ impression.user.full_name }</strong><br />
@@ -45,7 +45,7 @@ class Impression extends React.Component {
         { impression.type === 'photo' &&
           <div className="impression-photo">
             <div className="impression-asset">
-              <Image src={ impression.asset } />
+              <Image src={ impression.asset } transforms={{ w: 480 }} />
             </div>
             <div className="impression-caption" dangerouslySetInnerHTML={{__html: this._getCaption(impression.text) }} />
           </div>

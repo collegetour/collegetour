@@ -56,21 +56,22 @@ class Image extends React.Component {
   }
 
   _getHost() {
-    return process.env.CDN_HOST || process.env.ASSET_HOST
+    return ''
+    // return '' || process.env.CDN_HOST || process.env.ASSET_HOST
   }
 
   _getNormal() {
     const { src, transforms } = this.props
     if(!transforms) return src
     const query = qs.stringify(transforms, { encode: false })
-    return `/${query}&dpi=2${src}`
+    return `/imagecache/${query}&dpi=2${src}`
   }
 
   _getRetina() {
     const { src, transforms } = this.props
     if(!transforms) return src
     const query = qs.stringify(transforms, { encode: false })
-    return `/${query}&dpi=2${src}`
+    return `/imagecache/${query}&dpi=2${src}`
   }
 
   _handleLoad() {
