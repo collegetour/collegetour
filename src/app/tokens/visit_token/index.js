@@ -19,7 +19,7 @@ class VisitToken extends React.Component {
     return (
       <div className="visit-token">
         <div className="visit-token-logo">
-          <Image src={ visit.college.logo } />
+          <Image src={ visit.college.logo } transforms={{ w: 38, h: 38 }} />
         </div>
         <div className="visit-token-details">
           <strong>{ visit.college.name }</strong><br />

@@ -6,7 +6,7 @@ class Avatar extends React.Component {
 
   static propTypes = {
     user: PropTypes.object,
-    width: PropTypes.string
+    size: PropTypes.string
   }
 
   static defaultProps = {}
@@ -26,9 +26,9 @@ class Avatar extends React.Component {
   }
 
   _getImage() {
-    const { user, width } = this.props
+    const { user, size } = this.props
     return {
-      transforms: width ? { w: width, h: width } : null,
+      transforms: size ? { w: size, h: size, fit: 'cover' } : null,
       src: user.photo,
       alt: user.full_name,
       title: user.full_name

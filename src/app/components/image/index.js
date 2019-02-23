@@ -43,8 +43,8 @@ class Image extends React.Component {
 
   _getImage() {
     const { alt, className, title } = this.props
-    const normal = `${this._getHost()}${this._getNormal()}`
-    const retina = `${this._getHost()}${this._getRetina()}`
+    const normal = `${this._getHost()}/imagecache${this._getNormal()}`
+    const retina = `${this._getHost()}/imagecache${this._getRetina()}`
     return {
       alt,
       className,
@@ -63,14 +63,14 @@ class Image extends React.Component {
     const { src, transforms } = this.props
     if(!transforms) return src
     const query = qs.stringify(transforms, { encode: false })
-    return `/imagecache/${query}&dpi=2${src}`
+    return `/${query}&dpi=2${src}`
   }
 
   _getRetina() {
     const { src, transforms } = this.props
     if(!transforms) return src
     const query = qs.stringify(transforms, { encode: false })
-    return `/imagecache/${query}&dpi=2${src}`
+    return `/${query}&dpi=2${src}`
   }
 
   _handleLoad() {

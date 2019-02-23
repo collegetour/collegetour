@@ -2,6 +2,7 @@ import request from 'request-promise'
 import { Router } from 'express'
 import { t } from '../utils'
 import sharp from 'sharp'
+import path from 'path'
 import url from 'url'
 import qs from 'qs'
 
@@ -11,9 +12,33 @@ router.get('/imagecache/*', t(async (req, res, trx) => {
 
   const transformed = await transform(req.originalUrl)
 
-  res.type('jpeg').status(200).send(transformed)
+  const type = getType(req.originalUrl)
+
+  const data = await convert(transformed, type)
+
+  res.type(type).status(200).send(data)
 
 }))
+
+const convert = async (transformed, type) => {
+
+  if(type === 'jpeg') return await transformed.jpeg({ quality: 70 }).toBuffer()
+
+  if(type === 'png') return await transformed.png({ quality: 70 }).toBuffer()
+
+}
+
+const getType = (originalUrl) => {
+
+  const ext = path.extname(originalUrl).substr(1)
+
+  if(ext === 'jpg') return 'jpeg'
+
+  if(ext === 'png') return 'png'
+
+  if(ext === 'gif') return 'gif'
+
+}
 
 const transform = async(originalUrl) => {
 
@@ -38,15 +63,17 @@ const transform = async(originalUrl) => {
 
   const dpi = transform.dpi ? parseInt(transform.dpi) : 1
 
+  const fit = transform.fit || 'inside'
+
   const w = transform.w ? parseInt(transform.w) * dpi : null
 
   const h = transform.h ? parseInt(transform.h) * dpi : null
 
-  if(w & h) return await source.resize(w, h, { fit: sharp.fit.cover }).jpeg({ quality: 70 }).toBuffer()
+  if(w & h) return source.resize(w, h, { fit })
 
-  if(w) return await sharp(original).resize(w).jpeg({ quality: 70 }).toBuffer()
+  if(w) return source.resize(w)
 
-  return original
+  return source
 
 }
 

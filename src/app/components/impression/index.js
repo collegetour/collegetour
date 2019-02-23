@@ -30,7 +30,7 @@ class Impression extends React.Component {
       <div className="impression">
         <div className="impression-header">
           <div className="impression-header-avatar">
-            <Avatar user={ impression.user } width="42" />
+            <Avatar user={ impression.user } size="42" />
           </div>
           <div className="impression-header-details">
             <strong>{ impression.user.full_name }</strong><br />

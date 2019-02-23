@@ -18,7 +18,7 @@ class TouristToken extends React.Component {
     return (
       <div className="tourist-token">
         <div className="tourist-token-photo">
-          <Avatar user={ tourist.user } />
+          <Avatar user={ tourist.user } size="48" />
         </div>
         <div className="tourist-token-details">
           <strong>{ tourist.user.full_name }</strong>
