@@ -29,6 +29,6 @@ export const t = (handler) => async (req, res, next) => {
 
     }
 
-  }).catch(() => {})//console.error)
+  }).catch(console.error)
 
 }

@@ -94,17 +94,14 @@ class Searchbox extends React.Component {
   }
 
   _handleBegin() {
-    console.log('begin')
     this.props.onBegin()
   }
 
   _handleChange(q) {
-    console.log(q)
     this.props.onChange(q)
   }
 
   _handleEnd() {
-    console.log('end')
     this.props.onEnd()
   }
 

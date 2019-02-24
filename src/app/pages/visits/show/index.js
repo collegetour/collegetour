@@ -40,7 +40,7 @@ class Visit extends React.Component {
       <div className="visit">
         <div className="visit-photos">
           <div className="visit-photos-header">
-            <div className="visit-photos-container">
+            <div className="container">
               <div className="visit-photos-details">
                 <div className="visit-photos-details-schedule">
                   { visit.college.city}, { visit.college.state }<br />
@@ -69,7 +69,7 @@ class Visit extends React.Component {
             </div>
           </div>
           <div className="visit-photos-tools">
-            <div className="visit-photos-container">
+            <div className="container">
               <div className="visit-photos-displays">
                 <div className={ this._getDisplayClass('gallery') } onClick={ this._handleLayout.bind(this, 'gallery') }>
                   <i className="fa fa-th" />
@@ -87,7 +87,7 @@ class Visit extends React.Component {
               </div>
             }
             { impressions.length > 0 &&
-              <div className="visit-photos-container">
+              <div className="container">
                 { layout === 'feed' && <Feed { ...this._getImpressions() } /> }
                 { layout === 'gallery' && <Gallery { ...this._getImpressions() } /> }
               </div>

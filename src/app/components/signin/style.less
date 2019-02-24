@@ -21,14 +21,18 @@
 }
 .signin-button {
   display: block;
-  background-color: @white !important;
-  color: @red !important;
+  background-color: @white;
+  color: @red;
   margin-bottom: 1em;
   font-size: 1.1em;
   border: 1px solid @white;
   padding: 0.6em;
   border-radius: 0.5em;
   text-align: center;
+  cursor: pointer;
+  &:hover {
+    background-color: fadeout(@white, 5);
+  }
   &::selection {
     background-color: @white !important;
     color: @red !important;

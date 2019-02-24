@@ -7,15 +7,14 @@ export const fetch = (id) => ({
   failure: 'FETCH_FAILURE'
 })
 
-export const save = (first_name, last_name, email, photo_id, agreed_to_terms) => ({
+export const save = (first_name, last_name, email, agreed_to_terms) => ({
   type: 'API_REQUEST',
   method: 'PATCH',
-  endpoint: `${process.env.API_HOST}/api/account`,
+  endpoint: `${process.env.API_HOST}/api/setup`,
   body: {
     first_name,
     last_name,
     email,
-    photo_id,
     agreed_to_terms
   },
   request: 'SAVE_REQUEST',
@@ -27,4 +26,9 @@ export const type = (key, value) => ({
   type: 'TYPE',
   key,
   value
+})
+
+export const agree = (agreed_to_terms) => ({
+  type: 'AGREE',
+  agreed_to_terms
 })

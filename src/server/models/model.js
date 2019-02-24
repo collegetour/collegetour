@@ -1,3 +1,4 @@
+import '../validations/unique_validation'
 import bookshelf from '../lib/bookshelf'
 import Checkit from  'checkit'
 

@@ -46,18 +46,8 @@ class Presence extends React.Component {
 
   componentDidMount() {
     const query = this._getQuery()
-    this._handleTourist(query.tourist_id)
+    this._handleTourist(query.invitation)
     this._handleToken(query.token)
-  }
-
-  _handleToken(token) {
-    if(token) return this.props.onSetToken(token)
-    this.props.onLoadToken()
-  }
-
-  _handleTourist(tourist_id) {
-    if(tourist_id) return this.props.onSetTourist(tourist_id)
-    this.props.onLoadTourist()
   }
 
   componentDidUpdate(prevProps) {
@@ -105,6 +95,16 @@ class Presence extends React.Component {
 
   _handleSignout() {
     this.props.onSignout()
+  }
+
+  _handleToken(token) {
+    if(token) return this.props.onSetToken(token)
+    this.props.onLoadToken()
+  }
+
+  _handleTourist(invitation) {
+    if(invitation) return this.props.onSetTourist(invitation)
+    this.props.onLoadTourist()
   }
 
 }

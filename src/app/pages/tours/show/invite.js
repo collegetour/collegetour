@@ -1,3 +1,4 @@
+import Message from '../../../components/message'
 import Form from '../../../components/form'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -21,19 +22,19 @@ class Invite extends React.Component {
   render() {
     return <Form { ...this._getForm() } />
   }
+  _getInstructions() {
+    return {
+      icon: 'users',
+      title: 'Invite Other Tourists',
+      text: 'You can invite others to view or contribute to your tour. Just enter their contact information and we\'ll send them an invitation by email.'
+    }
+  }
 
   _getForm() {
     const { id } = this.props
     return {
       title: 'Invite Tourist',
-      instructions: (
-        <div className="invitation">
-          <i className="fa fa-fw fa-user-circle" />
-          You can invite others to view or contribute to your tour. Just enter
-          their contact information and we&apos;ll send them an invitation
-          by email.
-        </div>
-      ),
+      instructions: <Message { ...this._getInstructions() } />,
       method: 'POST',
       action: `${process.env.API_HOST}/api/tours/${id}/invitations`,
       submitText: 'Invite',

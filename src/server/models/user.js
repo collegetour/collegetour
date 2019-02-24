@@ -9,7 +9,7 @@ const User = new Model({
   rules: {
     first_name: 'required',
     last_name: 'required',
-    email: ['required','email']
+    email: ['required','email','unique']
   },
 
   virtuals: {

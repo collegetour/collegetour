@@ -31,13 +31,15 @@ const getUser = async (access_token) => {
 
   fb.setAccessToken(access_token)
 
-  const self = await fb.api('/me', { fields: ['id','first_name','last_name','picture'] })
+  const self = await fb.api('/me', { fields: ['id','first_name','last_name'] })
+
+  const picture = await fb.api(`/${self.id}/picture`, 'get', { type: 'square', width: 1000, redirect: false })
 
   return {
     id: self.id,
     first_name: self.first_name,
     last_name: self.last_name,
-    profile_picture: self.picture.data.url
+    profile_picture: picture.data.url
   }
 
 }

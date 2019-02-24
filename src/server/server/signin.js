@@ -2,9 +2,10 @@ import SessionSerializer from '../serializers/session_serializer'
 import { createAssetFromUrl } from '../services/assets'
 import Tourist from '../models/tourist'
 import User from '../models/user'
+import Hashids from 'hashids'
 import express from 'express'
-import moment from 'moment'
 import { t } from '../utils'
+import moment from 'moment'
 
 const signin = (network, getUrl, getAccessToken, getUser) => {
 
@@ -36,8 +37,12 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
       if(!tourist_id) return null
 
+      const hashids = new Hashids()
+
+      const values = hashids.decode(tourist_id)
+
       const tourist = await Tourist.where({
-        id: tourist_id
+        id: values[1]
       }).fetch({
         transacting: trx,
         withRelated: ['user']
@@ -45,7 +50,12 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
       if(!tourist) return null
 
+      const photo_id = tourist.related('user').get('photo_id')
+
+      const asset = photo_id === null ? await createAssetFromUrl(self.profile_picture, trx) : null
+
       await tourist.related('user').save({
+        photo_id: asset ? asset.get('id') : photo_id,
         [`${network}_id`]: self.id
       }, {
         transacting: trx,
@@ -62,15 +72,15 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
       transacting: trx
     })
 
-    const createUser = async (user, trx) => {
+    const createUser = async (self, trx) => {
 
-      const asset = await createAssetFromUrl(user.profile_picture, trx)
+      const asset = await createAssetFromUrl(self.profile_picture, trx)
 
       return await User.forge({
-        first_name: user.first_name,
-        last_name: user.last_name,
+        first_name: self.first_name,
+        last_name: self.last_name,
         photo_id: asset.get('id'),
-        [`${network}_id`]: user.id,
+        [`${network}_id`]: self.id,
         agreed_to_terms: false,
         created_at: moment(),
         updated_at: moment()

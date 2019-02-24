@@ -1,4 +1,3 @@
-import invitations from './invitations'
 import imagecache from './imagecache'
 import instagram from './instagram'
 import facebook from './facebook'
@@ -12,8 +11,6 @@ server.use(instagram)
 server.use(facebook)
 
 server.use(google)
-
-server.use(invitations)
 
 server.use(imagecache)
 

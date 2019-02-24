@@ -1,3 +1,4 @@
+import Message from '../../components/message'
 import Form from '../../components/form'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -19,24 +20,25 @@ class New extends React.Component {
     return <Form { ...this._getForm() } />
   }
 
+  _getInstructions() {
+    return {
+      icon: 'map',
+      title: 'Let\'s plan a college tour!',
+      text: 'To begin, give your tour a memorable name like "Spring Break Tour" and indicate where you will begin and end your journey.'
+    }
+  }
+
   _getForm() {
     return {
       title: 'New Tour',
-      instructions: (
-        <div className="invitation">
-          <i className="fa fa-fw fa-map" />
-          Let plan a college tour! To begin, give your tour a memorable name
-          like &quot;Spring Break Tour&quot; and indicate the locations where
-          you will begin and end.
-        </div>
-      ),
+      instructions: <Message { ...this._getInstructions() } />,
       method: 'POST',
       action: `${process.env.API_HOST}/api/tours`,
       submitText: 'Create',
       fields: [
         { label: 'Name', name: 'name', type: 'textfield', required: true, placeholder: 'Name to uniquely identify this tour' },
-        { label: 'Origin', name: 'origin', type: 'addressfield', required: true, placeholder: 'Street address you will leave from' },
-        { label: 'Destination', name: 'destination', type: 'addressfield', required: true, placeholder: 'Street address you will return to' }
+        { label: 'Origin', name: 'origin', type: 'addressfield', required: true, placeholder: 'Address from which you will leave' },
+        { label: 'Destination', name: 'destination', type: 'addressfield', required: true, placeholder: 'Address to which you will return' }
       ],
       onCancel: this._handleCancel,
       onSuccess: this._handleSuccess

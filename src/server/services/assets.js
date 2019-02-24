@@ -43,14 +43,17 @@ export const uploadChunk = async (req, trx) => {
 }
 
 export const createAssetFromUrl = async (url, trx) => {
-  const parsed = Url.parse(url)
-  const file_data = await request.get({
+  const response = await request.get({
     url,
+    resolveWithFullResponse: true,
     encoding: null
-  }).promise()
+  }).promise().then(response => response.toJSON())
+  const content_type = response.headers['content-type']
   const asset = await createAsset({
-    file_name: path.basename(parsed.pathname),
-    file_data
+    content_type,
+    file_size: response.headers['content-length'],
+    file_name: content_type.replace('image/', 'profile.'),
+    file_data: response.body
   }, trx)
   return asset
 }
@@ -59,8 +62,8 @@ export const createAsset = async (meta, trx) => {
   const asset = await Asset.forge({
     original_file_name: meta.file_name,
     file_name: _getNormalizedFileName(meta.file_name),
-    content_type: _getContentType(meta.file_name),
-    file_size: _getFilesize(meta.file_data),
+    content_type: meta.content_type || _getContentType(meta.file_name),
+    file_size: meta.file_size || _getFilesize(meta.file_data),
     chunks_total: 1,
     status: 'assembled'
   }).save(null, { transacting: trx })

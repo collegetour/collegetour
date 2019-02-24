@@ -22,6 +22,7 @@ router.post('/api/tours/:id/invitations', t(async (req, res, trx) => {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     email: req.body.email,
+    agreed_to_terms: false,
     created_at: moment(),
     updated_at: moment()
   }).save(null, {

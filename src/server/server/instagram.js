@@ -39,7 +39,7 @@ const getUser = async (access_token) => {
     id: self.id,
     first_name: parts[0],
     last_name: parts[parts.length - 1],
-    profile_picture: self.profile_picture
+    profile_picture: self.profile_picture.replace('150', '1000')
   }
 
 }

@@ -1,7 +1,9 @@
 export const INITIAL_STATE = {
   first_name: '',
   last_name: '',
-  email: ''
+  email: '',
+  photo: null,
+  agreed_to_terms: false
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -18,6 +20,12 @@ const reducer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       [action.key]: action.value
+    }
+
+  case 'AGREE':
+    return {
+      ...state,
+      agreed_to_terms: action.agreed_to_terms
     }
 
   case 'SAVE_REQUEST':
