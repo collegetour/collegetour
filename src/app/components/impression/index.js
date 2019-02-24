@@ -4,7 +4,6 @@ import Image from '../image'
 import moment from 'moment'
 import React from 'react'
 import EditNote from '../note/edit'
-import EditPhoto from '../photo/edit'
 
 class Impression extends React.Component {
 
@@ -33,9 +32,11 @@ class Impression extends React.Component {
             <Avatar user={ impression.user } size="50" />
           </div>
           <div className="impression-header-details">
-            <strong>{ impression.user.full_name }</strong><br />
-            { impression.college.name }, { impression.college.city }, { impression.college.state }<br />
-            { moment(impression.created_at).format('MMM DD, YYYY @ hh:mm A') }
+            <div><strong>{ impression.user.full_name }</strong></div>
+            { impression.college &&
+              <div>{ impression.college.name }, { impression.college.city }, { impression.college.state }</div>
+            }
+            <div>{ moment(impression.created_at).format('MMM DD, YYYY @ hh:mm A') }</div>
           </div>
           { impression.user.id === presence.user.id &&
             <div className="impression-header-icon" onClick={ this._handleTasks }>
@@ -88,7 +89,6 @@ class Impression extends React.Component {
 
   _getReviewItems() {
     return [
-      { label: 'Edit Review', modal: EditPhoto },
       { label: 'Delete Review', request: {
         method: 'delete',
         endpoint: `${process.env.API_HOST}/api/tours/1/visits/1/impressions/1`,

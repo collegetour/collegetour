@@ -15,6 +15,7 @@ import localforage from 'localforage'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import Uploader from './components/uploader'
 import Flash from './components/flash'
 import Modal from './components/modal'
 import Tasks from './components/tasks'
@@ -46,15 +47,17 @@ class App extends React.Component {
         <Host>
           <Router>
             <Flash>
-              <Presence>
-                <Modal>
-                  <Tasks>
-                    <Portal>
-                      <RouterStack { ...this._getStack() } />
-                    </Portal>
-                  </Tasks>
-                </Modal>
-              </Presence>
+              <Uploader>
+                <Presence>
+                  <Modal>
+                    <Tasks>
+                      <Portal>
+                        <RouterStack { ...this._getStack() } />
+                      </Portal>
+                    </Tasks>
+                  </Modal>
+                </Presence>
+              </Uploader>
             </Flash>
           </Router>
         </Host>

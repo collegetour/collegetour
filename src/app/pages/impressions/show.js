@@ -11,7 +11,7 @@ class Show extends React.Component {
   }
 
   static propTypes = {
-    impression: PropTypes.array,
+    impression: PropTypes.object,
     page: PropTypes.object
   }
 
@@ -19,7 +19,13 @@ class Show extends React.Component {
   }
 
   render() {
-    return <Impression { ...this._getImpression() } />
+    return (
+      <div className="impression-show">
+        <div className="container">
+          <Impression { ...this._getImpression() } />
+        </div>
+      </div>
+    )
   }
 
   _getImpression() {
