@@ -1,11 +1,10 @@
 import UserSerializer from '../serializers/user_serializer'
-import { sendMail } from '../lib/email'
-import { t } from '../utils'
+import { sendInvitation } from '../services/invitations'
 import Tourist from '../models/tourist'
 import User from '../models/user'
 import Tour from '../models/tour'
 import { Router } from 'express'
-import Hashids from 'hashids'
+import { t } from '../utils'
 import moment from 'moment'
 
 const router = new Router({ mergeParams: true })
@@ -38,29 +37,9 @@ router.post('/api/tours/:id/invitations', t(async (req, res, trx) => {
     transacting: trx
   })
 
-  const hashids = new Hashids()
+  await tourist.load(['tour'], { transacting: trx })
 
-  const salt = Math.floor(Math.random() * Math.floor(999999999))
-
-  const code = hashids.encode(salt, tourist.get('id'))
-
-  await sendMail({
-    template: 'invitation',
-    data: {
-      invitee: {
-        first_name: user.get('first_name')
-      },
-      inviter: {
-        full_name: req.user.get('full_name')
-      },
-      tour: {
-        name: tour.get('name')
-      },
-      code
-    },
-    to: user.get('rfc822'),
-    subject: `${req.user.get('full_name')} invited you to a tour`
-  })
+  await sendInvitation(req.user, tourist)
 
   const data = UserSerializer(user)
 

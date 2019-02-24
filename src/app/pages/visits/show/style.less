@@ -111,3 +111,22 @@
   flex: 1;
   text-align: center;
 }
+
+.tool {
+  display: inline-block;
+  padding: 0.8em;
+  text-align: center;
+  background-color: @white;
+  .fa {
+    border: 1px solid @blue;
+    background-color: @white;
+    color: @blue;
+    padding: 0.5em;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    &:hover {
+      background-color: fadeout(@blue, 90);
+    }
+  }
+}

@@ -11,7 +11,7 @@ class Note extends React.Component {
   static propTypes = {
     show: PropTypes.bool,
     tour_id: PropTypes.string,
-    visit_id: PropTypes.string    
+    visit_id: PropTypes.string
   }
 
   static defaultProps = {}
@@ -20,8 +20,8 @@ class Note extends React.Component {
 
   render() {
     return (
-      <div className="note">
-        <i className="fa fa-pencil" onClick={ this._handleNew } />
+      <div className="tool">
+        <i className="fa fa-sticky-note" onClick={ this._handleNew } />
       </div>
     )
   }

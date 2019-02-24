@@ -39,7 +39,9 @@ class Camera extends React.Component {
     return (
       <div className="camera">
         <input type="file" ref={ node => this.input = node } />
-        <i className="fa fa-camera-retro" ref={ node => this.button = node } />
+        <div className="tool">
+          <i className="fa fa-camera-retro" ref={ node => this.button = node } />
+        </div>
         { uploads.length > 0 &&
           <ModalPanel { ...this._getModalPanel() }>
             <div className="media list">
