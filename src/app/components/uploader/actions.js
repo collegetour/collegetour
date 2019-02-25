@@ -1,13 +1,10 @@
-export const addUpload = (tour_id, visit_id, uniqueIdentifier) => ({
+export const addUpload = (upload) => ({
   type: 'ADD_UPLOAD',
-  tour_id,
-  visit_id,
-  uniqueIdentifier
+  upload
 })
 
-export const removeUpload = (uniqueIdentifier) => ({
-  type: 'REMOVE_UPLOAD',
-  uniqueIdentifier
+export const complete = () => ({
+  type: 'COMPLETE'
 })
 
 export const saveUpload = (uniqueIdentifier, tour_id, visit_id, asset_id) => ({
@@ -21,7 +18,12 @@ export const saveUpload = (uniqueIdentifier, tour_id, visit_id, asset_id) => ({
   failure: 'SAVE_FAILURE'
 })
 
-export const updateProgress = (progress) => ({
-  type: 'UPDATE_PROGRESS',
+export const reset = () => ({
+  type: 'RESET'
+})
+
+export const updateUpload = (active, progress) => ({
+  type: 'UPDATE_UPLOAD',
+  active,
   progress
 })

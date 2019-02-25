@@ -20,11 +20,7 @@ class Preview extends React.Component {
   render() {
     const { dataurl, exif } = this.state
     if(!dataurl || !exif) return null
-    return (
-      <div className="preview">
-        <div { ...this._getPreview() } />
-      </div>
-    )
+    return <div { ...this._getPreview() } />
   }
 
   componentDidMount() {
@@ -42,7 +38,7 @@ class Preview extends React.Component {
     const { dataurl, exif, width, height } = this.state
     const paddingBottom = width === 0 ? 0 : (height / width) * 100
     return {
-      className: `preview-image exif-${ exif }`,
+      className: `preview exif-${ exif }`,
       style: {
         backgroundImage: `url('${dataurl}')`,
         display: paddingBottom > 0 ? 'block' : 'none',

@@ -1,4 +1,6 @@
 export const INITIAL_STATE = {
+  active: 0,
+  status: 'pending',
   uploads: [],
   progress: 0
 }
@@ -10,29 +12,28 @@ const reducer = (state = INITIAL_STATE, action) => {
   case 'ADD_UPLOAD':
     return {
       ...state,
+      status: 'uploading',
       uploads: [
         ...state.uploads,
-        {
-          tour_id: action.tour_id,
-          visit_id: action.visit_id,
-          uniqueIdentifier: action.uniqueIdentifier
-        }
+        action.upload
       ]
     }
 
-  case 'SAVE_SUCCESS':
+  case 'COMPLETE':
     return {
       ...state,
-      uploads: [
-        ...state.uploads.filter(upload => {
-          return upload.uniqueIdentifier !== action.uniqueIdentifier
-        })
-      ]
+      status: 'complete'
     }
 
-  case 'UPDATE_PROGRESS':
+  case 'RESET':
+    return {
+      ...INITIAL_STATE
+    }
+
+  case 'UPDATE_UPLOAD':
     return {
       ...state,
+      active: action.active,
       progress: action.progress
     }
 
