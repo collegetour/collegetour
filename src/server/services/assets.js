@@ -103,6 +103,7 @@ const _getExifData = async (data) => {
   try {
     const parser = exif.create(data)
     const metadata = parser.parse()
+    console.log(metadata)
     return {
       latitude: metadata.tags.GPSLatitude,
       longitude: metadata.tags.GPSLongitude,
