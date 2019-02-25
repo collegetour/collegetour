@@ -7,6 +7,11 @@ exports.up = function(knex, Promise) {
     table.integer('file_size')
     table.integer('chunks_total')
     table.string('status')
+    table.integer('width')
+    table.integer('height')
+    table.string('latitude')
+    table.string('longitude')
+    table.timestamp('taken_at')
     table.timestamps()
   })
 }

@@ -1,6 +1,13 @@
 const impression_serializer = (impression) => ({
   id: impression.get('id'),
-  asset: impression.get('asset_id') ? impression.related('asset').get('url') : null,
+  asset: impression.get('asset_id') ? {
+    url: impression.related('asset').get('url'),
+    width: impression.related('asset').get('width'),
+    height: impression.related('asset').get('height'),
+    latitude: impression.related('asset').get('latitude'),
+    longitude: impression.related('asset').get('longitude'),
+    taken_at: impression.related('asset').get('taken_at')
+  } : null,
   type: impression.get('type'),
   user: impression.get('user_id') ? {
     id: impression.related('user').get('id'),
@@ -8,7 +15,7 @@ const impression_serializer = (impression) => ({
     initials: impression.related('user').get('initials'),
     photo: impression.related('user').get('photo_id') ? impression.related('user').related('photo').get('url') : null
   } : null,
-  college: impression.get('college_id') ? {
+  college: impression.get('visit_id') ? {
     name: impression.related('visit').related('college').get('name'),
     city: impression.related('visit').related('college').get('city'),
     state: impression.related('visit').related('college').get('state')

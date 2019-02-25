@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
     table.foreign('visit_id').references('visits.id')
     table.integer('asset_id').unsigned()
     table.foreign('asset_id').references('assets.id')
-    table.enum('type', ['photo','note','review'])
+    table.enum('type', ['photo','note'])
     table.text('text')
     table.timestamps()
   })

@@ -36,7 +36,12 @@ class Impression extends React.Component {
             { impression.college &&
               <div>{ impression.college.name }, { impression.college.city }, { impression.college.state }</div>
             }
-            <div>{ moment(impression.created_at).format('MMM DD, YYYY @ hh:mm A') }</div>
+            { impression.asset.taken_at &&
+              <div>{ moment(impression.asset.taken_at).utc().format('MMM DD, YYYY @ hh:mm A') }</div>
+            }
+            { !impression.asset.taken_at &&
+              <div>{ moment(impression.created_at).format('MMM DD, YYYY @ hh:mm A') }</div>
+            }
           </div>
           { impression.user.id === presence.user.id &&
             <div className="impression-header-icon" onClick={ this._handleTasks }>
@@ -46,8 +51,8 @@ class Impression extends React.Component {
         </div>
         { impression.type === 'photo' &&
           <div className="impression-photo">
-            <div className="impression-asset">
-              <Image src={ impression.asset } transforms={{ w: 480 }} />
+            <div className="impression-asset" style={ this._getStyle(impression.asset) }>
+              <Image src={ impression.asset.url } transforms={{ w: 480 }} />
             </div>
           </div>
         }
@@ -58,8 +63,13 @@ class Impression extends React.Component {
     )
   }
 
-  _getCaption(text) {
-    return text ? text.replace(/\n/g, '<br />')  : ''
+  _getStyle(asset) {
+    if(!asset.width || !asset.height) return {}
+    return {
+      height: 0,
+      paddingBottom: (asset.width / asset.height) * 100 + '%'
+    }
+
   }
 
   _getNoteItems() {

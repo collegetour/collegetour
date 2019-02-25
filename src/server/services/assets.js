@@ -3,10 +3,11 @@ import * as local from '../backends/local'
 import * as aws from '../backends/aws'
 import request from 'request-promise'
 import Asset from '../models/asset'
+import exif from 'exif-parser'
+import moment from 'moment'
 import Jimp from 'jimp'
 import path from 'path'
 import _ from 'lodash'
-import Url from 'url'
 import fs from 'fs'
 
 const backend = process.env.ASSET_STORAGE === 's3' ? aws : local
@@ -74,10 +75,30 @@ export const createAsset = async (meta, trx) => {
 
 const _assembleAsset = async (asset, trx) => {
   const fileData = await _getAssembledData(asset)
+  const exif = await _getExifData(fileData)
   const normalizedData = await _getNormalizedData(asset, fileData)
   await _saveFile(normalizedData, `assets/${asset.get('id')}/${asset.get('file_name')}`, asset.get('content_type'))
   await _deleteChunks(asset)
-  await asset.save({ status: 'assembled' }, { transacting: trx })
+  await asset.save({
+    ...exif,
+    status: 'assembled'
+  }, { transacting: trx })
+}
+
+const _getExifData = async (data) => {
+  try {
+    const parser = exif.create(data)
+    const metadata = parser.parse()
+    return {
+      width: metadata.tags.ExifImageWidth,
+      height: metadata.tags.ExifImageHeight,
+      latitude: metadata.tags.GPSLatitude,
+      longitude: metadata.tags.GPSLongitude,
+      taken_at: moment.unix(metadata.tags.DateTimeOriginal)
+    }
+  } catch(err) {
+    return {}
+  }
 }
 
 const _getNormalizedData = async (asset, fileData) => {

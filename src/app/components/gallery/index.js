@@ -22,7 +22,7 @@ class Gallery extends React.Component {
       <div className="gallery">
         { impressions.filter(impression => impression.asset).map((impression, index) => (
           <div className="gallery-impression" key={`impression_${impression.id}`} onClick={ this._handleClick.bind(this, impression.id) }>
-            <Image src={ impression.asset } transforms={{ w: 200, h: 200, fit: 'cover' }} />
+            <Image src={ impression.asset.url } transforms={{ w: 200, h: 200, fit: 'cover' }} />
           </div>
         )) }
       </div>

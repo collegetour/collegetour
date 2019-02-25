@@ -33,7 +33,7 @@ exports.seed = async (knex, Promise) => {
       first_name: 'Margaret',
       last_name: 'Kops',
       email: 'margaretthewarrior@gmail.com',
-      photo_id: 14,
+      photo_id: null,
       instagram_id: null,
       facebook_id: null,
       google_id: null,
