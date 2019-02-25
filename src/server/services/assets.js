@@ -60,8 +60,8 @@ export const createAssetFromUrl = async (url, trx) => {
 }
 
 export const createAsset = async (meta, trx) => {
-  const dimensions = await _getDimensions(meta.file_data)
   const exif = await _getExifData(meta.file_data)
+  const dimensions = await _getDimensions(meta.file_data)
   const asset = await Asset.forge({
     original_file_name: meta.file_name,
     file_name: _getNormalizedFileName(meta.file_name),
@@ -79,8 +79,8 @@ export const createAsset = async (meta, trx) => {
 
 const _assembleAsset = async (asset, trx) => {
   const fileData = await _getAssembledData(asset)
-  const dimensions = await _getDimensions(fileData)
   const exif = await _getExifData(fileData)
+  const dimensions = await _getDimensions(fileData)
   const normalizedData = await _getNormalizedData(asset, fileData)
   await _saveFile(normalizedData, `assets/${asset.get('id')}/${asset.get('file_name')}`, asset.get('content_type'))
   await _deleteChunks(asset)
@@ -94,8 +94,8 @@ const _assembleAsset = async (asset, trx) => {
 const _getDimensions = async (data) => {
   const dimension = await sharp(data).metadata()
   return {
-    width: dimension.width,
-    height:  dimension.height
+    width: dimension.orientation > 4 ? dimension.height : dimension.width,
+    height: dimension.orientation > 4 ? dimension.width : dimension.height
   }
 }
 
@@ -103,14 +103,12 @@ const _getExifData = async (data) => {
   try {
     const parser = exif.create(data)
     const metadata = parser.parse()
-    console.log(metadata)
     return {
       latitude: metadata.tags.GPSLatitude,
       longitude: metadata.tags.GPSLongitude,
       taken_at: metadata.tags.DateTimeOriginal ? moment.unix(metadata.tags.DateTimeOriginal) : null
     }
   } catch(err) {
-    console.log(err)
     return {}
   }
 }
