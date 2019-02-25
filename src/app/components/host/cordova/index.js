@@ -40,7 +40,6 @@ class Cordova extends React.Component {
 
   componentDidMount() {
     window.addEventListener('message', this._handleReceiveMessage, false)
-    this._handleGetVersion()
   }
 
   componentWillUnmount() {

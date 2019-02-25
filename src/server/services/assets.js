@@ -109,6 +109,7 @@ const _getExifData = async (data) => {
       taken_at: metadata.tags.DateTimeOriginal ? moment.unix(metadata.tags.DateTimeOriginal) : null
     }
   } catch(err) {
+    console.log(err)
     return {}
   }
 }

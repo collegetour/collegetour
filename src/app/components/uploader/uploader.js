@@ -11,7 +11,7 @@ class Uploader extends React.Component {
   }
 
   static contextTypes = {
-    host: PropTypes.object    
+    host: PropTypes.object
   }
 
   static propTypes = {
@@ -87,7 +87,7 @@ class Uploader extends React.Component {
 
   componentDidMount() {
     this.resumable = new Resumable({
-      target: '/api/assets/upload',
+      target: `${process.env.API_HOST}/api/assets/upload`,
       chunkSize: 1024 * 256,
       permanentErrors: [204, 400, 404, 409, 415, 500, 501],
       fileType: ['jpg','png','gif','jpeg']
