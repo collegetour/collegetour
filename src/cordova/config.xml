@@ -100,7 +100,6 @@
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="AppendUserAgent" value=";Cordova" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
-    <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <plugin name="cordova-plugin-safariviewcontroller" spec="^1.5.4" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
@@ -111,5 +110,6 @@
     <plugin name="cordova-plugin-customurlscheme" spec="^4.3.0">
         <variable name="URL_SCHEME" value="collegetourist" />
     </plugin>
+    <plugin name="cordova-plugin-camera-with-exif" spec="^1.2.5" />
     <engine name="ios" spec="^4.5.5" />
 </widget>
