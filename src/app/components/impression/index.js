@@ -36,12 +36,7 @@ class Impression extends React.Component {
             { impression.college &&
               <div>{ impression.college.name }, { impression.college.city }, { impression.college.state }</div>
             }
-            { impression.asset.taken_at &&
-              <div>{ moment(impression.asset.taken_at).utc().format('MMM DD, YYYY @ hh:mm A') }</div>
-            }
-            { !impression.asset.taken_at &&
-              <div>{ moment(impression.created_at).format('MMM DD, YYYY @ hh:mm A') }</div>
-            }
+            <div>{ moment(impression.created_at).format('MMM DD, YYYY @ hh:mm A') }</div>
           </div>
           { impression.user.id === presence.user.id &&
             <div className="impression-header-icon" onClick={ this._handleTasks }>

@@ -3,10 +3,7 @@ const impression_serializer = (impression) => ({
   asset: impression.get('asset_id') ? {
     url: impression.related('asset').get('url'),
     width: impression.related('asset').get('width'),
-    height: impression.related('asset').get('height'),
-    latitude: impression.related('asset').get('latitude'),
-    longitude: impression.related('asset').get('longitude'),
-    taken_at: impression.related('asset').get('taken_at')
+    height: impression.related('asset').get('height')
   } : null,
   type: impression.get('type'),
   user: impression.get('user_id') ? {
