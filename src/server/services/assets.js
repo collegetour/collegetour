@@ -80,7 +80,6 @@ export const createAsset = async (meta, trx) => {
 const _assembleAsset = async (asset, trx) => {
   const fileData = await _getAssembledData(asset)
   const exif = await _getExifData(fileData)
-  console.log(exif)
   const dimensions = await _getDimensions(fileData)
   const normalizedData = await _getNormalizedData(asset, fileData)
   await _saveFile(normalizedData, `assets/${asset.get('id')}/${asset.get('file_name')}`, asset.get('content_type'))
@@ -104,6 +103,7 @@ const _getExifData = async (data) => {
   try {
     const parser = exif.create(data)
     const metadata = parser.parse()
+    console.log(metadata)
     return {
       latitude: metadata.tags.GPSLatitude,
       longitude: metadata.tags.GPSLongitude,
