@@ -21,14 +21,14 @@ class Cordova extends React.Component {
     hasFocus: true
   }
 
+  _handleAllowSleep = this._handleAllowSleep.bind(this)
   _handleBlurFocus = this._handleBlurFocus.bind(this)
-  _handleGetVersion = this._handleGetVersion.bind(this)
   _handleHasFocus = this._handleHasFocus.bind(this)
+  _handleKeepAwake = this._handleKeepAwake.bind(this)
   _handleOpenWindow = this._handleOpenWindow.bind(this)
   _handlePushRoute = this._handlePushRoute.bind(this)
   _handleReceiveMessage = this._handleReceiveMessage.bind(this)
   _handleSignin = this._handleSignin.bind(this)
-  _handleUpdateUnseen = this._handleUpdateUnseen.bind(this)
 
   render() {
     return (
@@ -51,25 +51,30 @@ class Cordova extends React.Component {
     return {
       host: {
         type: 'cordova',
-        mobile: true,
-        signin: this._handleSignin,
+        allowSleep: this._handleAllowSleep,
         hasFocus: this._handleHasFocus,
-        openWindow: this._handleOpenWindow,
-        updateUnseen: this._handleUpdateUnseen
+        signin: this._handleSignin,
+        keepAwake: this._handleKeepAwake,
+        openWindow: this._handleOpenWindow
+
       }
     }
+  }
+
+  _handleAllowSleep() {
+    this._handleSendMessage('allowSleep')
   }
 
   _handleBlurFocus(hasFocus) {
     this.setState({ hasFocus })
   }
 
-  _handleGetVersion() {
-    this._handleSendMessage('getVersion')
-  }
-
   _handleHasFocus() {
     return this.state.hasFocus
+  }
+
+  _handleKeepAwake() {
+    this._handleSendMessage('keepAwake')
   }
 
   _handleOpenWindow(url) {
@@ -106,10 +111,6 @@ class Cordova extends React.Component {
       action,
       data
     }, '*')
-  }
-
-  _handleUpdateUnseen(count) {
-    this._handleSendMessage('updateBadge', { count })
   }
 
 

@@ -60,13 +60,17 @@ export const createAssetFromUrl = async (url, trx) => {
 }
 
 export const createAsset = async (meta, trx) => {
+  const dimensions = await _getDimensions(meta.file_data)
+  const exif = await _getExifData(meta.file_data)
   const asset = await Asset.forge({
     original_file_name: meta.file_name,
     file_name: _getNormalizedFileName(meta.file_name),
     content_type: meta.content_type || _getContentType(meta.file_name),
     file_size: meta.file_size || _getFilesize(meta.file_data),
     chunks_total: 1,
-    status: 'assembled'
+    status: 'assembled',
+    ...dimensions,
+    ...exif
   }).save(null, { transacting: trx })
   const normalizedData = await _getNormalizedData(asset, meta.file_data)
   await _saveFile(normalizedData, `assets/${asset.get('id')}/${asset.get('file_name')}`, asset.get('content_type'))
@@ -75,14 +79,24 @@ export const createAsset = async (meta, trx) => {
 
 const _assembleAsset = async (asset, trx) => {
   const fileData = await _getAssembledData(asset)
+  const dimensions = await _getDimensions(fileData)
   const exif = await _getExifData(fileData)
   const normalizedData = await _getNormalizedData(asset, fileData)
   await _saveFile(normalizedData, `assets/${asset.get('id')}/${asset.get('file_name')}`, asset.get('content_type'))
   await _deleteChunks(asset)
   await asset.save({
+    ...dimensions,
     ...exif,
     status: 'assembled'
   }, { transacting: trx })
+}
+
+const _getDimensions = async (data) => {
+  const dimension = await sharp(data).metadata()
+  return {
+    width: dimension.width,
+    height:  dimension.height
+  }
 }
 
 const _getExifData = async (data) => {
@@ -90,11 +104,9 @@ const _getExifData = async (data) => {
     const parser = exif.create(data)
     const metadata = parser.parse()
     return {
-      width: metadata.tags.ExifImageWidth,
-      height: metadata.tags.ExifImageHeight,
       latitude: metadata.tags.GPSLatitude,
       longitude: metadata.tags.GPSLongitude,
-      taken_at: moment.unix(metadata.tags.DateTimeOriginal)
+      taken_at: metadata.tags.DateTimeOriginal ? moment.unix(metadata.tags.DateTimeOriginal) : null
     }
   } catch(err) {
     return {}

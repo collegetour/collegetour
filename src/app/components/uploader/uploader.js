@@ -10,7 +10,9 @@ class Uploader extends React.Component {
     uploader: PropTypes.object
   }
 
-  static contextTypes = {}
+  static contextTypes = {
+    host: PropTypes.object    
+  }
 
   static propTypes = {
     active: PropTypes.number,
@@ -98,9 +100,16 @@ class Uploader extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    const { host } = this.context
     const { status } = this.props
-    if(status !== prevProps.status && status === 'complete') {
-      setTimeout(this._handleReset, 5000)
+    if(status !== prevProps.status) {
+      if(status === 'uploading') {
+        host.keepAwake()
+      }
+      if(status === 'complete') {
+        host.allowSleep()
+        setTimeout(this._handleReset, 5000)
+      }
     }
   }
 

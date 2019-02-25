@@ -17,6 +17,7 @@
         "cordova-plugin-camera": "^4.0.3",
         "cordova-plugin-customurlscheme": "^4.3.0",
         "cordova-plugin-device": "^2.0.2",
+        "cordova-plugin-insomnia": "git+https://github.com/EddyVerbruggen/Insomnia-PhoneGap-Plugin.git",
         "cordova-plugin-keyboard": "^1.2.0",
         "cordova-plugin-safariviewcontroller": "^1.5.4",
         "cordova-plugin-screen-orientation": "^3.0.1",
@@ -35,7 +36,8 @@
             },
             "cordova-plugin-aswebauthenticationsession": {},
             "cordova-plugin-keyboard": {},
-            "cordova-plugin-screen-orientation": {}
+            "cordova-plugin-screen-orientation": {},
+            "cordova-plugin-insomnia": {}
         },
         "platforms": [
             "ios"

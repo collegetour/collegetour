@@ -39,6 +39,9 @@
         <splash qualifier="port-xxxhdpi" src="../public/images/screens/android/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="ios">
+        <feature name="Insomnia">
+            <param name="ios-package" value="Insomnia" />
+        </feature>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <preference name="FadeSplashScreen" value="true" />
@@ -103,9 +106,10 @@
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-keyboard" spec="^1.2.0" />
     <plugin name="cordova-plugin-aswebauthenticationsession" spec="^1.0.12" />
+    <plugin name="cordova-plugin-insomnia" spec="https://github.com/EddyVerbruggen/Insomnia-PhoneGap-Plugin.git" />
+    <plugin name="cordova-plugin-screen-orientation" spec="^3.0.1" />
     <plugin name="cordova-plugin-customurlscheme" spec="^4.3.0">
         <variable name="URL_SCHEME" value="collegetourist" />
     </plugin>
-    <plugin name="cordova-plugin-screen-orientation" spec="^3.0.1" />
     <engine name="ios" spec="^4.5.5" />
 </widget>

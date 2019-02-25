@@ -13,6 +13,7 @@ class Browser extends React.Component {
 
   static defaultProps = {}
 
+  _handleHasFocus = this._handleHasFocus.bind(this)
   _handleOpenWindow = this._handleOpenWindow.bind(this)
   _handleSignin = this._handleSignin.bind(this)
 
@@ -29,10 +30,17 @@ class Browser extends React.Component {
     return {
       host: {
         type: 'browser',
+        allowSleep: () => {},
+        hasFocus: this._handleHasFocus,
         signin: this._handleSignin,
+        keepAwake: () => {},
         openWindow: this._handleOpenWindow
       }
     }
+  }
+
+  _handleHasFocus() {
+    return document.hasFocus()
   }
 
   _handleOpenWindow(url) {

@@ -57,14 +57,24 @@ var app = {
       if (parseInt(window.device.version) >= 12 && window.device.platform == 'iOS') {
         window.ASWebAuthSession.start('collegetourist://', auth_url, function(url) {
           sendMessage('pushPath', { path: url.replace('collegetourist:/', '') })
-        },function(error){
+        }, function(error) {
           console.log(error)
         })
       }
     }
 
+    function keepAwake() {
+      window.plugins.insomnia.keepAwake()
+    }
+
+    function allowSleep() {
+      window.plugins.insomnia.allowSleepAgain()
+    }
+
     window.addEventListener('message', function (e) {
       var message = e.data
+      if(message.action === 'allowSleep') return allowSleep()
+      if(message.action === 'keepAwake') return keepAwake()
       if(message.action === 'openWindow') return openWindow(message.data)
       if(message.action === 'signin') return signin(message.data)
     }, false)
