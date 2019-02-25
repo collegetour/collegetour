@@ -67,9 +67,8 @@ class Impression extends React.Component {
     if(!asset.width || !asset.height) return {}
     return {
       height: 0,
-      paddingBottom: (asset.width / asset.height) * 100 + '%'
+      paddingBottom: (asset.height / asset.width) * 100 + '%'
     }
-
   }
 
   _getNoteItems() {
