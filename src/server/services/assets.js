@@ -5,7 +5,7 @@ import request from 'request-promise'
 import Asset from '../models/asset'
 import exif from 'exif-parser'
 import moment from 'moment'
-import Jimp from 'jimp'
+import sharp from 'sharp'
 import path from 'path'
 import _ from 'lodash'
 import fs from 'fs'
@@ -108,15 +108,7 @@ const _getNormalizedData = async (asset, fileData) => {
 }
 
 const _rotateImage = async (data) => {
-  const image = await Jimp.read(data)
-  if(!image) return data
-  image.exifRotate()
-  return await new Promise((resolve, reject) => {
-    image.getBuffer(image.getMIME(), (err, buffer) => {
-      if(err) reject(new Error(err))
-      resolve(buffer)
-    })
-  })
+  return await sharp(data).withMetadata().rotate().toBuffer()
 }
 
 const _chunkExists = async (filepath) => {
