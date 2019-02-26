@@ -33,13 +33,13 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
   router.get(`/signin/${network}/authorize`, t(async (req, res, trx) => {
 
-    const findTourist = async (self, tourist_id, trx) => {
+    const findTourist = async (self, invitation, trx) => {
 
-      if(!tourist_id) return null
+      if(!invitation) return null
 
       const hashids = new Hashids()
 
-      const values = hashids.decode(tourist_id)
+      const values = hashids.decode(invitation)
 
       const tourist = await Tourist.where({
         id: values[1]
@@ -94,7 +94,7 @@ const signin = (network, getUrl, getAccessToken, getUser) => {
 
     const self = await getUser(req.query.access_token)
 
-    const user = await findTourist(self, state.tourist_id, trx) || await findUser(self, trx) || await createUser(self, trx)
+    const user = await findTourist(self, state.invitation, trx) || await findUser(self, trx) || await createUser(self, trx)
 
     await user.load(['photo'], { transacting: trx })
 
