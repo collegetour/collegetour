@@ -1,7 +1,6 @@
 import TourSerializer from '../../serializers/tour_serializer'
 import Tourist from '../../models/tourist'
 import Tour from '../../models/tour'
-import moment from 'moment'
 
 const route = async (req, res, trx) => {
 
@@ -17,8 +16,7 @@ const route = async (req, res, trx) => {
 
   await Tourist.forge({
     tour_id: tour.get('id'),
-    user_id: req.user.get('id'),
-    claimed_at: moment()
+    user_id: req.user.get('id')
   }).save(null, {
     transacting: trx
   })
