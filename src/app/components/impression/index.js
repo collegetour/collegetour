@@ -57,7 +57,7 @@ class Impression extends React.Component {
       </div>
     )
   }
-  
+
   _getCaption(text) {
     return text ? text.replace(/\n/g, '<br />')  : ''
   }
@@ -96,10 +96,11 @@ class Impression extends React.Component {
   }
 
   _getReviewItems() {
+    const { impression, tour_id, visit_id } = this.props
     return [
       { label: 'Delete Review', request: {
         method: 'delete',
-        endpoint: `/api/tours/1/visits/1/impressions/1`,
+        endpoint: `/api/tours/${tour_id}/visits/${ visit_id }/impressions/${impression.id}`,
         onSuccess: () => {},
         onError: () => {}
       } }

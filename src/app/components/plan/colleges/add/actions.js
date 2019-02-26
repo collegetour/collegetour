@@ -1,7 +1,7 @@
 export const fetch = (q) => ({
   type: 'API_REQUEST',
   method: 'GET',
-  endpoint: `/api/colleges`,
+  endpoint: '/api/colleges',
   query: { q },
   request: 'FETCH_REQUEST',
   success: 'FETCH_SUCCESS',

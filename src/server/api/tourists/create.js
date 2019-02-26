@@ -35,7 +35,7 @@ const route = async (req, res, trx) => {
 
   await tourist.load(['tour'], { transacting: trx })
 
-  await sendInvitation(req.user, tourist)
+  await sendInvitation(req.user, user)
 
   const data = UserSerializer(user)
 
