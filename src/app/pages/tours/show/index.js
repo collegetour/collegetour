@@ -1,10 +1,10 @@
 import { Page } from '../../../components/page'
+import Invite from '../../../components/invite'
 import Tabs from '../../../components/tabs'
 import Itinerary from './itinerary'
 import PropTypes from 'prop-types'
 import Tourists from './tourists'
 import Visits from './visits'
-import Invite from './invite'
 import Edit from '../edit'
 import React from 'react'
 

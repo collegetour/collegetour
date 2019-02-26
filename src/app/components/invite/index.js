@@ -1,6 +1,6 @@
-import Message from '../../../components/message'
-import Form from '../../../components/form'
 import PropTypes from 'prop-types'
+import Message from '../message'
+import Form from '../form'
 import React from 'react'
 
 class Invite extends React.Component {

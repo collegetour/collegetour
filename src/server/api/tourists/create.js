@@ -8,7 +8,7 @@ import moment from 'moment'
 const route = async (req, res, trx) => {
 
   const tour = await Tour.where({
-    id: req.params.id
+    id: req.params.tour_id
   }).fetch({
     transacting: trx
   })
