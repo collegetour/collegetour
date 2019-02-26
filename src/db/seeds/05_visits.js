@@ -47,24 +47,11 @@ exports.seed = async (knex, Promise) => {
       created_at: moment(),
       updated_at: moment()
     },
-    {
-      tour_id: 1,
-      college_id: 8,
-      delta: 4,
-      info_session: '10:45:00',
-      campus_tour: '9:45:00',
-      date: '2019-02-20',
-      weather: 'snow',
-      temp: 30,
-      drive_duration: 21,
-      drive_distance: 17,
-      created_at: moment(),
-      updated_at: moment()
-    },
+
     {
       tour_id: 1,
       college_id: 6,
-      delta: 5,
+      delta: 4,
       info_session: '14:00:00',
       campus_tour: '15:00:00',
       date: '2019-02-21',
@@ -78,7 +65,7 @@ exports.seed = async (knex, Promise) => {
     {
       tour_id: 1,
       college_id: 12,
-      delta: 6,
+      delta: 5,
       info_session: '14:30:00',
       campus_tour: '15:30:00',
       date: '2019-02-21',
@@ -92,7 +79,7 @@ exports.seed = async (knex, Promise) => {
     {
       tour_id: 1,
       college_id: 4,
-      delta: 7,
+      delta: 6,
       info_session: '10:15:00',
       campus_tour: '9:00:00',
       date: '2019-02-22',

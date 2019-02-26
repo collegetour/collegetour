@@ -1,11 +1,7 @@
-import CollegeSerializer from '../serializers/college_serializer'
-import { t } from '../utils'
-import College from '../models/college'
-import { Router } from 'express'
+import CollegeSerializer from '../../serializers/college_serializer'
+import College from '../../models/college'
 
-const router = new Router({ mergeParams: true })
-
-router.get('/api/colleges', t(async (req, res, trx) => {
+const route = async (req, res, trx) => {
 
   const colleges = await College.query(qb => {
 
@@ -24,6 +20,6 @@ router.get('/api/colleges', t(async (req, res, trx) => {
     data: colleges.map(CollegeSerializer)
   })
 
-}))
+}
 
-export default router
+export default route

@@ -1,9 +1,4 @@
-import { t } from '../utils'
-import { Router } from 'express'
-
-const router = new Router({ mergeParams: true })
-
-router.get('/api/tours/:tour_id/itinerary', t(async (req, res, trx) => {
+const route = async (req, res, trx) => {
 
   const visits = [
     {
@@ -128,6 +123,6 @@ router.get('/api/tours/:tour_id/itinerary', t(async (req, res, trx) => {
     data: visits
   })
 
-}))
+}
 
-export default router
+export default route

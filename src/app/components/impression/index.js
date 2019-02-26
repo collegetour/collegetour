@@ -33,7 +33,7 @@ class Impression extends React.Component {
           </div>
           <div className="impression-header-details">
             <div><strong>{ impression.user.full_name }</strong></div>
-            { impression.college &&
+            { impression.college.name &&
               <div>{ impression.college.name }, { impression.college.city }, { impression.college.state }</div>
             }
             <div>{ moment(impression.created_at).format('MMM DD, YYYY @ hh:mm A') }</div>
@@ -56,6 +56,10 @@ class Impression extends React.Component {
         }
       </div>
     )
+  }
+  
+  _getCaption(text) {
+    return text ? text.replace(/\n/g, '<br />')  : ''
   }
 
   _getStyle(asset) {

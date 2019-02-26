@@ -1,15 +1,11 @@
-import UserSerializer from '../serializers/user_serializer'
-import { sendInvitation } from '../services/invitations'
-import Tourist from '../models/tourist'
-import User from '../models/user'
-import Tour from '../models/tour'
-import { Router } from 'express'
-import { t } from '../utils'
+import UserSerializer from '../../serializers/user_serializer'
+import { sendInvitation } from '../../services/invitations'
+import Tourist from '../../models/tourist'
+import User from '../../models/user'
+import Tour from '../../models/tour'
 import moment from 'moment'
 
-const router = new Router({ mergeParams: true })
-
-router.post('/api/tours/:id/invitations', t(async (req, res, trx) => {
+const route = async (req, res, trx) => {
 
   const tour = await Tour.where({
     id: req.params.id
@@ -45,6 +41,6 @@ router.post('/api/tours/:id/invitations', t(async (req, res, trx) => {
 
   res.status(200).json({ data })
 
-}))
+}
 
-export default router
+export default route

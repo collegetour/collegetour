@@ -27,13 +27,6 @@ class Preview extends React.Component {
     this._handlePreview()
   }
 
-  componentDidUpdate(prevProps) {
-    const { image } = this.props
-    if(image.identifier !== prevProps.image.identifier) {
-      this._handlePreview()
-    }
-  }
-
   _getPreview() {
     const { dataurl, exif, width, height } = this.state
     const paddingBottom = width === 0 ? 0 : (height / width) * 100

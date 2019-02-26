@@ -58,7 +58,7 @@ class Uploader extends React.Component {
                 <div className="uploader-progress">
                   <div className="uploader-progress-preview">
                     <div className="uploader-progress-preview-frame">
-                      <Preview image={ uploads[active] } />
+                      <Preview image={ uploads[active] } key={`preview_${active}` } />
                     </div>
                   </div>
                   <div className="uploader-progress-details">

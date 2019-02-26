@@ -70,18 +70,9 @@ const _sendViaConsole = async (message) => {
 
 const _sendViaSES = async (message) => {
 
-  const result = await new Promise((resolve, reject) => {
+  const result = ses.sendMail(message).promise()
 
-    ses.sendMail(message, async (err, info) => {
-
-      if(err) reject(err)
-
-      resolve(info)
-
-    })
-
-
-  })
+  console.log(message, result)
 
   return {
     ses_id: result.response,
