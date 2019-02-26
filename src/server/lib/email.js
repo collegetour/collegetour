@@ -80,7 +80,7 @@ const _sendViaSES = async (message) => {
       Body: {
         Html: {
           Charset: 'UTF-8',
-          Data: message.hml
+          Data: message.html
         },
         Text: {
           Charset: 'UTF-8',
