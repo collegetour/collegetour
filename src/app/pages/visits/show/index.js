@@ -181,8 +181,8 @@ class Visit extends React.Component {
 }
 
 const mapResourcesToPage = (props, context, page) => ({
-  visit: `${process.env.API_HOST}/api/tours/${page.params.tour_id}/visits/${page.params.id}`,
-  impressions: `${process.env.API_HOST}/api/tours/${page.params.tour_id}/visits/${page.params.id}/impressions`
+  visit: `/api/tours/${page.params.tour_id}/visits/${page.params.id}`,
+  impressions: `/api/tours/${page.params.tour_id}/visits/${page.params.id}/impressions`
 })
 
 const mapPropsToPage = (props, context, resources, page) => ({

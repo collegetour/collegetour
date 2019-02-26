@@ -24,8 +24,8 @@ class Edit extends React.Component {
     return {
       title: 'Edit Account',
       method: 'PATCH',
-      endpoint: `${process.env.API_HOST}/api/account`,
-      action: `${process.env.API_HOST}/api/account`,
+      endpoint: `/api/account`,
+      action: `/api/account`,
       submitText: 'Save',
       fields: [
         { label: 'First Name', name: 'first_name', type: 'textfield', required: true },

@@ -43,7 +43,7 @@ export const loadSession = (token) => ({
   type: 'API_REQUEST',
   method: 'GET',
   token,
-  endpoint: `${process.env.API_HOST}/api/session`,
+  endpoint: `/api/session`,
   request: 'LOAD_SESSION_REQUEST',
   success: 'LOAD_SESSION_SUCCESS',
   failure: 'LOAD_SESSION_FAILURE'

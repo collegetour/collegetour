@@ -10,7 +10,7 @@ export const complete = () => ({
 export const saveUpload = (uniqueIdentifier, tour_id, visit_id, asset_id) => ({
   type: 'API_REQUEST',
   method: 'POST',
-  endpoint: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${visit_id}/photos`,
+  endpoint: `/api/tours/${tour_id}/visits/${visit_id}/photos`,
   meta: { uniqueIdentifier },
   body: { asset_id },
   request: 'SAVE_REQUEST',

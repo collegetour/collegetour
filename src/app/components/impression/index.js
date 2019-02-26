@@ -76,7 +76,7 @@ class Impression extends React.Component {
       { label: 'Edit Note', modal: <EditNote tour_id={ tour_id } visit_id={ visit_id } id={ impression.id } /> },
       { label: 'Delete Note', request: {
         method: 'delete',
-        endpoint: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${ visit_id }/impressions/${impression.id}`,
+        endpoint: `/api/tours/${tour_id}/visits/${ visit_id }/impressions/${impression.id}`,
         onSuccess: () => {},
         onError: () => {}
       }}
@@ -88,7 +88,7 @@ class Impression extends React.Component {
     return [
       { label: 'Delete Photo', request: {
         method: 'delete',
-        endpoint: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${ visit_id }/impressions/${impression.id}`,
+        endpoint: `/api/tours/${tour_id}/visits/${ visit_id }/impressions/${impression.id}`,
         onSuccess: () => {},
         onError: () => {}
       } }
@@ -99,7 +99,7 @@ class Impression extends React.Component {
     return [
       { label: 'Delete Review', request: {
         method: 'delete',
-        endpoint: `${process.env.API_HOST}/api/tours/1/visits/1/impressions/1`,
+        endpoint: `/api/tours/1/visits/1/impressions/1`,
         onSuccess: () => {},
         onError: () => {}
       } }

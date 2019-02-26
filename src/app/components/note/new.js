@@ -28,7 +28,7 @@ class New extends React.Component {
       className: 'note-form',
       title: 'New Note',
       method: 'POST',
-      action: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${visit_id}/notes`,
+      action: `/api/tours/${tour_id}/visits/${visit_id}/notes`,
       submitText: 'Post',
       fields: [
         { name: 'text', type: 'textarea', placeholder: 'Enter your notes or record your impressions', autoGrow: true }

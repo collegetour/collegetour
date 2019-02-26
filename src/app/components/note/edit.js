@@ -29,8 +29,8 @@ class Edit extends React.Component {
       className: 'note-form',
       title: 'Edit Note',
       method: 'PATCH',
-      endpoint: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${visit_id}/impressions/${id}`,
-      action: `${process.env.API_HOST}/api/tours/${tour_id}/visits/${visit_id}/impressions/${id}`,
+      endpoint: `/api/tours/${tour_id}/visits/${visit_id}/impressions/${id}`,
+      action: `/api/tours/${tour_id}/visits/${visit_id}/impressions/${id}`,
       submitText: 'Save',
       fields: [
         { name: 'text', type: 'textarea', placeholder: 'Enter your notes or record your impressions', autoGrow: true }

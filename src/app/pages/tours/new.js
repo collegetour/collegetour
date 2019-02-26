@@ -33,7 +33,7 @@ class New extends React.Component {
       title: 'New Tour',
       instructions: <Message { ...this._getInstructions() } />,
       method: 'POST',
-      action: `${process.env.API_HOST}/api/tours`,
+      action: `/api/tours`,
       submitText: 'Create',
       fields: [
         { label: 'Name', name: 'name', type: 'textfield', required: true, placeholder: 'Name to uniquely identify this tour' },

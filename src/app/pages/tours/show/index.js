@@ -42,10 +42,10 @@ class Tour extends React.Component {
 }
 
 const mapResourcesToPage = (props, context, page) => ({
-  tour: `${process.env.API_HOST}/api/tours/${page.params.tour_id}`,
-  tourists: `${process.env.API_HOST}/api/tours/${page.params.tour_id}/tourists`,
-  itinerary: `${process.env.API_HOST}/api/tours/${page.params.tour_id}/itinerary`,
-  visits: `${process.env.API_HOST}/api/tours/${page.params.tour_id}/visits`
+  tour: `/api/tours/${page.params.tour_id}`,
+  tourists: `/api/tours/${page.params.tour_id}/tourists`,
+  itinerary: `/api/tours/${page.params.tour_id}/itinerary`,
+  visits: `/api/tours/${page.params.tour_id}/visits`
 })
 
 const mapPropsToPage = (props, context, resources, page) => ({

@@ -26,8 +26,8 @@ class Edit extends React.Component {
     return {
       title: 'Edit Tour',
       method: 'PATCH',
-      endpoint: `${process.env.API_HOST}/api/tours/${id}`,
-      action: `${process.env.API_HOST}/api/tours/${id}`,
+      endpoint: `/api/tours/${id}`,
+      action: `/api/tours/${id}`,
       submitText: 'Save',
       fields: [
         { label: 'Name', name: 'name', type: 'textfield', required: true, placeholder: 'Name to uniquely identify this tour' },

@@ -36,7 +36,7 @@ class Invite extends React.Component {
       title: 'Invite Tourist',
       instructions: <Message { ...this._getInstructions() } />,
       method: 'POST',
-      action: `${process.env.API_HOST}/api/tours/${id}/invitations`,
+      action: `/api/tours/${id}/invitations`,
       submitText: 'Invite',
       fields: [
         { label: 'First Name', name: 'first_name', type: 'textfield', required: true },

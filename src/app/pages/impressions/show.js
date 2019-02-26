@@ -41,7 +41,7 @@ class Show extends React.Component {
 }
 
 const mapResourcesToPage = (props, context, page) => ({
-  impression: `${process.env.API_HOST}/api/tours/${page.params.tour_id}/visits/${page.params.visit_id}/impressions/${page.params.id}`
+  impression: `/api/tours/${page.params.tour_id}/visits/${page.params.visit_id}/impressions/${page.params.id}`
 })
 
 const mapPropsToPage = (props, context, resources, page) => ({

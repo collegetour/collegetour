@@ -68,7 +68,9 @@ class App extends React.Component {
   _getStore() {
     const reducers = combineReducers(this.props.reducers)
     const loggerMiddleware = createLogger({ collapsed: true })
-    const apiRequestMiddleware = createApiRequest()
+    const apiRequestMiddleware = createApiRequest({
+      defaultHost: process.env.API_HOST
+    })
     const localStorageMiddleware = createlocalStorage(localforage.createInstance({
       name: 'local',
       storeName: 'collegetour'
