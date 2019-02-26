@@ -45,6 +45,8 @@ export const sendMail = async (email) => {
 
   } catch(err) {
 
+    console.log(err)
+
     return { error: err.message }
 
   }
@@ -70,12 +72,31 @@ const _sendViaConsole = async (message) => {
 
 const _sendViaSES = async (message) => {
 
-  const result = ses.sendMail(message).promise()
-
-  console.log(message, result)
+  const result = await ses.sendEmail({
+    Destination: {
+      ToAddresses: [ message.to ]
+    },
+    Message: {
+      Body: {
+        Html: {
+          Charset: 'UTF-8',
+          Data: message.hml
+        },
+        Text: {
+          Charset: 'UTF-8',
+          Data: message.text
+        }
+      },
+      Subject: {
+        Charset: 'UTF-8',
+        Data: message.subject
+      }
+    },
+    Source: message.from
+  }).promise()
 
   return {
-    ses_id: result.response,
+    ses_id: result.MessageId,
     sent_at: moment()
   }
 
