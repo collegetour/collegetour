@@ -56,6 +56,7 @@ class Cordova extends React.Component {
   getChildContext() {
     return {
       host: {
+        type: 'cordova',
         getContacts: this._handleGetContactsSend,
         getContactsPermission: this._handleGetContactsPermissionSend,
         allowSleep: this._handleAllowSleep,
