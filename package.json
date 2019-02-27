@@ -10,6 +10,7 @@
     "build:client": "babel-node ./src/scripts/client.js",
     "invalidate": "babel-node ./src/scripts/invalidate.js",
     "dev": "babel-node ./src/scripts/dev.js",
+    "deploy": "shipit production deploy",
     "test": "babel-node ./src/scripts/test.js"
   },
   "repository": {
