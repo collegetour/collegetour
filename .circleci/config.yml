@@ -25,6 +25,9 @@ jobs:
       - image: circleci/node:8.14.0
     working_directory: ~/repo
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "a9:be:a2:38:b8:fc:5c:15:5c:68:e2:ba:63:70:5a:ed"
       - run: echo '${APP1_FINGERPRINT}' >> ~/.ssh/known_hosts
       - checkout
       - restore_cache:
