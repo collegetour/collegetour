@@ -1,12 +1,11 @@
 import Mocha from 'mocha'
-import path from 'path'
 import glob from 'glob'
 
 const test = async () => {
 
   const mocha = new Mocha()
 
-  glob.sync('src/tests/*_test.js').map((test) => {
+  glob.sync('src/@(app|server)/**/*_test.js').map((test) => {
 
     mocha.addFile(test)
 
@@ -14,7 +13,7 @@ const test = async () => {
 
   await new Promise((resolve, reject) => {
 
-    const runner = mocha.run((err) => {
+    mocha.run((err) => {
 
       if(err) reject(err)
 
@@ -22,9 +21,8 @@ const test = async () => {
 
     })
 
-
   })
 
 }
 
-test().then(() => process.exit())
+test().then(process.exit)
