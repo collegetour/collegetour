@@ -20,13 +20,15 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm test
+      - persist_to_workspace:
+          root: .
+          paths:
+            - docker-image
   deploy:
     docker:
       - image: circleci/node:8.14.0
     steps:
-      - run:
-        name: deploy
-        command: shipit production deploy
+      - run: shipit production deploy
 workflows:
   version: 2
   build-deploy:
