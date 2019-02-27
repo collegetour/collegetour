@@ -11,7 +11,7 @@ class Invitation extends React.Component {
   }
 
   static propTypes = {
-    id: PropTypes.string
+    tour_id: PropTypes.string
   }
 
   static defaultProps = {}
@@ -24,12 +24,12 @@ class Invitation extends React.Component {
   }
 
   _getForm() {
-    const { id } = this.props
+    const { tour_id } = this.props
     return {
       title: 'Invite Tourist',
       instructions: <Message { ...this._getInstructions() } />,
       method: 'POST',
-      action: `/api/tours/${id}/tourists`,
+      action: `/api/tours/${tour_id}/tourists`,
       submitText: 'Invite',
       fields: [
         { label: 'First Name', name: 'first_name', type: 'textfield', required: true },
