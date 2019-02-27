@@ -9,7 +9,7 @@ module.exports = shipit => {
     default: {
       deployTo: '/var/www/collegetouristapp',
       repositoryUrl: 'https://github.com/collegetourist/collegetouristapp.git',
-      key: '~/.ssh/gkops',
+      key: '~/.ssh/ctdeploy',
       workspace: path.resolve('repo'),
       ignores: ['.git', 'node_modules'],
       keepReleases: 2
