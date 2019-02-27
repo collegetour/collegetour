@@ -86,6 +86,9 @@
     <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
         <string>need photo library access to save pictures there</string>
     </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSContactsUsageDescription">
+        <string>need contacts access to invite friends and family members</string>
+    </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="CFBundleURLTypes">
         <array>
             <dict>

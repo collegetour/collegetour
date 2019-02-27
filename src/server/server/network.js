@@ -25,7 +25,7 @@ const network = (network, getUrl, getAccessToken, getUser) => {
 
     const access_token = await getAccessToken(req.query.code)
 
-    const url = `${process.env.API_HOST}/${network}/authorize?access_token=${access_token}&state=${req.query.state}`
+    const url = `${process.env.API_HOST}/signin/${network}/authorize?access_token=${access_token}&state=${req.query.state}`
 
     res.redirect(301, url)
 

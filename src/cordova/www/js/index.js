@@ -1,5 +1,10 @@
 var iframe, body = null
 
+var store = window.localforage.createInstance({
+  name: 'local',
+  storeName: 'collegetourist'
+})
+
 var app = {
 
   initialize: function() {
@@ -72,12 +77,56 @@ var app = {
       window.plugins.insomnia.allowSleepAgain()
     }
 
+    function getContactsPermission() {
+      store.getItem('contacts', function (err, value) {
+        if(value === true) return requestContactsPermission()
+        store.setItem('contacts', true, function (err, value) {
+          sendMessage('getContactsPermission', 'unknown')
+        })
+      })
+    }
+
+    function requestContactsPermission() {
+      navigator.contacts.find(['*'], (contacts) => {
+        sendMessage('getContactsPermission', 'granted')
+      }, (err) => {
+        sendMessage('getContactsPermission', 'denied')
+      }, {
+        desiredFields: [],
+        filter: '',
+        hasPhoneNumber: false,
+        multiple: true
+      })
+    }
+
+    function getContacts() {
+      navigator.contacts.find([
+        navigator.contacts.fieldType.displayName,
+        navigator.contacts.fieldType.emails
+      ], (contacts) => {
+        sendMessage('getContacts', contacts.map(contact => ({
+          first_name: contact.name.givenName,
+          last_name: contact.name.familyName,
+          email: contact.emails && contact.emails[0] ? contact.emails[0].value : null
+        })).filter(contact => contact.email !== null))
+      }, (err) => {
+        console.log('err', err)
+      }, {
+        desiredFields: [],
+        filter: '',
+        hasPhoneNumber: false,
+        multiple: true
+      })
+    }
+
     window.addEventListener('message', function (e) {
       var message = e.data
       if(message.action === 'allowSleep') return allowSleep()
       if(message.action === 'keepAwake') return keepAwake()
       if(message.action === 'openWindow') return openWindow(message.data)
       if(message.action === 'signin') return signin(message.data)
+      if(message.action === 'getContactsPermission') return getContactsPermission()
+      if(message.action === 'getContacts') return getContacts()
     }, false)
 
     window.handleOpenURL = function(target) {

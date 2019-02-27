@@ -7,6 +7,7 @@ import React from 'react'
 class Contacts extends React.Component {
 
   static contextTypes = {
+    host: PropTypes.object,
     modal: PropTypes.object
   }
 
@@ -16,12 +17,14 @@ class Contacts extends React.Component {
     tour_id: PropTypes.string,
     tourists: PropTypes.array,
     onFetch: PropTypes.func,
-    onInvite: PropTypes.func
+    onInvite: PropTypes.func,
+    onSetContacts: PropTypes.func
   }
 
   static defaultProps = {}
 
   _handleDone = this._handleDone.bind(this)
+  _handleSetContacts = this._handleSetContacts.bind(this)
 
   render() {
     const { contacts, status } = this.props
@@ -60,7 +63,9 @@ class Contacts extends React.Component {
   }
 
   componentDidMount() {
+    const { host } = this.context
     const { tour_id, onFetch } = this.props
+    host.getContacts(this._handleSetContacts)
     onFetch(tour_id)
   }
 
@@ -106,6 +111,11 @@ class Contacts extends React.Component {
     const { tour_id } = this.props
     const { first_name, last_name, email } = contact
     this.props.onInvite(tour_id, first_name, last_name, email)
+  }
+
+  _handleSetContacts(contacts) {
+    console.log(contacts)
+    this.props.onSetContacts(contacts)
   }
 
 }

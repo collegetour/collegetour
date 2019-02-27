@@ -7,6 +7,11 @@ export const fetch = (tour_id) => ({
   failure: 'FETCH_FAILURE'
 })
 
+export const setContacts = (contacts) => ({
+  type: 'SET_CONTACTS',
+  contacts
+})
+
 export const invite = (tour_id, first_name, last_name, email) => ({
   type: 'API_REQUEST',
   method: 'POST',

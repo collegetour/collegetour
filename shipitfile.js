@@ -8,7 +8,7 @@ module.exports = shipit => {
   shipit.initConfig({
     default: {
       deployTo: '/var/www/collegetouristapp',
-      repositoryUrl: 'https://github.com/collegetour/collegetour.git',
+      repositoryUrl: 'https://github.com/collegetourist/collegetouristapp.git',
       key: '~/.ssh/gkops',
       workspace: path.resolve('repo'),
       ignores: ['.git', 'node_modules'],

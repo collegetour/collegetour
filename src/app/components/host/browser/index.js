@@ -29,9 +29,8 @@ class Browser extends React.Component {
   getChildContext() {
     return {
       host: {
-        type: 'browser',
-        enableContacts: () => {},
-        contactsEnabled: () => false,
+        getContacts: () => {},
+        getContactsPermission: (callback) => callback('denied'),
         allowSleep: () => {},
         hasFocus: this._handleHasFocus,
         signin: this._handleSignin,

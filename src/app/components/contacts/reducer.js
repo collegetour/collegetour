@@ -1,13 +1,5 @@
 const INITIAL_STATE = {
-  contacts: [
-    { first_name: 'Greg', last_name: 'Kops', email: 'greg@thinktopography.com' },
-    { first_name: 'Greg', last_name: 'Kops', email: 'mochini@gmail.com' },
-    { first_name: 'Greg', last_name: 'Kops', email: 'mochini+1@gmail.com' },
-    { first_name: 'Greg', last_name: 'Kops', email: 'mochini+2@gmail.com' },
-    { first_name: 'Greg', last_name: 'Kops', email: 'mochini+3@gmail.com' },
-    { first_name: 'Greg', last_name: 'Kops', email: 'mochini+4@gmail.com' },
-    { first_name: 'Greg', last_name: 'Kops', email: 'mochini+5@gmail.com' }
-  ],
+  contacts: [],
   status: 'pending',
   tourists: []
 }
@@ -27,6 +19,12 @@ export default (state = INITIAL_STATE, action) => {
       ...state,
       status: 'success',
       tourists: action.result.data.map(tourist => tourist.user)
+    }
+
+  case 'SET_CONTACTS':
+    return {
+      ...state,
+      contacts: action.contacts
     }
 
   case 'INVITE_SUCCESS':

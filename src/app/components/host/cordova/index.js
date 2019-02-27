@@ -17,13 +17,19 @@ class Cordova extends React.Component {
     user: PropTypes.object
   }
 
+  contacts = null
+  contactsPermisssions = null
+
   state = {
     hasFocus: true
   }
 
   _handleAllowSleep = this._handleAllowSleep.bind(this)
   _handleBlurFocus = this._handleBlurFocus.bind(this)
-  _handleEnableContacts = this._handleEnableContacts.bind(this)
+  _handleGetContactsSend = this._handleGetContactsSend.bind(this)
+  _handleGetContactsReceive = this._handleGetContactsReceive.bind(this)
+  _handleGetContactsPermissionSend = this._handleGetContactsPermissionSend.bind(this)
+  _handleGetContactsPermissionReceive = this._handleGetContactsPermissionReceive.bind(this)
   _handleHasFocus = this._handleHasFocus.bind(this)
   _handleKeepAwake = this._handleKeepAwake.bind(this)
   _handleOpenWindow = this._handleOpenWindow.bind(this)
@@ -50,15 +56,13 @@ class Cordova extends React.Component {
   getChildContext() {
     return {
       host: {
-        type: 'cordova',
-        enableContacts: this._handleEnableContacts,
-        contactsEnabled: () => null,
+        getContacts: this._handleGetContactsSend,
+        getContactsPermission: this._handleGetContactsPermissionSend,
         allowSleep: this._handleAllowSleep,
         hasFocus: this._handleHasFocus,
         signin: this._handleSignin,
         keepAwake: this._handleKeepAwake,
         openWindow: this._handleOpenWindow
-
       }
     }
   }
@@ -71,8 +75,24 @@ class Cordova extends React.Component {
     this.setState({ hasFocus })
   }
 
-  _handleEnableContacts(callback) {
-    callback(true)
+  _handleGetContactsPermissionSend(callback) {
+    this.contactsPermissions = callback
+    this._handleSendMessage('getContactsPermission')
+  }
+
+  _handleGetContactsPermissionReceive(result) {
+    this.contactsPermissions(result)
+    this.contactsPermissions = null
+  }
+
+  _handleGetContactsSend(callback) {
+    this.contacts = callback
+    this._handleSendMessage('getContacts')
+  }
+
+  _handleGetContactsReceive(result) {
+    this.contacts(result)
+    this.contacts = null
   }
 
   _handleHasFocus() {
@@ -105,6 +125,12 @@ class Cordova extends React.Component {
     }
     if(message.action === 'resume') {
       this._handleBlurFocus(true)
+    }
+    if(message.action === 'getContactsPermission') {
+      this._handleGetContactsPermissionReceive(message.data)
+    }
+    if(message.action === 'getContacts') {
+      this._handleGetContactsReceive(message.data)
     }
   }
 
