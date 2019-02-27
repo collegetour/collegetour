@@ -33,7 +33,8 @@ module.exports = shipit => {
   ])
 
   utils.registerTask(shipit, 'deploy:release', [
-    'deploy:reload_appserver'
+    'deploy:reload_appserver',
+    'deploy:invalidate'
   ])
 
   utils.registerTask(shipit, 'deploy:config', () => {
@@ -61,6 +62,10 @@ module.exports = shipit => {
 
   utils.registerTask(shipit, 'deploy:cache_app', () => {
     return shipit.remote('wget -O - http://127.0.0.1:80/ping')
+  })
+
+  utils.registerTask(shipit, 'deploy:invalidate', () => {
+    return shipit.remote('cd ' + shipit.releasePath + ' && NODE_ENV=production npm run invalidate')
   })
 
   shipit.on('updated', function () {

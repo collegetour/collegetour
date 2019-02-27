@@ -8,6 +8,7 @@
     "build": "npm run build:server && npm run build:client",
     "build:server": "babel-node ./src/scripts/server.js",
     "build:client": "babel-node ./src/scripts/client.js",
+    "invalidate": "babel-node ./src/scripts/invalidate.js",
     "dev": "babel-node ./src/scripts/dev.js",
     "test": "babel-node ./src/scripts/test.js"
   },
