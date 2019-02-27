@@ -26,7 +26,7 @@ class Invite extends React.Component {
   render() {
     const { host } = this.context
     const { access, status } = this.props
-    if(host.type === 'browser' || access === false) return <Invitation />
+    if(host.type === 'browser' || access === false) return <Invitation { ...this._getInvitation() } />
     if(status === 'loading') return <Loader />
     if(host.type === 'cordova' && access === true) return <Contacts { ...this._getContacts() } />
     if(host.type === 'cordova') return <Access { ...this._getAccess() } />
@@ -47,6 +47,13 @@ class Invite extends React.Component {
   }
 
   _getContacts() {
+    const { tour_id } = this.props
+    return {
+      tour_id
+    }
+  }
+
+  _getInvitation() {
     const { tour_id } = this.props
     return {
       tour_id

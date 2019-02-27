@@ -34,6 +34,7 @@ module.exports = shipit => {
 
   utils.registerTask(shipit, 'deploy:release', [
     'deploy:reload_appserver',
+    'deploy:cache_app',
     'deploy:invalidate'
   ])
 
@@ -65,7 +66,7 @@ module.exports = shipit => {
   })
 
   utils.registerTask(shipit, 'deploy:invalidate', () => {
-    return shipit.remote('cd ' + shipit.releasePath + ' && NODE_ENV=production npm run invalidate')
+    return shipit.remote('cd ' + currentDir + ' && NODE_ENV=production npm run invalidate')
   })
 
   shipit.on('updated', function () {

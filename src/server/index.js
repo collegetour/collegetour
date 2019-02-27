@@ -23,6 +23,8 @@ app.use(cors())
 
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
+app.use('/ping', (req, res) => res.send('pong'))
+
 app.use('/signin', signin)
 
 app.use('/imagecache', imagecache)
