@@ -57,7 +57,7 @@ const config = () => ({
   output: {
     path: path.resolve('public'),
     filename: path.join('js', 'bundle-[hash].min.js'),
-    publicPath: `${process.env.WEB_HOST}/`
+    publicPath: '/'
   },
   plugins: [
     new ScriptPlugin(),
@@ -65,10 +65,9 @@ const config = () => ({
     new MiniCssExtractPlugin({
       path: path.resolve('public'),
       filename: path.join('css', 'bundle-[hash].min.css'),
-      publicPath: `${process.env.WEB_HOST}/`
+      publicPath: '/'
     }),
     new HtmlWebpackPlugin({
-      host: process.env.WEB_HOST,
       template: path.resolve('src', 'app','index.html')
     }),
     new webpack.DefinePlugin({

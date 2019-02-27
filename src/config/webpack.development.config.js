@@ -59,14 +59,13 @@ const config = () => ({
   output: {
     path: path.resolve('public'),
     filename: 'application.js',
-    publicPath: `${process.env.WEB_HOST}/`
+    publicPath: '/'
   },
   plugins: [
     new ScriptPlugin(),
     new StylePlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      host: process.env.WEB_HOST,
       template: path.resolve('src', 'app','index.html')
     }),
     new webpack.DefinePlugin({
