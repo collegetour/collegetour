@@ -108,7 +108,7 @@ var app = {
           first_name: contact.name.givenName,
           last_name: contact.name.familyName,
           email: contact.emails && contact.emails[0] ? contact.emails[0].value : null
-        })).filter(contact => contact.email !== null))
+        })))
       }, (err) => {
         console.log('err', err)
       }, {
