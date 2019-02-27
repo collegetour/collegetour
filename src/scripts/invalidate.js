@@ -21,7 +21,7 @@ const getDistribution = async (name) => {
 
   return distributions.DistributionList.Items.reduce((id, item) => {
 
-    return id || (item.DefaultCacheBehavior.TargetOriginId === `S3-${name}` ? item : null)
+    return id || (item.DefaultCacheBehavior.TargetOriginId === 'api.collegetouristapp.com' ? item : null)
 
   }, null)
 
