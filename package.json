@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "reset": "knex migrate:rollback && knex migrate:latest && knex seed:run",
-    "build": "NODE_ENV=production babel-node ./src/scripts/build.js",
-    "compile": "NODE_ENV=production babel-node ./src/scripts/compile.js",
-    "publish": "NODE_ENV=production babel-node ./src/scripts/build.js && NODE_ENV=production babel-node ./src/scripts/publish.js",
+    "build": "npm run build:server && npm run build:client",
+    "build:server": "babel-node ./src/scripts/server.js",
+    "build:client": "babel-node ./src/scripts/client.js",
     "dev": "babel-node ./src/scripts/dev.js",
     "test": "babel-node ./src/scripts/test.js"
   },

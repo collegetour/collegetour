@@ -57,7 +57,7 @@ const config = () => ({
   output: {
     path: path.resolve('public'),
     filename: path.join('js', 'bundle-[hash].min.js'),
-    publicPath: '/'
+    publicPath: `${process.env.WEB_HOST}/`
   },
   plugins: [
     new ScriptPlugin(),
@@ -65,19 +65,19 @@ const config = () => ({
     new MiniCssExtractPlugin({
       path: path.resolve('public'),
       filename: path.join('css', 'bundle-[hash].min.css'),
-      publicPath: '/'
+      publicPath: `${process.env.WEB_HOST}/`
     }),
     new HtmlWebpackPlugin({
+      host: process.env.WEB_HOST,
       template: path.resolve('src', 'app','index.html')
     }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         'GOOGLE_API_KEY': JSON.stringify(process.env.GOOGLE_API_KEY),
-        'WEB_HOST': JSON.stringify(process.env.WEB_HOST),
+        'WEB_HOST': JSON.stringify(process.env.WEB_CDN_HOST || process.env.WEB_HOST),
         'API_HOST': JSON.stringify(process.env.API_HOST),
-        'ASSET_HOST': JSON.stringify(process.env.ASSET_HOST),
-        'CDN_HOST': JSON.stringify(process.env.CDN_HOST)
+        'ASSET_HOST': JSON.stringify(process.env.ASSET_CDN_HOST || process.env.ASSET_HOST)
       }
     })
   ]

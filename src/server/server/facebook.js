@@ -1,5 +1,5 @@
+import network from './network'
 import { Facebook } from 'fb'
-import signin from './signin'
 
 const fb = new Facebook({
   appId: process.env.FACEBOOK_APP_ID,
@@ -44,6 +44,6 @@ const getUser = async (access_token) => {
 
 }
 
-const facbook = signin('facebook', getUrl, getAccessToken, getUser)
+const facbook = network('facebook', getUrl, getAccessToken, getUser)
 
 export default facbook

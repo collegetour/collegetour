@@ -1,5 +1,5 @@
 import Instagram from 'instagram-node'
-import signin from './signin'
+import network from './network'
 
 const redirect_uri = `${process.env.API_HOST}/signin/instagram/token`
 
@@ -44,6 +44,6 @@ const getUser = async (access_token) => {
 
 }
 
-const instagram = signin('instagram', getUrl, getAccessToken, getUser)
+const instagram = network('instagram', getUrl, getAccessToken, getUser)
 
 export default instagram

@@ -8,7 +8,7 @@ import qs from 'qs'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/imagecache/*', t(async (req, res, trx) => {
+router.get('/*', t(async (req, res, trx) => {
 
   const transformed = await transform(req.originalUrl)
 

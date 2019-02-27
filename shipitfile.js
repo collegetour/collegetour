@@ -28,7 +28,7 @@ module.exports = shipit => {
   utils.registerTask(shipit, 'deploy:prepare', [
     'deploy:config',
     'deploy:install_modules',
-    'deploy:compile',
+    'deploy:build',
     'deploy:tmp'
   ])
 
@@ -47,8 +47,8 @@ module.exports = shipit => {
     return shipit.remote('cd ' + shipit.releasePath + ' && npm install')
   })
 
-  utils.registerTask(shipit, 'deploy:compile', () => {
-    return shipit.remote('cd ' + shipit.releasePath + ' && NODE_ENV=production npm run compile && chown -R 501.games dist')
+  utils.registerTask(shipit, 'deploy:build', () => {
+    return shipit.remote('cd ' + shipit.releasePath + ' && NODE_ENV=production npm run build && chown -R 501.games dist')
   })
 
   utils.registerTask(shipit, 'deploy:tmp', () => {

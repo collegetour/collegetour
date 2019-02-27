@@ -43,8 +43,8 @@ class Image extends React.Component {
 
   _getImage() {
     const { alt, className, title } = this.props
-    const normal = `${this._getHost()}/imagecache${this._getNormal()}`
-    const retina = `${this._getHost()}/imagecache${this._getRetina()}`
+    const normal = `${process.env.ASSET_HOST}/imagecache${this._getNormal()}`
+    const retina = `${process.env.ASSET_HOST}/imagecache${this._getRetina()}`
     return {
       alt,
       className,
@@ -53,10 +53,6 @@ class Image extends React.Component {
       title,
       onLoad: this._handleLoad
     }
-  }
-
-  _getHost() {
-    return process.env.CDN_HOST || process.env.ASSET_HOST
   }
 
   _getNormal() {

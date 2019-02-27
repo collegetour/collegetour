@@ -4,6 +4,6 @@ import { Router } from 'express'
 
 const router = new Router({ mergeParams: true })
 
-router.post('/api/tours/:tour_id/visits/:visit_id/notes', t(create))
+router.post('/', t(create))
 
 export default router

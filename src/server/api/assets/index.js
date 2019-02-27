@@ -5,8 +5,8 @@ import update from './update'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/api/assets/upload', t(show))
+router.get('/upload', t(show))
 
-router.post('/api/assets/upload', t(update))
+router.post('/upload', t(update))
 
 export default router

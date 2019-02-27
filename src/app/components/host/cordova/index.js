@@ -23,6 +23,7 @@ class Cordova extends React.Component {
 
   _handleAllowSleep = this._handleAllowSleep.bind(this)
   _handleBlurFocus = this._handleBlurFocus.bind(this)
+  _handleEnableContacts = this._handleEnableContacts.bind(this)
   _handleHasFocus = this._handleHasFocus.bind(this)
   _handleKeepAwake = this._handleKeepAwake.bind(this)
   _handleOpenWindow = this._handleOpenWindow.bind(this)
@@ -50,6 +51,8 @@ class Cordova extends React.Component {
     return {
       host: {
         type: 'cordova',
+        enableContacts: this._handleEnableContacts,
+        contactsEnabled: () => null,
         allowSleep: this._handleAllowSleep,
         hasFocus: this._handleHasFocus,
         signin: this._handleSignin,
@@ -66,6 +69,10 @@ class Cordova extends React.Component {
 
   _handleBlurFocus(hasFocus) {
     this.setState({ hasFocus })
+  }
+
+  _handleEnableContacts(callback) {
+    callback(true)
   }
 
   _handleHasFocus() {

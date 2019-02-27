@@ -6,10 +6,10 @@ import setup from './setup'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/api/account', t(show))
+router.get('/', t(show))
 
-router.patch('/api/account', t(update))
+router.patch('/', t(update))
 
-router.patch('/api/setup', t(setup))
+router.patch('/setup', t(setup))
 
 export default router

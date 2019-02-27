@@ -30,6 +30,8 @@ class Browser extends React.Component {
     return {
       host: {
         type: 'browser',
+        enableContacts: () => {},
+        contactsEnabled: () => false,
         allowSleep: () => {},
         hasFocus: this._handleHasFocus,
         signin: this._handleSignin,

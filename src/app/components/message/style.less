@@ -1,7 +1,16 @@
 .message {
+	background-color: fadeout(@black, 98);
 	flex: 1;
   display: flex;
-	background-color: fadeout(@black, 98);
+	&.green {
+		background-color: @red;
+		.fa {
+			color: @red;
+		}
+		h3, p {
+			color: @white;
+		}
+	}
 }
 .message-panel {
 	margin: auto;
@@ -12,7 +21,7 @@
   h3 {
     font-size: 1.4em;
     line-height: 1.4em;
-    margin: 0 0 0.4em;
+    margin: 0;
 		color: fadeout(@black, 20);
   }
   p {
@@ -37,7 +46,7 @@
 		box-shadow: 0 0 0 0.1em fadeout(@black, 90) inset;
 		width: 2em !important;
 		height: 2em !important;
-		background-color: @white;
+		background-color: fadeout(@white, 20);
 		.colorize(color);
 	}
 	img {

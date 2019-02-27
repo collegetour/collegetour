@@ -15,28 +15,28 @@ import notes from './notes'
 
 const api = new Router({ mergeParams: true })
 
-api.use(assets)
-
 api.use(token)
 
-api.use(account)
+api.use('/assets', assets)
 
-api.use(session)
+api.use('/account', account)
 
-api.use(colleges)
+api.use('/session', session)
 
-api.use(tours)
+api.use('/colleges', colleges)
 
-api.use(tourists)
+api.use('/tours', tours)
 
-api.use(itinerary)
+api.use('/tours/:tour_id/tourists', tourists)
 
-api.use(visits)
+api.use('/tours/:tour_id/itinerary', itinerary)
 
-api.use(impressions)
+api.use('/tours/:tour_id/visits', visits)
 
-api.use(notes)
+api.use('/tours/:tour_id/visits/:visit_id/impressions', impressions)
 
-api.use(photos)
+api.use('/tours/:tour_id/visits/:visit_id/notes', notes)
+
+api.use('/tours/:tour_id/visits/:visit_id/photos', photos)
 
 export default api

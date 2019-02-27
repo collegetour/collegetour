@@ -1,0 +1,37 @@
+.contacts {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.contacts-header {
+  background-color: fadeout(@black, 95);
+  padding: 0.8em;
+  line-height: 1.8em;
+  color: fadeout(@black, 60);
+}
+.contacts-body {
+  .scrollable()
+}
+.contact-token {
+  display: flex;
+}
+.contact-token-detail {
+  flex: 1;
+  padding: 0.8em;
+  color: fadeout(@black, 60);
+  strong {
+    color: @black;
+  }
+}
+.contact-token-button {
+  flex: 0 0 6em;
+  padding: 0.8em 0.8em 0.8em 0;
+  display: flex;
+  span {
+    margin: auto;
+    color: @green;
+  }
+  .ui.button {
+    margin: auto;
+  }
+}

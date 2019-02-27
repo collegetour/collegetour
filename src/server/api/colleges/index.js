@@ -4,6 +4,6 @@ import list from './list'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/api/colleges', t(list))
+router.get('/', t(list))
 
 export default router

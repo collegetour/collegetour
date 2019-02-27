@@ -4,6 +4,6 @@ import { Router } from 'express'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/api/session', t(show))
+router.get('/', t(show))
 
 export default router

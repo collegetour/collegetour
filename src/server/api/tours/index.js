@@ -6,10 +6,10 @@ import show from './show'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/api/tours', t(list))
+router.get('/', t(list))
 
-router.post('/api/tours', t(create))
+router.post('/', t(create))
 
-router.get('/api/tours/:id', t(show))
+router.get('/:id', t(show))
 
 export default router

@@ -1,6 +1,6 @@
 import { google as googleapis } from 'googleapis'
 import request from 'request-promise'
-import signin from './signin'
+import network from './network'
 
 const redirect_uri = `${process.env.API_HOST}/signin/google/token`
 
@@ -37,6 +37,6 @@ const getUser = async (access_token) => {
 
 }
 
-const google = signin('google', getUrl, getAccessToken, getUser)
+const google = network('google', getUrl, getAccessToken, getUser)
 
 export default google

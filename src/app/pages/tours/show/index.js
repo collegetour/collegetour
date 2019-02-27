@@ -55,7 +55,7 @@ const mapPropsToPage = (props, context, resources, page) => ({
     items: [
       { label: 'Edit Tour', modal: () => <Edit id={ page.params.tour_id } /> },
       { label: 'Manage Tour' },
-      { label: 'Invite Tourists', modal: () => <Invite id={ page.params.tour_id } /> }
+      { label: 'Invite Tourists', modal: () => <Invite tour_id={ page.params.tour_id } /> }
     ]
   } : null
 })
