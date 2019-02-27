@@ -4,11 +4,7 @@ import rimraf from 'rimraf'
 import path from 'path'
 import ncp from 'ncp'
 
-const env = process.env.NODE_ENV === 'production' ? '.env.production' : '.env'
-
-dotenv.load({
-  path: path.join(env)
-})
+dotenv.load({ path: path.join('.env') })
 
 const config = require(`../config/webpack.${process.env.NODE_ENV}.config`).default
 
