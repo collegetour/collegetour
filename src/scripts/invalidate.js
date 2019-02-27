@@ -3,19 +3,13 @@ import dotenv from 'dotenv'
 import aws from 'aws-sdk'
 import path from 'path'
 
-const env = process.env.NODE_ENV === 'production' ? '.env.production' : '.env'
-
-dotenv.load({
-  path: path.join(env)
-})
+dotenv.load({ path: path.join('.env') })
 
 aws.config.constructor({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
   region: process.env.AWS_REGION || ''
 })
-
-const s3 = new aws.S3()
 
 const cloudfront = new aws.CloudFront()
 
