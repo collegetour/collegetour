@@ -32,17 +32,8 @@ jobs:
       - run: npm run deploy
 workflows:
   build-deploy:
-    triggers:
-      - filter:
-        branches:
-          ignore: /.*/
     jobs:
       - build
       - deploy:
           requires:
             - build
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v*/
