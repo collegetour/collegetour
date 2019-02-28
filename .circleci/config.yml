@@ -24,7 +24,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "22:d3:aa:30:bb:b0:7e:f7:68:58:e0:fe:a9:4e:b3:0b"
-      - run: echo '${FINGERPRINT}' >> ~/.ssh/known_hosts
+      - run: echo '${KNOWN_HOST}' >> ~/.ssh/known_hosts
       - checkout
       - restore_cache:
           keys:
