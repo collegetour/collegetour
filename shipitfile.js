@@ -9,13 +9,13 @@ module.exports = shipit => {
     default: {
       deployTo: '/var/www/collegetouristapp',
       repositoryUrl: 'https://github.com/collegetourist/collegetouristapp.git',
-      key: '~/.ssh/ctdeploy',
+      key: `~/.ssh/id_rsa_${process.env.FINGERPRINT}`,
       workspace: path.resolve('repo'),
       ignores: ['.git', 'node_modules'],
       keepReleases: 2
     },
     production: {
-      servers: 'root@18.211.173.32'
+      servers: 'root@app1.collegetourist.com'
     }
   })
 
