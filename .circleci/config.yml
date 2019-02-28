@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/node:8.14.0
     working_directory: ~/repo
@@ -31,25 +31,14 @@ jobs:
             - "22:d3:aa:30:bb:b0:7e:f7:68:58:e0:fe:a9:4e:b3:0b"
       - run: npm run deploy
 workflows:
-  test:
+  test-deploy:
     jobs:
-      - build:
-          filters:
-            tags:
-              ignore: /.*/
-  deploy:
-    jobs:
-      - build:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^.*/
+      - test
       - deploy:
           requires:
-            - build
+            - test
           filters:
             branches:
               ignore: /.*/
             tags:
-              only: /^.*/
+              only: /.*/
