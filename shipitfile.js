@@ -15,7 +15,7 @@ module.exports = shipit => {
       keepReleases: 2
     },
     production: {
-      servers: 'root@app1.collegetourist.com'
+      servers: 'root@app1.collegetouristapp.com'
     }
   })
 
