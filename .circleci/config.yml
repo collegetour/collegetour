@@ -35,15 +35,15 @@ workflows:
     jobs:
       - build:
           filters:
+            tags:
+              ignore: /.*/
             branches:
               ignore: /.*/
-            tags:
-              only: /^v*/
       - deploy:
           requires:
             - build
           filters:
+            tags:
+              only: /.*/
             branches:
               ignore: /.*/
-            tags:
-              only: /^v*/
