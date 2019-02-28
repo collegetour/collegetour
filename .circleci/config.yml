@@ -33,7 +33,11 @@ jobs:
 workflows:
   test-deploy:
     jobs:
-      - test
+      - test:
+        branches:
+          only: /.*/
+        tags:
+          only: /.*/
       - deploy:
           requires:
             - test
