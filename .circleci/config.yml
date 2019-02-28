@@ -1,9 +1,12 @@
 version: 2
-jobs:
-  build:
+executors:
+  executor:
     docker:
       - image: circleci/node:8.14.0
     working_directory: ~/repo
+jobs:
+  build:
+    executor: executor
     steps:
       - checkout
       - restore_cache:
@@ -17,19 +20,11 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm test
   deploy:
-    docker:
-      - image: circleci/node:8.14.0
-    working_directory: ~/repo
+    executor: executor
     steps:
       - add_ssh_keys:
           fingerprints:
             - "22:d3:aa:30:bb:b0:7e:f7:68:58:e0:fe:a9:4e:b3:0b"
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
-      - run: npm install
       - run: npm run deploy
 workflows:
   version: 2
