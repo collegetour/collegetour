@@ -34,10 +34,11 @@ workflows:
   test-deploy:
     jobs:
       - test:
-        branches:
-          only: /.*/
-        tags:
-          only: /.*/
+        filters:
+          branches:
+            only: /.*/
+          tags:
+            only: /.*/
       - deploy:
           requires:
             - test
