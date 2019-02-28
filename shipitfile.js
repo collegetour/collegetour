@@ -12,7 +12,8 @@ module.exports = shipit => {
       key: `~/.ssh/id_rsa_${process.env.FINGERPRINT}`,
       workspace: path.resolve('repo'),
       ignores: ['.git', 'node_modules'],
-      keepReleases: 2
+      keepReleases: 2,
+      strict: 'no'
     },
     production: {
       servers: 'root@app1.collegetouristapp.com'
