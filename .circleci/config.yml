@@ -36,16 +36,20 @@ workflows:
       - build:
           filters:
             tags:
-              ignore: /^.*/
+              ignore: /.*/
   deploy:
     jobs:
       - build:
           filters:
+            branches:
+              ignore: /.*/
             tags:
-              only: /^v*/
+              only: /^.*/
       - deploy:
           requires:
             - build
           filters:
+            branches:
+              ignore: /.*/
             tags:
-              only: /.*/
+              only: /^.*/
