@@ -10,12 +10,13 @@ class Router extends React.Component {
     pathname: PropTypes.string
   }
 
+  state = {
+    cards: []
+  }
+
   constructor(props) {
     super(props)
     this.routes = this._collapseRoutes(props.routes, props.routes.path)
-    this.state = {
-      cards: []
-    }
   }
 
   render() {

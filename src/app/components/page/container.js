@@ -24,7 +24,8 @@ const PageCreator = (mapResourcesToPage, mapPropsToPage) => {
       pathname: PropTypes.string,
       resources: PropTypes.object,
       status: PropTypes.string,
-      onFetchResource: PropTypes.func
+      onFetchResource: PropTypes.func,
+      onReady: PropTypes.func
     }
 
     state = {
@@ -53,7 +54,14 @@ const PageCreator = (mapResourcesToPage, mapPropsToPage) => {
     }
 
     componentDidMount() {
-      setTimeout(this._handleInit, 500)
+      if(this.props.active) this._handleInit()
+    }
+
+    componentDidUpdate(prevProps) {
+      const { active } = this.props
+      if(active !== prevProps.active && active) {
+        setTimeout(this._handleInit, 600)
+      }
     }
 
     _getPanel() {
@@ -108,7 +116,7 @@ const PageCreator = (mapResourcesToPage, mapPropsToPage) => {
 
     _handleInit() {
       if(!mapResourcesToPage) return this._handleReady()
-      this._handleFetchResources()
+      if(this.props.status === 'pending') this._handleFetchResources()
     }
 
 

@@ -32,7 +32,7 @@ class Tour extends React.Component {
     const { itinerary, page, tourists, visits } = this.props
     return {
       items: [
-        { label: 'Colleges', component: (props) => <Visits {...props} visits={ visits } tour_id={ page.params.tour_id } /> },
+        { label: 'Visits', component: (props) => <Visits {...props} visits={ visits } tour_id={ page.params.tour_id } /> },
         { label: 'Tourists', component: (props) => <Tourists {...props} tourists={ tourists } tour_id={ page.params.tour_id } /> },
         { label: 'Itinerary', component: (props) => <Itinerary {...props} itinerary={ itinerary } tour_id={ page.params.tour_id } /> }
       ]

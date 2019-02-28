@@ -29,7 +29,7 @@ class Stack extends React.Component {
       <div className="stack">
         { cards.map((card, index) => (
           <div key={ `card_${index}` } className={ `stack-card ${this._getStatus(index)}` }>
-            <card.component params={ card.params } pathname={ card.pathname } cards={ cards } cardIndex={ index } />
+            <card.component params={ card.params } pathname={ card.pathname } cardStatus={ this._getStatus(index) } cardIndex={ index } active={ this._getActive(index) } />
           </div>
         )) }
       </div>
@@ -54,6 +54,11 @@ class Stack extends React.Component {
         cards
       }
     }
+  }
+
+  _getActive(index) {
+    const status = this._getStatus(index)
+    return status === 'active'
   }
 
   _getStatus(index) {
