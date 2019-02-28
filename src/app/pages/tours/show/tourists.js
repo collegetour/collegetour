@@ -7,14 +7,19 @@ class Tourists extends React.Component {
   static contextTypes = {
     flash: PropTypes.object,
     presence: PropTypes.object,
-    tasks: PropTypes.object
+    tasks: PropTypes.object,
+    tracker: PropTypes.object
   }
 
   static propTypes = {
+    active: PropTypes.bool,
+    tour_id: PropTypes.string,
     tourists: PropTypes.array
   }
 
   static defaultProps = {}
+
+  _handleTrack = this._handleTrack.bind(this)
 
   render() {
     const { presence } = this.context
@@ -35,11 +40,11 @@ class Tourists extends React.Component {
     )
   }
 
-  _handleTasks(tourist) {
-    const items = []
-    if(!tourist.claimed_at) items.push({ label: 'Resend Invitation', request: this._getResend(tourist) })
-    if(tourist.user.id !== tourist.tour.owner_id) items.push({ label: 'Remove Tourist', request: this._getRemove(tourist) })
-    this.context.tasks.open(items)
+  componentDidUpdate(prevProps) {
+    const { active } = this.props
+    if(active !== prevProps.active && active) {
+      this._handleTrack()
+    }
   }
 
   _getRemove(tourist) {
@@ -66,6 +71,18 @@ class Tourists extends React.Component {
         this.context.flash.set('success', `We resent an invitation to ${tourist.user.first_name}`)
       }
     }
+  }
+
+  _handleTasks(tourist) {
+    const items = []
+    if(!tourist.claimed_at) items.push({ label: 'Resend Invitation', request: this._getResend(tourist) })
+    if(tourist.user.id !== tourist.tour.owner_id) items.push({ label: 'Remove Tourist', request: this._getRemove(tourist) })
+    this.context.tasks.open(items)
+  }
+
+  _handleTrack() {
+    const { tour_id } = this.props
+    this.context.tracker.track('viewed tourists', { tour_id })
   }
 
 }

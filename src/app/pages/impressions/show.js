@@ -7,7 +7,8 @@ class Show extends React.Component {
 
   static contextTypes = {
     host: PropTypes.object,
-    router: PropTypes.object
+    router: PropTypes.object,
+    tracker: PropTypes.object
   }
 
   static propTypes = {
@@ -15,8 +16,7 @@ class Show extends React.Component {
     page: PropTypes.object
   }
 
-  static defaultProps = {
-  }
+  static defaultProps = {}
 
   render() {
     return (
@@ -28,6 +28,10 @@ class Show extends React.Component {
     )
   }
 
+  componentDidMount() {
+    this._handleTrack()
+  }
+
   _getImpression() {
     const { page, impression } = this.props
     const { tour_id, visit_id } = page.params
@@ -36,6 +40,12 @@ class Show extends React.Component {
       tour_id,
       visit_id
     }
+  }
+
+  _handleTrack() {
+    const { page, impression } = this.props
+    const { tour_id, visit_id } = page.params
+    this.context.tracker.track('viewed impression', { tour_id, visit_id, impression_id: impression.id })
   }
 
 }

@@ -6,15 +6,19 @@ import React from 'react'
 class Visits extends React.Component {
 
   static contextTypes = {
-    router: PropTypes.object
+    router: PropTypes.object,
+    tracker: PropTypes.object
   }
 
   static propTypes = {
+    active: PropTypes.bool,
     tour_id: PropTypes.string,
     visits: PropTypes.array
   }
 
   static defaultProps = {}
+
+  _handleTrack = this._handleTrack.bind(this)
 
   render() {
     const { visits } = this.props
@@ -33,6 +37,13 @@ class Visits extends React.Component {
     )
   }
 
+  componentDidUpdate(prevProps) {
+    const { active } = this.props
+    if(active !== prevProps.active && active) {
+      this._handleTrack()
+    }
+  }
+
   _getEmpty() {
     return {
       icon: 'map',
@@ -45,6 +56,11 @@ class Visits extends React.Component {
   _handleClick(id) {
     const { tour_id } = this.props
     this.context.router.history.push(`/tours/${tour_id}/visits/${id}`)
+  }
+
+  _handleTrack() {
+    const { tour_id } = this.props
+    this.context.tracker.track('viewed visits', { tour_id })
   }
 
 }

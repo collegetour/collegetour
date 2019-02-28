@@ -46,7 +46,7 @@ class Tabs extends React.Component {
           { items.map((item, index) => (
             <div key={`tab_body_${index}`} className={ this._getTabClass(index) }>
               <div className="tab-content">
-                { _.isFunction(item.component) ? React.createElement(item.component) : item.component }
+                { item.component && <item.component { ...this._getComponent(index) } /> }
               </div>
             </div>
           )) }
@@ -75,6 +75,13 @@ class Tabs extends React.Component {
     if(index < chosen) classes.push('left')
     if(index === chosen) classes.push('active')
     return classes.join(' ')
+  }
+
+  _getComponent(index) {
+    const { chosen } = this.props
+    return {
+      active: (index === chosen)
+    }
   }
 
   _handleChoose(index: number): void {

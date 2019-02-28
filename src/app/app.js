@@ -15,6 +15,7 @@ import localforage from 'localforage'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import Tracker from './components/tracker'
 import Uploader from './components/uploader'
 import Flash from './components/flash'
 import Modal from './components/modal'
@@ -44,23 +45,25 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={ this.store }>
-        <Host>
-          <Router>
-            <Flash>
-              <Uploader>
-                <Presence>
-                  <Modal>
-                    <Tasks>
-                      <Portal>
-                        <RouterStack { ...this._getStack() } />
-                      </Portal>
-                    </Tasks>
-                  </Modal>
-                </Presence>
-              </Uploader>
-            </Flash>
-          </Router>
-        </Host>
+        <Tracker>
+          <Host>
+            <Router>
+              <Flash>
+                <Uploader>
+                  <Presence>
+                    <Modal>
+                      <Tasks>
+                        <Portal>
+                          <RouterStack { ...this._getStack() } />
+                        </Portal>
+                      </Tasks>
+                    </Modal>
+                  </Presence>
+                </Uploader>
+              </Flash>
+            </Router>
+          </Host>
+        </Tracker>
       </Provider>
     )
   }

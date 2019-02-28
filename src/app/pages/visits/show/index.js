@@ -14,7 +14,8 @@ class Visit extends React.Component {
 
   static contextTypes = {
     host: PropTypes.object,
-    router: PropTypes.object
+    router: PropTypes.object,
+    tracker: PropTypes.object
   }
 
   static propTypes = {
@@ -158,11 +159,15 @@ class Visit extends React.Component {
   }
 
   _handleCall() {
+    const { tour_id, id } = this.props.page.params
+    this.context.tracker.track('clicked call', { tour_id, visit_id: id })
     const { phone } = this.props.visit.college
     window.location.href = `tel://+1${phone.replace(/[^\d]/g, '')}`
   }
 
   _handleDirections() {
+    const { tour_id, id } = this.props.page.params
+    this.context.tracker.track('clicked directions', { tour_id, visit_id: id })
     const { name, city, state } =  this.props.visit.college
     const daddr = `${name} ${city}, ${state}`.replace(' ', '+')
     const path = `://maps.google.com/maps?daddr=${daddr}`
@@ -174,6 +179,8 @@ class Visit extends React.Component {
   }
 
   _handleWebsite() {
+    const { tour_id, id } = this.props.page.params
+    this.context.tracker.track('clicked website', { tour_id, visit_id: id })
     const { website } =  this.props.visit.college
     this.context.host.openWindow(website)
   }

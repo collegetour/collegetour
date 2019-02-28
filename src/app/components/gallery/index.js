@@ -5,7 +5,8 @@ import React from 'react'
 class Gallery extends React.Component {
 
   static contextTypes = {
-    router: PropTypes.object
+    router: PropTypes.object,
+    tracker: PropTypes.object
   }
 
   static propTypes = {
@@ -15,6 +16,8 @@ class Gallery extends React.Component {
   }
 
   static defaultProps = {}
+
+  _handleTrack = this._handleTrack.bind(this)
 
   render() {
     const { impressions } = this.props
@@ -27,6 +30,10 @@ class Gallery extends React.Component {
         )) }
       </div>
     )
+  }
+
+  componentDidMount() {
+    this._handleTrack()
   }
 
   _getImpression(impression) {
@@ -50,6 +57,11 @@ class Gallery extends React.Component {
     const { history } = this.context.router
     const { tour_id, visit_id } = this.props
     history.push(`/tours/${tour_id}/visits/${visit_id}/impressions/${id}`)
+  }
+
+  _handleTrack() {
+    const { tour_id, visit_id } = this.props
+    this.context.tracker.track('viewed gallery', { tour_id, visit_id })
   }
 
 }

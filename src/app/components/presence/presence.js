@@ -11,7 +11,8 @@ class Presence extends React.Component {
   }
 
   static contextTypes = {
-    router: PropTypes.object
+    router: PropTypes.object,
+    tracker: PropTypes.object
   }
 
   static propTypes = {
@@ -34,6 +35,7 @@ class Presence extends React.Component {
   static defaultProps = {}
 
   _handleReload = this._handleReload.bind(this)
+  _handleSignin = this._handleSignin.bind(this)
   _handleSignout = this._handleSignout.bind(this)
 
   render() {
@@ -51,7 +53,7 @@ class Presence extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { status, token, onLoadSession, onRemoveTourist, onRemoveToken, onSaveToken } = this.props
+    const { status, token, user, onLoadSession, onRemoveTourist, onRemoveToken, onSaveToken } = this.props
     if(!_.isEqual(token, prevProps.token)) {
       if(token === null) {
         onRemoveToken()
@@ -60,6 +62,9 @@ class Presence extends React.Component {
       } else if(token !== prevProps.token) {
         onSaveToken(token)
       }
+    }
+    if(!_.isEqual(user, prevProps.user)) {
+      if(user) this._handleSignin()
     }
     if(status !== prevProps.status) {
       if(status === 'saved') {
@@ -93,7 +98,13 @@ class Presence extends React.Component {
     onLoadSession(user.token)
   }
 
+  _handleSignin() {
+    const { user } = this.props
+    this.context.tracker.identify(user)
+  }
+
   _handleSignout() {
+    this.context.tracker.identify(null)
     this.props.onSignout()
   }
 
