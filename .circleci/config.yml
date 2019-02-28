@@ -31,19 +31,18 @@ jobs:
             - "22:d3:aa:30:bb:b0:7e:f7:68:58:e0:fe:a9:4e:b3:0b"
       - run: npm run deploy
 workflows:
-  build-deploy:
+  test:
+    jobs:
+      - build
+  deploy:
     jobs:
       - build:
           filters:
             tags:
-              ignore: /.*/
-            branches:
-              ignore: /.*/
+              only: /.*/
       - deploy:
           requires:
             - build
           filters:
             tags:
               only: /.*/
-            branches:
-              ignore: /.*/
