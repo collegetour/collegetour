@@ -33,7 +33,7 @@ jobs:
 workflows:
   build-deploy:
     triggers:
-      filter:
+      - filter:
         branches:
           ignore: /.*/
     jobs:
