@@ -33,8 +33,3 @@ workflows:
       - deploy:
           requires:
             - build
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v*/
