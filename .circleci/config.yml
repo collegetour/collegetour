@@ -33,7 +33,17 @@ jobs:
 workflows:
   build-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              ignore: /.*/
       - deploy:
           requires:
             - build
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v*/
