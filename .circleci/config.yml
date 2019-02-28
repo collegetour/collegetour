@@ -27,7 +27,6 @@ jobs:
             - "22:d3:aa:30:bb:b0:7e:f7:68:58:e0:fe:a9:4e:b3:0b"
       - run: npm run deploy
 workflows:
-  version: 2
   build-deploy:
     jobs:
       - build
