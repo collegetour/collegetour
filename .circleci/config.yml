@@ -40,5 +40,5 @@ workflows:
           requires:
             - build
           filters:
-            branches:
-              only: production
+            tags:
+              only: /^v.*/
