@@ -36,7 +36,7 @@ workflows:
       - build:
           filters:
             tags:
-              ignore: /^v*/
+              ignore: /^.*/
   deploy:
     jobs:
       - build:
