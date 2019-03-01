@@ -1,13 +1,19 @@
 version: 2.1
-jobs:
-  test:
+executors:
+  node-postgres:
     docker:
       - image: circleci/node:8.14.0
+        environment:
+            DATABASE_URL: postgresql://root@localhost/circle_test
       - image: circleci/postgres:10-alpine-ram
         environment:
             POSTGRES_USER: root
-            POSTGRES_DB: circle-test_test
+            POSTGRES_DB: circle_test
+            POSTGRES_PASSWORD: ""
     working_directory: ~/repo
+jobs:
+  test:
+    executor: node-postgres
     steps:
       - checkout
       - restore_cache:
@@ -21,16 +27,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm test
   deploy:
-    docker:
-      - image: circleci/node:8.14.0
-        environment:
-            DATABASE_URL: postgresql://root@localhost/circle_test
-      - image: circleci/postgres:10-alpine-ram
-        environment:
-            POSTGRES_USER: root
-            POSTGRES_DB: circle_test
-            POSTGRES_PASSWORD: ""
-    working_directory: ~/repo
+    executor: node-postgres
     steps:
       - checkout
       - restore_cache:
