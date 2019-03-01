@@ -1,8 +1,7 @@
-import { t } from '../utils'
 import { decode } from '../lib/jwt'
 import User from '../models/user'
 
-const router = t(async (req, res, trx, next) => {
+const router = async (req, res, next) => {
 
   const token = req.headers.authorization
 
@@ -21,7 +20,7 @@ const router = t(async (req, res, trx, next) => {
   const user = await User.where({
     id: user_id
   }).fetch({
-    transacting: trx,
+    transacting: req.trx,
     withRelated: ['photo']
   })
 
@@ -31,6 +30,6 @@ const router = t(async (req, res, trx, next) => {
 
   next()
 
-})
+}
 
 export default router

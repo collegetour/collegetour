@@ -1,9 +1,8 @@
-import create from './create'
-import { t } from '../../utils'
 import { Router } from 'express'
+import create from './create'
 
 const router = new Router({ mergeParams: true })
 
-router.post('/', t(create))
+router.post('/', create)
 
 export default router

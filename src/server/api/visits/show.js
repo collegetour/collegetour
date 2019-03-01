@@ -1,12 +1,12 @@
 import VisitSerializer from '../../serializers/visit_serializer'
 import Visit from '../../models/visit'
 
-const route = async (req, res, trx) => {
+const route = async (req, res) => {
 
   const visit = await Visit.where({
     id: req.params.id
   }).fetch({
-    transacting: trx,
+    transacting: req.trx,
     withRelated: ['college.logo']
   })
 

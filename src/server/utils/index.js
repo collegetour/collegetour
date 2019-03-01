@@ -1,34 +1,24 @@
-import knex from '../lib/knex'
-
 export const t = (handler) => async (req, res, next) => {
 
-  return knex.transaction(async trx => {
+  try {
 
-    try {
+    await handler(req, res, next)
 
-      await handler(req, res, trx, next)
+  } catch(err) {
 
-      await trx.commit()
+    if(err.errors) {
 
-    } catch(err) {
-
-      await trx.rollback(err)
-
-      if(err.errors) {
-
-        return res.status(422).json({
-          message: 'Unable to save record',
-          errors: err.toJSON()
-        })
-
-      }
-
-      res.status(500).json({
-        message: err.message
+      return res.status(422).json({
+        message: 'Unable to save record',
+        errors: err.toJSON()
       })
 
     }
 
-  }).catch(console.error)
+    res.status(500).json({
+      message: err.message
+    })
+
+  }
 
 }

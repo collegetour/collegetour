@@ -1,7 +1,7 @@
 import ImpressionSerializer from '../../serializers/impression_serializer'
 import Impression from '../../models/impression'
 
-const route = async (req, res, trx) => {
+const route = async (req, res) => {
 
   const impression = await Impression.forge({
     type: 'photo',
@@ -9,7 +9,7 @@ const route = async (req, res, trx) => {
     user_id: req.user.get('id'),
     asset_id: req.body.asset_id
   }).save(null, {
-    transacting: trx
+    transacting: req.trx
   })
 
   await impression.load(['asset', 'user.photo'])

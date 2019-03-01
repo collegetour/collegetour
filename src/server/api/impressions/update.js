@@ -1,12 +1,12 @@
 import ImpressionSerializer from '../../serializers/impression_serializer'
 import Impression from '../../models/impression'
 
-const route = async (req, res, trx) => {
+const route = async (req, res) => {
 
   const impression = await Impression.where({
     id: req.params.id
   }).fetch({
-    transacting: trx,
+    transacting: req.trx,
     withRelated: ['asset', 'user.photo']
   })
 
@@ -14,7 +14,7 @@ const route = async (req, res, trx) => {
     text: req.body.text
   }, {
     patch: true,
-    transacting: trx
+    transacting: req.trx
   })
 
   res.status(200).json({

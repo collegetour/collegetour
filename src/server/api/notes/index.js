@@ -4,6 +4,6 @@ import { Router } from 'express'
 
 const router = new Router({ mergeParams: true })
 
-router.post('/', t(create))
+router.post('/', create)
 
 export default router

@@ -1,6 +1,5 @@
 import request from 'request-promise'
 import { Router } from 'express'
-import { t } from '../utils'
 import sharp from 'sharp'
 import path from 'path'
 import url from 'url'
@@ -8,7 +7,7 @@ import qs from 'qs'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/*', t(async (req, res, trx) => {
+router.get('/*', async (req, res) => {
 
   const transformed = await transform(req.originalUrl)
 
@@ -18,7 +17,7 @@ router.get('/*', t(async (req, res, trx) => {
 
   res.type(type).status(200).send(data)
 
-}))
+})
 
 const convert = async (transformed, type) => {
 

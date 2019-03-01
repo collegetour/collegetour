@@ -1,12 +1,12 @@
 import TourSerializer from '../../serializers/tour_serializer'
 import Tour from '../../models/tour'
 
-const route = async (req, res, trx) => {
+const route = async (req, res) => {
 
   const tour = await Tour.where({
     id: req.params.id
   }).fetch({
-    transacting: trx,
+    transacting: req.trx,
     withRelated: ['owner.photo']
   })
 

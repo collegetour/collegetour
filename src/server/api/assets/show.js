@@ -1,8 +1,8 @@
 import { checkUploadedFile } from '../../services/assets'
 
-const route = async (req, res, trx) => {
+const route = async (req, res) => {
 
-  const exists = await checkUploadedFile(req, trx)
+  const exists = await checkUploadedFile(req, req.trx)
 
   if(!exists) return res.status(204).send('not found')
 

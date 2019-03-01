@@ -1,12 +1,12 @@
 import TouristSerializer from '../../serializers/tourist_serializer'
 import Tourist from '../../models/tourist'
 
-const route = async (req, res, trx) => {
+const route = async (req, res) => {
 
   const tourists = await Tourist.where({
     tour_id: req.params.tour_id
   }).fetchAll({
-    transacting: trx,
+    transacting: req.trx,
     withRelated: ['user.photo','tour']
   })
 

@@ -1,18 +1,17 @@
-import show from './show'
+import { Router } from 'express'
 import destroy from './destroy'
 import create from './create'
 import resend from './resend'
-import { Router } from 'express'
-import { t } from '../../utils'
+import show from './show'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/', t(show))
+router.get('/', show)
 
-router.post('/', t(create))
+router.post('/', create)
 
-router.delete('/:id', t(destroy))
+router.delete('/:id', destroy)
 
-router.post('/:id/resend', t(resend))
+router.post('/:id/resend', resend)
 
 export default router

@@ -7,10 +7,9 @@ import session from './session'
 import account from './account'
 import assets from './assets'
 import visits from './visits'
+import photos from './photos'
 import tours from './tours'
 import token from './token'
-
-import photos from './photos'
 import notes from './notes'
 
 const api = new Router({ mergeParams: true })

@@ -1,7 +1,7 @@
 import TourSerializer from '../../serializers/tour_serializer'
 import Tour from '../../models/tour'
 
-const route = async (req, res, trx) => {
+const route = async (req, res) => {
 
   const tours = await Tour.query(qb => {
 
@@ -10,7 +10,7 @@ const route = async (req, res, trx) => {
     qb.where('tourists.user_id', req.user.get('id'))
 
   }).fetchAll({
-    transacting: trx,
+    transacting: req.trx,
     withRelated: ['owner.photo']
   })
 

@@ -1,4 +1,4 @@
-const route = async (req, res, trx) => {
+const route = async (req, res) => {
 
   const visits = [
     {

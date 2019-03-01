@@ -5,12 +5,12 @@ import User from '../../models/user'
 import Tour from '../../models/tour'
 import moment from 'moment'
 
-const route = async (req, res, trx) => {
+const route = async (req, res) => {
 
   const tour = await Tour.where({
     id: req.params.tour_id
   }).fetch({
-    transacting: trx
+    transacting: req.trx
   })
 
   const user = await User.forge({
@@ -21,7 +21,7 @@ const route = async (req, res, trx) => {
     created_at: moment(),
     updated_at: moment()
   }).save(null, {
-    transacting: trx
+    transacting: req.trx
   })
 
   const tourist = await Tourist.forge({
@@ -30,10 +30,12 @@ const route = async (req, res, trx) => {
     created_at: moment(),
     updated_at: moment()
   }).save(null, {
-    transacting: trx
+    transacting: req.trx
   })
 
-  await tourist.load(['tour', 'user'], { transacting: trx })
+  await tourist.load(['tour', 'user'], {
+    transacting: req.trx
+  })
 
   await sendInvitation(req.user, tourist)
 

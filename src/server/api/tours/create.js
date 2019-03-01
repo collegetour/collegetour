@@ -2,7 +2,7 @@ import TourSerializer from '../../serializers/tour_serializer'
 import Tourist from '../../models/tourist'
 import Tour from '../../models/tour'
 
-const route = async (req, res, trx) => {
+const route = async (req, res) => {
 
   const tour = await Tour.forge({
     name: req.body.name,
@@ -11,14 +11,14 @@ const route = async (req, res, trx) => {
     start_date: req.body.start_date,
     end_date: req.body.end_date
   }).save(null, {
-    transacting: trx
+    transacting: req.trx
   })
 
   await Tourist.forge({
     tour_id: tour.get('id'),
     user_id: req.user.get('id')
   }).save(null, {
-    transacting: trx
+    transacting: req.trx
   })
 
   res.status(200).json({

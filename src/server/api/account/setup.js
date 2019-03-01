@@ -1,7 +1,7 @@
 import SessionSerializer from '../../serializers/session_serializer'
 import Checkit from 'checkit'
 
-const route = async (req, res, trx) => {
+const route = async (req, res) => {
 
   await Checkit({
     agreed_to_terms: 'accepted'
@@ -13,7 +13,7 @@ const route = async (req, res, trx) => {
     email: req.body.email,
     agreed_to_terms: req.body.agreed_to_terms
   }, {
-    transacting: trx,
+    transacting: req.trx,
     patch: true
   })
 

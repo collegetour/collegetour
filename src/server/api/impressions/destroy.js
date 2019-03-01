@@ -1,15 +1,15 @@
 import Impression from '../../models/impression'
 
-const route = async (req, res, trx) => {
+const route = async (req, res) => {
 
   const impression = await Impression.where({
     id: req.params.id
   }).fetch({
-    transacting: trx
+    transacting: req.trx
   })
 
   await impression.destroy({
-    transacting: trx
+    transacting: req.trx
   })
 
   res.status(200).json({

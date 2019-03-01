@@ -1,12 +1,12 @@
 import { sendInvitation } from '../../services/invitations'
 import Tourist from '../../models/tourist'
 
-const route = async (req, res, trx) => {
+const route = async (req, res) => {
 
   const tourist = await Tourist.where({
     id: req.params.id
   }).fetch({
-    transacting: trx,
+    transacting: req.trx,
     withRelated: ['user','tour']
   })
 

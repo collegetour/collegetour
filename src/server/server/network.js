@@ -4,14 +4,13 @@ import Tourist from '../models/tourist'
 import User from '../models/user'
 import Hashids from 'hashids'
 import express from 'express'
-import { t } from '../utils'
 import moment from 'moment'
 
 const network = (network, getUrl, getAccessToken, getUser) => {
 
   const router = express()
 
-  router.get('/', t(async (req, res, trx) => {
+  router.get('/', async (req, res) => {
 
     const state = encodeState(req.query)
 
@@ -19,9 +18,9 @@ const network = (network, getUrl, getAccessToken, getUser) => {
 
     res.status(200).json({ data })
 
-  }))
+  })
 
-  router.get('/token', t(async (req, res, trx) => {
+  router.get('/token', async (req, res) => {
 
     const access_token = await getAccessToken(req.query.code)
 
@@ -29,9 +28,9 @@ const network = (network, getUrl, getAccessToken, getUser) => {
 
     res.redirect(301, url)
 
-  }))
+  })
 
-  router.get('/authorize', t(async (req, res, trx) => {
+  router.get('/authorize', async (req, res) => {
 
     const findTourist = async (self, tourist_id, trx) => {
 
@@ -101,9 +100,11 @@ const network = (network, getUrl, getAccessToken, getUser) => {
 
     const self = await getUser(req.query.access_token)
 
-    const user = await findTourist(self, state.tourist_id, trx) || await findUser(self, trx) || await createUser(self, trx)
+    const user = await findTourist(self, state.tourist_id, req.trx) || await findUser(self, req.trx) || await createUser(self, req.trx)
 
-    await user.load(['photo'], { transacting: trx })
+    await user.load(['photo'], {
+      transacting: req.trx
+    })
 
     const session = SessionSerializer(user)
 
@@ -113,7 +114,7 @@ const network = (network, getUrl, getAccessToken, getUser) => {
 
     res.redirect(301, `${protocol}?token=${session.token}&redirect=${redirect}`)
 
-  }))
+  })
 
   return router
 

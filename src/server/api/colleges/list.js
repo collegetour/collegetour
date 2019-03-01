@@ -1,7 +1,7 @@
 import CollegeSerializer from '../../serializers/college_serializer'
 import College from '../../models/college'
 
-const route = async (req, res, trx) => {
+const route = async (req, res) => {
 
   const colleges = await College.query(qb => {
 
@@ -12,7 +12,7 @@ const route = async (req, res, trx) => {
     qb.whereRaw('lower(name) like ? or lower(city) like ? or lower(state) like ?', [term, term, term])
 
   }).fetchAll({
-    transacting: trx,
+    transacting: req.trx,
     withRelated: ['logo']
   })
 

@@ -1,7 +1,7 @@
 import ImpressionSerializer from '../../serializers/impression_serializer'
 import Impression from '../../models/impression'
 
-const route = async (req, res, trx) => {
+const route = async (req, res) => {
 
   const impressions = await Impression.query(qb => {
 
@@ -10,7 +10,7 @@ const route = async (req, res, trx) => {
     qb.orderBy('created_at', 'desc')
 
   }).fetchAll({
-    transacting: trx,
+    transacting: req.trx,
     withRelated: ['asset', 'user.photo']
   })
 

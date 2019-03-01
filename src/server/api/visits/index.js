@@ -1,12 +1,11 @@
-import { t } from '../../utils'
+import { Router } from 'express'
 import list from './list'
 import show from './show'
-import { Router } from 'express'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/', t(list))
+router.get('/', list)
 
-router.get('/:id', t(show))
+router.get('/:id', show)
 
 export default router

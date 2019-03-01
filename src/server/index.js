@@ -1,36 +1,44 @@
 import './lib/environment'
+import 'express-async-errors'
+import expressKnextransaction from 'express-knex-transaction'
 import imagecache from './server/imagecache'
 import multiparty from 'connect-multiparty'
 import signin from './server/signin'
 import bodyParser from 'body-parser'
 import express from 'express'
+import knex from './lib/knex'
+import error from './error'
 import api from './api'
 import cors from 'cors'
-import qs from 'qs'
 import path from 'path'
+import qs from 'qs'
 
-const app = express()
+const transactions = expressKnextransaction(knex)
 
-app.set('query parser', str => qs.parse(str, { arrayLimit: 100, depth: 10 }))
+const server = express()
 
-app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }))
+server.set('query parser', str => qs.parse(str, { arrayLimit: 100, depth: 10 }))
 
-app.use(bodyParser.json({ limit: '5mb' }))
+server.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }))
 
-app.use(multiparty({ uploadDir: './tmp' }))
+server.use(bodyParser.json({ limit: '5mb' }))
 
-app.use(cors())
+server.use(multiparty({ uploadDir: './tmp' }))
 
-app.use(express.static(path.join(__dirname, '..', 'public')))
+server.use(cors())
 
-app.use('/ping', (req, res) => res.send('pong'))
+server.use(express.static(path.join(__dirname, '..', 'public')))
 
-app.use('/signin', signin)
+server.use('/ping', (req, res) => res.send('pong'))
 
-app.use('/imagecache', imagecache)
+server.use('/imagecache', imagecache)
 
-app.use('/api', api)
+server.use('/signin', transactions, signin)
 
-app.listen(3001)
+server.use('/api', transactions, api)
 
-export default app
+server.use(error)
+
+server.listen(3001)
+
+export default server

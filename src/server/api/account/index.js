@@ -1,15 +1,14 @@
 import { Router } from 'express'
-import { t } from '../../utils'
-import show from './show'
 import update from './update'
 import setup from './setup'
+import show from './show'
 
 const router = new Router({ mergeParams: true })
 
-router.get('/', t(show))
+router.get('/', show)
 
-router.patch('/', t(update))
+router.patch('/', update)
 
-router.patch('/setup', t(setup))
+router.patch('/setup', setup)
 
 export default router
