@@ -19,36 +19,40 @@ const knex = Knex({
 
 export const testHandler = async (handler, options = {}) => {
 
-  let trx = null
+  let req, res, trx = null
 
   knex.transaction(tx => {
     trx = tx
   }).catch(() => {})
 
-  const req = {
-    params: {},
-    body: {},
-    query: {},
-    ...options,
-    trx
-  }
+  try {
 
-  const res = {
-    _status: null,
-    _json: null,
-    status: function(status) {
-      if(!status) return this._status
-      this._status = status
-      return this
-    },
-    json: function(json) {
-      if(!json) return this._json
-      this._json = json
-      return this
+    req = {
+      params: {},
+      body: {},
+      query: {},
+      ...options,
+      trx
     }
-  }
 
-  await handler(req, res)
+    res = {
+      _status: null,
+      _json: null,
+      status: function(status) {
+        if(!status) return this._status
+        this._status = status
+        return this
+      },
+      json: function(json) {
+        if(!json) return this._json
+        this._json = json
+        return this
+      }
+    }
+
+    await handler(req, res)
+
+  } catch(err) {}
 
   trx.rollback()
 

@@ -2,7 +2,7 @@ import { testHandler } from '../../utils/test'
 import { expect } from 'chai'
 import list from './list'
 
-describe('api/colleges', () => {
+describe('api/colleges/list', () => {
 
   it('lists colleges', async () => {
 

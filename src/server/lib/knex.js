@@ -4,11 +4,11 @@ import fs from 'fs'
 
 const _getConnection = () => {
 
+  if(process.env.DATABASE_URL) return process.env.DATABASE_URL
+
   const knexpath = path.resolve('knexfile.js')
 
   if(fs.existsSync(knexpath)) return require(knexpath)[process.env.NODE_ENV].connection
-
-  return process.env.DATABASE_URL
 
 }
 
