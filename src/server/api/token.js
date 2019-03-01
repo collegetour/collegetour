@@ -5,17 +5,23 @@ const router = async (req, res, next) => {
 
   const token = req.headers.authorization
 
-  if(!token) throw new Error('No token ')
+  if(!token) return res.status(401).json({
+    message: 'No token'
+  })
 
   const matches = token.match(/Bearer (.*)/)
 
-  if(!matches) throw new Error('Invalid token')
+  if(!matches) return res.status(401).json({
+    message: 'Invalid token'
+  })
 
   const { exp, user_id } = decode(matches[1])
 
   const iat = Math.floor(Date.now() / 1000)
 
-  if(iat > exp) throw new Error('Expired token')
+  if(iat > exp) return res.status(401).json({
+    message: 'Expired token'
+  })
 
   const user = await User.where({
     id: user_id
@@ -24,7 +30,9 @@ const router = async (req, res, next) => {
     withRelated: ['photo']
   })
 
-  if(!user) throw new Error('Invalid user')
+  if(!user) return res.status(401).json({
+    message: 'Invalid user'
+  })
 
   req.user = user
 

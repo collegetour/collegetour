@@ -4,11 +4,8 @@ import Impression from '../../models/impression'
 const route = async (req, res) => {
 
   const impressions = await Impression.query(qb => {
-
-    qb.where('visit_id', req.params.visit_id)
-
+    qb.where('visit_id', req.visit.get('id'))
     qb.orderBy('created_at', 'desc')
-
   }).fetchAll({
     transacting: req.trx,
     withRelated: ['asset', 'user.photo']

@@ -1,19 +1,19 @@
 import './lib/environment'
 import 'express-async-errors'
-import expressKnextransaction from 'express-knex-transaction'
+import transactions from './utils/transactions'
 import imagecache from './server/imagecache'
 import multiparty from 'connect-multiparty'
 import signin from './server/signin'
 import bodyParser from 'body-parser'
+import error from './utils/error'
 import express from 'express'
 import knex from './lib/knex'
-import error from './error'
 import api from './api'
 import cors from 'cors'
 import path from 'path'
 import qs from 'qs'
 
-const transactions = expressKnextransaction(knex)
+const withTransaction = transactions(knex)
 
 const server = express()
 
@@ -33,9 +33,9 @@ server.use('/ping', (req, res) => res.send('pong'))
 
 server.use('/imagecache', imagecache)
 
-server.use('/signin', transactions, signin)
+server.use('/signin', withTransaction, signin)
 
-server.use('/api', transactions, api)
+server.use('/api', withTransaction, api)
 
 server.use(error)
 

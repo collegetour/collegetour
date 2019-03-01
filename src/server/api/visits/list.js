@@ -3,8 +3,8 @@ import Visit from '../../models/visit'
 
 const route = async (req, res) => {
 
-  const visits = await Visit.where({
-    tour_id: req.params.tour_id
+  const visits = await Visit.query(qb => {
+    qb.where('visits.tour_id', req.tour.get('id'))
   }).fetchAll({
     transacting: req.trx,
     withRelated: ['college.logo']

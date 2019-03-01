@@ -1,4 +1,3 @@
-import { t } from '../../utils'
 import { Router } from 'express'
 import show from './show'
 

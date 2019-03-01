@@ -1,13 +1,26 @@
-class APIError extends Error {
+const error = (err, req, res, next) => {
 
-  constructor({ code, message, errors }) {
-    super(message)
-    this.name = 'APIError'
-    this.code = code
-    this.message = message
-    this.errors = errors
+  if(err.status) {
+
+    res.status(err.status).json({
+      message: err.message
+    })
+
+  } else if(err.errors) {
+
+    res.status(422).json({
+      message: 'Unable to save record',
+      errors: err.toJSON()
+    })
+
+  } else {
+
+    res.status(500).json({
+      message: err.message
+    })
+
   }
 
 }
 
-export default APIError
+export default error
