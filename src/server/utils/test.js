@@ -21,7 +21,7 @@ export const testHandler = async (handler, options = {}) => {
     params: {},
     query: {},
     ...options,
-    trx: global.trx
+    trx: global.knex
   }
 
   await handler(req, res)

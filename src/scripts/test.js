@@ -40,7 +40,7 @@ const test = async () => {
   })
 
   mocha.suite.beforeEach('begin transaction', async () => {
-    global.trx = await new Promise((resolve, reject) => {
+    global.knex = await new Promise((resolve, reject) => {
       knex.transaction(tx => {
         resolve(tx)
       }).catch(() => {})
@@ -48,7 +48,7 @@ const test = async () => {
   })
 
   mocha.suite.afterEach('rollback transaction', async () => {
-    global.trx.rollback().catch(() => {})
+    global.knex.rollback().catch(() => {})
   })
 
   mocha.suite.afterAll('rollback database', async () => {
