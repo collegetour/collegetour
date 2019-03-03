@@ -23,6 +23,9 @@ describe('api/impressions/destroy', () => {
 
   it('destroys existing impression', async () => {
 
+    const existing = await global.trx('impressions')
+    expect(existing.length).to.be.equal(1)
+
     const req = {
       visit: {
         get: () => 1
@@ -36,6 +39,8 @@ describe('api/impressions/destroy', () => {
 
     expect(res.status()).to.be.equal(200)
     expect(res.json().data).to.be.null
+    const remaining = await global.trx('impressions')
+    expect(remaining.length).to.be.equal(0)
 
   })
 

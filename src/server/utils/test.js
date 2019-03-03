@@ -1,22 +1,3 @@
-import Knex from 'knex'
-
-const knex = Knex({
-  client: 'pg',
-  connection: process.env.DATABASE_URL,
-  migrations: {
-    tableName: 'knex_migrations',
-    directory: './src/db/migrations'
-  },
-  pool: {
-    min: 1,
-    max: 1
-  },
-  seeds: {
-    directory: './src/db/fixtures'
-  },
-  useNullAsDefault: true
-})
-
 export const testHandler = async (handler, options = {}) => {
 
   const res = {
@@ -34,27 +15,16 @@ export const testHandler = async (handler, options = {}) => {
     }
   }
 
-  await knex.transaction(async trx => {
+  const req = {
+    body: {},
+    headers: {},
+    params: {},
+    query: {},
+    ...options,
+    trx: global.trx
+  }
 
-    const req = {
-      params: {},
-      body: {},
-      query: {},
-      ...options,
-      trx
-    }
-
-    await handler(req, res)
-
-    return trx.rollback(new Error('rollback'))
-
-  }).catch(err => {
-
-    if(err.message === 'rollback') return
-
-    throw err
-
-  })
+  await handler(req, res)
 
   return res
 

@@ -33,24 +33,29 @@ const test = async () => {
     mocha.addFile(test)
   })
 
-  await knex.migrate.latest()
+  mocha.suite.beforeAll('migrate and seed', async () => {
+    await knex.migrate.rollback()
+    await knex.migrate.latest()
+    await knex.seed.run()
+  })
 
-  await knex.seed.run()
-
-  try {
-
-    await new Promise((resolve, reject) => {
-      mocha.run((err) => {
-        if(err) reject(err)
-        resolve()
-      })
+  mocha.suite.beforeEach('begin transaction', async () => {
+    global.trx = await new Promise((resolve, reject) => {
+      knex.transaction(tx => {
+        resolve(tx)
+      }).catch(() => {})
     })
+  })
 
-  } catch(err) {
-    console.log(err)
-  }
+  mocha.suite.afterEach('rollback transaction', async () => {
+    global.trx.rollback().catch(() => {})
+  })
 
-  await knex.migrate.rollback()
+  mocha.suite.afterAll('rollback database', async () => {
+    await knex.migrate.rollback()
+  })
+
+  await new Promise((resolve, reject) => mocha.run(resolve))
 
 }
 
