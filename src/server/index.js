@@ -1,19 +1,16 @@
 import './lib/environment'
 import 'express-async-errors'
-import transactions from './utils/transactions'
+import withTransaction from './utils/transactions'
 import imagecache from './server/imagecache'
 import multiparty from 'connect-multiparty'
 import signin from './server/signin'
 import bodyParser from 'body-parser'
 import error from './utils/error'
 import express from 'express'
-import knex from './lib/knex'
 import api from './api'
 import cors from 'cors'
 import path from 'path'
 import qs from 'qs'
-
-const withTransaction = transactions(knex)
 
 const server = express()
 

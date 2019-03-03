@@ -1,6 +1,7 @@
 import onFinished from 'on-finished'
+import knex from '../lib/knex'
 
-const withTransaction = (knex) => (req, res, next) => {
+const withTransaction = (req, res, next) => {
 
   knex.transaction(trx => {
 
