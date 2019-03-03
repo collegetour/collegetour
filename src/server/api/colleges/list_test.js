@@ -15,11 +15,13 @@ describe('api/colleges/list', () => {
 
   it('filters colleges', async () => {
 
-    const res = await testHandler(list, {
+    const req = {
       query: {
         q: 'Cor'
       }
-    })
+    }
+
+    const res = await testHandler(list, req)
 
     expect(res.status()).to.be.equal(200)
     expect(res.json().data.length).to.be.equal(1)

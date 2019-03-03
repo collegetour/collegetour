@@ -6,15 +6,16 @@ describe('api/impressions/list', () => {
 
   it('lists impressions', async () => {
 
-    const res = await testHandler(list, {
+    const req = {
       visit: {
         get: () => 1
       }
-    })
+    }
+
+    const res = await testHandler(list, req)
 
     expect(res.status()).to.be.equal(200)
-    // expect(res.json().data.length).to.be.equal(1)
-    //TODO: doesnt seem to be rolling back transaction...
+    expect(res.json().data.length).to.be.equal(1)
 
   })
 

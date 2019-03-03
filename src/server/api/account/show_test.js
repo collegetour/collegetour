@@ -1,3 +1,5 @@
+import { testHandler } from '../../utils/test'
+import User from '../../models/user'
 import { expect } from 'chai'
 import show from './show'
 
@@ -5,28 +7,26 @@ describe('api/account/show', () => {
 
   it('returns account', async () => {
 
-    const req = {
-      user: {
-        get: () => {},
-        related: () => ({
-          get: () => {},
-          related: () => ({
-          })
-        })
-      }
+    const account = {
+      id: 1,
+      first_name: 'Greg',
+      last_name: 'Kops',
+      email: 'greg@thinktopography.com',
+      photo_id: 12,
+      photo: '/assets/12/greg.jpg',
+      agreed_to_terms: true
     }
 
-    const res = {
-      status: () => ({
-        json: () => {
-
-        }
+    const req = {
+      user: await User.where('id', 1).fetch({
+        withRelated: ['photo']
       })
     }
 
-    await show(req, res)
+    const res = await testHandler(show, req)
 
-    expect(1).to.be.equal(1)
+    expect(res.status()).to.be.equal(200)
+    expect(res.json().data).to.be.eql(account)
 
   })
 
