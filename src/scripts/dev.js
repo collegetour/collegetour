@@ -31,8 +31,6 @@ const serverWatch = async () => {
   proc.on('message', function (event) {
     if(event.type === 'start') {
       log('info', 'nodemon', 'Compiling...')
-    } else if (event.type === 'restart') {
-      log('info', 'nodemon', `Detected change in ${event.data[0].replace(path.resolve()+'/','')}`)
     }
   })
 
