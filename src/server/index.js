@@ -36,6 +36,6 @@ server.use('/api', withTransaction, api)
 
 server.use(error)
 
-server.listen(3001)
+server.listen(3001, () => console.log('Listening on 3001'))
 
 export default server
