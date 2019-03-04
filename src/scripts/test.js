@@ -13,14 +13,14 @@ const knex = Knex({
   connection: process.env.DATABASE_URL,
   migrations: {
     tableName: 'knex_migrations',
-    directory: './src/db/migrations'
+    directory: './src/server/db/migrations'
   },
   pool: {
     min: 1,
     max: 1
   },
   seeds: {
-    directory: './src/db/fixtures'
+    directory: './src/server/db/fixtures'
   },
   useNullAsDefault: true
 })

@@ -6,7 +6,7 @@ import ncp from 'ncp'
 
 dotenv.load({ path: path.join('.env') })
 
-const config = require(`../config/webpack.${process.env.NODE_ENV}.config`).default
+const config = require(`../app/config/webpack.${process.env.NODE_ENV}.config`).default
 
 const removeAssets = (dest) => rimraf.sync(dest)
 

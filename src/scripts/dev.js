@@ -1,5 +1,5 @@
 import '../server/lib/environment'
-import config from '../config/webpack.development.config'
+import config from '../app/config/webpack.development.config'
 import devServer from 'webpack-dev-server'
 import { spawn } from 'child_process'
 import Webpack from 'webpack'
@@ -47,7 +47,7 @@ const serverWatch = async () => {
 const clientWatch = () => {
 
   const devserver = new devServer(Webpack(config()), {
-    contentBase: path.join('src', 'public'),
+    contentBase: path.join('src', 'app', 'public'),
     compress: true,
     hot: true,
     stats: 'errors-only',

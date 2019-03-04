@@ -10,7 +10,7 @@
     "build:client": "babel-node ./src/scripts/client.js",
     "invalidate": "babel-node ./src/scripts/invalidate.js",
     "dev": "babel-node ./src/scripts/dev.js",
-    "deploy": "shipit production deploy",
+    "deploy": "shipit production deploy --shipitfile=./src/deploy/shipitfile.js",
     "test": "babel-node ./src/scripts/test.js"
   },
   "repository": {
@@ -24,8 +24,7 @@
   },
   "homepage": "https://github.com/ccetc/static-starter#readme",
   "devDependencies": {
-    "archiver": "^3.0.0",
-    "autoprefixer": "^8.6.5",
+    "autoprefixer": "^9.4.9",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
@@ -36,6 +35,8 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "browserslist": "^4.4.2",
+    "caniuse-lite": "^1.0.30000940",
     "chai": "^4.1.2",
     "chai-enzyme": "^1.0.0-beta.1",
     "css-loader": "^1.0.0",
