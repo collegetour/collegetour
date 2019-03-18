@@ -1,4 +1,4 @@
-import '../apps/maha/core/services/environment'
+import '../server/lib/environment'
 import shipitfile from '../deploy/shipitfile'
 import Shipit from 'shipit-cli'
 
