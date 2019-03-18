@@ -11,10 +11,6 @@ dotenv.load({ path: path.join('.env') })
 
 const config = require(`../app/config/webpack.${process.env.NODE_ENV}.config`).default
 
-const removeAssets = (dest) => rimraf.sync(dest)
-
-const copyAssets = (src, dest) => Promise.promisify(ncp)(src, dest)
-
 const copy = (src, dest) => Promise.promisify(ncp)(src, dest)
 
 const transpile = (source) => {
@@ -79,8 +75,6 @@ const compileServer = async () => {
 const compileClient = async () => {
 
   console.log('Compiling client')
-
-  await copyAssets(path.join('src','app','public'), path.join('dist','public'))
 
   await webpackClient()
 

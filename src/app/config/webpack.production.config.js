@@ -1,6 +1,7 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import DynamicPlugin from './dynamic_plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import CopyPlugin from 'copy-webpack-plugin'
+import DynamicPlugin from './dynamic_plugin'
 import autoprefixer from 'autoprefixer'
 import webpack from 'webpack'
 import cssnano from 'cssnano'
@@ -60,6 +61,10 @@ const config = () => ({
   },
   plugins: [
     new DynamicPlugin(),
+    new CopyPlugin([{
+      from: path.resolve('src','app','public'),
+      to: path.resolve('dist','public')
+    }]),
     new MiniCssExtractPlugin({
       path: path.resolve('public'),
       filename: path.join('css', 'bundle-[hash].min.css'),

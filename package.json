@@ -4,7 +4,7 @@
   "description": "College Tour",
   "main": "index.js",
   "scripts": {
-    "build": "babel-node ./src/scripts/build.js",
+    "build": "NODE_ENV=production babel-node ./src/scripts/build.js",
     "deploy": "babel-node ./src/scripts/deploy.js",
     "dev": "babel-node ./src/scripts/dev.js",
     "invalidate": "babel-node ./src/scripts/invalidate.js",
@@ -68,6 +68,7 @@
     "bookshelf": "^0.14.2",
     "checkit": "^0.7.0",
     "connect-multiparty": "^2.2.0",
+    "copy-webpack-plugin": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "ejs": "^2.6.1",
