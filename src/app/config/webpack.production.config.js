@@ -54,7 +54,7 @@ const config = () => ({
     runtimeChunk: true
   },
   output: {
-    path: path.resolve('public'),
+    path: path.resolve('dist','public'),
     filename: path.join('js', 'bundle-[hash].min.js'),
     publicPath: '/'
   },

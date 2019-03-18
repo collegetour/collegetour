@@ -7,7 +7,6 @@ npm-debug.log
 dist
 /public
 knexfile.js
-deploy.js
 config.json
 dist
 docs/files/deploy

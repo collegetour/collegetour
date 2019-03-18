@@ -30,7 +30,32 @@ export const testHandler = async (handler, options = {}) => {
     trx: global.knex
   }
 
-  await handler(req, res)
+  const next = () => {}
+
+  try {
+
+    if(options.error) {
+
+      await handler(options.error, req, res, next)
+
+    } else {
+
+      await handler(req, res, next)
+
+    }
+
+  } catch(err) {
+
+    if(err.errors) return res.status(422).json({
+      errors: Object.keys(err.errors).reduce((errors, key) => ({
+        ...errors,
+        [key]: err.errors[key].errors.map(error => error.message)
+      }), {})
+    })
+
+    throw err
+
+  }
 
   return res
 

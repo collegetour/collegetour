@@ -1,4 +1,6 @@
+import notFound from './default/not_found'
 import impressions from './impressions'
+import error from './default/error'
 import itinerary from './itinerary'
 import tourists from './tourists'
 import colleges from './colleges'
@@ -14,30 +16,34 @@ import tours from './tours'
 import token from './token'
 import notes from './notes'
 
-const api = new Router({ mergeParams: true })
+const router = new Router({ mergeParams: true })
 
-api.use(token)
+router.use(token)
 
-api.use('/assets', assets)
+router.use('/assets', assets)
 
-api.use('/account', account)
+router.use('/account', account)
 
-api.use('/session', session)
+router.use('/session', session)
 
-api.use('/colleges', colleges)
+router.use('/colleges', colleges)
 
-api.use('/tours', tours)
+router.use('/tours', tours)
 
-api.use('/tours/:tour_id/tourists', tour, tourists)
+router.use('/tours/:tour_id/tourists', tour, tourists)
 
-api.use('/tours/:tour_id/itinerary', tour, itinerary)
+router.use('/tours/:tour_id/itinerary', tour, itinerary)
 
-api.use('/tours/:tour_id/visits', tour, visits)
+router.use('/tours/:tour_id/visits', tour, visits)
 
-api.use('/tours/:tour_id/visits/:visit_id/impressions', tour, visit, impressions)
+router.use('/tours/:tour_id/visits/:visit_id/impressions', tour, visit, impressions)
 
-api.use('/tours/:tour_id/visits/:visit_id/notes', tour, visit, notes)
+router.use('/tours/:tour_id/visits/:visit_id/notes', tour, visit, notes)
 
-api.use('/tours/:tour_id/visits/:visit_id/photos', tour, visit, photos)
+router.use('/tours/:tour_id/visits/:visit_id/photos', tour, visit, photos)
 
-export default api
+router.use(notFound)
+
+router.use(error)
+
+export default router

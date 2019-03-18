@@ -1,7 +1,7 @@
-const path = require('path')
-const utils = require('shipit-utils')
+import path from 'path'
+import utils from 'shipit-utils'
 
-module.exports = shipit => {
+const shipitfile = (shipit) => {
 
   require('shipit-deploy')(shipit)
 
@@ -75,4 +75,7 @@ module.exports = shipit => {
   shipit.on('deployed', function () {
     return shipit.start('deploy:release')
   })
+
 }
+
+export default shipitfile
